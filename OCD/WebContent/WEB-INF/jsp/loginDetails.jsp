@@ -23,6 +23,6 @@
 	
 	    <p><bean:message key="label.centre"/>: <bean:write name="LoginForm" property="centre" />.</p>
 	    
-	    <p><html:link action="/mainPg">Pantalla principal</html:link></p>
+	    <p><html:link action="/caseSearchPg"><bean:message key="label.caseSearch"/></html:link></p>
 	</body>
 </html>
