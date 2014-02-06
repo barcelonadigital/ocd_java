@@ -1,0 +1,3539 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions targetNamespace="http://linkcare.es/LINKCARE"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:apachesoap="http://xml.apache.org/xml-soap"
+                  xmlns:intf="http://linkcare.es/LINKCARE"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+    <wsdl:message name="CheckConectionRequest">
+    </wsdl:message>
+    <wsdl:message name="CheckConectionResponse">
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_refRequest">
+        <wsdl:part name="FORM_ID" type="xsd:string"/>
+        <wsdl:part name="library" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_refResponse">
+        <wsdl:part name="FORM_REF" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_getRequest">
+        <wsdl:part name="FORM_REF" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_getResponse">
+        <wsdl:part name="template" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_setRequest">
+        <wsdl:part name="FORM_REF" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_setResponse">
+        <wsdl:part name="template" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_deleteRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="FORM_REF" type="xsd:string"/>
+        <wsdl:part name="host" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_deleteResponse">
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_insertRequest">
+        <wsdl:part name="template" type="xsd:string"/>
+        <wsdl:part name="library" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_insertResponse">
+        <wsdl:part name="FORM_REF" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_exportRequest">
+        <wsdl:part name="template" type="xsd:string"/>
+        <wsdl:part name="host" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_exportResponse">
+        <wsdl:part name="text" type="xsd:base64Binary"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_importRequest">
+        <wsdl:part name="text" type="xsd:base64Binary"/>
+        <wsdl:part name="host" type="xsd:string"/>
+        <wsdl:part name="especial" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_importResponse">
+        <wsdl:part name="template" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_updateRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="text" type="xsd:base64Binary"/>
+        <wsdl:part name="host" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_updateResponse">
+        <wsdl:part name="template" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_get_summaryRequest">
+        <wsdl:part name="session" type="xsd:base64Binary"/>
+        <wsdl:part name="template_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="template_get_summaryResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+
+
+    <wsdl:message name="activity_loadRequest">
+        <wsdl:part name="ACTIVITY_REF" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="activity_loadResponse">
+        <wsdl:part name="activity" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="activity_optionalRequest">
+        <wsdl:part name="ADMISSION_REF" type="xsd:string"/>
+        <wsdl:part name="TYPE" type="xsd:string"/>
+        <wsdl:part name="LANG" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="activity_optionalResponse">
+        <wsdl:part name="activity_list" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+
+    <wsdl:message name="task_insertRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="ADMISSION_REF" type="xsd:string"/>
+        <wsdl:part name="activity" type="xsd:string"/>
+        <wsdl:part name="DATE" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_insertResponse">
+        <wsdl:part name="TASK_ID" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_insert_with_professionalRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="ADMISSION_REF" type="xsd:string"/>
+        <wsdl:part name="activity" type="xsd:string"/>
+        <wsdl:part name="DATE" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_insert_with_professionalResponse">
+        <wsdl:part name="TASK_ID" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_deleteRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="TASK_ID" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_deleteResponse">
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_list_day_defaultRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="id_type" type="xsd:string"/>
+        <wsdl:part name="id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_list_day_defaultResponse">
+        <wsdl:part name="date" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_calendar_monthRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="year" type="xsd:string"/>
+        <wsdl:part name="month" type="xsd:string"/>
+        <wsdl:part name="id_type" type="xsd:string"/>
+        <wsdl:part name="id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_calendar_monthResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_calendar_yearRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="year" type="xsd:string"/>
+        <wsdl:part name="id_type" type="xsd:string"/>
+        <wsdl:part name="id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_calendar_yearResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_listRequest">
+        <wsdl:part name="date" type="xsd:string"/>
+        <wsdl:part name="id_type" type="xsd:string"/>
+        <wsdl:part name="id" type="xsd:string"/>
+        <wsdl:part name="lang" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_list_dateRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="date" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_list_dateResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_form_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_form_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task" type="xsd:string"/>
+        <wsdl:part name="context" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_setRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_setResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_role_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task_id" type="xsd:string"/>
+        <wsdl:part name="category_id" type="xsd:string"/>
+        <wsdl:part name="assigned_roles" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_role_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_user_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task_id" type="xsd:string"/>
+        <wsdl:part name="role_id" type="xsd:string"/>
+        <wsdl:part name="assigned_users" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="task_user_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+
+    <wsdl:message name="user_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_get_contactRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_get_contactResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_insertRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_insertResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_set_contactRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_set_contactResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_merge_contactRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_merge_contactResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_setRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_setResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_get_role_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_get_role_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_set_role_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user_id" type="xsd:string"/>
+        <wsdl:part name="role_list" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_set_role_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="program" type="xsd:string"/>
+        <wsdl:part name="role" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="user_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+    <wsdl:message name="contact_searchRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="search_str" type="xsd:string"/>
+        <wsdl:part name="max_res" type="xsd:string"/>
+        <wsdl:part name="scope" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="contact_searchResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    
+    <wsdl:message name="source_get_urlRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="source_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="source_get_urlResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    
+    <wsdl:message name="team_checkRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="team_checkResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>    
+
+
+    <wsdl:message name="case_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_get_contactRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_get_contactResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_insertRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_insertResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_set_contactRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_set_contactResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_merge_contactRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_merge_contactResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_setRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_setResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_deleteRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="case_deleteResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+
+    <wsdl:message name="admission_setRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="admission" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_setResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_deleteRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="admission" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_deleteResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="admission" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+        <wsdl:part name="get" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_list_caseRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+        <wsdl:part name="get" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_list_caseResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_insertRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+        <wsdl:part name="program" type="xsd:string"/>
+        <wsdl:part name="date" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_insertResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_joinRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="admission" type="xsd:string"/>
+        <wsdl:part name="protocol" type="xsd:string"/>
+        <wsdl:part name="date" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_joinResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_reportRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="start_date" type="xsd:string"/>
+        <wsdl:part name="end_date" type="xsd:string"/>
+        <wsdl:part name="program" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_reportResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+
+    <wsdl:message name="action_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="admission" type="xsd:string"/>
+        <wsdl:part name="id" type="xsd:string"/>
+        <wsdl:part name="library" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="action_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="action_execRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="action_token" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="action_execResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+
+    <wsdl:message name="event_insertRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="date" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+        <wsdl:part name="event_type" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_insertResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_reportRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="start_date" type="xsd:string"/>
+        <wsdl:part name="end_date" type="xsd:string"/>
+        <wsdl:part name="program" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_reportResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_report_2Request">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="start_date" type="xsd:string"/>
+        <wsdl:part name="end_date" type="xsd:string"/>
+        <wsdl:part name="program" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_report_2Response">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_typeRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_typeResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_deleteRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_deleteResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_setRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_setResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_call_duration_setRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+        <wsdl:part name="duration" type="xsd:string"/>
+        <wsdl:part name="event_code" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_call_duration_setResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_form_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_form_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_template_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_template_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_task_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_task_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_issuer_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_issuer_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_role_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="event_role_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+    <wsdl:message name="elapsed_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="elapsed_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_get_headerRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_get_headerResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_get_summaryRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_get_summaryResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_get_questionRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+        <wsdl:part name="question_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_get_questionResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_get_answerRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+        <wsdl:part name="question_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_get_answerResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_set_answerRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+        <wsdl:part name="question_id" type="xsd:string"/>
+        <wsdl:part name="value" type="xsd:string"/>
+        <wsdl:part name="option_id" type="xsd:string"/>
+        <wsdl:part name="event_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_set_answerResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="refresh" type="xsd:string"/>
+        <wsdl:part name="next" type="xsd:string"/>
+        <wsdl:part name="next_form" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_PDFRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_PDFResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="id" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="form_closeRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_closeResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_openRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_openResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_deleteRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_deleteResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_insertRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="id_type" type="xsd:string"/>
+        <wsdl:part name="template_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_insertResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_setRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="id_type" type="xsd:string"/>
+        <wsdl:part name="template_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_setResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_set_fileRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+        <wsdl:part name="type" type="xsd:string"/>
+        <wsdl:part name="file_content" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_set_fileResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+    <wsdl:message name="description_get_keyRequest">
+        <wsdl:part name="KEY" type="xsd:string"/>
+        <wsdl:part name="LANG" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="description_get_keyResponse">
+        <wsdl:part name="text" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="description_get_XLSRequest">
+    </wsdl:message>
+    <wsdl:message name="description_get_XLSResponse">
+        <wsdl:part name="XLS" type="xsd:base64Binary"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="description_set_XLSRequest">
+        <wsdl:part name="XLS" type="xsd:base64Binary"/>
+    </wsdl:message>
+    <wsdl:message name="description_set_XLSResponse">
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    
+    
+    <wsdl:message name="alert_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="ticket" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="alert_getResponse">
+        <wsdl:part name="message" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="alert_subscribeRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="endpoint" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="alert_subscribeResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+    <wsdl:message name="session_discoverRequest">
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="password" type="xsd:string"/>
+        <wsdl:part name="IP" type="xsd:string"/>
+        <wsdl:part name="host" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_discoverResponse">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+        <wsdl:part name="role" type="xsd:string"/>
+        <wsdl:part name="center" type="xsd:string"/>
+        <wsdl:part name="name" type="xsd:string"/>
+        <wsdl:part name="WS" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_initRequest">
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="password" type="xsd:string"/>
+        <wsdl:part name="IP" type="xsd:string"/>
+        <wsdl:part name="host" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="norewrite" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_initResponse">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+        <wsdl:part name="role" type="xsd:string"/>
+        <wsdl:part name="center" type="xsd:string"/>
+        <wsdl:part name="name" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_centerRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="center" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_centerResponse">
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_roleRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="role" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_roleResponse">
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_languageRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_languageResponse">
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_userRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_userResponse">
+        <wsdl:part name="user_id" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_role_listRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_role_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_language_listRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_language_listResponse">
+        <wsdl:part name="language_list" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_center_listRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_center_listResponse">
+        <wsdl:part name="center_list" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_active_roleRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_get_active_roleResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_relocateRequest">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="source_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="session_relocateResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+
+    <!-- 1- obtenerDatosPacienteCIP / messages-->
+    <wsdl:message name="HIS_obtenerDatosPacienteCIPRequest">
+        <wsdl:part name="CIP" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="HIS_obtenerDatosPacienteCIPResponse">
+        <wsdl:part name="datosXML" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- 2- obtenerDatosNHC / messages-->
+    <wsdl:message name="HIS_obtenerDatosNHCRequest">
+        <wsdl:part name="NHC" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="HIS_obtenerDatosNHCResponse">
+        <wsdl:part name="datosXML" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- 3- obtenerEquiposReferencia / messages-->
+    <wsdl:message name="HIS_obtenerEquiposReferenciaRequest">
+        <wsdl:part name="CIP" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="HIS_obtenerEquiposReferenciaResponse">
+        <wsdl:part name="datosXML" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- 4- obtenerDatosDiagnosticos / messages-->
+    <wsdl:message name="HIS_obtenerDatosDiagnosticosRequest">
+        <wsdl:part name="CIP" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="HIS_obtenerDatosDiagnosticosResponse">
+        <wsdl:part name="datosXML" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- 5- obtenerDocumentosCIP / messages-->
+    <wsdl:message name="HIS_obtenerDocumentosCIPRequest">
+        <wsdl:part name="CIP" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="HIS_obtenerDocumentosCIPResponse">
+        <wsdl:part name="datosXML" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- 6- recuperarDocumento / messages-->
+    <wsdl:message name="HIS_recuperarDocumentoRequest">
+        <wsdl:part name="xml" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="HIS_recuperarDocumentoResponse">
+        <wsdl:part name="datosXML" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- 7- enviarCursoClinico / messages-->
+    <wsdl:message name="HIS_enviarCursoClinicoRequest">
+        <wsdl:part name="xml" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="HIS_enviarCursoClinicoResponse">
+        <wsdl:part name="posicionXML" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- Synergy Functions -->
+    <wsdl:message name="synergy_get_dataRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="xml" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="synergy_get_dataResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <!-- End Synergy Functions -->
+
+    <wsdl:message name="program_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="active" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="program_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="program_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="program_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="program_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_list_programRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="program" type="xsd:string"/>
+        <wsdl:part name="status" type="xsd:string"/>
+        <wsdl:part name="scope" type="xsd:string"/>
+        <wsdl:part name="search_str" type="xsd:string"/>
+        <wsdl:part name="limit" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_list_programResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <wsdl:message name="protocol_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="program" type="xsd:string"/>
+        <wsdl:part name="mdc" type="xsd:string"/>
+        <wsdl:part name="active" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="protocol_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="protocol_getRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="protocol_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="protocol_getResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="protocol_get_XMLRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="protocol_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="protocol_get_XMLResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_list_protocolRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="protocol" type="xsd:string"/>
+        <wsdl:part name="status" type="xsd:string"/>
+        <wsdl:part name="scope" type="xsd:string"/>
+        <wsdl:part name="search_str" type="xsd:string"/>
+        <wsdl:part name="limit" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="admission_list_protocolResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    
+    
+    <wsdl:message name="code_searchRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="code_system" type="xsd:string"/>
+        <wsdl:part name="search_text" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="code_searchResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
+    <!-- Mobile functions -->
+    <wsdl:message name="mobile_session_discoverRequest">
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="password" type="xsd:string"/>
+        <wsdl:part name="IP" type="xsd:string"/>
+        <wsdl:part name="host" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_session_discoverResponse">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+        <wsdl:part name="role" type="xsd:string"/>
+        <wsdl:part name="center" type="xsd:string"/>
+        <wsdl:part name="name" type="xsd:string"/>
+        <wsdl:part name="WS" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_session_initRequest">
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="password" type="xsd:string"/>
+        <wsdl:part name="IP" type="xsd:string"/>
+        <wsdl:part name="host" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_session_initResponse">
+        <wsdl:part name="token" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+        <wsdl:part name="language" type="xsd:string"/>
+        <wsdl:part name="role" type="xsd:string"/>
+        <wsdl:part name="center" type="xsd:string"/>
+        <wsdl:part name="name" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_get_pendingsRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_get_pendingsResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_get_optionalsRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_get_optionalsResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_form_set_device_answersRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task_id" type="xsd:string"/>
+        <wsdl:part name="device_type" type="xsd:string"/>
+        <wsdl:part name="answers_XML" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_form_set_device_answersResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_insert_from_optionalRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task_id_optional" type="xsd:string"/>
+        <wsdl:part name="user" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_insert_from_optionalResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_form_listRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task_id" type="xsd:string"/>
+        <wsdl:part name="optional" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_form_listResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_form_get_summaryRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="task_id" type="xsd:string"/>
+        <wsdl:part name="optional" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_form_get_summaryResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_list_monthRequest"> 
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="from" type="xsd:string"/>
+        <wsdl:part name="to" type="xsd:string"/>
+        <wsdl:part name="case" type="xsd:string"/>
+        <wsdl:part name="lang" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="mobile_task_list_monthResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+    <!-- End Mobile Functions -->
+
+    <wsdl:portType name="LINKCARE">
+
+        <wsdl:operation name="CheckConection" parameterOrder="ErrorMsg">
+            <wsdl:input message="intf:CheckConectionRequest" name="CheckConectionRequest"/>
+            <wsdl:output message="intf:CheckConectionResponse" name="CheckConectionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_ref" parameterOrder="FORM_ID library FORM_REF ErrorMsg">
+            <wsdl:input message="intf:template_refRequest" name="template_refRequest"/>
+            <wsdl:output message="intf:template_refResponse" name="template_refResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_get" parameterOrder="FORM_REF language template ErrorMsg">
+            <wsdl:input message="intf:template_getRequest" name="template_getRequest"/>
+            <wsdl:output message="intf:template_getResponse" name="template_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_set" parameterOrder="FORM_REF language template ErrorMsg">
+            <wsdl:input message="intf:template_setRequest" name="template_setRequest"/>
+            <wsdl:output message="intf:template_setResponse" name="template_setResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_delete" parameterOrder="session FORM_REF host ErrorMsg">
+            <wsdl:input message="intf:template_deleteRequest" name="template_deleteRequest"/>
+            <wsdl:output message="intf:template_deleteResponse" name="template_deleteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_insert" parameterOrder="template library FORM_REF ErrorMsg">
+            <wsdl:input message="intf:template_insertRequest" name="template_insertRequest"/>
+            <wsdl:output message="intf:template_insertResponse" name="template_insertResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_export" parameterOrder="template host text ErrorMsg">
+            <wsdl:input message="intf:template_exportRequest" name="template_exportRequest"/>
+            <wsdl:output message="intf:template_exportResponse" name="template_exportResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_import" parameterOrder="text host especial template ErrorMsg">
+            <wsdl:input message="intf:template_importRequest" name="template_importRequest"/>
+            <wsdl:output message="intf:template_importResponse" name="template_importResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_update" parameterOrder="session text host template ErrorMsg">
+            <wsdl:input message="intf:template_updateRequest" name="template_updateRequest"/>
+            <wsdl:output message="intf:template_updateResponse" name="template_updateResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="template_get_summary" parameterOrder="session template_id result ErrorMsg">
+            <wsdl:input message="intf:template_get_summaryRequest" name="template_get_summaryRequest"/>
+            <wsdl:output message="intf:template_get_summaryResponse" name="template_get_summaryResponse"/>
+        </wsdl:operation>
+
+
+
+
+        <wsdl:operation name="activity_load" parameterOrder="ACTIVITY_REF activity ErrorMsg">
+            <wsdl:input message="intf:activity_loadRequest" name="activity_loadRequest"/>
+            <wsdl:output message="intf:activity_loadResponse" name="activity_loadResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="activity_optional" parameterOrder="ADMISSION_REF TYPE LANG activity_list ErrorMsg">
+            <wsdl:input message="intf:activity_optionalRequest" name="activity_optionalRequest"/>
+            <wsdl:output message="intf:activity_optionalResponse" name="activity_optionalResponse"/>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="task_insert" parameterOrder="session ADMISSION_REF activity DATE event_id TASK_ID ErrorMsg">
+            <wsdl:input message="intf:task_insertRequest" name="task_insertRequest"/>
+            <wsdl:output message="intf:task_insertResponse" name="task_insertResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_insert_with_professional" parameterOrder="session ADMISSION_REF activity DATE TASK_ID ErrorMsg">
+            <wsdl:input message="intf:task_insert_with_professionalRequest" name="task_insert_with_professionalRequest"/>
+            <wsdl:output message="intf:task_insert_with_professionalResponse" name="task_insert_with_professionalResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_delete" parameterOrder="token TASK_ID type ErrorMsg">
+            <wsdl:input message="intf:task_deleteRequest" name="task_deleteRequest"/>
+            <wsdl:output message="intf:task_deleteResponse" name="task_deleteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_list_day_default" parameterOrder="token id_type id date ErrorMsg">
+            <wsdl:input message="intf:task_list_day_defaultRequest" name="task_list_day_defaultRequest"/>
+            <wsdl:output message="intf:task_list_day_defaultResponse" name="task_list_day_defaultResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_calendar_month" parameterOrder="token year month id_type id result ErrorMsg">
+            <wsdl:input message="intf:task_calendar_monthRequest" name="task_calendar_monthRequest"/>
+            <wsdl:output message="intf:task_calendar_monthResponse" name="task_calendar_monthResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_calendar_year" parameterOrder="token year id_type id result ErrorMsg">
+            <wsdl:input message="intf:task_calendar_yearRequest" name="task_calendar_yearRequest"/>
+            <wsdl:output message="intf:task_calendar_yearResponse" name="task_calendar_yearResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_list" parameterOrder="date id_type id lang ErrorMsg">
+            <wsdl:input message="intf:task_listRequest" name="task_listRequest"/>
+            <wsdl:output message="intf:task_listResponse" name="task_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_list_date" parameterOrder="session date type id result ErrorMsg">
+            <wsdl:input message="intf:task_list_dateRequest" name="task_list_dateRequest"/>
+            <wsdl:output message="intf:task_list_dateResponse" name="task_list_dateResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_form_list" parameterOrder="session task_id result ErrorMsg">
+            <wsdl:input message="intf:task_form_listRequest" name="task_form_listRequest"/>
+            <wsdl:output message="intf:task_form_listResponse" name="task_form_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_get" parameterOrder="session task context result ErrorMsg">
+            <wsdl:input message="intf:task_getRequest" name="task_getRequest"/>
+            <wsdl:output message="intf:task_getResponse" name="task_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_set" parameterOrder="session task result ErrorMsg">
+            <wsdl:input message="intf:task_setRequest" name="task_setRequest"/>
+            <wsdl:output message="intf:task_setResponse" name="task_setResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_role_list" parameterOrder="session task_id category_id assigned_roles result ErrorMsg">
+            <wsdl:input message="intf:task_role_listRequest" name="task_role_listRequest"/>
+            <wsdl:output message="intf:task_role_listResponse" name="task_role_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="task_user_list" parameterOrder="session task_id role_id assigned_users result ErrorMsg">
+            <wsdl:input message="intf:task_user_listRequest" name="task_user_listRequest"/>
+            <wsdl:output message="intf:task_user_listResponse" name="task_user_listResponse"/>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="contact_search" parameterOrder="session type search_str max_res scope result ErrorMsg">
+            <wsdl:input message="intf:contact_searchRequest" name="contact_searchRequest"/>
+            <wsdl:output message="intf:contact_searchResponse" name="contact_searchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="source_get_url" parameterOrder="session source_id result ErrorMsg">
+            <wsdl:input message="intf:source_get_urlRequest" name="source_get_urlRequest"/>
+            <wsdl:output message="intf:source_get_urlResponse" name="source_get_urlResponse"/>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="user_list" parameterOrder="session program role result ErrorMsg">
+            <wsdl:input message="intf:user_listRequest" name="user_listRequest"/>
+            <wsdl:output message="intf:user_listResponse" name="user_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_set_role_list" parameterOrder="session user_id role_list result ErrorMsg">
+            <wsdl:input message="intf:user_set_role_listRequest" name="user_set_role_listRequest"/>
+            <wsdl:output message="intf:user_set_role_listResponse" name="user_set_role_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_get_role_list" parameterOrder="session user_id result ErrorMsg">
+            <wsdl:input message="intf:user_get_role_listRequest" name="user_get_role_listRequest"/>
+            <wsdl:output message="intf:user_get_role_listResponse" name="user_get_role_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_get" parameterOrder="session user result ErrorMsg">
+            <wsdl:input message="intf:user_getRequest" name="user_getRequest"/>
+            <wsdl:output message="intf:user_getResponse" name="user_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_get_contact" parameterOrder="session user result ErrorMsg">
+            <wsdl:input message="intf:user_get_contactRequest" name="user_get_contactRequest"/>
+            <wsdl:output message="intf:user_get_contactResponse" name="user_get_contactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_insert" parameterOrder="session user result type ErrorMsg">
+            <wsdl:input message="intf:user_insertRequest" name="user_insertRequest"/>
+            <wsdl:output message="intf:user_insertResponse" name="user_insertResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_set_contact" parameterOrder="session user result ErrorMsg">
+            <wsdl:input message="intf:user_set_contactRequest" name="user_set_contactRequest"/>
+            <wsdl:output message="intf:user_set_contactResponse" name="user_set_contactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_merge_contact" parameterOrder="session user result ErrorMsg">
+            <wsdl:input message="intf:user_merge_contactRequest" name="user_merge_contactRequest"/>
+            <wsdl:output message="intf:user_merge_contactResponse" name="user_merge_contactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="user_set" parameterOrder="session user result ErrorMsg">
+            <wsdl:input message="intf:user_setRequest" name="user_setRequest"/>
+            <wsdl:output message="intf:user_setResponse" name="user_setResponse"/>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="case_get" parameterOrder="session case result ErrorMsg">
+            <wsdl:input message="intf:case_getRequest" name="case_getRequest"/>
+            <wsdl:output message="intf:case_getResponse" name="case_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="case_get_contact" parameterOrder="session case result ErrorMsg">
+            <wsdl:input message="intf:case_get_contactRequest" name="case_get_contactRequest"/>
+            <wsdl:output message="intf:case_get_contactResponse" name="case_get_contactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="case_insert" parameterOrder="session case result type ErrorMsg">
+            <wsdl:input message="intf:case_insertRequest" name="case_insertRequest"/>
+            <wsdl:output message="intf:case_insertResponse" name="case_insertResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="case_set_contact" parameterOrder="session case result ErrorMsg">
+            <wsdl:input message="intf:case_set_contactRequest" name="case_set_contactRequest"/>
+            <wsdl:output message="intf:case_set_contactResponse" name="case_set_contactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="case_merge_contact" parameterOrder="session case result ErrorMsg">
+            <wsdl:input message="intf:case_merge_contactRequest" name="case_merge_contactRequest"/>
+            <wsdl:output message="intf:case_merge_contactResponse" name="case_merge_contactResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="case_set" parameterOrder="session case result ErrorMsg">
+            <wsdl:input message="intf:case_setRequest" name="case_setRequest"/>
+            <wsdl:output message="intf:case_setResponse" name="case_setResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="case_delete" parameterOrder="session case type result ErrorMsg">
+            <wsdl:input message="intf:case_deleteRequest" name="case_deleteRequest"/>
+            <wsdl:output message="intf:case_deleteResponse" name="case_deleteResponse"/>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="admission_set" parameterOrder="session admission result ErrorMsg">
+            <wsdl:input message="intf:admission_setRequest" name="admission_setRequest"/>
+            <wsdl:output message="intf:admission_setResponse" name="admission_setResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_delete" parameterOrder="session admission type result ErrorMsg">
+            <wsdl:input message="intf:admission_deleteRequest" name="admission_deleteRequest"/>
+            <wsdl:output message="intf:admission_deleteResponse" name="admission_deleteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_get" parameterOrder="session admission result ErrorMsg">
+            <wsdl:input message="intf:admission_getRequest" name="admission_getRequest"/>
+            <wsdl:output message="intf:admission_getResponse" name="admission_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list" parameterOrder="session case get result ErrorMsg">
+            <wsdl:input message="intf:admission_listRequest" name="admission_listRequest"/>
+            <wsdl:output message="intf:admission_listResponse" name="admission_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list_case" parameterOrder="session case get result ErrorMsg">
+            <wsdl:input message="intf:admission_list_caseRequest" name="admission_list_caseRequest"/>
+            <wsdl:output message="intf:admission_list_caseResponse" name="admission_list_caseResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_insert" parameterOrder="session case program date result ErrorMsg">
+            <wsdl:input message="intf:admission_insertRequest" name="admission_insertRequest"/>
+            <wsdl:output message="intf:admission_insertResponse" name="admission_insertResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_join" parameterOrder="session admission protocol date result ErrorMsg">
+            <wsdl:input message="intf:admission_joinRequest" name="admission_joinRequest"/>
+            <wsdl:output message="intf:admission_joinResponse" name="admission_joinResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_report" parameterOrder="session start_date end_date program result ErrorMsg">
+            <wsdl:input message="intf:admission_reportRequest" name="admission_reportRequest"/>
+            <wsdl:output message="intf:admission_reportResponse" name="admission_reportResponse"/>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="action_list" parameterOrder="session case type admission id library result ErrorMsg">
+            <wsdl:input message="intf:action_listRequest" name="action_listRequest"/>
+            <wsdl:output message="intf:action_listResponse" name="action_listResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="action_exec" parameterOrder="session action_token result ErrorMsg">
+            <wsdl:input message="intf:action_execRequest" name="action_execRequest"/>
+            <wsdl:output message="intf:action_execResponse" name="action_execResponse"/>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="event_role_list" parameterOrder="session event_id type result ErrorMsg">
+            <wsdl:input message="intf:event_role_listRequest" name="event_role_listRequest"/>
+            <wsdl:output message="intf:event_role_listResponse" name="event_role_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_issuer_list" parameterOrder="session event_id result ErrorMsg">
+            <wsdl:input message="intf:event_issuer_listRequest" name="event_issuer_listRequest"/>
+            <wsdl:output message="intf:event_issuer_listResponse" name="event_issuer_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_task_list" parameterOrder="session event_id result ErrorMsg">
+            <wsdl:input message="intf:event_task_listRequest" name="event_task_listRequest"/>
+            <wsdl:output message="intf:event_task_listResponse" name="event_task_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_form_list" parameterOrder="session event_id result ErrorMsg">
+            <wsdl:input message="intf:event_form_listRequest" name="event_form_listRequest"/>
+            <wsdl:output message="intf:event_form_listResponse" name="event_form_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_template_list" parameterOrder="session event_id result ErrorMsg">
+            <wsdl:input message="intf:event_template_listRequest" name="event_template_listRequest"/>
+            <wsdl:output message="intf:event_template_listResponse" name="event_template_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_set" parameterOrder="session event result ErrorMsg">
+            <wsdl:input message="intf:event_setRequest" name="event_setRequest"/>
+            <wsdl:output message="intf:event_setResponse" name="event_setResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_call_duration_set" parameterOrder="session event_id duration event_code result ErrorMsg">
+            <wsdl:input message="intf:event_call_duration_setRequest" name="event_call_duration_setRequest"/>
+            <wsdl:output message="intf:event_call_duration_setResponse" name="event_call_duration_setResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_get" parameterOrder="session event_id result ErrorMsg">
+            <wsdl:input message="intf:event_getRequest" name="event_getRequest"/>
+            <wsdl:output message="intf:event_getResponse" name="event_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_delete" parameterOrder="session event_id type result ErrorMsg">
+            <wsdl:input message="intf:event_deleteRequest" name="event_deleteRequest"/>
+            <wsdl:output message="intf:event_deleteResponse" name="event_deleteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_type" parameterOrder="session result ErrorMsg">
+            <wsdl:input message="intf:event_typeRequest" name="event_typeRequest"/>
+            <wsdl:output message="intf:event_typeResponse" name="event_typeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_insert" parameterOrder="session date case event_type result ErrorMsg">
+            <wsdl:input message="intf:event_insertRequest" name="event_insertRequest"/>
+            <wsdl:output message="intf:event_insertResponse" name="event_insertResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_report" parameterOrder="session start_date end_date program result ErrorMsg">
+            <wsdl:input message="intf:event_reportRequest" name="event_reportRequest"/>
+            <wsdl:output message="intf:event_reportResponse" name="event_reportResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="event_report_2" parameterOrder="session start_date end_date program result ErrorMsg">
+            <wsdl:input message="intf:event_report_2Request" name="event_report_2Request"/>
+            <wsdl:output message="intf:event_report_2Response" name="event_report_2Response"/>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="elapsed_list" parameterOrder="session result ErrorMsg">
+            <wsdl:input message="intf:elapsed_listRequest" name="elapsed_listRequest"/>
+            <wsdl:output message="intf:elapsed_listResponse" name="elapsed_listResponse"/>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="form_insert" parameterOrder="session type id_type template_id result ErrorMsg">
+            <wsdl:input message="intf:form_insertRequest" name="form_insertRequest"/>
+            <wsdl:output message="intf:form_insertResponse" name="form_insertResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_set" parameterOrder="session type id_type template_id result ErrorMsg">
+            <wsdl:input message="intf:form_setRequest" name="form_setRequest"/>
+            <wsdl:output message="intf:form_setResponse" name="form_setResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_close" parameterOrder="session form_id result ErrorMsg">
+            <wsdl:input message="intf:form_closeRequest" name="form_closeRequest"/>
+            <wsdl:output message="intf:form_closeResponse" name="form_closeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_open" parameterOrder="session form_id result ErrorMsg">
+            <wsdl:input message="intf:form_openRequest" name="form_openRequest"/>
+            <wsdl:output message="intf:form_openResponse" name="form_openResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_delete" parameterOrder="session form result ErrorMsg">
+            <wsdl:input message="intf:form_deleteRequest" name="form_deleteRequest"/>
+            <wsdl:output message="intf:form_deleteResponse" name="form_deleteResponse"/>
+        </wsdl:operation>
+        <!-- 2013/01/17 -->
+        <wsdl:operation name="form_get" parameterOrder="session form_id result ErrorMsg">
+            <wsdl:input message="intf:form_getRequest" name="form_getRequest"/>
+            <wsdl:output message="intf:form_getResponse" name="form_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_header" parameterOrder="session form_id result ErrorMsg">
+            <wsdl:input message="intf:form_get_headerRequest" name="form_get_headerRequest"/>
+            <wsdl:output message="intf:form_get_headerResponse" name="form_get_headerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_summary" parameterOrder="session form_id result ErrorMsg">
+            <wsdl:input message="intf:form_get_summaryRequest" name="form_get_summaryRequest"/>
+            <wsdl:output message="intf:form_get_summaryResponse" name="form_get_summaryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_question" parameterOrder="session form_id question_id result ErrorMsg">
+            <wsdl:input message="intf:form_get_questionRequest" name="form_get_questionRequest"/>
+            <wsdl:output message="intf:form_get_questionResponse" name="form_get_questionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_answer" parameterOrder="session form_id question_id result ErrorMsg">
+            <wsdl:input message="intf:form_get_answerRequest" name="form_get_answerRequest"/>
+            <wsdl:output message="intf:form_get_answerResponse" name="form_get_answerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_set_answer" parameterOrder="session form_id question_id value option_id event_id result refresh next next_form ErrorMsg">
+            <wsdl:input message="intf:form_set_answerRequest" name="form_set_answerRequest"/>
+            <wsdl:output message="intf:form_set_answerResponse" name="form_set_answerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_PDF" parameterOrder="session form_id result ErrorMsg">
+            <wsdl:input message="intf:form_PDFRequest" name="form_PDFRequest"/>
+            <wsdl:output message="intf:form_PDFResponse" name="form_PDFResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_list" parameterOrder="session type id form_id result ErrorMsg">
+            <wsdl:input message="intf:form_listRequest" name="form_listRequest"/>
+            <wsdl:output message="intf:form_listResponse" name="form_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_set_file" parameterOrder="session form_id type file_content result ErrorMsg">
+            <wsdl:input message="intf:form_set_fileRequest" name="form_set_fileRequest"/>
+            <wsdl:output message="intf:form_set_fileResponse" name="form_set_fileResponse"/>
+        </wsdl:operation>
+        <!-- -->
+
+
+
+        <wsdl:operation name="description_get_key" parameterOrder="KEY LANG text ErrorMsg">
+            <wsdl:input message="intf:description_get_keyRequest" name="description_get_keyRequest"/>
+            <wsdl:output message="intf:description_get_keyResponse" name="description_get_keyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="description_get_XLS" parameterOrder="XLS ErrorMsg">
+            <wsdl:input message="intf:description_get_XLSRequest" name="description_get_XLSRequest"/>
+            <wsdl:output message="intf:description_get_XLSResponse" name="description_get_XLSResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="description_set_XLS" parameterOrder="XLS ErrorMsg">
+            <wsdl:input message="intf:description_set_XLSRequest" name="description_set_XLSRequest"/>
+            <wsdl:output message="intf:description_set_XLSResponse" name="description_set_XLSResponse"/>
+        </wsdl:operation>
+        
+        <wsdl:operation name="alert_get" parameterOrder="session ticket message ErrorMsg">
+            <wsdl:input message="intf:alert_getRequest" name="alert_getRequest"/>
+            <wsdl:output message="intf:alert_getResponse" name="alert_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="alert_subscribe" parameterOrder="session endpoint result ErrorMsg">
+            <wsdl:input message="intf:alert_subscribeRequest" name="alert_subscribeRequest"/>
+            <wsdl:output message="intf:alert_subscribeResponse" name="alert_subscribeResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="team_check" parameterOrder="session result ErrorMsg">
+            <wsdl:input message="intf:team_checkRequest" name="team_checkRequest"/>
+            <wsdl:output message="intf:team_checkResponse" name="team_checkResponse"/>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="session_discover" parameterOrder="user password IP host language">
+            <wsdl:input message="intf:session_discoverRequest" name="session_discoverRequest"/>
+            <wsdl:output message="intf:session_discoverResponse" name="session_discoverResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_init" parameterOrder="user password IP host language token norewrite">
+            <wsdl:input message="intf:session_initRequest" name="session_initRequest"/>
+            <wsdl:output message="intf:session_initResponse" name="session_initResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_center" parameterOrder="token center ErrorMsg">
+            <wsdl:input message="intf:session_centerRequest" name="session_centerRequest"/>
+            <wsdl:output message="intf:session_centerResponse" name="session_centerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_role" parameterOrder="token role ErrorMsg">
+            <wsdl:input message="intf:session_roleRequest" name="session_roleRequest"/>
+            <wsdl:output message="intf:session_roleResponse" name="session_roleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_language" parameterOrder="token language ErrorMsg">
+            <wsdl:input message="intf:session_languageRequest" name="session_languageRequest"/>
+            <wsdl:output message="intf:session_languageResponse" name="session_languageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_user" parameterOrder="token user_id ErrorMsg">
+            <wsdl:input message="intf:session_get_userRequest" name="session_get_userRequest"/>
+            <wsdl:output message="intf:session_get_userResponse" name="session_get_userResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_center_list" parameterOrder="token center_list ErrorMsg">
+            <wsdl:input message="intf:session_get_center_listRequest" name="session_get_center_listRequest"/>
+            <wsdl:output message="intf:session_get_center_listResponse" name="session_get_center_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_role_list" parameterOrder="token result ErrorMsg">
+            <wsdl:input message="intf:session_get_role_listRequest" name="session_get_role_listRequest"/>
+            <wsdl:output message="intf:session_get_role_listResponse" name="session_get_role_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_language_list" parameterOrder="token language_list ErrorMsg">
+            <wsdl:input message="intf:session_get_language_listRequest" name="session_get_language_listRequest"/>
+            <wsdl:output message="intf:session_get_language_listResponse" name="session_get_language_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_active_role" parameterOrder="token result ErrorMsg">
+            <wsdl:input message="intf:session_get_active_roleRequest" name="session_get_active_roleRequest"/>
+            <wsdl:output message="intf:session_get_active_roleResponse" name="session_get_active_roleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="session_relocate" parameterOrder="token source_id result ErrorMsg">
+            <wsdl:input message="intf:session_relocateRequest" name="session_relocateRequest"/>
+            <wsdl:output message="intf:session_relocateResponse" name="session_relocateResponse"/>
+        </wsdl:operation>
+
+
+
+        <!-- 1- obtenerDatosPacienteCIP / operations-->
+        <wsdl:operation name="HIS_obtenerDatosPacienteCIP" parameterOrder="CIP datosXML ErrorMsg">
+            <wsdl:input message="intf:HIS_obtenerDatosPacienteCIPRequest" name="HIS_obtenerDatosPacienteCIPRequest"/>
+            <wsdl:output message="intf:HIS_obtenerDatosPacienteCIPResponse" name="HIS_obtenerDatosPacienteCIPResponse"/>
+        </wsdl:operation>
+
+        <!-- 2- obtenerDatosNHC / operations-->
+        <wsdl:operation name="HIS_obtenerDatosNHC" parameterOrder="NHC datosXML ErrorMsg">
+            <wsdl:input message="intf:HIS_obtenerDatosNHCRequest" name="HIS_obtenerDatosNHCRequest"/>
+            <wsdl:output message="intf:HIS_obtenerDatosNHCResponse" name="HIS_obtenerDatosNHCResponse"/>
+        </wsdl:operation>
+
+        <!-- 3- obtenerEquiposReferencia / operations-->
+        <wsdl:operation name="HIS_obtenerEquiposReferencia" parameterOrder="CIP datosXML ErrorMsg">
+            <wsdl:input message="intf:HIS_obtenerEquiposReferenciaRequest" name="HIS_obtenerEquiposReferenciaRequest"/>
+            <wsdl:output message="intf:HIS_obtenerEquiposReferenciaResponse" name="HIS_obtenerEquiposReferenciaResponse"/>
+        </wsdl:operation>
+
+        <!-- 4- obtenerDatosDiagnosticos / operations-->
+        <wsdl:operation name="HIS_obtenerDatosDiagnosticos" parameterOrder="CIP datosXML ErrorMsg">
+            <wsdl:input message="intf:HIS_obtenerDatosDiagnosticosRequest" name="HIS_obtenerDatosDiagnosticosRequest"/>
+            <wsdl:output message="intf:HIS_obtenerDatosDiagnosticosResponse" name="HIS_obtenerDatosDiagnosticosResponse"/>
+        </wsdl:operation>
+
+        <!-- 5- obtenerDocumentosCIP / operations-->
+        <wsdl:operation name="HIS_obtenerDocumentosCIP" parameterOrder="CIP datosXML ErrorMsg">
+            <wsdl:input message="intf:HIS_obtenerDocumentosCIPRequest" name="HIS_obtenerDocumentosCIPRequest"/>
+            <wsdl:output message="intf:HIS_obtenerDocumentosCIPResponse" name="HIS_obtenerDocumentosCIPResponse"/>
+        </wsdl:operation>
+
+        <!-- 6- recuperarDocumento / operations-->
+        <wsdl:operation name="HIS_recuperarDocumento" parameterOrder="xml datosXML ErrorMsg">
+            <wsdl:input message="intf:HIS_recuperarDocumentoRequest" name="HIS_recuperarDocumentoRequest"/>
+            <wsdl:output message="intf:HIS_recuperarDocumentoResponse" name="HIS_recuperarDocumentoResponse"/>
+        </wsdl:operation>
+
+        <!-- 7- enviarCursoClinico / operations-->
+        <wsdl:operation name="HIS_enviarCursoClinico" parameterOrder="xml posicionXML ErrorMsg">
+            <wsdl:input message="intf:HIS_enviarCursoClinicoRequest" name="HIS_enviarCursoClinicoRequest"/>
+            <wsdl:output message="intf:HIS_enviarCursoClinicoResponse" name="HIS_enviarCursoClinicoResponse"/>
+        </wsdl:operation>
+        <!-- Synergy functoins-->
+        <wsdl:operation name="synergy_get_data" parameterOrder="session xml result ErrorMsg">
+            <wsdl:input message="intf:synergy_get_dataRequest" name="synergy_get_dataRequest"/>
+            <wsdl:output message="intf:synergy_get_dataResponse" name="synergy_get_dataResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="program_list" parameterOrder="session active result ErrorMsg">
+            <wsdl:input message="intf:program_listRequest" name="program_listRequest"/>
+            <wsdl:output message="intf:program_listResponse" name="program_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="program_get" parameterOrder="session program_id result ErrorMsg">
+            <wsdl:input message="intf:program_getRequest" name="program_getRequest"/>
+            <wsdl:output message="intf:program_getResponse" name="program_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list_program" parameterOrder="session program status scope search_str limit result ErrorMsg">
+            <wsdl:input message="intf:admission_list_programRequest" name="admission_list_programRequest"/>
+            <wsdl:output message="intf:admission_list_programResponse" name="admission_list_programResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="protocol_list" parameterOrder="session program mdc active result ErrorMsg">
+            <wsdl:input message="intf:protocol_listRequest" name="protocol_listRequest"/>
+            <wsdl:output message="intf:protocol_listResponse" name="protocol_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="protocol_get" parameterOrder="session protocol_id result ErrorMsg">
+            <wsdl:input message="intf:protocol_getRequest" name="protocol_getRequest"/>
+            <wsdl:output message="intf:protocol_getResponse" name="protocol_getResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="protocol_get_XML" parameterOrder="session protocol_id result ErrorMsg">
+            <wsdl:input message="intf:protocol_get_XMLRequest" name="protocol_get_XMLRequest"/>
+            <wsdl:output message="intf:protocol_get_XMLResponse" name="protocol_get_XMLResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list_protocol" parameterOrder="session protocol status scope search_str limit result ErrorMsg">
+            <wsdl:input message="intf:admission_list_protocolRequest" name="admission_list_protocolRequest"/>
+            <wsdl:output message="intf:admission_list_protocolResponse" name="admission_list_protocolResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="code_search" parameterOrder="session code_system search_text result ErrorMsg">
+            <wsdl:input message="intf:code_searchRequest" name="code_searchRequest"/>
+            <wsdl:output message="intf:code_searchResponse" name="code_searchResponse"/>
+        </wsdl:operation>
+
+        <!-- Mobile functions -->
+        <wsdl:operation name="mobile_session_discover" parameterOrder="user password IP host language">
+            <wsdl:input message="intf:mobile_session_discoverRequest" name="mobile_session_discoverRequest"/>
+            <wsdl:output message="intf:mobile_session_discoverResponse" name="mobile_session_discoverResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_session_init" parameterOrder="user password IP host language">
+            <wsdl:input message="intf:mobile_session_initRequest" name="mobile_session_initRequest"/>
+            <wsdl:output message="intf:mobile_session_initResponse" name="mobile_session_initResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_get_pendings" parameterOrder="session user result ErrorMsg">
+            <wsdl:input message="intf:mobile_task_get_pendingsRequest" name="mobile_task_get_pendingsRequest"/>
+            <wsdl:output message="intf:mobile_task_get_pendingsResponse" name="mobile_task_get_pendingsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_get_optionals" parameterOrder="session user result ErrorMsg">
+            <wsdl:input message="intf:mobile_task_get_optionalsRequest" name="mobile_task_get_optionalsRequest"/>
+            <wsdl:output message="intf:mobile_task_get_optionalsResponse" name="mobile_task_get_optionalsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_form_set_device_answers" parameterOrder="session task_id device_type answers_XML result ErrorMsg">
+            <wsdl:input message="intf:mobile_form_set_device_answersRequest" name="mobile_form_set_device_answersRequest"/>
+            <wsdl:output message="intf:mobile_form_set_device_answersResponse" name="mobile_form_set_device_answersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_insert_from_optional" parameterOrder="session task_id_optional user result ErrorMsg">
+            <wsdl:input message="intf:mobile_task_insert_from_optionalRequest" name="mobile_task_insert_from_optionalRequest"/>
+            <wsdl:output message="intf:mobile_task_insert_from_optionalResponse" name="mobile_task_insert_from_optionalResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_form_list" parameterOrder="session task_id optional result ErrorMsg">
+            <wsdl:input message="intf:mobile_task_form_listRequest" name="mobile_task_form_listRequest"/>
+            <wsdl:output message="intf:mobile_task_form_listResponse" name="mobile_task_form_listResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_form_get_summary" parameterOrder="session task_id optional result ErrorMsg">
+            <wsdl:input message="intf:mobile_form_get_summaryRequest" name="mobile_form_get_summaryRequest"/>
+            <wsdl:output message="intf:mobile_form_get_summaryResponse" name="mobile_form_get_summaryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_list_month" parameterOrder="session from to case lang result ErrorMsg">
+            <wsdl:input message="intf:mobile_task_list_monthRequest" name="mobile_task_list_monthRequest"/>
+            <wsdl:output message="intf:mobile_task_list_monthResponse" name="mobile_task_list_monthResponse"/>
+        </wsdl:operation>
+        <!-- End Mobile functions -->
+
+    </wsdl:portType>
+
+
+    <wsdl:binding name="LINKCARESoapBinding" type="intf:LINKCARE">
+        <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+
+        <wsdl:operation name="CheckConection">
+            <wsdlsoap:operation soapAction="LINKCARE#CheckConection"/>
+            <wsdl:input name="CheckConectionRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="CheckConectionResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_ref">
+            <wsdlsoap:operation soapAction="LINKCARE#template_ref"/>
+            <wsdl:input name="template_refRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_refResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_get">
+            <wsdlsoap:operation soapAction="LINKCARE#template_get"/>
+            <wsdl:input name="template_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_set">
+            <wsdlsoap:operation soapAction="LINKCARE#template_set"/>
+            <wsdl:input name="template_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_delete">
+            <wsdlsoap:operation soapAction="LINKCARE#template_delete"/>
+            <wsdl:input name="template_deleteRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_deleteResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_insert">
+            <wsdlsoap:operation soapAction="LINKCARE#template_insert"/>
+            <wsdl:input name="template_insertRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_insertResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_export">
+            <wsdlsoap:operation soapAction="LINKCARE#template_export"/>
+            <wsdl:input name="template_exportRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_exportResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_import">
+            <wsdlsoap:operation soapAction="LINKCARE#template_import"/>
+            <wsdl:input name="template_importRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_importResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_update">
+            <wsdlsoap:operation soapAction="LINKCARE#template_update"/>
+            <wsdl:input name="template_updateRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_updateResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="template_get_summary">
+            <wsdlsoap:operation soapAction="LINKCARE#template_get_summary"/>
+            <wsdl:input name="template_get_summaryRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="template_get_summaryResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+
+        <wsdl:operation name="activity_load">
+            <wsdlsoap:operation soapAction="LINKCARE#activity_load"/>
+            <wsdl:input name="activity_loadRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="activity_loadResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="activity_optional">
+            <wsdlsoap:operation soapAction="LINKCARE#activity_optional"/>
+            <wsdl:input name="activity_optionalRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="activity_optionalResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+
+
+        <wsdl:operation name="task_insert">
+            <wsdlsoap:operation soapAction="LINKCARE#task_insert"/>
+            <wsdl:input name="task_insertRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_insertResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_insert_with_professional">
+            <wsdlsoap:operation soapAction="LINKCARE#task_insert_with_professional"/>
+            <wsdl:input name="task_insert_with_professionalRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_insert_with_professionalResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_delete">
+            <wsdlsoap:operation soapAction="LINKCARE#task_delete"/>
+            <wsdl:input name="task_deleteRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_deleteResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_list_day_default">
+            <wsdlsoap:operation soapAction="LINKCARE#task_list_day_default"/>
+            <wsdl:input name="task_list_day_defaultRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_list_day_defaultResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_calendar_month">
+            <wsdlsoap:operation soapAction="LINKCARE#task_calendar_month"/>
+            <wsdl:input name="task_calendar_monthRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_calendar_monthResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_calendar_year">
+            <wsdlsoap:operation soapAction="LINKCARE#task_calendar_year"/>
+            <wsdl:input name="task_calendar_yearRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_calendar_yearResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_list">
+            <wsdlsoap:operation soapAction="LINKCARE#task_list"/>
+            <wsdl:input name="task_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_list_date">
+            <wsdlsoap:operation soapAction="LINKCARE#task_list_date"/>
+            <wsdl:input name="task_list_dateRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_list_dateResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_form_list">
+            <wsdlsoap:operation soapAction="LINKCARE#task_form_list"/>
+            <wsdl:input name="task_form_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_form_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_get">
+            <wsdlsoap:operation soapAction="LINKCARE#task_get"/>
+            <wsdl:input name="task_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_set">
+            <wsdlsoap:operation soapAction="LINKCARE#task_set"/>
+            <wsdl:input name="task_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_role_list">
+            <wsdlsoap:operation soapAction="LINKCARE#task_role_list"/>
+            <wsdl:input name="task_role_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_role_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="task_user_list">
+            <wsdlsoap:operation soapAction="LINKCARE#task_user_list"/>
+            <wsdl:input name="task_user_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="task_user_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="user_list">
+            <wsdlsoap:operation soapAction="LINKCARE#user_list"/>
+            <wsdl:input name="user_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_set_role_list">
+            <wsdlsoap:operation soapAction="LINKCARE#user_set_role_list"/>
+            <wsdl:input name="user_set_role_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_set_role_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_get_role_list">
+            <wsdlsoap:operation soapAction="LINKCARE#user_get_role_list"/>
+            <wsdl:input name="user_get_role_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_get_role_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_get">
+            <wsdlsoap:operation soapAction="LINKCARE#user_get"/>
+            <wsdl:input name="user_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_get_contact">
+            <wsdlsoap:operation soapAction="LINKCARE#user_get_contact"/>
+            <wsdl:input name="user_get_contactRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_get_contactResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_insert">
+            <wsdlsoap:operation soapAction="LINKCARE#user_insert"/>
+            <wsdl:input name="user_insertRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_insertResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_set_contact">
+            <wsdlsoap:operation soapAction="LINKCARE#user_set_contact"/>
+            <wsdl:input name="user_set_contactRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_set_contactResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_merge_contact">
+            <wsdlsoap:operation soapAction="LINKCARE#user_merge_contact"/>
+            <wsdl:input name="user_merge_contactRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_merge_contactResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="user_set">
+            <wsdlsoap:operation soapAction="LINKCARE#user_set"/>
+            <wsdl:input name="user_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="user_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+
+
+
+
+
+        <wsdl:operation name="case_get">
+            <wsdlsoap:operation soapAction="LINKCARE#case_get"/>
+            <wsdl:input name="case_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="case_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="case_get_contact">
+            <wsdlsoap:operation soapAction="LINKCARE#case_get_contact"/>
+            <wsdl:input name="case_get_contactRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="case_get_contactResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="case_insert">
+            <wsdlsoap:operation soapAction="LINKCARE#case_insert"/>
+            <wsdl:input name="case_insertRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="case_insertResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="case_set_contact">
+            <wsdlsoap:operation soapAction="LINKCARE#case_set_contact"/>
+            <wsdl:input name="case_set_contactRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="case_set_contactResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="case_merge_contact">
+            <wsdlsoap:operation soapAction="LINKCARE#case_merge_contact"/>
+            <wsdl:input name="case_merge_contactRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="case_merge_contactResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="case_set">
+            <wsdlsoap:operation soapAction="LINKCARE#case_set"/>
+            <wsdl:input name="case_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="case_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="case_delete">
+            <wsdlsoap:operation soapAction="LINKCARE#case_delete"/>
+            <wsdl:input name="case_deleteRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="case_deleteResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="admission_set">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_set"/>
+            <wsdl:input name="admission_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_delete">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_delete"/>
+            <wsdl:input name="admission_deleteRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_deleteResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_get">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_get"/>
+            <wsdl:input name="admission_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_list"/>
+            <wsdl:input name="admission_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list_case">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_list_case"/>
+            <wsdl:input name="admission_list_caseRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_list_caseResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_insert">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_insert"/>
+            <wsdl:input name="admission_insertRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_insertResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_join">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_join"/>
+            <wsdl:input name="admission_joinRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_joinResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_report">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_report"/>
+            <wsdl:input name="admission_reportRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_reportResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+
+        <wsdl:operation name="action_list">
+            <wsdlsoap:operation soapAction="LINKCARE#action_list"/>
+            <wsdl:input name="action_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="action_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="action_exec">
+            <wsdlsoap:operation soapAction="LINKCARE#action_exec"/>
+            <wsdl:input name="action_execRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="action_execResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="elapsed_list">
+            <wsdlsoap:operation soapAction="LINKCARE#elapsed_list"/>
+            <wsdl:input name="elapsed_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="elapsed_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="contact_search">
+            <wsdlsoap:operation soapAction="LINKCARE#contact_search"/>
+            <wsdl:input name="contact_searchRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="contact_searchResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="source_get_url">
+            <wsdlsoap:operation soapAction="LINKCARE#source_get_url"/>
+            <wsdl:input name="source_get_urlRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="source_get_urlResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="event_role_list">
+            <wsdlsoap:operation soapAction="LINKCARE#event_role_list"/>
+            <wsdl:input name="event_role_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_role_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_issuer_list">
+            <wsdlsoap:operation soapAction="LINKCARE#event_issuer_list"/>
+            <wsdl:input name="event_issuer_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_issuer_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_task_list">
+            <wsdlsoap:operation soapAction="LINKCARE#event_task_list"/>
+            <wsdl:input name="event_task_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_task_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_form_list">
+            <wsdlsoap:operation soapAction="LINKCARE#event_form_list"/>
+            <wsdl:input name="event_form_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_form_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_template_list">
+            <wsdlsoap:operation soapAction="LINKCARE#event_template_list"/>
+            <wsdl:input name="event_template_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_template_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_set">
+            <wsdlsoap:operation soapAction="LINKCARE#event_set"/>
+            <wsdl:input name="event_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_call_duration_set">
+            <wsdlsoap:operation soapAction="LINKCARE#event_call_duration_set"/>
+            <wsdl:input name="event_call_duration_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_call_duration_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_get">
+            <wsdlsoap:operation soapAction="LINKCARE#event_get"/>
+            <wsdl:input name="event_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_delete">
+            <wsdlsoap:operation soapAction="LINKCARE#event_delete"/>
+            <wsdl:input name="event_deleteRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_deleteResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_type">
+            <wsdlsoap:operation soapAction="LINKCARE#event_type"/>
+            <wsdl:input name="event_typeRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_typeResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_insert">
+            <wsdlsoap:operation soapAction="LINKCARE#event_insert"/>
+            <wsdl:input name="event_insertRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_insertResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_report">
+            <wsdlsoap:operation soapAction="LINKCARE#event_report"/>
+            <wsdl:input name="event_reportRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_reportResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="event_report_2">
+            <wsdlsoap:operation soapAction="LINKCARE#event_report_2"/>
+            <wsdl:input name="event_report_2Request">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="event_report_2Response">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="form_insert">
+            <wsdlsoap:operation soapAction="LINKCARE#form_insert"/>
+            <wsdl:input name="form_insertRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_insertResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_set">
+            <wsdlsoap:operation soapAction="LINKCARE#form_set"/>
+            <wsdl:input name="form_setRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_setResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_close">
+            <wsdlsoap:operation soapAction="LINKCARE#form_close"/>
+            <wsdl:input name="form_closeRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_closeResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_open">
+            <wsdlsoap:operation soapAction="LINKCARE#form_open"/>
+            <wsdl:input name="form_openRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_openResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="form_delete">
+            <wsdlsoap:operation soapAction="LINKCARE#form_delete"/>
+            <wsdl:input name="form_deleteRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_deleteResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- 2013/01/17 -->
+        <wsdl:operation name="form_get">
+            <wsdlsoap:operation soapAction="LINKCARE#form_get"/>
+            <wsdl:input name="form_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_header">
+            <wsdlsoap:operation soapAction="LINKCARE#form_get_header"/>
+            <wsdl:input name="form_get_headerRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_get_headerResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_summary">
+            <wsdlsoap:operation soapAction="LINKCARE#form_get_summary"/>
+            <wsdl:input name="form_get_summaryRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_get_summaryResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_question">
+            <wsdlsoap:operation soapAction="LINKCARE#form_get_question"/>
+            <wsdl:input name="form_get_questionRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_get_questionResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_answer">
+            <wsdlsoap:operation soapAction="LINKCARE#form_get_answer"/>
+            <wsdl:input name="form_get_answerRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_get_answerResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_set_answer">
+            <wsdlsoap:operation soapAction="LINKCARE#form_set_answer"/>
+            <wsdl:input name="form_set_answerRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_set_answerResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_PDF">
+            <wsdlsoap:operation soapAction="LINKCARE#form_PDF"/>
+            <wsdl:input name="form_PDFRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_PDFResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_list">
+            <wsdlsoap:operation soapAction="LINKCARE#form_list"/>
+            <wsdl:input name="form_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_set_file">
+            <wsdlsoap:operation soapAction="LINKCARE#form_set_file"/>
+            <wsdl:input name="form_set_fileRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_set_fileResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- -->
+
+
+
+        <wsdl:operation name="description_get_key">
+            <wsdlsoap:operation soapAction="LINKCARE#description_get_key"/>
+            <wsdl:input name="description_get_keyRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="description_get_keyResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="description_get_XLS">
+            <wsdlsoap:operation soapAction="LINKCARE#description_get_XLS"/>
+            <wsdl:input name="description_get_XLSRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="description_get_XLSResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="description_set_XLS">
+            <wsdlsoap:operation soapAction="LINKCARE#description_set_XLS"/>
+            <wsdl:input name="description_set_XLSRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="description_set_XLSResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        
+        <wsdl:operation name="alert_get">
+            <wsdlsoap:operation soapAction="LINKCARE#alert_get"/>
+            <wsdl:input name="alert_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="alert_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        
+        <wsdl:operation name="alert_subscribe">
+            <wsdlsoap:operation soapAction="LINKCARE#alert_subscribe"/>
+            <wsdl:input name="alert_subscribeRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="alert_subscribeResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+        <wsdl:operation name="session_discover">
+            <wsdlsoap:operation soapAction="LINKCARE#session_discover"/>
+            <wsdl:input name="session_discoverRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_discoverResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_init">
+            <wsdlsoap:operation soapAction="LINKCARE#session_init"/>
+            <wsdl:input name="session_initRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_initResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_center">
+            <wsdlsoap:operation soapAction="LINKCARE#session_center"/>
+            <wsdl:input name="session_centerRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_centerResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_role">
+            <wsdlsoap:operation soapAction="LINKCARE#session_role"/>
+            <wsdl:input name="session_roleRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_roleResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_language">
+            <wsdlsoap:operation soapAction="LINKCARE#session_language"/>
+            <wsdl:input name="session_languageRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_languageResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_user">
+            <wsdlsoap:operation soapAction="LINKCARE#session_get_user"/>
+            <wsdl:input name="session_get_userRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_get_userResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_center_list">
+            <wsdlsoap:operation soapAction="LINKCARE#session_get_center_list"/>
+            <wsdl:input name="session_get_center_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_get_center_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_role_list">
+            <wsdlsoap:operation soapAction="LINKCARE#session_get_role_list"/>
+            <wsdl:input name="session_get_role_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_get_role_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_language_list">
+            <wsdlsoap:operation soapAction="LINKCARE#session_get_language_list"/>
+            <wsdl:input name="session_get_language_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_get_language_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_get_active_role">
+            <wsdlsoap:operation soapAction="LINKCARE#session_get_active_role"/>
+            <wsdl:input name="session_get_active_roleRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_get_active_roleResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="session_relocate">
+            <wsdlsoap:operation soapAction="LINKCARE#session_relocate"/>
+            <wsdl:input name="session_relocateRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="session_relocateResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        
+        <wsdl:operation name="team_check">
+            <wsdlsoap:operation soapAction="LINKCARE#team_check"/>
+            <wsdl:input name="team_checkRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="team_checkResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+        <wsdl:operation name="program_list">
+            <wsdlsoap:operation soapAction="LINKCARE#program_list"/>
+            <wsdl:input name="program_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="program_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="program_get">
+            <wsdlsoap:operation soapAction="LINKCARE#program_get"/>
+            <wsdl:input name="program_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="program_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list_program">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_list_program"/>
+            <wsdl:input name="admission_list_programRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_list_programResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="protocol_list">
+            <wsdlsoap:operation soapAction="LINKCARE#protocol_list"/>
+            <wsdl:input name="protocol_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="protocol_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="protocol_get">
+            <wsdlsoap:operation soapAction="LINKCARE#protocol_get"/>
+            <wsdl:input name="protocol_getRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="protocol_getResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="protocol_get_XML">
+            <wsdlsoap:operation soapAction="LINKCARE#protocol_get_XML"/>
+            <wsdl:input name="protocol_get_XMLRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="protocol_get_XMLResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="admission_list_protocol">
+            <wsdlsoap:operation soapAction="LINKCARE#admission_list_protocol"/>
+            <wsdl:input name="admission_list_protocolRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="admission_list_protocolResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="code_search">
+            <wsdlsoap:operation soapAction="LINKCARE#code_search"/>
+            <wsdl:input name="code_searchRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="code_searchResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+
+
+        <!-- 1- obtenerDatosPacienteCIP/ binding-->
+        <wsdl:operation name="HIS_obtenerDatosPacienteCIP">
+            <wsdlsoap:operation soapAction="LINKCARE#HIS_obtenerDatosPacienteCIP"/>
+            <wsdl:input name="HIS_obtenerDatosPacienteCIPRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="HIS_obtenerDatosPacienteCIPResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- 2- obtenerDatosNHC/ binding-->
+        <wsdl:operation name="HIS_obtenerDatosNHC">
+            <wsdlsoap:operation soapAction="LINKCARE#HIS_obtenerDatosNHC"/>
+            <wsdl:input name="HIS_obtenerDatosNHCRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="HIS_obtenerDatosNHCResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- 3- obtenerEquiposReferencia/ binding-->
+        <wsdl:operation name="HIS_obtenerEquiposReferencia">
+            <wsdlsoap:operation soapAction="LINKCARE#HIS_obtenerEquiposReferencia"/>
+            <wsdl:input name="HIS_obtenerEquiposReferenciaRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="HIS_obtenerEquiposReferenciaResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- 4- obtenerDatosDiagnosticos/ binding-->
+        <wsdl:operation name="HIS_obtenerDatosDiagnosticos">
+            <wsdlsoap:operation soapAction="LINKCARE#HIS_obtenerDatosDiagnosticos"/>
+            <wsdl:input name="HIS_obtenerDatosDiagnosticosRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="HIS_obtenerDatosDiagnosticosResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- 5- obtenerDocumentosCIP/ binding-->
+        <wsdl:operation name="HIS_obtenerDocumentosCIP">
+            <wsdlsoap:operation soapAction="LINKCARE#HIS_obtenerDocumentosCIP"/>
+            <wsdl:input name="HIS_obtenerDocumentosCIPRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="HIS_obtenerDocumentosCIPResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- 6- recuperarDocumento/ binding-->
+        <wsdl:operation name="HIS_recuperarDocumento">
+            <wsdlsoap:operation soapAction="LINKCARE#HIS_recuperarDocumento"/>
+            <wsdl:input name="HIS_recuperarDocumentoRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="HIS_recuperarDocumentoResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <!-- 7- enviarCursoClinico/ binding-->
+        <wsdl:operation name="HIS_enviarCursoClinico">
+            <wsdlsoap:operation soapAction="LINKCARE#HIS_enviarCursoClinico"/>
+            <wsdl:input name="HIS_enviarCursoClinicoRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="HIS_enviarCursoClinicoResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <!-- Synergy functions-->
+        <wsdl:operation name="synergy_get_data">
+            <wsdlsoap:operation soapAction="LINKCARE#synergy_get_data"/>
+            <wsdl:input name="synergy_get_dataRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="synergy_get_dataResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <!-- End Synergy functions-->
+        <!-- Mobile functions-->
+        <wsdl:operation name="mobile_session_discover">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_session_discover"/>
+            <wsdl:input name="mobile_session_discoverRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_session_discoverResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_session_init">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_session_init"/>
+            <wsdl:input name="mobile_session_initRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_session_initResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_get_pendings">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_task_get_pendings"/>
+            <wsdl:input name="mobile_task_get_pendingsRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_task_get_pendingsResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_get_optionals">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_task_get_optionals"/>
+            <wsdl:input name="mobile_task_get_optionalsRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_task_get_optionalsResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_form_set_device_answers">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_form_set_device_answers"/>
+            <wsdl:input name="mobile_form_set_device_answersRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_form_set_device_answersResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_insert_from_optional">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_task_insert_from_optional"/>
+            <wsdl:input name="mobile_task_insert_from_optionalRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_task_insert_from_optionalResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_form_list">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_task_form_list"/>
+            <wsdl:input name="mobile_task_form_listRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_task_form_listResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_form_get_summary">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_form_get_summary"/>
+            <wsdl:input name="mobile_form_get_summaryRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_form_get_summaryResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mobile_task_list_month">
+            <wsdlsoap:operation soapAction="LINKCARE#mobile_task_list_month"/>
+            <wsdl:input name="mobile_task_list_monthRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="mobile_task_list_monthResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <!-- End Mobile functions-->
+    </wsdl:binding>
+
+    <wsdl:service name="LINKCARE">
+        <wsdl:port binding="intf:LINKCARESoapBinding" name="LINKCARE">
+            <wsdlsoap:address location="http://localhost:8081/BDIGITAL-LCWS/ServerWSDL.php"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

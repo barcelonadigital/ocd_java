@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+    <form-beans>
+        <form-bean name="LoginForm" type="org.bdigital.ocd.login.LoginForm"/>
+        <form-bean name="CaseSearchForm" type="org.bdigital.ocd.cases.CaseSearchForm"/>
+        <form-bean name="CaseNewForm" type="org.bdigital.ocd.cases.CaseNewForm"/>
+        <form-bean name="CaseDetailsForm" type="org.bdigital.ocd.cases.CaseDetailsForm"/>
+        <form-bean name="AdmissionInsertForm" type="org.bdigital.ocd.admission.AdmissionInsertForm"/>
+        <form-bean name="AdmissionDetailsForm" type="org.bdigital.ocd.admission.AdmissionDetailsForm"/>
+        <form-bean name="TaskInsertForm" type="org.bdigital.ocd.task.TaskInsertForm"/>
+        <form-bean name="TaskDetailsForm" type="org.bdigital.ocd.task.TaskDetailsForm"/>
+        <form-bean name="FormCloseForm" type="org.bdigital.ocd.form.FormCloseForm"/>
+        <form-bean name="FormOpenForm" type="org.bdigital.ocd.form.FormOpenForm"/>
+        <form-bean name="FormDetailsForm" type="org.bdigital.ocd.form.FormDetailsForm"/>
+        <form-bean name="FormSetAnswersForm" type="org.bdigital.ocd.form.FormSetAnswersForm"/>
+        <form-bean name="FormSetAnswerForm" type="org.bdigital.ocd.form.FormSetAnswerForm"/>
+        <form-bean name="FormGetQuestionForm" type="org.bdigital.ocd.form.FormGetQuestionForm"/>
+        <form-bean name="CaseJoinForm" type="org.bdigital.ocd.cases.CaseJoinForm"/>
+    </form-beans>
+
+	<global-forwards>
+        <forward name="loginAuto"  path="/login.do"/>
+        <forward name="login"  path="/jsp/login.jsp"/>
+    </global-forwards>
+
+    <action-mappings>
+        <action name="LoginForm" path="/login" scope="request" type="org.bdigital.ocd.login.LoginAction" validate="false">
+            <forward name="success" path="/WEB-INF/jsp/loginDetails.jsp"/>
+            <forward name="failure" path="/jsp/login.jsp"/>
+        </action>
+        
+        <action path="/mainPg" forward="/jsp/main.jsp"/>
+        <action path="/caseSearchPg" forward="/jsp/caseSearch.jsp"/>
+        <action path="/caseSearchAction" name="CaseSearchForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
+            <forward name="casejoin" path="/caseJoinAction.do"/>
+            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="failure" path="/caseSearchPg.do"/>
+        </action>
+        <action path="/caseJoinAction" name="CaseJoinForm" scope="request" type="org.bdigital.ocd.cases.CaseJoinAction" validate="false">
+            <forward name="admission" path="/admissionInsertAction.do"/>
+            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="failure" path="/caseSearchPg.do"/>
+        </action>
+        <action path="/caseNewPg" forward="/jsp/caseNew.jsp"/>
+        <action path="/caseNewAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseNewAction" validate="true" input="/caseNewPg.do">
+            <forward name="casejoin" path="/caseJoinAction.do"/>
+            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="failure" path="/caseNewPg.do"/>
+        </action>
+        <action path="/caseDetailsPg" forward="/WEB-INF/jsp/caseDetails.jsp"/>
+        <action path="/caseDetailsAction" name="CaseDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseDetailsAction" validate="false">
+            <forward name="success" path="/caseDetailsPg.do"/>
+            <forward name="failure" path="/caseDetailsPg.do"/>
+        </action>
+        <action path="/admissionInsertAction" name="AdmissionInsertForm" scope="request" type="org.bdigital.ocd.admission.AdmissionInsertAction" validate="false">
+            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="failure" path="/caseDetailsAction.do"/>
+        </action>
+        <action path="/admissionDetailsPg" forward="/WEB-INF/jsp/admissionDetails.jsp"/>
+        <action path="/admissionDetailsAction" name="AdmissionDetailsForm" scope="request" type="org.bdigital.ocd.admission.AdmissionDetailsAction" validate="false">
+            <forward name="success" path="/admissionDetailsPg.do"/>
+            <forward name="failure" path="/admissionDetailsPg.do"/>
+            <forward name="task" path="/taskDetailsAction.do"/>
+        </action>
+        <action path="/admissionDetailsNoAutoAction" name="AdmissionDetailsForm" scope="request" type="org.bdigital.ocd.admission.AdmissionDetailsNoAutoAction" validate="false">
+            <forward name="success" path="/admissionDetailsPg.do"/>
+            <forward name="failure" path="/admissionDetailsPg.do"/>
+        </action>
+        <action path="/taskInsertAction" name="TaskInsertForm" scope="request" type="org.bdigital.ocd.task.TaskInsertAction" validate="false">
+            <forward name="success" path="/admissionDetailsAction.do"/>
+            <forward name="failure" path="/admissionDetailsAction.do"/>
+        </action>
+        <action path="/caseTaskInsertAction" name="TaskInsertForm" scope="request" type="org.bdigital.ocd.task.TaskInsertAction" validate="false">
+            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="failure" path="/caseDetailsAction.do"/>
+        </action>
+        <action path="/taskDetailsPg" forward="/WEB-INF/jsp/taskDetails.jsp"/>
+        <action path="/taskDetailsAction" name="TaskDetailsForm" scope="request" type="org.bdigital.ocd.task.TaskDetailsAction" validate="false">
+            <forward name="success" path="/taskDetailsPg.do"/>
+            <forward name="failure" path="/taskDetailsPg.do"/>
+        </action>
+        <action path="/formCloseAction" name="FormCloseForm" scope="request" type="org.bdigital.ocd.form.FormCloseAction" validate="false">
+            <forward name="success" path="/taskDetailsAction.do"/>
+            <forward name="failure" path="/taskDetailsAction.do"/>
+        </action>
+        <action path="/formOpenAction" name="FormOpenForm" scope="request" type="org.bdigital.ocd.form.FormOpenAction" validate="false">
+            <forward name="success" path="/taskDetailsAction.do"/>
+            <forward name="failure" path="/taskDetailsAction.do"/>
+        </action>
+        <action path="/formDetailsPg" forward="/WEB-INF/jsp/formDetails.jsp"/>
+        <action path="/formDetailsAction" name="FormDetailsForm" scope="request" type="org.bdigital.ocd.form.FormDetailsAction" validate="false">
+            <forward name="success" path="/formDetailsPg.do"/>
+            <forward name="failure" path="/formDetailsPg.do"/>
+        </action>
+        <action path="/formSetAnswersAction" name="FormSetAnswersForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswersAction" validate="false">
+            <forward name="success" path="/formDetailsAction.do"/>
+            <forward name="failure" path="/formDetailsAction.do"/>
+        </action>
+        <action path="/formAjaxAction" type="org.bdigital.ocd.form.FormAjaxAction" scope="request">
+        </action>
+        <action path="/formSetAnswerAction" name="FormSetAnswerForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswerAction" validate="false">
+        </action>
+        <action path="/formGetQuestionAction" name="FormGetQuestionForm" scope="request" type="org.bdigital.ocd.form.FormGetQuestionAction" validate="false">
+        </action>
+    </action-mappings>
+
+    <message-resources parameter="ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
