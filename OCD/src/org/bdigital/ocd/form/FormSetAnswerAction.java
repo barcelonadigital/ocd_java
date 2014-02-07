@@ -62,7 +62,7 @@ public class FormSetAnswerAction extends BaseAction {
         	String questionType = formBean.getType();
         	if("VERTICAL_RADIO".equals(questionType) || 
         			"HORIZONTAL_RADIO".equals(questionType) ||
-        			"DATA".equals(questionType) ||
+        			"DATE".equals(questionType) ||
         			"TEXT".equals(questionType) || 
         			"NUMERICAL".equals(questionType) || 
         			"TEXT_AREA".equals(questionType)){
@@ -71,6 +71,7 @@ public class FormSetAnswerAction extends BaseAction {
         		String optionId = formBean.getOption();
         		String value = formBean.getValue();
         		String questionId = formBean.getIdQuestion();
+        		respJson.setIdQuestion(questionId);
         		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, nextForm, errorMsg);
             	if (!"".equals(errorMsg.value)) {
             		

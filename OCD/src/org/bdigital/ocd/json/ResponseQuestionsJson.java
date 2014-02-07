@@ -23,6 +23,7 @@ public class ResponseQuestionsJson extends org.apache.struts.action.ActionForm {
 	private static final long serialVersionUID = 1L;
 	private String errorMessage;
 	private String formStatus;
+	private String idQuestion;
 	private List<String> questionIds = new ArrayList<String>();
 	private List<String> questionDescriptions = new ArrayList<String>();
 	private List<String> questionTypes = new ArrayList<String>();
@@ -64,6 +65,12 @@ public class ResponseQuestionsJson extends org.apache.struts.action.ActionForm {
 	}
 	public void setFormStatus(String formStatus) {
 		this.formStatus = formStatus;
+	}
+	public String getIdQuestion() {
+		return idQuestion;
+	}
+	public void setIdQuestion(String idQuestion) {
+		this.idQuestion = idQuestion;
 	}
 
 }

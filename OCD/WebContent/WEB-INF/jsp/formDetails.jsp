@@ -17,11 +17,12 @@
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\\/script>');</script>
 	    <script type="text/javascript">
-		    function ajaxSetAnswer() {
+	        var timeOutIds=new Array();
+	        function ajaxSetAnswerById(idQuestion) {
 		    	document.getElementById("ajaxResponseId").value = '';
+		    	document.getElementById("statusSaving"+idQuestion).innerHTML = 'Desant';
 		        var idForm = '<bean:write name="FormDetailsForm" property="idForm"/>';
-		        var idQuestion = document.getElementById("ajaxFieldId").value;
-		        var valueObj = document.getElementsByName("questionValue("+idQuestion+")")[0];
+		    	var valueObj = document.getElementsByName("questionValue("+idQuestion+")")[0];
 		        var value='';
 		        if (typeof valueObj !== "undefined") {
 		        	value = valueObj.value;
@@ -32,6 +33,10 @@
 
 		        var url="formSetAnswerAction.do?idForm="+idForm+"&type="+type+"&option="+option+"&value="+value+"&idQuestion="+idQuestion;
 		        ajaxCall(url,processMessageSetAnswer);
+	        }
+		    function ajaxSetAnswer() {
+		        var idQuestion = document.getElementById("ajaxFieldId").value;
+		        ajaxSetAnswerById(idQuestion);
 		    }
 		    function ajaxGetQuestion(questionId) {
 		    	var idForm = '<bean:write name="FormDetailsForm" property="idForm"/>';
@@ -97,6 +102,8 @@
 		    	document.getElementById("ajaxResponseId").value = req.responseText;
 		    	var responseOjb = JSON.parse(req.responseText);
 		    	if(responseOjb.errorMessage==''){
+			    	//document.getElementById("statusSaving"+responseOjb.idQuestion).innerHTML = 'Desat';
+			    	$( "#statusSaving"+responseOjb.idQuestion ).html('Desat');
 		    		document.getElementById("formStatusContainer").innerHTML = responseOjb.formStatus;
 			    	var questionsList = responseOjb.questionIds;
 		    		for(var j=0;j<arrayQuestions.length;){
@@ -120,6 +127,9 @@
 		    				newLI.innerHTML = '\n(ID: '+questionIdNew+')\n'+responseOjb.questionDescriptions[i]+'\n';
 		    				newLI.id = 'fila'+questionIdNew;
 		    				newLI.style.display = 'none';
+		    				var newSpan = document.createElement("SPAN");
+		    				newSpan.id = "statusSaving"+questionIdNew;
+		    				newSpan.style.color = '#bbb';
 		    				var newInputType = document.createElement("INPUT");
 			    			newInputType.name = "questionType("+questionIdNew+")";
 			    			newInputType.type = "hidden";
@@ -128,6 +138,7 @@
 		    				newInputId.name = "questionId("+questionIdNew+")";
 		    				newInputId.type = "hidden";
 		    				newInputId.value = questionIdNew;
+		    				newLI.appendChild(newSpan);
 		    				newLI.appendChild(newInputType);
 		    				newLI.appendChild(newInputId);
 		    				if (typeof questionIdVisible !== "undefined") {
@@ -161,7 +172,15 @@
 		    		var newInput = document.createElement("TEXTAREA");
 	    			newInput.name = "questionValue("+questionOjb.questionId+")";
 	    			newInput.value = questionOjb.value;
-		    		var newDiv = document.createElement("DIV");
+	    			newInput.onkeyup = function() { 
+	    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
+	    				if(typeof timeOutIds !== "undefined"){
+	    					clearTimeout(timeOutIds[questionOjb.questionId]);
+	    				}
+	    				timeOutIds[questionOjb.questionId]=setTimeout(function() {
+	    				    ajaxSetAnswerById(questionOjb.questionId);
+	    			}, 1000); };
+	    			var newDiv = document.createElement("DIV");
 	    			newDiv.style.display = 'none';
     				newDiv.appendChild(newInput);
 	    			//fila.innerHTML += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -172,6 +191,14 @@
 	    			newInput.name = "questionValue("+questionOjb.questionId+")";
 	    			newInput.type = "text";
 	    			newInput.value = questionOjb.value;
+	    			newInput.onkeyup = function() { 
+	    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
+	    				if(typeof timeOutIds !== "undefined"){
+	    					clearTimeout(timeOutIds[questionOjb.questionId]);
+	    				}
+	    				timeOutIds[questionOjb.questionId]=setTimeout(function() {
+	    				    ajaxSetAnswerById(questionOjb.questionId);
+	    			}, 1000); };
 		    		var newDiv = document.createElement("DIV");
 	    			newDiv.style.display = 'none';
     				newDiv.appendChild(newInput);
@@ -194,8 +221,11 @@
 		    			if(optionObj.optionId == questionOjb.value){
 		    				$(newInput).attr('checked',true);
 		    			}
-	    				newLabel.appendChild(newInput);
+		    			newLabel.appendChild(newInput);
 		    			newLabel.innerHTML += optionObj.description;
+		    			newLabel.onchange = function() { 
+		    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
+		    				ajaxSetAnswerById(questionOjb.questionId); };
 			    		//fila.appendChild(newLabel);
 	    				newDiv.appendChild(newLabel);
 			    		//$(newLabel).slideDown('slow');
@@ -236,11 +266,14 @@
             <span style='color:red'><bean:write name="msg3" /></span>
         </html:messages>
 	    
+		Debug: <input type="text" id="ajaxResponseId" name="ajaxResponseId" style="width: 300px;" readonly="readonly" /><br/>
 	    Status: <span id="formStatusContainer"><bean:write name="FormDetailsForm" property="status"/></span>
 	    <logic:present name="FormDetailsForm" property="questions">
 	    <html:form action="/formSetAnswersAction">
 	    <html:hidden name="FormDetailsForm" property="idForm"/>
-		<html:button property="botoAjax" value="Ajax" onclick="ajaxSetAnswer()" /><input type="text" id="ajaxFieldId" name="ajaxFieldId" /><input type="text" id="ajaxResponseId" name="ajaxResponseId" style="width: 300px;" /><br/>
+		<!-- 
+		<html:button property="botoAjax" value="Debug" onclick="ajaxSetAnswer()" /><input type="text" id="ajaxFieldId" name="ajaxFieldId" />
+		-->
 	    Preguntes: 
 		<ul id="llistaQuestions">
 	    <logic:iterate name="FormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
@@ -248,12 +281,14 @@
 		        <html:hidden name="FormDetailsForm" property="questionType(${questionItem.questionId})"/>
 		        <html:hidden name="FormDetailsForm" property="questionId(${questionItem.questionId})"/>
 				(ID: <bean:write name="questionItem" property="questionId"/>)
-				<bean:write name="questionItem" property="description" filter="false"/>
+				<bean:write name="questionItem" property="description" filter="false"/> <span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
 			</li>
 		</logic:iterate>
 		</ul>
 		<logic:equal name="FormDetailsForm" property="status" value="OPEN">
+		<!--  
 			<html:submit value="Enviar" />
+		-->
 		</logic:equal>
 		</html:form>
 		</logic:present>
