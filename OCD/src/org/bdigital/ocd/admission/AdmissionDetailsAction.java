@@ -7,7 +7,9 @@
 package org.bdigital.ocd.admission;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,41 +121,73 @@ public class AdmissionDetailsAction extends BaseAction {
 //                        }else{
                         	errorMsg = new StringHolder("");
                         	result = new StringHolder("");
-                        	String admissionDateString = "";
+                        	Date admissionDate = null;
+                        	Calendar admissionCal = new GregorianCalendar();
+                        	Calendar todayCal = new GregorianCalendar();
+                        	
                         	if(admissionObj.getData()!=null){
                         		if(admissionObj.getData().getProgram()!=null){
-                        			Date admissionDate = UtilsString.stringtoDate(admissionObj.getData().getEnrolDate(),UtilsWs.FORMAT_DATEHOUR_WS);
-                        			admissionDateString = UtilsString.dateToString(admissionDate, UtilsWs.FORMAT_DATE_WS);
+                        			admissionDate = UtilsString.stringtoDate(admissionObj.getData().getEnrolDate(),UtilsWs.FORMAT_DATEHOUR_WS);
+                        			//String admissionDateString = UtilsString.dateToString(admissionDate, UtilsWs.FORMAT_DATE_WS);
+                        			admissionCal = new GregorianCalendar();
+                        			admissionCal.setTime(admissionDate);
                         		}
                         	}
-                        	proxy.task_list_date(tokenLK, admissionDateString, "ADMI", admissionId, result, errorMsg);
-                        	if (!"".equals(errorMsg.value)) {
+                        	
+                        	List<Task> tasks = new ArrayList<Task>();
+                        	List<Task> proTasks = new ArrayList<Task>();
+                        	for(int j=admissionCal.get(Calendar.YEAR);j<=todayCal.get(Calendar.YEAR)+1;j++){
 
-                                ActionMessages errors = new ActionMessages();
-                                errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                                saveErrors(request, errors);
-                                return mapping.findForward(FAILURE);
-                            }else{
-                            	Tasks tasksObj = (Tasks)UtilsWs.xmlToObject(result.value,
-                            			Tasks.class, Task.class);
-                            	List<Task> tasks = new ArrayList<Task>();
-                            	if(tasksObj.getTasks()!=null){
-	                            	for(int i=0;i<tasksObj.getTasks().size();i++){
-	                        			Task t = tasksObj.getTasks().get(i);
-	                        			if("PRO_TASK".equals(t.getTaskClass())){
-	                        				tasks.add(t);
-	                        			}
-	                            	}
-                            	}
-                            	if(tasks.size()==1){
-                            		Task t = tasks.get(0);
-                            		request.setAttribute("parameterIdTask",t.getId());
-	                            	return mapping.findForward("task");
-                            	}else{
-	                            	formBean.setTasks(tasksObj.getTasks());
-	                            	return mapping.findForward(SUCCESS);
-                            	}
-                            }
+                            	errorMsg = new StringHolder("");
+                            	result = new StringHolder("");
+                        		proxy.task_calendar_year(tokenLK, ""+j, "ADMI", admissionId, result, errorMsg);
+                            	if (!"".equals(errorMsg.value)) {
+
+                                    ActionMessages errors = new ActionMessages();
+                                    errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
+                                    saveErrors(request, errors);
+                                    return mapping.findForward(FAILURE);
+                                }else{
+                                	if(result.value!=null){
+	                                	String[] datesArray = result.value.split("#");
+	                                	for(int k=0;k<datesArray.length;k++){
+	                                		String dateItem = datesArray[k];
+	                                		String[] infoDateArray = dateItem.split("\\|");
+	                                    	errorMsg = new StringHolder("");
+	                                    	result = new StringHolder("");
+	                                		proxy.task_list_date(tokenLK, infoDateArray[0], "ADMI", admissionId, result, errorMsg);
+	                                    	if (!"".equals(errorMsg.value)) {
+	
+	                                            ActionMessages errors = new ActionMessages();
+	                                            errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
+	                                            saveErrors(request, errors);
+	                                            return mapping.findForward(FAILURE);
+	                                        }else{
+	                                        	Tasks tasksObj = (Tasks)UtilsWs.xmlToObject(result.value,
+	                                        			Tasks.class, Task.class);
+	                                        	if(tasksObj.getTasks()!=null){
+	                                        		for(int i=0;i<tasksObj.getTasks().size();i++){
+	            	                        			Task t = tasksObj.getTasks().get(i);
+	            	                        			if("PRO_TASK".equals(t.getTaskClass())){
+	            	                        				proTasks.add(t);
+	            	                        			}
+	            	                        			tasks.add(t);
+	            	                            	}
+	                                        	}
+	                                        }
+	                                	}
+                                	}
+                                }
+                        	}
+
+                        	if(proTasks.size()==1){
+                        		Task t = proTasks.get(0);
+                        		request.setAttribute("parameterIdTask",t.getId());
+                            	return mapping.findForward("task");
+                        	}else{
+                            	formBean.setTasks(tasks);
+                            	return mapping.findForward(SUCCESS);
+                        	}
 //                        }
                     }
                 	
