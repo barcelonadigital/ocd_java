@@ -24,6 +24,7 @@ public class ResponseQuestionsJson extends org.apache.struts.action.ActionForm {
 	private String errorMessage;
 	private String formStatus;
 	private String idQuestion;
+	private String requestCounter;
 	private List<String> questionIds = new ArrayList<String>();
 	private List<String> questionDescriptions = new ArrayList<String>();
 	private List<String> questionTypes = new ArrayList<String>();
@@ -71,6 +72,12 @@ public class ResponseQuestionsJson extends org.apache.struts.action.ActionForm {
 	}
 	public void setIdQuestion(String idQuestion) {
 		this.idQuestion = idQuestion;
+	}
+	public String getRequestCounter() {
+		return requestCounter;
+	}
+	public void setRequestCounter(String requestCounter) {
+		this.requestCounter = requestCounter;
 	}
 
 }

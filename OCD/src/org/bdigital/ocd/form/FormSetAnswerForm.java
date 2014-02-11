@@ -23,6 +23,7 @@ public class FormSetAnswerForm extends org.apache.struts.action.ActionForm {
 	private String option;
 	private String idQuestion;
 	private String value;
+	private String requestCounter;
 	public String getIdForm() {
 		return idForm;
 	}
@@ -52,6 +53,12 @@ public class FormSetAnswerForm extends org.apache.struts.action.ActionForm {
 	}
 	public void setValue(String value) {
 		this.value = value;
+	}
+	public String getRequestCounter() {
+		return requestCounter;
+	}
+	public void setRequestCounter(String requestCounter) {
+		this.requestCounter = requestCounter;
 	}
 
 }

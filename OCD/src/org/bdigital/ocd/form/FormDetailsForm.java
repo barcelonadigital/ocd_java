@@ -23,6 +23,8 @@ public class FormDetailsForm extends org.apache.struts.action.ActionForm {
 	private static final long serialVersionUID = 1L;
 	private String idForm;
 	private String status;
+	private String name;
+	private String description;
 	private List<Question> questions;
 	private HashMap<String,String> questionTypeMap = new HashMap<String,String>();
 	private HashMap<String,String> questionOptionMap = new HashMap<String,String>();
@@ -69,6 +71,18 @@ public class FormDetailsForm extends org.apache.struts.action.ActionForm {
 	}
 	public void setQuestionValue(String index, String value) {
 		this.questionValueMap.put(index,value);
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

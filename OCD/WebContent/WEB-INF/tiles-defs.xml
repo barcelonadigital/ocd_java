@@ -35,8 +35,36 @@
     </definition>
 
     end samples -->
-
-    <definition name="${YOUR_DEFINITION_HERE}">
+    <definition name="base.definition" path="/jsp/tiles/layout.jsp">
+	    <put name="header" value="/jsp/tiles/header.jsp" />
+	    <put name="footer" value="/jsp/tiles/footer.jsp" />
+	    <put name="body" value="" /> 
     </definition>
+
+    <definition name="mainPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/main-body.jsp" />
+    </definition>
+    <definition name="searchPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/search-body.jsp" />
+    </definition>
+    <definition name="newPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/new-body.jsp" />
+    </definition>
+    <definition name="detailsPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/details-body.jsp" />
+    </definition>
+    <definition name="historicPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/historic-body.jsp" />
+    </definition>
+    <definition name="casetaskPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/casetask-body.jsp" />
+    </definition>
+    <definition name="caseadmissionPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/caseadmission-body.jsp" />
+    </definition>
+    <definition name="caseformPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/caseform-body.jsp" />
+    </definition>
+    
 
 </tiles-definitions>

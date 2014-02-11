@@ -84,6 +84,8 @@ public class CaseDetailsAction extends BaseAction {
             		formBean.setFullname(caseGet.getData().getFullname());
             		formBean.setNickname(caseGet.getData().getNickname());
             		formBean.setBirthday(caseGet.getData().getBdate());
+            		formBean.setAge(caseGet.getData().getAge());
+            		formBean.setSex(caseGet.getData().getGender());
             	}
             	for(int i=0;i<caseGet.getRefs().length;i++){
             		String item = caseGet.getRefs()[i];
@@ -181,6 +183,13 @@ public class CaseDetailsAction extends BaseAction {
             		}
             		Admission a = admissionsAll.get(0);
             		formBean.setIdAdmission(a.getRef());
+            		if(a.getData()!=null){
+	            		if(a.getData().getProtocol()!=null){
+	            			formBean.setDescProtocolActual(a.getData().getProtocol().getName());
+	            		}
+	            		formBean.setDataProgramaActual(a.getData().getAdmissionDate());
+	            		formBean.setEstatProgramaActual(a.getData().getStatus());
+            		}
             		errorMsg = new StringHolder("");
                 	result = new StringHolder("");
                 	proxy.action_list(tokenLK,"","MNG",a.getRef(),"","",result,errorMsg);
@@ -206,6 +215,7 @@ public class CaseDetailsAction extends BaseAction {
                     		}
                     	}
                     	formBean.setActions(actions);
+                    	request.setAttribute("actions",actions);
                     	if(containsTransfer){
                     		errorMsg = new StringHolder("");
     	                	result = new StringHolder("");
@@ -220,6 +230,7 @@ public class CaseDetailsAction extends BaseAction {
     	                    	actionsObj = (Actions)UtilsWs.xmlToObject(result.value,
     	                    			Actions.class, Action.class);
     	                    	formBean.setActionsTransfer(actionsObj.getActions());
+    	                    	request.setAttribute("actionsTransfer",actionsObj.getActions());
     	                    }
                     	}
                     }

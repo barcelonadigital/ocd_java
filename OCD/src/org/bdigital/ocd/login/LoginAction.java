@@ -73,8 +73,8 @@ public class LoginAction extends BaseAction {
             return mapping.findForward(FAILURE);
         }else{
         	request.getSession().setAttribute("tokenLK", token.value);
-        	formBean.setName(name.value);
-        	formBean.setCentre(center.value);
+        	request.getSession().setAttribute("userFullName", name.value);
+        	request.getSession().setAttribute("userCenter", center.value);
         	return mapping.findForward(SUCCESS);
         }
     }

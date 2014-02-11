@@ -64,6 +64,8 @@ public class FormDetailsAction extends BaseAction {
             	if(formObj.getFormData()!=null){
             		formBean.setQuestions(formObj.getFormData().getQuestions());
             		formBean.setStatus(formObj.getFormData().getStatus());
+            		formBean.setName(formObj.getFormData().getName());
+            		formBean.setDescription(formObj.getFormData().getDescription());
             		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
             			Question questionObj = formObj.getFormData().getQuestions().get(i);
             			formBean.setQuestionType(questionObj.getQuestionId(), questionObj.getType());

@@ -28,10 +28,16 @@ public class CaseDetailsForm extends org.apache.struts.action.ActionForm {
 	private String fullname;
 	private String nickname;
 	private String birthday;
+	private String age;
+	private String sex;
 
 	private String idCase;
 	private String idProgram;
 	private String idAdmission;
+
+	private String descProtocolActual;
+	private String dataProgramaActual;
+	private String estatProgramaActual;
 	
 	private String admissionsText;
 	private List<Admission> admissions;
@@ -165,6 +171,46 @@ public class CaseDetailsForm extends org.apache.struts.action.ActionForm {
 
 	public void setAdmissionsAll(List<Admission> admissionsAll) {
 		this.admissionsAll = admissionsAll;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getDescProtocolActual() {
+		return descProtocolActual;
+	}
+
+	public void setDescProtocolActual(String descProtocolActual) {
+		this.descProtocolActual = descProtocolActual;
+	}
+
+	public String getDataProgramaActual() {
+		return dataProgramaActual;
+	}
+
+	public void setDataProgramaActual(String dataProgramaActual) {
+		this.dataProgramaActual = dataProgramaActual;
+	}
+
+	public String getEstatProgramaActual() {
+		return estatProgramaActual;
+	}
+
+	public void setEstatProgramaActual(String estatProgramaActual) {
+		this.estatProgramaActual = estatProgramaActual;
 	}
 	
 	

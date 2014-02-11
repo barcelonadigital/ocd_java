@@ -25,18 +25,21 @@
     </form-beans>
 
 	<global-forwards>
-        <forward name="loginAuto"  path="/login.do"/>
+        <forward name="loginAuto"  path="/loginAction.do"/>
         <forward name="login"  path="/jsp/login.jsp"/>
     </global-forwards>
 
     <action-mappings>
-        <action name="LoginForm" path="/login" scope="request" type="org.bdigital.ocd.login.LoginAction" validate="false">
-            <forward name="success" path="/WEB-INF/jsp/loginDetails.jsp"/>
+        
+        <action path="/loginAction" name="LoginForm" scope="request" type="org.bdigital.ocd.login.LoginAction" validate="false">
+            <forward name="success" path="/mainPg.do"/>
             <forward name="failure" path="/jsp/login.jsp"/>
         </action>
+        <action path="/logoutAction" scope="request" type="org.bdigital.ocd.login.LogoutAction" validate="false">
+        </action>
         
-        <action path="/mainPg" forward="/jsp/main.jsp"/>
-        <action path="/caseSearchPg" forward="/jsp/caseSearch.jsp"/>
+        <action path="/caseSearchPg" forward="searchPg.page"/>
+        <action path="/mainPg" forward="mainPg.page"/>
         <action path="/caseSearchAction" name="CaseSearchForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
             <forward name="casejoin" path="/caseJoinAction.do"/>
             <forward name="success" path="/caseDetailsAction.do"/>
@@ -47,22 +50,27 @@
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseSearchPg.do"/>
         </action>
-        <action path="/caseNewPg" forward="/jsp/caseNew.jsp"/>
+        <action path="/caseNewPg" forward="newPg.page"/>
         <action path="/caseNewAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseNewAction" validate="true" input="/caseNewPg.do">
             <forward name="casejoin" path="/caseJoinAction.do"/>
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseNewPg.do"/>
         </action>
-        <action path="/caseDetailsPg" forward="/WEB-INF/jsp/caseDetails.jsp"/>
+        <action path="/caseDetailsPg" forward="detailsPg.page"/>
         <action path="/caseDetailsAction" name="CaseDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseDetailsAction" validate="false">
             <forward name="success" path="/caseDetailsPg.do"/>
             <forward name="failure" path="/caseDetailsPg.do"/>
+        </action>
+        <action path="/caseHistoricPg" forward="historicPg.page"/>
+        <action path="/caseHistoricAction" name="CaseDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseDetailsAction" validate="false">
+            <forward name="success" path="/caseHistoricPg.do"/>
+            <forward name="failure" path="/caseHistoricPg.do"/>
         </action>
         <action path="/admissionInsertAction" name="AdmissionInsertForm" scope="request" type="org.bdigital.ocd.admission.AdmissionInsertAction" validate="false">
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseDetailsAction.do"/>
         </action>
-        <action path="/admissionDetailsPg" forward="/WEB-INF/jsp/admissionDetails.jsp"/>
+        <action path="/admissionDetailsPg" forward="caseadmissionPg.page"/>
         <action path="/admissionDetailsAction" name="AdmissionDetailsForm" scope="request" type="org.bdigital.ocd.admission.AdmissionDetailsAction" validate="false">
             <forward name="success" path="/admissionDetailsPg.do"/>
             <forward name="failure" path="/admissionDetailsPg.do"/>
@@ -80,7 +88,7 @@
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseDetailsAction.do"/>
         </action>
-        <action path="/taskDetailsPg" forward="/WEB-INF/jsp/taskDetails.jsp"/>
+        <action path="/taskDetailsPg" forward="casetaskPg.page"/>
         <action path="/taskDetailsAction" name="TaskDetailsForm" scope="request" type="org.bdigital.ocd.task.TaskDetailsAction" validate="false">
             <forward name="success" path="/taskDetailsPg.do"/>
             <forward name="failure" path="/taskDetailsPg.do"/>
@@ -93,7 +101,7 @@
             <forward name="success" path="/taskDetailsAction.do"/>
             <forward name="failure" path="/taskDetailsAction.do"/>
         </action>
-        <action path="/formDetailsPg" forward="/WEB-INF/jsp/formDetails.jsp"/>
+        <action path="/formDetailsPg" forward="caseformPg.page"/>
         <action path="/formDetailsAction" name="FormDetailsForm" scope="request" type="org.bdigital.ocd.form.FormDetailsAction" validate="false">
             <forward name="success" path="/formDetailsPg.do"/>
             <forward name="failure" path="/formDetailsPg.do"/>
@@ -110,6 +118,7 @@
         </action>
     </action-mappings>
 
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
     <message-resources parameter="ApplicationResource"/>    
     
     <!-- ========================= Tiles plugin ===============================-->

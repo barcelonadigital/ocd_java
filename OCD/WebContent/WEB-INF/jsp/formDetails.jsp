@@ -19,8 +19,13 @@
 	    <script type="text/javascript">
 	        var timeOutIds=new Array();
 	        function ajaxSetAnswerById(idQuestion) {
+	        	if (typeof arrayRequestCounter[idQuestion] === "undefined") {
+	        		arrayRequestCounter[idQuestion] = 0;
+	        	}
+	        	var requestCounter = ++arrayRequestCounter[idQuestion];
 		    	document.getElementById("ajaxResponseId").value = '';
 		    	document.getElementById("statusSaving"+idQuestion).innerHTML = 'Desant';
+		    	document.getElementById("errorSaving"+idQuestion).innerHTML = '';
 		        var idForm = '<bean:write name="FormDetailsForm" property="idForm"/>';
 		    	var valueObj = document.getElementsByName("questionValue("+idQuestion+")")[0];
 		        var value='';
@@ -31,7 +36,7 @@
 		        var option=getRadioCheckedValue(idQuestion);
 		        //var idQuestion = document.getElementsByName("questionId("+idQuestion+")")[0].value;
 
-		        var url="formSetAnswerAction.do?idForm="+idForm+"&type="+type+"&option="+option+"&value="+value+"&idQuestion="+idQuestion;
+		        var url="formSetAnswerAction.do?idForm="+idForm+"&type="+type+"&option="+option+"&value="+value+"&idQuestion="+idQuestion+"&requestCounter="+requestCounter;
 		        ajaxCall(url,processMessageSetAnswer);
 	        }
 		    function ajaxSetAnswer() {
@@ -101,6 +106,10 @@
 		    function processMessageSetAnswer(req){
 		    	document.getElementById("ajaxResponseId").value = req.responseText;
 		    	var responseOjb = JSON.parse(req.responseText);
+		    	if (typeof arrayRequestCounter[responseOjb.idQuestion] === "undefined" ||
+		    			responseOjb.requestCounter < arrayRequestCounter[responseOjb.idQuestion]){
+		    		return;
+		    	}
 		    	if(responseOjb.errorMessage==''){
 			    	//document.getElementById("statusSaving"+responseOjb.idQuestion).innerHTML = 'Desat';
 			    	$( "#statusSaving"+responseOjb.idQuestion ).html('Desat');
@@ -130,6 +139,9 @@
 		    				var newSpan = document.createElement("SPAN");
 		    				newSpan.id = "statusSaving"+questionIdNew;
 		    				newSpan.style.color = '#bbb';
+		    				var newSpanError = document.createElement("SPAN");
+		    				newSpanError.id = "errorSaving"+questionIdNew;
+		    				newSpanError.style.color = '#f00';
 		    				var newInputType = document.createElement("INPUT");
 			    			newInputType.name = "questionType("+questionIdNew+")";
 			    			newInputType.type = "hidden";
@@ -139,6 +151,7 @@
 		    				newInputId.type = "hidden";
 		    				newInputId.value = questionIdNew;
 		    				newLI.appendChild(newSpan);
+		    				newLI.appendChild(newSpanError);
 		    				newLI.appendChild(newInputType);
 		    				newLI.appendChild(newInputId);
 		    				if (typeof questionIdVisible !== "undefined") {
@@ -156,6 +169,9 @@
 	    				k++;
 	    				i++;
 		    		}
+		    	}else{
+		    		$( "#statusSaving"+responseOjb.idQuestion ).html('');
+		    		$( "#errorSaving"+responseOjb.idQuestion ).html(responseOjb.errorMessage);
 		    	}
 		    }
 	
@@ -174,12 +190,13 @@
 	    			newInput.value = questionOjb.value;
 	    			newInput.onkeyup = function() { 
 	    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
+	    				document.getElementById("errorSaving"+questionOjb.questionId).innerHTML = '';
 	    				if(typeof timeOutIds !== "undefined"){
 	    					clearTimeout(timeOutIds[questionOjb.questionId]);
 	    				}
 	    				timeOutIds[questionOjb.questionId]=setTimeout(function() {
-	    				    ajaxSetAnswerById(questionOjb.questionId);
-	    			}, 1000); };
+	    				    ajaxSetAnswerById(questionOjb.questionId);}, 1000); 
+	    			};
 	    			var newDiv = document.createElement("DIV");
 	    			newDiv.style.display = 'none';
     				newDiv.appendChild(newInput);
@@ -193,13 +210,14 @@
 	    			newInput.value = questionOjb.value;
 	    			newInput.onkeyup = function() { 
 	    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
+	    				document.getElementById("errorSaving"+questionOjb.questionId).innerHTML = '';
 	    				if(typeof timeOutIds !== "undefined"){
 	    					clearTimeout(timeOutIds[questionOjb.questionId]);
 	    				}
 	    				timeOutIds[questionOjb.questionId]=setTimeout(function() {
-	    				    ajaxSetAnswerById(questionOjb.questionId);
-	    			}, 1000); };
-		    		var newDiv = document.createElement("DIV");
+	    				    ajaxSetAnswerById(questionOjb.questionId);}, 1000);
+	    			};
+	    			var newDiv = document.createElement("DIV");
 	    			newDiv.style.display = 'none';
     				newDiv.appendChild(newInput);
 	    			//fila.innerHTML += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -225,6 +243,7 @@
 		    			newLabel.innerHTML += optionObj.description;
 		    			newLabel.onchange = function() { 
 		    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
+		    				document.getElementById("errorSaving"+questionOjb.questionId).innerHTML = '';
 		    				ajaxSetAnswerById(questionOjb.questionId); };
 			    		//fila.appendChild(newLabel);
 	    				newDiv.appendChild(newLabel);
@@ -243,11 +262,15 @@
 		    }
 		    
 		    var arrayQuestions=new Array();
+		    var arrayRequestCounter=new Array();
 		    //var arrayIndexes=new Array();
+		    <logic:present name="FormDetailsForm" property="questions">
 		    <logic:iterate name="FormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
 		    arrayQuestions['${index}']='<bean:write name="questionItem" property="questionId"/>';
 		    //arrayIndexes['<bean:write name="questionItem" property="questionId"/>']='${index}';
+		    arrayRequestCounter['<bean:write name="questionItem" property="questionId"/>']=0;
 			</logic:iterate>
+			</logic:present>
 
 		    function loadQuestions(){
 		    	for(var i=0;i<arrayQuestions.length;i++){
@@ -281,7 +304,9 @@
 		        <html:hidden name="FormDetailsForm" property="questionType(${questionItem.questionId})"/>
 		        <html:hidden name="FormDetailsForm" property="questionId(${questionItem.questionId})"/>
 				(ID: <bean:write name="questionItem" property="questionId"/>)
-				<bean:write name="questionItem" property="description" filter="false"/> <span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
+				<bean:write name="questionItem" property="description" filter="false"/> 
+				<span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
+				<span id='errorSaving<bean:write name="questionItem" property="questionId"/>' style='color:#f00'></span>
 			</li>
 		</logic:iterate>
 		</ul>

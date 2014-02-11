@@ -72,6 +72,7 @@ public class FormSetAnswerAction extends BaseAction {
         		String value = formBean.getValue();
         		String questionId = formBean.getIdQuestion();
         		respJson.setIdQuestion(questionId);
+        		respJson.setRequestCounter(formBean.getRequestCounter());
         		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, nextForm, errorMsg);
             	if (!"".equals(errorMsg.value)) {
             		
