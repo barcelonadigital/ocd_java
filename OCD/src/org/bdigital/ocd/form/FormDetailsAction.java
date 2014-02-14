@@ -13,8 +13,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.FormData;
@@ -51,51 +49,35 @@ public class FormDetailsAction extends BaseAction {
     		StringHolder errorMsg = new StringHolder("");
         	StringHolder result = new StringHolder("");
         	proxy.form_get_summary(tokenLK, formId, result, errorMsg);
-        	if (!"".equals(errorMsg.value)) {
-
-                ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                saveErrors(request, errors);
-                return mapping.findForward(FAILURE);
-            }else{
-
-            	Form formObj = (Form)UtilsWs.xmlToObject(result.value,
-            			Form.class, FormData.class, Question.class);
-            	if(formObj.getFormData()!=null){
-            		formBean.setQuestions(formObj.getFormData().getQuestions());
-            		formBean.setStatus(formObj.getFormData().getStatus());
-            		formBean.setName(formObj.getFormData().getName());
-            		formBean.setDescription(formObj.getFormData().getDescription());
-            		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
-            			Question questionObj = formObj.getFormData().getQuestions().get(i);
-            			formBean.setQuestionType(questionObj.getQuestionId(), questionObj.getType());
-                    	formBean.setQuestionId(questionObj.getQuestionId(), questionObj.getQuestionId());
-            		}
+        	
+        	Form formObj = (Form)UtilsWs.xmlToObject(result.value,
+        			Form.class, FormData.class, Question.class);
+        	if(formObj.getFormData()!=null){
+        		formBean.setQuestions(formObj.getFormData().getQuestions());
+        		formBean.setStatus(formObj.getFormData().getStatus());
+        		formBean.setName(formObj.getFormData().getName());
+        		formBean.setDescription(formObj.getFormData().getDescription());
+        		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
+        			Question questionObj = formObj.getFormData().getQuestions().get(i);
+        			formBean.setQuestionType(questionObj.getQuestionId(), questionObj.getType());
+                	formBean.setQuestionId(questionObj.getQuestionId(), questionObj.getQuestionId());
+        		}
 //            		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
 //            			Question q = formObj.getFormData().getQuestions().get(i);
 //            			errorMsg = new StringHolder("");
 //                    	result = new StringHolder("");
 //                    	proxy.form_get_question(tokenLK, formId, q.getQuestionId(), result, errorMsg);
-//                    	if (!"".equals(errorMsg.value)) {
-//
-//                            ActionMessages errors = new ActionMessages();
-//                            errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-//                            saveErrors(request, errors);
-//                            return mapping.findForward(FAILURE);
-//                        }else{
-//                        	Question questionObj = (Question)UtilsWs.xmlToObject(result.value,
-//                        			Question.class,Form.class,Option.class);
-//                        	formBean.setQuestionType(""+i, questionObj.getType());
-//                        	formBean.setQuestionId(""+i, questionObj.getQuestionId());
-//                        	formBean.setQuestionOption(""+i, questionObj.getValue());
-//                        	formBean.setQuestionValue(""+i, questionObj.getValue());
-//                        	formObj.getFormData().getQuestions().set(i,questionObj);
-//                        }
+//                    	Question questionObj = (Question)UtilsWs.xmlToObject(result.value,
+//                    			Question.class,Form.class,Option.class);
+//                    	formBean.setQuestionType(""+i, questionObj.getType());
+//                    	formBean.setQuestionId(""+i, questionObj.getQuestionId());
+//                    	formBean.setQuestionOption(""+i, questionObj.getValue());
+//                    	formBean.setQuestionValue(""+i, questionObj.getValue());
+//                    	formObj.getFormData().getQuestions().set(i,questionObj);
 //            		}
-            	}
-            	return mapping.findForward(SUCCESS);
+        	}
+        	return mapping.findForward(SUCCESS);
             	
-            }
     	}else{
     		return mapping.findForward(FAILURE);
     	}

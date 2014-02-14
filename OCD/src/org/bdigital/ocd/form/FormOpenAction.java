@@ -13,8 +13,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 
 /**
@@ -46,16 +44,8 @@ public class FormOpenAction extends BaseAction {
     	if(formId!=null){
     		StringHolder result = new StringHolder("");
     		StringHolder errorMsg = new StringHolder("");
-        	proxy.form_open(tokenLK, formId, result, errorMsg);
-        	if (null!=errorMsg.value && !"".equals(errorMsg.value)) {
-
-                ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                saveErrors(request, errors);
-                return mapping.findForward(FAILURE);
-            }else{
-            	return mapping.findForward(SUCCESS);
-            }
+    		proxy.form_open(tokenLK, formId, result, errorMsg);
+        	return mapping.findForward(SUCCESS);
     	}else{
     		return mapping.findForward(FAILURE);
     	}

@@ -46,7 +46,7 @@
               <h3>Dades personals</h3>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="cip">CIP</label>
+                  <label for="cip"><bean:message key="label.cip"/></label>
                   <html:text styleId="cip" property="cip" />
                 </div>
                 <div class="smallfield">
@@ -66,7 +66,7 @@
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="givenName">Nom</label>
+                  <label for="givenName"><bean:message key="label.name"/></label>
                   <html:text styleId="givenName" property="givenName" />
                 </div>
                 <div class="smallfield">
@@ -86,12 +86,59 @@
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="birthday">Data Naixement (aaaa-mm-dd)</label>
+                  <label for="birthday"><bean:message key="label.birthday"/> (aaaa-mm-dd)</label>
                   <html:text styleId="birthday" property="birthday" />
                 </div>
                 <div class="smallfield">
-                  <label for="sex">Gènere (M/F)</label>
+                  <label for="sex"><bean:message key="label.sex"/> (M/F)</label>
                   <html:text styleId="sex" property="sex" />
+                </div>
+              </div>
+              <h3>Dades de contacte</h3>
+              <div class="fields-row">
+                <div class="smallfield">
+                  <label for="streetName">Carrer</label>
+                  <html:text styleId="streetName" property="streetName" />
+                </div>
+                <div class="smallfield">
+                  <label for="number">Número</label>
+                  <html:text styleId="number" property="number" />
+                </div>
+              </div>
+              <div class="fields-row">
+                <div class="smallfield">
+                  <label for="floor">Pis</label>
+                  <html:text styleId="floor" property="floor" />
+                </div>
+                <div class="smallfield">
+                  <label for="suite">Porta</label>
+                  <html:text styleId="suite" property="suite" />
+                </div>
+              </div>
+              <div class="fields-row">
+                <div class="smallfield">
+                  <label for="district">Barri</label>
+                  <html:text styleId="district" property="district" />
+                </div>
+                <div class="smallfield">
+                  <label for="city">Ciutat</label>
+                  <html:text styleId="city" property="city" />
+                </div>
+              </div>
+              <div class="fields-row">
+                <div class="smallfield">
+                  <label for="postcode">Codi postal</label>
+                  <html:text styleId="postcode" property="postcode" />
+                </div>
+                <div class="smallfield">
+                  <label for="state">Estat</label>
+                  <html:text styleId="state" property="state" />
+                </div>
+              </div>
+              <div class="fields-row">
+                <div class="smallfield">
+                  <label for="country">País</label>
+                  <html:text styleId="country" property="country" />
                 </div>
               </div>
             </div>

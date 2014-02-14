@@ -30,6 +30,7 @@ public class CaseSearchForm extends ValidatorForm {
 	
 	private String showLinkCreate;
 	private String doJoin;
+	private String doNew;
 
 	public String getNick() {
 		return nick;
@@ -102,5 +103,11 @@ public class CaseSearchForm extends ValidatorForm {
 	}
 	public void setDoJoin(String doJoin) {
 		this.doJoin = doJoin;
+	}
+	public String getDoNew() {
+		return doNew;
+	}
+	public void setDoNew(String doNew) {
+		this.doNew = doNew;
 	}
 }

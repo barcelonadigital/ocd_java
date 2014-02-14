@@ -11,15 +11,15 @@
           <div class="actionsbottom">
             <span class="info">
 	            <strong>Protocol actual</strong>
-	            <bean:write name="CaseDetailsForm" property="descProtocolActual" />
+	            <bean:write name="CaseDetailsForm" property="descProtocolActual" />&nbsp;
             </span>
             <span class="info">
-	            <strong>Inici del programa</strong>
-	            <bean:write name="CaseDetailsForm" property="dataProgramaActual" />
+	            <strong>Inici del protocol</strong>
+	            <bean:write name="CaseDetailsForm" property="dataProtocolActual" />&nbsp;
             </span>
             <span class="info">
-	            <strong>Estat del programa</strong>
-	            <bean:write name="CaseDetailsForm" property="estatProgramaActual" />
+	            <strong>Estat del protocol</strong>
+	            <bean:write name="CaseDetailsForm" property="estatProtocolActual" />&nbsp;
             </span>
           </div>
           <div class="actionstop"><html:link action="/caseSearchPg" styleClass="btn btn-large">Seleccionar un altre pacient</html:link></div>
@@ -41,10 +41,8 @@
             <div class="tabbable">
               <!-- Only required for left/right tabs-->
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1" data-toggle="tab">Clinical data</a></li>
-                <li><a href="#tab2" data-toggle="tab">Assesments</a></li>
-                <li><a href="#tab3" data-toggle="tab">Personal data</a></li>
-                <li><a href="#tab4" data-toggle="tab">Contact data</a></li>
+                <li class="active"><a href="#tab1" data-toggle="tab">Dades personals</a></li>
+                <li><a href="#tab2" data-toggle="tab">Dades de contacte</a></li>
               </ul>
               <div class="tab-content">
                 <div id="tab1" class="tab-pane dataform active">
@@ -81,207 +79,52 @@
                 </div>
                 <div id="tab2" class="tab-pane dataform">
                   <div class="fields-row">
-                    <div class="bigfield">
-                      <label for="first_name">First name</label>
-                      <input name="first_name" type="text" value="Marc">
+                    <div class="smallfield">
+                      <label for="streetName">Carrer</label>
+                      <html:text name="CaseDetailsForm" styleId="streetName" property="streetName" disabled="true" />
+                    </div>
+                    <div class="smallfield">
+                      <label for="number">Número</label>
+                      <html:text name="CaseDetailsForm" styleId="number" property="number" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="first_name">First name</label>
-                      <input name="first_name" type="text" value="Marc">
+                      <label for="floor">Pis</label>
+                      <html:text name="CaseDetailsForm" styleId="floor" property="floor" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="last_name">Last name</label>
-                      <input name="last_name" type="text" value="Solà">
+                      <label for="suite">Porta</label>
+                      <html:text name="CaseDetailsForm" styleId="suite" property="suite" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="user_name">User name</label>
-                      <input name="user_name" type="text" value="clinicasec">
+                      <label for="district">Barri</label>
+                      <html:text name="CaseDetailsForm" styleId="district" property="district" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="work_experience">Work experience</label>
-                      <input name="work_experience" type="text" value="5 years">
+                      <label for="city">Ciutat</label>
+                      <html:text name="CaseDetailsForm" styleId="city" property="city" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="first_name">First name</label>
-                      <input name="first_name" type="text" value="Marc">
-                    </div>
-                  </div>
-                </div>
-                <div id="tab3" class="tab-pane dataform">
-                  <h3>About the patient</h3>
-                  <div class="fields-row">
-                    <div class="smallfield">
-                      <label for="last_name">Last name</label>
-                      <input name="last_name" type="text" value="Solà">
+                      <label for="postcode">Codi postal</label>
+                      <html:text name="CaseDetailsForm" styleId="postcode" property="postcode" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="user_name">User name</label>
-                      <input name="user_name" type="text" value="clinicasec">
+                      <label for="state">Estat</label>
+                      <html:text name="CaseDetailsForm" styleId="state" property="state" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="work_experience">Work experience</label>
-                      <input name="work_experience" type="text" value="5 years">
-                    </div>
-                    <div class="smallfield">
-                      <label for="first_name">First name</label>
-                      <input name="first_name" type="text" value="Marc">
+                      <label for="country">País</label>
+                      <html:text name="CaseDetailsForm" styleId="country" property="country" disabled="true" />
                     </div>
                   </div>
-                  <div class="fields-row">
-                    <div class="smallfield">
-                      <label for="last_name">Last name</label>
-                      <input name="last_name" type="text" value="Solà">
-                    </div>
-                    <div class="smallfield">
-                      <label for="user_name">User name</label>
-                      <input name="user_name" type="text" value="clinicasec">
-                    </div>
-                  </div>
-                  <div class="fields-row">
-                    <div class="smallfield">
-                      <label for="work_experience">Work experience</label>
-                      <input name="work_experience" type="text" value="5 years">
-                    </div>
-                    <div class="smallfield">
-                      <label for="phone_option[]">Contact phone
-                        <div class="multiple input-prepend">
-                          <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-large dropdown-toggle">Mobile<span class="caret triangulo"></span></button>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Personal</a></li>
-                              <li><a href="#">Mobile</a></li>
-                              <li><a href="#">Work</a></li>
-                            </ul>
-                            <input id="prependedDropdownButton" name="phone_input[]" type="text" value="+34 222 444 777">
-                            <button class="btn btn-large btn-warning right remove">Remove</button>
-                          </div>
-                          <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-large dropdown-toggle">Work<span class="caret triangulo"></span></button>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Personal</a></li>
-                              <li><a href="#">Mobile</a></li>
-                              <li><a href="#">Work</a></li>
-                            </ul>
-                            <input id="prependedDropdownButton" name="phone_input[]" type="text" value="+34 999 555 111">
-                            <button class="btn btn-large btn-warning right remove">Remove</button>
-                          </div>
-                          <button class="btn btn-large btn-info add">Add</button>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-                  <div class="fields-group clearfix">
-                    <div class="fg-header">
-                      <div class="h3actions"><a href="#" class="remove">Remove Caregiver</a></div>
-                      <h3>Caregiver</h3>
-                    </div>
-                    <div class="fields-row">
-                      <div class="smallfield">
-                        <label for="last_name">Last name</label>
-                        <input name="last_name" type="text" value="Solà">
-                      </div>
-                      <div class="smallfield">
-                        <label for="user_name">User name</label>
-                        <input name="user_name" type="text" value="clinicasec">
-                      </div>
-                    </div>
-                    <div class="fields-row">
-                      <div class="smallfield">
-                        <label for="work_experience">Work experience</label>
-                        <input name="work_experience" type="text" value="5 years">
-                      </div>
-                      <div class="smallfield">
-                        <label for="first_name">First name</label>
-                        <input name="first_name" type="text" value="Marc">
-                      </div>
-                    </div>
-                    <div class="fields-row">
-                      <div class="smallfield">
-                        <label for="last_name">Last name</label>
-                        <input name="last_name" type="text" value="Solà">
-                      </div>
-                      <div class="smallfield">
-                        <label for="user_name">User name</label>
-                        <input name="user_name" type="text" value="clinicasec">
-                      </div>
-                    </div>
-                    <div class="fields-row">
-                      <div class="smallfield">
-                        <label for="work_experience">Work experience</label>
-                        <input name="work_experience" type="text" value="5 years">
-                      </div>
-                      <div class="smallfield">
-                        <label for="phone_option[]">Contact phone
-                          <div class="multiple input-prepend">
-                            <div class="btn-group">
-                              <button data-toggle="dropdown" class="btn btn-large dropdown-toggle">Mobile<span class="caret triangulo"></span></button>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Personal</a></li>
-                                <li><a href="#">Mobile</a></li>
-                                <li><a href="#">Work</a></li>
-                              </ul>
-                              <input id="prependedDropdownButton" name="phone_input[]" type="text" value="+34 222 444 777">
-                              <button class="btn btn-large btn-warning right remove">Remove</button>
-                            </div>
-                            <div class="btn-group">
-                              <button data-toggle="dropdown" class="btn btn-large dropdown-toggle">Work<span class="caret triangulo"></span></button>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Personal</a></li>
-                                <li><a href="#">Mobile</a></li>
-                                <li><a href="#">Work</a></li>
-                              </ul>
-                              <input id="prependedDropdownButton" name="phone_input[]" type="text" value="+34 999 555 111">
-                              <button class="btn btn-large btn-warning right remove">Remove</button>
-                            </div>
-                            <button class="btn btn-large btn-info add">Add</button>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="fields-row">
-                      <div class="smallfield">
-                        <label for="last_name">Email</label>
-                        <input name="last_name" type="text" value="chewacca@hotmail.com">
-                      </div>
-                    </div>
-                  </div>
-                  <button class="btn btn-large btn-info add-fields-group">Add Caregiver</button>
-                </div>
-                <div id="tab4" class="tab-pane dataform">
-                  <div class="fields-row">
-                    <div class="bigfield">
-                      <label for="first_name">First name</label>
-                      <input name="first_name" type="text" value="Marc">
-                    </div>
-                  </div>
-                  <div class="fields-row">
-                    <div class="smallfield">
-                      <label for="last_name">Last name</label>
-                      <input name="last_name" type="text" value="Solà">
-                    </div>
-                    <div class="smallfield">
-                      <label for="user_name">User name</label>
-                      <input name="user_name" type="text" value="clinicasec">
-                    </div>
-                  </div>
-                  <div class="fields-row">
-                    <div class="smallfield">
-                      <label for="work_experience">Work experience</label>
-                      <input name="work_experience" type="text" value="5 years">
-                    </div>
-                    <div class="smallfield">
-                      <label for="first_name">First name</label>
-                      <input name="first_name" type="text" value="Marc">
-                    </div>
-                  </div>
+                  <button class="btn btn-large btn-info add-fields-group">Afegir adreça</button>
                 </div>
               </div>
             </div>

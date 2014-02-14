@@ -15,8 +15,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.model.Admission;
 import org.bdigital.ocd.model.AdmissionData;
@@ -58,48 +56,32 @@ public class AdmissionInsertAction extends BaseAction {
     		StringHolder errorMsg = new StringHolder("");
         	StringHolder result = new StringHolder("");
         	proxy.admission_list_case(tokenLK,caseId, "true", result, errorMsg);
-        	if (!"".equals(errorMsg.value)) {
-
-                ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                saveErrors(request, errors);
-                return mapping.findForward(FAILURE);
-            }else{
-            	Admissions admissionListCase = (Admissions)UtilsWs.xmlToObject(result.value,
-            			Admissions.class, Admission.class, Case.class, 
-            			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
-//        		boolean alreadyAssigned=false;
-            	if(admissionListCase.getAdmissions()!=null){
-            		for(int i=0;i<admissionListCase.getAdmissions().size();i++){
-            			Admission adm = admissionListCase.getAdmissions().get(i);
-            			if(programId.equals(adm.getData().getProgram().getId())){
-//            				alreadyAssigned=true;
-            			}
-            		}
-            	}
-//            	if(alreadyAssigned){
-//            		ActionMessages errors = new ActionMessages();
-//                    errors.add("error",new ActionMessage("errors.admissionInsertExists"));
-//                    saveErrors(request, errors);
-//                    return mapping.findForward(FAILURE);
-//            	}
-        		
-        		errorMsg = new StringHolder("");
-            	result = new StringHolder("");
-            	String currentTimeString = UtilsString.dateToString(new Date(), UtilsWs.FORMAT_DATE_WS);
-            	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,UtilsWs.FORMAT_DATE_WS);
-    			proxy.admission_insert(tokenLK, caseId, programId, UtilsString.dateToString(currentTimeZero, UtilsWs.FORMAT_DATEHOUR_WS), result, errorMsg);
-            	if (!"".equals(errorMsg.value)) {
-
-                    ActionMessages errors = new ActionMessages();
-                    errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                    saveErrors(request, errors);
-                    return mapping.findForward(FAILURE);
-                }else{
-    	        	request.setAttribute("case_id",caseId);
-                	return mapping.findForward(SUCCESS);
-                }
-            }
+        	Admissions admissionListCase = (Admissions)UtilsWs.xmlToObject(result.value,
+        			Admissions.class, Admission.class, Case.class, 
+        			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
+//    		boolean alreadyAssigned=false;
+        	if(admissionListCase.getAdmissions()!=null){
+        		for(int i=0;i<admissionListCase.getAdmissions().size();i++){
+        			Admission adm = admissionListCase.getAdmissions().get(i);
+        			if(programId.equals(adm.getData().getProgram().getId())){
+//        				alreadyAssigned=true;
+        			}
+        		}
+        	}
+//        	if(alreadyAssigned){
+//        		ActionMessages errors = new ActionMessages();
+//                errors.add("error",new ActionMessage("errors.admissionInsertExists"));
+//                saveErrors(request, errors);
+//                return mapping.findForward(FAILURE);
+//        	}
+    		
+    		errorMsg = new StringHolder("");
+        	result = new StringHolder("");
+        	String currentTimeString = UtilsString.dateToString(new Date(), UtilsWs.FORMAT_DATE_WS);
+        	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,UtilsWs.FORMAT_DATE_WS);
+			proxy.admission_insert(tokenLK, caseId, programId, UtilsString.dateToString(currentTimeZero, UtilsWs.FORMAT_DATEHOUR_WS), result, errorMsg);
+			request.setAttribute("case_id",caseId);
+        	return mapping.findForward(SUCCESS);
     	}else{
     		return mapping.findForward(FAILURE);
     	}

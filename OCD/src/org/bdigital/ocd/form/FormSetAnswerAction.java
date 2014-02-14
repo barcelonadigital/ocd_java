@@ -23,6 +23,7 @@ import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.FormData;
 import org.bdigital.ocd.model.Question;
 import org.bdigital.ocd.utils.UtilsWs;
+import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
  *
@@ -42,19 +43,35 @@ public class FormSetAnswerAction extends BaseAction {
      */
     @Override
     public ActionForward doExecute(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response)
+    		HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+
+
+    	response.setContentType("text/json");
+    	PrintWriter out = response.getWriter();
     	
-    	FormSetAnswerForm formBean = (FormSetAnswerForm)form;
+    	ResponseQuestionsJson respJson = doSave(form,request,out);
+    	
+		if(respJson!=null){
+	    	JSONObject json = JSONObject.fromObject(respJson);
+	    	out.println(json.toString());
+		}
+	    
+	    out.flush();
+	    return(null);
+    }
+
+	private ResponseQuestionsJson doSave(ActionForm form,
+    		HttpServletRequest request, PrintWriter out) throws Exception {
+		
+		FormSetAnswerForm formBean = (FormSetAnswerForm)form;
+		ResponseQuestionsJson respJson = null;
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String formId=formBean.getIdForm();
-    	
-    	response.setContentType("text/json");
-    	PrintWriter out = response.getWriter();
 	    
 	    if(formId!=null){
-    		StringHolder result = new StringHolder("");
+	    	StringHolder result = new StringHolder("");
     		StringHolder errorMsg = new StringHolder("");
     		StringHolder refresh = new StringHolder("");
         	StringHolder next = new StringHolder("");
@@ -67,45 +84,48 @@ public class FormSetAnswerAction extends BaseAction {
         			"NUMERICAL".equals(questionType) || 
         			"TEXT_AREA".equals(questionType)){
 
-        		ResponseQuestionsJson respJson = new ResponseQuestionsJson();
+        		respJson = new ResponseQuestionsJson();
         		String optionId = formBean.getOption();
         		String value = formBean.getValue();
         		String questionId = formBean.getIdQuestion();
         		respJson.setIdQuestion(questionId);
         		respJson.setRequestCounter(formBean.getRequestCounter());
-        		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, nextForm, errorMsg);
-            	if (!"".equals(errorMsg.value)) {
-            		
-            		respJson.setErrorMessage(errorMsg.value);
-                }else{
-                	errorMsg = new StringHolder("");
-                	result = new StringHolder("");
-                	proxy.form_get_summary(tokenLK, formId, result, errorMsg);
-                	if (!"".equals(errorMsg.value)) {
 
-                		respJson.setErrorMessage(errorMsg.value);
-                    }else{
-                        
-                    	Form formObj = (Form)UtilsWs.xmlToObject(result.value,
-                    			Form.class, FormData.class, Question.class);
-                    	if(formObj.getFormData()!=null){
-                        	respJson.setFormStatus(formObj.getFormData().getStatus());
-                    		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
-                    			Question questionObj = formObj.getFormData().getQuestions().get(i);
-                    			respJson.addToQuestionIds(questionObj.getQuestionId());
-                        		respJson.addToQuestionDescriptions(questionObj.getDescription());
-                        		respJson.addToQuestionTypes(questionObj.getType());
-                    		}
-                    	}
-                    }
+        		try{
+            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, nextForm, errorMsg);
+                }catch(LINKCAREException e){
+                	
+                	respJson.setErrorMessage(errorMsg.value);
+                	return respJson;
                 }
+        		
+            	errorMsg = new StringHolder("");
+            	result = new StringHolder("");
+            	
+            	try{
+                	proxy.form_get_summary(tokenLK, formId, result, errorMsg);
+                }catch(LINKCAREException e){
+                	
+                	respJson.setErrorMessage(errorMsg.value);
+                	return respJson;
+                }
+            	
+            	Form formObj = (Form)UtilsWs.xmlToObject(result.value,
+            			Form.class, FormData.class, Question.class);
+            	if(formObj.getFormData()!=null){
+                	respJson.setFormStatus(formObj.getFormData().getStatus());
+            		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
+            			Question questionObj = formObj.getFormData().getQuestions().get(i);
+            			respJson.addToQuestionIds(questionObj.getQuestionId());
+                		respJson.addToQuestionDescriptions(questionObj.getDescription());
+                		respJson.addToQuestionTypes(questionObj.getType());
+            		}
+            	}
             	JSONObject json = JSONObject.fromObject(respJson);
             	out.println(json.toString());
         	}
 	    }
-	    
-	    out.flush();
-	    return(null);
-    }
+	    return respJson;
+	}
 
 }

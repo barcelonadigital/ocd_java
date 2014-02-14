@@ -13,8 +13,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 
 /**
@@ -57,13 +55,6 @@ public class FormSetAnswersAction extends BaseAction {
             		String optionId = formBean.getQuestionOption(questionId);
             		String value = formBean.getQuestionValue(questionId);
             		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
-                	if (!"".equals(errorMsg.value)) {
-
-                        ActionMessages errors = new ActionMessages();
-                        errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                        saveErrors(request, errors);
-                        return mapping.findForward(FAILURE);
-                    }
             	}
     		}
 //        	for(int i=0;i<formBean.getQuestionSize();i++){
@@ -79,13 +70,6 @@ public class FormSetAnswersAction extends BaseAction {
 //            		String value = formBean.getQuestionValue(""+i);
 //            		String questionId = formBean.getQuestionId(""+i);
 //            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
-//                	if (!"".equals(errorMsg.value)) {
-//
-//                        ActionMessages errors = new ActionMessages();
-//                        errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-//                        saveErrors(request, errors);
-//                        return mapping.findForward(FAILURE);
-//                    }
 //            	}
 //        	}
         	return mapping.findForward(SUCCESS);

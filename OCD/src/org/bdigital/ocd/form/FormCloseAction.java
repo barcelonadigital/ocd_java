@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
+import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
  *
@@ -46,22 +47,22 @@ public class FormCloseAction extends BaseAction {
     	if(formId!=null){
     		StringHolder result = new StringHolder("");
     		StringHolder errorMsg = new StringHolder("");
-        	proxy.form_close(tokenLK, formId, result, errorMsg);
-        	if ("Form has mandatory questions without answer".equals(errorMsg.value)) {
+        	try{
+        		proxy.form_close(tokenLK, formId, result, errorMsg);
+            }catch(LINKCAREException e){
+            	
+            	if ("Form has mandatory questions without answer".equals(errorMsg.value)) {
 
-                ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.mandatoryQuestionsIncompleted"));
-                saveErrors(request, errors);
-                return mapping.findForward(FAILURE);
-            }else if (null!=errorMsg.value && !"".equals(errorMsg.value)) {
-
-                ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                saveErrors(request, errors);
-                return mapping.findForward(FAILURE);
-            }else{
-            	return mapping.findForward(SUCCESS);
+                    ActionMessages errors = new ActionMessages();
+                    errors.add("general",new ActionMessage("errors.mandatoryQuestionsIncompleted"));
+                    saveErrors(request, errors);
+                    return mapping.findForward(FAILURE);
+                }else{
+                	throw e;
+                }
             }
+        	
+        	return mapping.findForward(SUCCESS);
     	}else{
     		return mapping.findForward(FAILURE);
     	}

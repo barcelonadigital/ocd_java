@@ -20,6 +20,7 @@ import org.apache.struts.action.ActionMessages;
 import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.login.LoginAction;
 import org.bdigital.ocd.login.LoginForm;
+import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
  *
@@ -30,7 +31,7 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
     protected static final String SUCCESS = "success";
     protected final static String FAILURE = "failure";
-    protected es.linkcare.LINKCARE.LINKCAREProxy proxy;
+    protected org.bdigital.ocd.ws.LINKCAREProxyWrapper proxy;
     private boolean autologin = true;
 
     /**
@@ -48,7 +49,7 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-    	proxy = new es.linkcare.LINKCARE.LINKCAREProxy();
+    	proxy = new org.bdigital.ocd.ws.LINKCAREProxyWrapper();
     	proxy.setEndpoint("http://localhost:8081/BDIGITAL-LCWS/ServerWSDL.php");
     	HttpSession session = request.getSession();
     	String tokenLK = (String) session.getAttribute("tokenLK");
@@ -69,18 +70,25 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
     	}
         try{
         	return doExecute(mapping, form, request, response);
+        }catch(LINKCAREException e){
+        	
+        	ActionMessages errors = new ActionMessages();
+            errors.add("general",new ActionMessage("errors.resultWS",e.getMessage()));
+            saveErrors(request, errors);
+            return mapping.findForward(FAILURE);
         }catch(RemoteException e){
-    		
     		MessageResources msgResource = getResources(request);
-        	String msg = msgResource.getMessage("errors.connection");
         	String msgError="";
     		if(e.detail.getClass() == java.net.ConnectException.class){
-    			msgError = ": "+e.detail.getMessage();
+            	String msg = msgResource.getMessage("errors.connection");
+    			msgError = msg+": "+e.detail.getMessage();
+    		}else{
+    			msgError = e.getMessage();
     		}
     		
     		ActionMessages errors = new ActionMessages();
             errors.add("general",
-                       new ActionMessage("errors.detail",msg+msgError));
+                       new ActionMessage("errors.detail",msgError));
             saveErrors(request, errors);
             
     		return mapping.findForward(FAILURE);

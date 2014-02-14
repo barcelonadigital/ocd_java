@@ -38,6 +38,26 @@
 		             <var-value>pas</var-value>
 		            </var>
             </field>
+            <field 
+                property="cip"
+                depends="required">
+                    <arg0 key="label.cip"/>
+            </field>
+            <field 
+                property="sex"
+                depends="required">
+                    <arg0 key="label.sex"/>
+            </field>
+            <field 
+                property="givenName"
+                depends="required">
+                    <arg0 key="label.name"/>
+            </field>
+            <field 
+                property="birthday"
+                depends="required">
+                    <arg0 key="label.birthday"/>
+            </field>
         </form>
 
     </formset>

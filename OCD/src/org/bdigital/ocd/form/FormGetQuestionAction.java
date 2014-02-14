@@ -17,8 +17,6 @@ import net.sf.json.JSONObject;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.Option;
@@ -59,18 +57,10 @@ public class FormGetQuestionAction extends BaseAction {
     		StringHolder errorMsg = new StringHolder("");
     		String questionId = formBean.getIdQuestion();
         	proxy.form_get_question(tokenLK, formId, questionId, result, errorMsg);
-        	if (!"".equals(errorMsg.value)) {
-
-                ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                saveErrors(request, errors);
-                return mapping.findForward(FAILURE);
-            }else{
-            	Question questionObj = (Question)UtilsWs.xmlToObject(result.value,
-            			Question.class,Form.class,Option.class);
-            	JSONObject json = JSONObject.fromObject(questionObj);
-            	out.println(json.toString());
-            }
+        	Question questionObj = (Question)UtilsWs.xmlToObject(result.value,
+        			Question.class,Form.class,Option.class);
+        	JSONObject json = JSONObject.fromObject(questionObj);
+        	out.println(json.toString());
 	    }
 	    
 	    out.flush();

@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
+import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
  *
@@ -49,33 +50,29 @@ public class LoginAction extends BaseAction {
     	StringHolder role = new StringHolder("");
     	StringHolder center = new StringHolder("");
     	StringHolder name = new StringHolder("");
-    	proxy.session_init(user, password, "127.0.0.1", 
-                "test.linkcare.es", language, token, 
-                "", role, center, name, 
-                errorMsg);
-    	
-        // perform validation
-        if ("ERROR:Invalid user/password".equals(errorMsg.value)) {
+    	try{
+    		proxy.session_init(user, password, "127.0.0.1", 
+                    "test.linkcare.es", language, token, 
+                    "", role, center, name, 
+                    errorMsg);
+        }catch(LINKCAREException e){
         	
-        	ActionMessages errors = new ActionMessages();
-            errors.add("error",
-                       new ActionMessage("label.logininvalid"));
-            saveErrors(request, errors);
-            
-            return mapping.findForward(FAILURE);
-        }else if (!"".equals(errorMsg.value)) {
-
-            ActionMessages errors = new ActionMessages();
-            errors.add("error",
-                       new ActionMessage("errors.detail",errorMsg.value));
-            saveErrors(request, errors);
-            
-            return mapping.findForward(FAILURE);
-        }else{
-        	request.getSession().setAttribute("tokenLK", token.value);
-        	request.getSession().setAttribute("userFullName", name.value);
-        	request.getSession().setAttribute("userCenter", center.value);
-        	return mapping.findForward(SUCCESS);
+            if ("ERROR:Invalid user/password".equals(e.getMessage())) {
+            	
+            	ActionMessages errors = new ActionMessages();
+                errors.add("error",
+                           new ActionMessage("label.logininvalid"));
+                saveErrors(request, errors);
+                
+                return mapping.findForward(FAILURE);
+            }else{
+            	throw e;
+            }
         }
+    	
+    	request.getSession().setAttribute("tokenLK", token.value);
+    	request.getSession().setAttribute("userFullName", name.value);
+    	request.getSession().setAttribute("userCenter", center.value);
+    	return mapping.findForward(SUCCESS);
     }
 }

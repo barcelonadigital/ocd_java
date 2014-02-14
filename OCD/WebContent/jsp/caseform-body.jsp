@@ -118,8 +118,14 @@
 		    			var questionIdNew = questionsList[i];
 		    			var questionIdVisible = arrayQuestions[k];
 		    			if(questionIdNew!=questionIdVisible){
-		    				var newFS = document.createElement('fieldset');
-		    				newFS.innerHTML = '<legend class="questionform">\n(ID: '+questionIdNew+')\n'+responseOjb.questionDescriptions[i]+'\n</legend>';
+		    				var newFS;
+		    				if(responseOjb.questionTypes[i]==='STATIC_TEXT'){
+		    					newFS = document.createElement('p');
+			    				newFS.innerHTML = '\n(ID: '+questionIdNew+')\n'+responseOjb.questionDescriptions[i]+'\n';
+		    				}else{
+		    					newFS = document.createElement('fieldset');
+			    				newFS.innerHTML = '<legend class="questionform">\n(ID: '+questionIdNew+')\n'+responseOjb.questionDescriptions[i]+'\n</legend>';
+		    				}
 		    				newFS.id = 'fila'+questionIdNew;
 		    				newFS.style.display = 'none';
 		    				var newSpan = document.createElement("SPAN");

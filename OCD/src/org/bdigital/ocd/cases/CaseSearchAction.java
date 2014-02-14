@@ -19,6 +19,7 @@ import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.model.Case;
 import org.bdigital.ocd.model.Data;
 import org.bdigital.ocd.utils.UtilsWs;
+import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
  *
@@ -41,7 +42,11 @@ public class CaseSearchAction extends BaseAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // extract user data
-    	CaseSearchForm formBean = (CaseSearchForm)form;
+    	CaseNewForm formBean = (CaseNewForm)form;
+    	
+    	if("true".equals(formBean.getDoNew())){
+    		return mapping.findForward("casenew");
+    	}
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	
@@ -67,33 +72,33 @@ public class CaseSearchAction extends BaseAction {
     	StringHolder errorMsg = new StringHolder("");
     	StringHolder type = new StringHolder("");
     	StringHolder result = new StringHolder("");
-    	proxy.case_insert(tokenLK,caseXmlString,result,type,errorMsg);
-   
-    	if ("Fill all reguired fields".equals(errorMsg.value)) {
-    		formBean.setShowLinkCreate("true");
-            return mapping.findForward(FAILURE);
-    	}else if (!"".equals(errorMsg.value)) {
 
-    		ActionMessages errors = new ActionMessages();
-            errors.add("error",new ActionMessage("errors.detail",errorMsg.value));
-            saveErrors(request, errors);
-            return mapping.findForward(FAILURE);
-        }else{
-        	String caseId = result.value;
-        	if (!"EXIST".equals(type.value)) {
-        		ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.resultWS",type.value));
-                saveErrors(request, errors);
+    	try{
+    		proxy.case_insert(tokenLK,caseXmlString,result,type,errorMsg);
+        }catch(LINKCAREException e){
+        	
+        	if ("Fill all reguired fields".equals(e.getMessage())) {
+        		formBean.setShowLinkCreate("true");
                 return mapping.findForward(FAILURE);
         	}else{
-	        	if("true".equals(formBean.getDoJoin())){
-	        		request.setAttribute("parameterIdCase",caseId);
-	        		return mapping.findForward("casejoin");
-	        	}else{
-		        	request.setAttribute("case_id",caseId);
-	        		return mapping.findForward(SUCCESS);
-	        	}
-        	}
+            	throw e;
+            }
         }
+   
+    	String caseId = result.value;
+    	if (!"EXIST".equals(type.value)) {
+    		ActionMessages errors = new ActionMessages();
+            errors.add("general",new ActionMessage("errors.resultWS",type.value));
+            saveErrors(request, errors);
+            return mapping.findForward(FAILURE);
+    	}else{
+        	if("true".equals(formBean.getDoJoin())){
+        		request.setAttribute("parameterIdCase",caseId);
+        		return mapping.findForward("casejoin");
+        	}else{
+	        	request.setAttribute("case_id",caseId);
+        		return mapping.findForward(SUCCESS);
+        	}
+    	}
     }
 }

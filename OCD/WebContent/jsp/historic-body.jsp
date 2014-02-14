@@ -11,15 +11,15 @@
           <div class="actionsbottom">
             <span class="info">
 	            <strong>Protocol actual</strong>
-	            <bean:write name="CaseDetailsForm" property="descProtocolActual" />
+	            <bean:write name="CaseDetailsForm" property="descProtocolActual" />&nbsp;
             </span>
             <span class="info">
-	            <strong>Inici del programa</strong>
-	            <bean:write name="CaseDetailsForm" property="dataProgramaActual" />
+	            <strong>Inici del protocol</strong>
+	            <bean:write name="CaseDetailsForm" property="dataProtocolActual" />&nbsp;
             </span>
             <span class="info">
-	            <strong>Estat del programa</strong>
-	            <bean:write name="CaseDetailsForm" property="estatProgramaActual" />
+	            <strong>Estat del protocol</strong>
+	            <bean:write name="CaseDetailsForm" property="estatProtocolActual" />&nbsp;
             </span>
           </div>
           <div class="actionstop"><html:link action="/caseSearchPg" styleClass="btn btn-large">Seleccionar un altre pacient</html:link></div>

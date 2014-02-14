@@ -13,8 +13,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.Forms;
@@ -50,20 +48,10 @@ public class TaskDetailsAction extends BaseAction {
     		StringHolder errorMsg = new StringHolder("");
         	StringHolder result = new StringHolder("");
         	proxy.task_form_list(tokenLK, taskId, result, errorMsg);
-        	if (!"".equals(errorMsg.value)) {
-
-                ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.detail",errorMsg.value));
-                saveErrors(request, errors);
-                return mapping.findForward(FAILURE);
-            }else{
-
-            	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
-            			Forms.class, Form.class);
-            	formBean.setForms(formsObj.getForms());
-            	return mapping.findForward(SUCCESS);
-            	
-            }
+        	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
+        			Forms.class, Form.class);
+        	formBean.setForms(formsObj.getForms());
+        	return mapping.findForward(SUCCESS);
     	}else{
     		return mapping.findForward(FAILURE);
     	}

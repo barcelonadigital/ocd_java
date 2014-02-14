@@ -7,6 +7,19 @@
     	  document.location='<html:rewrite action="/caseNewPg.do"/>';
           return false;
       }
+      $(document).ready(function() {
+          $('#linkNew2').click(function(e){
+        	  e.preventDefault();
+        	  $('#doNew').val('true');
+        	  $('#formSearch').submit();
+          });
+          $('#linkNew').click(function(e){
+        	  e.preventDefault();
+        	  var params = { doNew:'true', cip:$('#cip').val(), nif:$('#nif').val(), nie:$('#nie').val(), pas:$('#pas').val() };
+        	  var str = $.param( params );
+        	  document.location='<html:rewrite action="/caseSearchAction.do"/>?'+str;
+          });
+      });
     </script>
     <!-- Menú principal (final)-->
     <div class="gris1">
@@ -27,7 +40,8 @@
           <div class="content">
             <h2 class="clinician"><bean:message key="label.caseSearch"/></h2>
             
-            <html:form action="/caseSearchAction">
+            <html:form styleId="formSearch" action="/caseSearchAction">
+            <html:hidden name="CaseNewForm" property="doNew" styleId="doNew"/>
 			<html:messages id="msg2" property="general">
 		           <span style='color:red'><bean:write name="msg2" /></span>
 		    </html:messages>
@@ -36,20 +50,20 @@
 		            <span style='color:red'><bean:write name="msg3" /></span>
 		        </html:messages>
 		    </logic:messagesNotPresent>
-            <logic:equal name="CaseSearchForm" property="showLinkCreate" value="true">
+            <logic:equal name="CaseNewForm" property="showLinkCreate" value="true">
                 <span style='color:red'>El pacient no existeix. Desitja donar-lo d'alta? 
-		        <html:link action="/caseNewPg?join=${join}${CaseSearchForm.doJoin}">Alta</html:link>
+		        <html:link styleId="linkNew" href="#">Alta</html:link>
                 </span>
 			</logic:equal>
             <div id="search-patient">
+                <label for="cip">CIP</label>
+                <html:text styleId="cip" property="cip" />
                 <label for="nif">NIF</label>
                 <html:text styleId="nif" property="nif" />
                 <label for="nie">NIE</label>
                 <html:text styleId="nie" property="nie" />
                 <label for="pas">PAS</label>
                 <html:text styleId="pas" property="pas" />
-                <label for="cip">CIP</label>
-                <html:text styleId="cip" property="cip" />
                 
             </div>
             <div class="actions bottom">

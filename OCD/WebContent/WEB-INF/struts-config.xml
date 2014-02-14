@@ -40,10 +40,11 @@
         
         <action path="/caseSearchPg" forward="searchPg.page"/>
         <action path="/mainPg" forward="mainPg.page"/>
-        <action path="/caseSearchAction" name="CaseSearchForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
+        <action path="/caseSearchAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
             <forward name="casejoin" path="/caseJoinAction.do"/>
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseSearchPg.do"/>
+            <forward name="casenew" path="/caseNewPg.do"/>
         </action>
         <action path="/caseJoinAction" name="CaseJoinForm" scope="request" type="org.bdigital.ocd.cases.CaseJoinAction" validate="false">
             <forward name="admission" path="/admissionInsertAction.do"/>
@@ -76,10 +77,6 @@
             <forward name="failure" path="/admissionDetailsPg.do"/>
             <forward name="task" path="/taskDetailsAction.do"/>
         </action>
-        <action path="/admissionDetailsNoAutoAction" name="AdmissionDetailsForm" scope="request" type="org.bdigital.ocd.admission.AdmissionDetailsNoAutoAction" validate="false">
-            <forward name="success" path="/admissionDetailsPg.do"/>
-            <forward name="failure" path="/admissionDetailsPg.do"/>
-        </action>
         <action path="/taskInsertAction" name="TaskInsertForm" scope="request" type="org.bdigital.ocd.task.TaskInsertAction" validate="false">
             <forward name="success" path="/admissionDetailsAction.do"/>
             <forward name="failure" path="/admissionDetailsAction.do"/>
@@ -109,8 +106,6 @@
         <action path="/formSetAnswersAction" name="FormSetAnswersForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswersAction" validate="false">
             <forward name="success" path="/formDetailsAction.do"/>
             <forward name="failure" path="/formDetailsAction.do"/>
-        </action>
-        <action path="/formAjaxAction" type="org.bdigital.ocd.form.FormAjaxAction" scope="request">
         </action>
         <action path="/formSetAnswerAction" name="FormSetAnswerForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswerAction" validate="false">
         </action>
