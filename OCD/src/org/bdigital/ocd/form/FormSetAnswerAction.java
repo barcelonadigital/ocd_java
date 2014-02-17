@@ -50,7 +50,7 @@ public class FormSetAnswerAction extends BaseAction {
     	response.setContentType("text/json");
     	PrintWriter out = response.getWriter();
     	
-    	ResponseQuestionsJson respJson = doSave(form,request,out);
+    	ResponseQuestionsJson respJson = doSave(form,request);
     	
 		if(respJson!=null){
 	    	JSONObject json = JSONObject.fromObject(respJson);
@@ -62,7 +62,7 @@ public class FormSetAnswerAction extends BaseAction {
     }
 
 	private ResponseQuestionsJson doSave(ActionForm form,
-    		HttpServletRequest request, PrintWriter out) throws Exception {
+    		HttpServletRequest request) throws Exception {
 		
 		FormSetAnswerForm formBean = (FormSetAnswerForm)form;
 		ResponseQuestionsJson respJson = null;
@@ -121,8 +121,6 @@ public class FormSetAnswerAction extends BaseAction {
                 		respJson.addToQuestionTypes(questionObj.getType());
             		}
             	}
-            	JSONObject json = JSONObject.fromObject(respJson);
-            	out.println(json.toString());
         	}
 	    }
 	    return respJson;

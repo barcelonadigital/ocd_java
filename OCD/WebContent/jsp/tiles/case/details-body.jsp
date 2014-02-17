@@ -2,39 +2,6 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-    <!-- Menú principal (final)-->
-    <div class="cabeceraperfil">
-      <div class="container">
-        <div id="contentnophoto" class="content">
-          <small>Pacient (case_id: <bean:write name="CaseDetailsForm" property="idCase" />)</small>
-          <h2><bean:write name="CaseDetailsForm" property="fullname" /></h2><span><strong>Edat:</strong> <bean:write name="CaseDetailsForm" property="age" /></span><span><strong>Gènere:</strong> <bean:write name="CaseDetailsForm" property="sex" /></span>
-          <div class="actionsbottom">
-            <span class="info">
-	            <strong>Protocol actual</strong>
-	            <bean:write name="CaseDetailsForm" property="descProtocolActual" />&nbsp;
-            </span>
-            <span class="info">
-	            <strong>Inici del protocol</strong>
-	            <bean:write name="CaseDetailsForm" property="dataProtocolActual" />&nbsp;
-            </span>
-            <span class="info">
-	            <strong>Estat del protocol</strong>
-	            <bean:write name="CaseDetailsForm" property="estatProtocolActual" />&nbsp;
-            </span>
-          </div>
-          <div class="actionstop"><html:link action="/caseSearchPg" styleClass="btn btn-large">Seleccionar un altre pacient</html:link></div>
-        </div>
-      </div>
-    </div>
-    <div class="menuizqlayout gris1">
-      <div class="container">
-        <nav class="menuizq">
-          <ul>
-            <li><html:link action="/caseDetailsAction?idCase=${CaseDetailsForm.idCase}" styleClass="active">Informació</html:link></li>
-            <li><html:link action="/caseHistoricAction?idCase=${CaseDetailsForm.idCase}">Històric</html:link></li>
-            <li><html:link action="/admissionDetailsAction?idAdmission=${CaseDetailsForm.idAdmission}">Formularis</html:link></li>
-          </ul>
-        </nav>
         <div class="content contabs">
           <html:form styleId="newForm" action="/caseNewAction">
           <div class="contentconbotoneslaterales">
@@ -142,6 +109,3 @@
           </div>
           </html:form>
         </div>
-      </div>
-      <!-- Contenido fin-->
-    </div>

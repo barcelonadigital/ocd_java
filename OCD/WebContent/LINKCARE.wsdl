@@ -654,6 +654,15 @@
         <wsdl:part name="ErrorMsg" type="xsd:string"/>
     </wsdl:message>
 
+    <wsdl:message name="form_get_summary_allRequest">
+        <wsdl:part name="session" type="xsd:string"/>
+        <wsdl:part name="form_id" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="form_get_summary_allResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+        <wsdl:part name="ErrorMsg" type="xsd:string"/>
+    </wsdl:message>
+
     <wsdl:message name="form_get_questionRequest">
         <wsdl:part name="session" type="xsd:string"/>
         <wsdl:part name="form_id" type="xsd:string"/>
@@ -1490,6 +1499,10 @@
         <wsdl:operation name="form_get_summary" parameterOrder="session form_id result ErrorMsg">
             <wsdl:input message="intf:form_get_summaryRequest" name="form_get_summaryRequest"/>
             <wsdl:output message="intf:form_get_summaryResponse" name="form_get_summaryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_summary_all" parameterOrder="session form_id result ErrorMsg">
+            <wsdl:input message="intf:form_get_summary_allRequest" name="form_get_summary_allRequest"/>
+            <wsdl:output message="intf:form_get_summary_allResponse" name="form_get_summary_allResponse"/>
         </wsdl:operation>
         <wsdl:operation name="form_get_question" parameterOrder="session form_id question_id result ErrorMsg">
             <wsdl:input message="intf:form_get_questionRequest" name="form_get_questionRequest"/>
@@ -2818,6 +2831,20 @@
                         use="encoded"/>
             </wsdl:input>
             <wsdl:output name="form_get_summaryResponse">
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                               namespace="http://linkcare.es/LINKCARE"
+                               use="encoded"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="form_get_summary_all">
+            <wsdlsoap:operation soapAction="LINKCARE#form_get_summary_all"/>
+            <wsdl:input name="form_get_summary_allRequest">
+                <wsdlsoap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="http://linkcare.es/LINKCARE"
+                        use="encoded"/>
+            </wsdl:input>
+            <wsdl:output name="form_get_summary_allResponse">
                 <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
                                namespace="http://linkcare.es/LINKCARE"
                                use="encoded"/>

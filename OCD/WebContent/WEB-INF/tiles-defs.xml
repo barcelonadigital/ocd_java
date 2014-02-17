@@ -35,35 +35,50 @@
     </definition>
 
     end samples -->
-    <definition name="base.definition" path="/jsp/tiles/layout.jsp">
-	    <put name="header" value="/jsp/tiles/header.jsp" />
-	    <put name="footer" value="/jsp/tiles/footer.jsp" />
+    <definition name="base.definition" path="/jsp/tiles/layout/layout.jsp">
+	    <put name="html-header" value="/jsp/tiles/common/htmlheader.jsp" />
+	    <put name="header" value="/jsp/tiles/common/header.jsp" />
+	    <put name="footer" value="/jsp/tiles/common/footer.jsp" />
 	    <put name="body" value="" /> 
     </definition>
-
     <definition name="mainPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/main-body.jsp" />
+	    <put name="body" value="/jsp/tiles/general/main-body.jsp" />
     </definition>
     <definition name="searchPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/search-body.jsp" />
+	    <put name="body" value="/jsp/tiles/general/search-body.jsp" />
     </definition>
     <definition name="newPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/new-body.jsp" />
+	    <put name="body" value="/jsp/tiles/general/new-body.jsp" />
     </definition>
-    <definition name="detailsPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/details-body.jsp" />
+    <definition name="casebase.definition" path="/jsp/tiles/layout/case-layout.jsp">
+	    <put name="html-header" value="/jsp/tiles/common/htmlheader.jsp" />
+	    <put name="header" value="/jsp/tiles/common/header.jsp" />
+	    <put name="footer" value="/jsp/tiles/common/footer.jsp" />
+	    <put name="subheader" value="/jsp/tiles/case/header.jsp" />
+	    <put name="menu" value="/jsp/tiles/case/menu.jsp" />
+	    <put name="body" value="" /> 
+	    <put name="body-style" value="" />
     </definition>
-    <definition name="historicPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/historic-body.jsp" />
+    
+    <definition name="detailsPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/details-body.jsp" />
+	    <put name="body-style" value="gris1" />
     </definition>
-    <definition name="casetaskPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/casetask-body.jsp" />
+    <definition name="historicPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/historic-body.jsp" />
+	    <put name="body-style" value="" />
     </definition>
-    <definition name="caseadmissionPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/caseadmission-body.jsp" />
+    <definition name="casetaskPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/task-body.jsp" />
+	    <put name="body-style" value="" />
     </definition>
-    <definition name="caseformPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/caseform-body.jsp" />
+    <definition name="caseadmissionPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/admission-body.jsp" />
+	    <put name="body-style" value="" />
+    </definition>
+    <definition name="caseformPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/form-body.jsp" />
+	    <put name="body-style" value="" />
     </definition>
     
 

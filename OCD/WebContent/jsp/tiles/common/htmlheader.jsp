@@ -1,30 +1,9 @@
-<%-- 
-    Document   : success
-    Created on : 17-ene-2014, 12:06:05
-    Author     : jroda
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
-<!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> </html>
-<![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> </html>
-<![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> </html>
-<![endif]-->
-<!-- [if gt IE 8] <!-->
-<html class="no-js">
-  <!-- <![endif]-->
-  <head>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>OCD</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
@@ -40,22 +19,6 @@
     <!--[if (gte IE 8)&(lte IE 8)]>
     <script src="js/vendor/selectivizr.min.js"></script>
     <![endif]-->
-	    <script type="text/javascript">
-		    function bodyOnLoad(){
-		    	if (typeof bodyOnLoadAux !== "undefined") {
-		    		bodyOnLoadAux();
-		    	}
-		    }
-
-	    </script>
-  </head>
-  <body onload="bodyOnLoad();">
-    
-    <tiles:insert attribute="header"/>
-    <!-- Menú principal (final)-->
-    <tiles:insert attribute="body"/>
-    <tiles:insert attribute="footer"/>
-    
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/bootstrap-slider-edited.js"></script>
     <script src="js/main.js"></script>
@@ -66,5 +29,3 @@
       s.parentNode.insertBefore(g,s)}(document,'script'));
       
     </script>
-  </body>
-</html>

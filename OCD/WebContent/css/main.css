@@ -2804,6 +2804,7 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 }
 .nav-tabs>li>a {
     padding-top:8px;
+    background-color:#fff;
     padding-bottom:8px;
     line-height:20px;
     border:1px solid transparent;
@@ -5702,7 +5703,8 @@ body>.fichalayout>.container>.ficha .encabezado {
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tabbable .nav li a {
     color:#48525e;
     font-size:14px;
-    padding:10px 16px
+    padding:10px 16px;
+    border-top:3px solid
 }
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tabbable .nav li.active a {
     font-weight:700;

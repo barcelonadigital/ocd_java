@@ -12,7 +12,7 @@
 		    	document.getElementById("ajaxResponseId").value = '';
 		    	document.getElementById("statusSaving"+idQuestion).innerHTML = 'Desant';
 		    	document.getElementById("errorSaving"+idQuestion).innerHTML = '';
-		        var idForm = '<bean:write name="FormDetailsForm" property="idForm"/>';
+		        var idForm = '<bean:write name="CaseFormDetailsForm" property="idForm"/>';
 		    	var valueObj = document.getElementsByName("questionValue("+idQuestion+")")[0];
 		        var value='';
 		        if (typeof valueObj !== "undefined") {
@@ -30,7 +30,7 @@
 		        ajaxSetAnswerById(idQuestion);
 		    }
 		    function ajaxGetQuestion(questionId) {
-		    	var idForm = '<bean:write name="FormDetailsForm" property="idForm"/>';
+		    	var idForm = '<bean:write name="CaseFormDetailsForm" property="idForm"/>';
 		        var idQuestion = questionId;
 
 		        var url="formGetQuestionAction.do?idForm="+idForm+"&idQuestion="+idQuestion;
@@ -181,7 +181,7 @@
 	    			newInput.name = "questionValue("+questionOjb.questionId+")";
 	    			newInput.value = questionOjb.value;
 	    			newInput.rows = 5;
-	    			newInput.onkeyup = function() { 
+	    			newInput.onkeypress = function(e) { 
 	    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
 	    				document.getElementById("errorSaving"+questionOjb.questionId).innerHTML = '';
 	    				if(typeof timeOutIds !== "undefined"){
@@ -202,7 +202,7 @@
 	    			newInput.name = "questionValue("+questionOjb.questionId+")";
 	    			newInput.type = "text";
 	    			newInput.value = questionOjb.value;
-	    			newInput.onkeyup = function() { 
+	    			newInput.onkeypress = function(e) { 
 	    				document.getElementById("statusSaving"+questionOjb.questionId).innerHTML = '';
 	    				document.getElementById("errorSaving"+questionOjb.questionId).innerHTML = '';
 	    				if(typeof timeOutIds !== "undefined"){
@@ -263,8 +263,8 @@
 		    var arrayQuestions=new Array();
 		    var arrayRequestCounter=new Array();
 		    //var arrayIndexes=new Array();
-		    <logic:present name="FormDetailsForm" property="questions">
-		    <logic:iterate name="FormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
+		    <logic:present name="CaseFormDetailsForm" property="questions">
+		    <logic:iterate name="CaseFormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
 		    arrayQuestions['${index}']='<bean:write name="questionItem" property="questionId"/>';
 		    //arrayIndexes['<bean:write name="questionItem" property="questionId"/>']='${index}';
 		    arrayRequestCounter['<bean:write name="questionItem" property="questionId"/>']=0;
@@ -282,19 +282,9 @@
 		    }
 
 	    </script>
-    <!-- Menú principal (final)-->
-    <div class="menuizqlayout">
-      <div class="container">
-        <nav class="menuizq">
-          <ul>
-            <li><html:link action="/caseDetailsAction?idCase=${CaseDetailsForm.idCase}">Informació</html:link></li>
-            <li><html:link action="/caseHistoricAction?idCase=${CaseDetailsForm.idCase}">Històric</html:link></li>
-            <li><html:link action="/admissionDetailsAction?idAdmission=${CaseDetailsForm.idAdmission}">Formularis</html:link></li>
-          </ul>
-        </nav>
         <div class="content">
-          <h2 class="asses"><bean:write name="FormDetailsForm" property="name" /></h2><a href="#" class="h2 back clearfix"><span>Tornar</span></a>
-          <h3><bean:write name="FormDetailsForm" property="description" /> <span id="formStatusContainer"><bean:write name="FormDetailsForm" property="status"/></span></h3>
+          <h2 class="asses"><bean:write name="CaseFormDetailsForm" property="name" /></h2><a href="#" class="h2 back clearfix"><span>Tornar</span></a>
+          <h3><bean:write name="CaseFormDetailsForm" property="description" /> <span id="formStatusContainer"><bean:write name="CaseFormDetailsForm" property="status"/></span></h3>
 	      <html:messages id="msg" property="general">
               <span style='color:red'><bean:write name="msg" /></span>
           </html:messages>
@@ -304,15 +294,15 @@
 	    
 		  Debug: <input type="text" id="ajaxResponseId" name="ajaxResponseId" style="width: 300px;" readonly="readonly" /><br/>
 	      
-	      <logic:present name="FormDetailsForm" property="questions">
+	      <logic:present name="CaseFormDetailsForm" property="questions">
           <html:form action="/formSetAnswersAction">
-	      <html:hidden name="FormDetailsForm" property="idForm"/>
-	      <logic:iterate name="FormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
+	      <html:hidden name="CaseFormDetailsForm" property="idForm"/>
+	      <logic:iterate name="CaseFormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
 			<logic:equal name="questionItem" property="type" value="STATIC_TEXT">
 			<p id='fila<bean:write name="questionItem" property="questionId"/>'>(ID: <bean:write name="questionItem" property="questionId"/>)
 				<bean:write name="questionItem" property="description" filter="false"/>
-		        <html:hidden name="FormDetailsForm" property="questionType(${questionItem.questionId})"/>
-		        <html:hidden name="FormDetailsForm" property="questionId(${questionItem.questionId})"/>
+		        <html:hidden name="CaseFormDetailsForm" property="questionType(${questionItem.questionId})"/>
+		        <html:hidden name="CaseFormDetailsForm" property="questionId(${questionItem.questionId})"/>
 				<span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
 				<span id='errorSaving<bean:write name="questionItem" property="questionId"/>' style='color:#f00'></span>
 			</p>
@@ -324,12 +314,12 @@
 				<span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
 				<span id='errorSaving<bean:write name="questionItem" property="questionId"/>' style='color:#f00'></span>
 				</legend>
-		        <html:hidden name="FormDetailsForm" property="questionType(${questionItem.questionId})"/>
-		        <html:hidden name="FormDetailsForm" property="questionId(${questionItem.questionId})"/>
+		        <html:hidden name="CaseFormDetailsForm" property="questionType(${questionItem.questionId})"/>
+		        <html:hidden name="CaseFormDetailsForm" property="questionId(${questionItem.questionId})"/>
 			</fieldset>
 			</logic:notEqual>
 		  </logic:iterate>
-          <logic:equal name="FormDetailsForm" property="status" value="OPEN">
+          <logic:equal name="CaseFormDetailsForm" property="status" value="OPEN">
 		<!--  
 		    <html:submit value="Enviar" />
             <div class="actions bottom"><a class="btn btn-warning link">Cancel</a><a class="btn custom-btn btn-large btn-info">Submit</a></div>
@@ -338,6 +328,3 @@
           </html:form>
 		  </logic:present>
         </div>
-      </div>
-      <!-- Contenido fin-->
-    </div>

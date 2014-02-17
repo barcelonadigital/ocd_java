@@ -22,6 +22,8 @@
         <form-bean name="FormSetAnswerForm" type="org.bdigital.ocd.form.FormSetAnswerForm"/>
         <form-bean name="FormGetQuestionForm" type="org.bdigital.ocd.form.FormGetQuestionForm"/>
         <form-bean name="CaseJoinForm" type="org.bdigital.ocd.cases.CaseJoinForm"/>
+        <form-bean name="CaseTaskDetailsForm" type="org.bdigital.ocd.cases.CaseTaskDetailsForm"/>
+        <form-bean name="CaseFormDetailsForm" type="org.bdigital.ocd.cases.CaseFormDetailsForm"/>
     </form-beans>
 
 	<global-forwards>
@@ -86,6 +88,11 @@
             <forward name="failure" path="/caseDetailsAction.do"/>
         </action>
         <action path="/taskDetailsPg" forward="casetaskPg.page"/>
+        <action path="/caseTaskDetailsAction" name="CaseTaskDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseTaskDetailsAction" validate="false">
+            <forward name="success" path="/taskDetailsPg.do"/>
+            <forward name="failure" path="/taskDetailsPg.do"/>
+            <forward name="admission" path="/admissionDetailsPg.do"/>
+        </action>
         <action path="/taskDetailsAction" name="TaskDetailsForm" scope="request" type="org.bdigital.ocd.task.TaskDetailsAction" validate="false">
             <forward name="success" path="/taskDetailsPg.do"/>
             <forward name="failure" path="/taskDetailsPg.do"/>
@@ -100,6 +107,10 @@
         </action>
         <action path="/formDetailsPg" forward="caseformPg.page"/>
         <action path="/formDetailsAction" name="FormDetailsForm" scope="request" type="org.bdigital.ocd.form.FormDetailsAction" validate="false">
+            <forward name="success" path="/formDetailsPg.do"/>
+            <forward name="failure" path="/formDetailsPg.do"/>
+        </action>
+        <action path="/caseFormDetailsAction" name="CaseFormDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseFormDetailsAction" validate="false">
             <forward name="success" path="/formDetailsPg.do"/>
             <forward name="failure" path="/formDetailsPg.do"/>
         </action>

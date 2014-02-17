@@ -45,15 +45,17 @@
               <!-- dropdown menu-->
               <div class="task_links">
                 <ul>
+                <logic:present name="caseBean">
 			    <logic:present name="actionsTransfer">
 			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.Action" >
-					<li><html:link action="/caseTaskInsertAction?idAdmission=${CaseDetailsForm.idAdmission}&idCase=${CaseDetailsForm.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Dessitja continuar?');"><bean:write name="actionItem" property="name"/></html:link></li>
+					<li><html:link action="/caseTaskInsertAction?idAdmission=${caseBean.idAdmission}&idCase=${caseBean.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Dessitja continuar?');"><bean:write name="actionItem" property="name"/></html:link></li>
 				</logic:iterate>
 				</logic:present>
 			    <logic:present name="actions">
 			    <logic:iterate name="actions" id="actionItem" type="org.bdigital.ocd.model.Action" >
-					<li><html:link action="/caseTaskInsertAction?idAdmission=${CaseDetailsForm.idAdmission}&idCase=${CaseDetailsForm.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref"><bean:write name="actionItem" property="name"/></html:link></li>
+					<li><html:link action="/caseTaskInsertAction?idAdmission=${caseBean.idAdmission}&idCase=${caseBean.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref"><bean:write name="actionItem" property="name"/></html:link></li>
 				</logic:iterate>
+				</logic:present>
 				</logic:present>
                 </ul>
               </div>
