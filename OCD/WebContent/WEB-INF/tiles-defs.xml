@@ -80,6 +80,10 @@
 	    <put name="body" value="/jsp/tiles/case/form-body.jsp" />
 	    <put name="body-style" value="" />
     </definition>
+    <definition name="caseformstaticPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/formstatic-body.jsp" />
+	    <put name="body-style" value="gris1" />
+    </definition>
     
 
 </tiles-definitions>

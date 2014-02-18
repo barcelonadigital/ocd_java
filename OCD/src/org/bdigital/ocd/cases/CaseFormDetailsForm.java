@@ -30,6 +30,7 @@ public class CaseFormDetailsForm extends CaseBaseForm {
 	private HashMap<String,String> questionOptionMap = new HashMap<String,String>();
 	private HashMap<String,String> questionIdMap = new HashMap<String,String>();
 	private HashMap<String,String> questionValueMap = new HashMap<String,String>();
+	private String isThereGasometria;
 	public String getIdForm() {
 		return idForm;
 	}
@@ -83,6 +84,12 @@ public class CaseFormDetailsForm extends CaseBaseForm {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getIsThereGasometria() {
+		return isThereGasometria;
+	}
+	public void setIsThereGasometria(String isThereGasometria) {
+		this.isThereGasometria = isThereGasometria;
 	}
 	
 }

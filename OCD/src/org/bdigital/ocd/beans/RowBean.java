@@ -6,7 +6,8 @@
 
 package org.bdigital.ocd.beans;
 
-import org.bdigital.ocd.model.Question;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -18,26 +19,17 @@ public class RowBean extends org.apache.struts.action.ActionForm {
 
 	private static final long serialVersionUID = 1L;
 
-	private Question bigFieldQuestion;
-	private Question smallFieldQuestion1;
-	private Question smallFieldQuestion2;
-	public Question getBigFieldQuestion() {
-		return bigFieldQuestion;
+	private List<FieldBean> fields = new ArrayList<FieldBean>();
+
+	public List<FieldBean> getFields() {
+		return fields;
 	}
-	public void setBigFieldQuestion(Question bigFieldQuestion) {
-		this.bigFieldQuestion = bigFieldQuestion;
+
+	public void setFields(List<FieldBean> fields) {
+		this.fields = fields;
 	}
-	public Question getSmallFieldQuestion1() {
-		return smallFieldQuestion1;
+
+	public void addField(FieldBean field) {
+		this.fields.add(field);
 	}
-	public void setSmallFieldQuestion1(Question smallFieldQuestion1) {
-		this.smallFieldQuestion1 = smallFieldQuestion1;
-	}
-	public Question getSmallFieldQuestion2() {
-		return smallFieldQuestion2;
-	}
-	public void setSmallFieldQuestion2(Question smallFieldQuestion2) {
-		this.smallFieldQuestion2 = smallFieldQuestion2;
-	}
-	
 }

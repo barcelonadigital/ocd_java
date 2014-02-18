@@ -6,6 +6,10 @@
 
 package org.bdigital.ocd.cases;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.rpc.holders.StringHolder;
@@ -13,9 +17,16 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.bdigital.ocd.beans.TabBean;
 import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.FormData;
 import org.bdigital.ocd.model.Question;
+import org.bdigital.ocd.tabs.AltresTab;
+import org.bdigital.ocd.tabs.DiagnosticTab;
+import org.bdigital.ocd.tabs.EspirometriaTab;
+import org.bdigital.ocd.tabs.GasometriaTab;
+import org.bdigital.ocd.tabs.PrescripcioTab;
+import org.bdigital.ocd.tabs.PulsioximetriaTab;
 import org.bdigital.ocd.utils.UtilsWs;
 
 /**
@@ -39,15 +50,19 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // extract user data
-    	CaseFormDetailsForm formBean = (CaseFormDetailsForm)form;
+    	CaseFormStaticDetailsForm formBean = (CaseFormStaticDetailsForm)form;
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String formId=formBean.getIdForm();
+    	//String[] gasometriaIds = new String[]{"10","11","12","40","13","14","15"};
+//    	List<String> gasometriaIdList = Arrays.asList(gasometriaIds);
+//    	boolean isThereGasometria=false;
+    	HashMap<String,Question> questionsMap = new HashMap<String,Question>();
     	
     	if(formId!=null){
     		StringHolder errorMsg = new StringHolder("");
         	StringHolder result = new StringHolder("");
-        	proxy.form_get_summary(tokenLK, formId, result, errorMsg);
+        	proxy.form_get_summary_all(tokenLK, formId, result, errorMsg);
         	
         	Form formObj = (Form)UtilsWs.xmlToObject(result.value,
         			Form.class, FormData.class, Question.class);
@@ -60,21 +75,32 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         			Question questionObj = formObj.getFormData().getQuestions().get(i);
         			formBean.setQuestionType(questionObj.getQuestionId(), questionObj.getType());
                 	formBean.setQuestionId(questionObj.getQuestionId(), questionObj.getQuestionId());
+                	questionsMap.put(questionObj.getQuestionId(), questionObj);
+/*
+                	proxy.form_get_question(tokenLK, formId, questionObj.getQuestionId(), result, errorMsg);
+                	questionObj = (Question)UtilsWs.xmlToObject(result.value,
+                			Question.class,Form.class,Option.class);
+                	formObj.getFormData().getQuestions().set(i,questionObj);
+                	*/
+//                	if(gasometriaIdList.contains(questionObj.getQuestionId())){
+//                		isThereGasometria=true;
+//                	}
         		}
-//            		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
-//            			Question q = formObj.getFormData().getQuestions().get(i);
-//            			errorMsg = new StringHolder("");
-//                    	result = new StringHolder("");
-//                    	proxy.form_get_question(tokenLK, formId, q.getQuestionId(), result, errorMsg);
-//                    	Question questionObj = (Question)UtilsWs.xmlToObject(result.value,
-//                    			Question.class,Form.class,Option.class);
-//                    	formBean.setQuestionType(""+i, questionObj.getType());
-//                    	formBean.setQuestionId(""+i, questionObj.getQuestionId());
-//                    	formBean.setQuestionOption(""+i, questionObj.getValue());
-//                    	formBean.setQuestionValue(""+i, questionObj.getValue());
-//                    	formObj.getFormData().getQuestions().set(i,questionObj);
-//            		}
         	}
+//        	if(isThereGasometria){
+//        		formBean.setIsThereGasometria("true");
+//        		getpregunta10
+//        		new row large 
+//        	}
+        	List<TabBean> tabs = new ArrayList<TabBean>();
+        	DiagnosticTab.generateTab(questionsMap,tabs);
+        	EspirometriaTab.generateTab(questionsMap,tabs);
+        	GasometriaTab.generateTab(questionsMap,tabs);
+        	PulsioximetriaTab.generateTab(questionsMap,tabs);
+        	PrescripcioTab.generateTab(questionsMap,tabs);
+        	AltresTab.generateTab(questionsMap,tabs);
+        	
+        	request.setAttribute("tabs", tabs);
         	return mapping.findForward(SUCCESS);
             	
     	}else{

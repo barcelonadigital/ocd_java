@@ -12,7 +12,7 @@
 		    	document.getElementById("ajaxResponseId").value = '';
 		    	document.getElementById("statusSaving"+idQuestion).innerHTML = 'Desant';
 		    	document.getElementById("errorSaving"+idQuestion).innerHTML = '';
-		        var idForm = '<bean:write name="CaseFormDetailsForm" property="idForm"/>';
+		        var idForm = '<bean:write name="CaseFormStaticDetailsForm" property="idForm"/>';
 		    	var valueObj = document.getElementsByName("questionValue("+idQuestion+")")[0];
 		        var value='';
 		        if (typeof valueObj !== "undefined") {
@@ -30,7 +30,7 @@
 		        ajaxSetAnswerById(idQuestion);
 		    }
 		    function ajaxGetQuestion(questionId) {
-		    	var idForm = '<bean:write name="CaseFormDetailsForm" property="idForm"/>';
+		    	var idForm = '<bean:write name="CaseFormStaticDetailsForm" property="idForm"/>';
 		        var idQuestion = questionId;
 
 		        var url="formGetQuestionAction.do?idForm="+idForm+"&idQuestion="+idQuestion;
@@ -263,8 +263,8 @@
 		    var arrayQuestions=new Array();
 		    var arrayRequestCounter=new Array();
 		    //var arrayIndexes=new Array();
-		    <logic:present name="CaseFormDetailsForm" property="questions">
-		    <logic:iterate name="CaseFormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
+		    <logic:present name="CaseFormStaticDetailsForm" property="questions">
+		    <logic:iterate name="CaseFormStaticDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
 		    arrayQuestions['${index}']='<bean:write name="questionItem" property="questionId"/>';
 		    //arrayIndexes['<bean:write name="questionItem" property="questionId"/>']='${index}';
 		    arrayRequestCounter['<bean:write name="questionItem" property="questionId"/>']=0;
@@ -278,53 +278,77 @@
 		    }
 		    
 		    function bodyOnLoadAux(){
-		    	loadQuestions();
+		    	//loadQuestions();
 		    }
 
 	    </script>
-        <div class="content">
-          <h2 class="asses"><bean:write name="CaseFormDetailsForm" property="name" /></h2><a href="#" class="h2 back clearfix"><span>Tornar</span></a>
-          <h3><bean:write name="CaseFormDetailsForm" property="description" /> <span id="formStatusContainer"><bean:write name="CaseFormDetailsForm" property="status"/></span></h3>
-	      <html:messages id="msg" property="general">
-              <span style='color:red'><bean:write name="msg" /></span>
-          </html:messages>
-	      <html:messages id="msg3" property="error">
-              <span style='color:red'><bean:write name="msg3" /></span>
-          </html:messages>
-	    
-		  Debug: <input type="text" id="ajaxResponseId" name="ajaxResponseId" style="width: 300px;" readonly="readonly" /><br/>
-	      
-	      <logic:present name="CaseFormDetailsForm" property="questions">
+        <div class="content contabs">
           <html:form action="/formSetAnswersAction">
-	      <html:hidden name="CaseFormDetailsForm" property="idForm"/>
-	      <logic:iterate name="CaseFormDetailsForm" property="questions" id="questionItem" indexId="index" type="org.bdigital.ocd.model.Question" >
-			<logic:equal name="questionItem" property="type" value="STATIC_TEXT">
-			<p id='fila<bean:write name="questionItem" property="questionId"/>'>(ID: <bean:write name="questionItem" property="questionId"/>)
-				<bean:write name="questionItem" property="description" filter="false"/>
-		        <html:hidden name="CaseFormDetailsForm" property="questionType(${questionItem.questionId})"/>
-		        <html:hidden name="CaseFormDetailsForm" property="questionId(${questionItem.questionId})"/>
-				<span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
-				<span id='errorSaving<bean:write name="questionItem" property="questionId"/>' style='color:#f00'></span>
-			</p>
-			</logic:equal>
-			<logic:notEqual name="questionItem" property="type" value="STATIC_TEXT">
-			<fieldset id='fila<bean:write name="questionItem" property="questionId"/>'>
-				<legend class="questionform">(ID: <bean:write name="questionItem" property="questionId"/>)
-				<bean:write name="questionItem" property="description" filter="false"/>
-				<span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
-				<span id='errorSaving<bean:write name="questionItem" property="questionId"/>' style='color:#f00'></span>
-				</legend>
-		        <html:hidden name="CaseFormDetailsForm" property="questionType(${questionItem.questionId})"/>
-		        <html:hidden name="CaseFormDetailsForm" property="questionId(${questionItem.questionId})"/>
-			</fieldset>
-			</logic:notEqual>
-		  </logic:iterate>
-          <logic:equal name="CaseFormDetailsForm" property="status" value="OPEN">
-		<!--  
-		    <html:submit value="Enviar" />
-            <div class="actions bottom"><a class="btn btn-warning link">Cancel</a><a class="btn custom-btn btn-large btn-info">Submit</a></div>
-		-->
-		  </logic:equal>
+          <div class="contentconbotoneslaterales">
+            <div class="tabbable">
+              <!-- Only required for left/right tabs-->
+              <ul class="nav nav-tabs">
+                <logic:present name="tabs">
+                <logic:iterate name="tabs" id="tabItem" indexId="index" type="org.bdigital.ocd.beans.TabBean" >
+                <logic:equal name="index" value="0">
+                <% request.setAttribute("activeClass","active"); %>
+                </logic:equal>
+                <logic:notEqual name="index" value="0">
+                <% request.setAttribute("activeClass",""); %>
+                </logic:notEqual>
+                <li class="${activeClass}"><a href="#tab${index}" data-toggle="tab"><bean:write name="tabItem" property="title"/></a></li>
+                </logic:iterate></logic:present>
+              </ul>
+              <div class="tab-content">
+                <logic:present name="tabs">
+                <logic:iterate name="tabs" id="tabItem" indexId="indexTab" type="org.bdigital.ocd.beans.TabBean" >
+                <logic:equal name="indexTab" value="0">
+                <% request.setAttribute("activeClass","active"); %>
+                </logic:equal>
+                <logic:notEqual name="indexTab" value="0">
+                <% request.setAttribute("activeClass",""); %>
+                </logic:notEqual>
+                <div id="tab${indexTab}" class="tab-pane dataform ${activeClass}">
+                  <logic:iterate name="tabItem" property="rows" id="rowItem" indexId="indexRow" type="org.bdigital.ocd.beans.RowBean" >
+                  <div class="fields-row">
+                    <logic:iterate name="rowItem" property="fields" id="fieldItem" indexId="indexField" type="org.bdigital.ocd.beans.FieldBean" >
+                            <bean:define id="questionItem" name="fieldItem" property="question" type="org.bdigital.ocd.model.Question"/>
+		                    <logic:equal name="fieldItem" property="fieldType" value="<%=org.bdigital.ocd.utils.Constants.HTML_FIELDTYPE_BIG%>">
+		                    <% request.setAttribute("divClass","bigfield"); %>
+		                    </logic:equal>
+		                    <logic:notEqual name="fieldItem" property="fieldType" value="<%=org.bdigital.ocd.utils.Constants.HTML_FIELDTYPE_BIG%>">
+		                    <% request.setAttribute("divClass","smallfield"); %>
+		                    </logic:notEqual>
+		                    <div class="${divClass}" id='fila<bean:write name="questionItem" property="questionId"/>'>
+		                      
+		                      <label>(ID: <bean:write name="questionItem" property="questionId"/>)
+								<bean:write name="questionItem" property="description" filter="false"/>
+								<span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
+								<span id='errorSaving<bean:write name="questionItem" property="questionId"/>' style='color:#f00'></span>
+							  </label>
+						      <html:hidden name="CaseFormStaticDetailsForm" property="questionType(${questionItem.questionId})"/>
+						      <html:hidden name="CaseFormStaticDetailsForm" property="questionId(${questionItem.questionId})"/>
+		                      <logic:equal name="questionItem" property="type" value="NUMERICAL">
+		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" onkeypress="alert('ah')"></html:text>
+		                      </logic:equal>
+		                      
+		                    </div>
+                    </logic:iterate>
+                  </div>
+                  </logic:iterate>
+                </div>
+                </logic:iterate>
+                </logic:present>
+              </div>
+            </div>
+          </div>
           </html:form>
-		  </logic:present>
+          <div class="botoneslaterales">
+            <div class="botoneslateralescontainer">
+              <div>
+	            <a href="#" class="btn-primary btn savedataform">Desar</a>
+	            <a href="#" class="btn-warning btn canceldataform">Cancel.</a>
+              </div>
+            </div>
+          </div>
         </div>

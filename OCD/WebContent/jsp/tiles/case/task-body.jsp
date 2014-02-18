@@ -8,7 +8,7 @@
 	        <logic:present name="CaseTaskDetailsForm" property="forms">
 		    <logic:iterate name="CaseTaskDetailsForm" property="forms" id="formItem" type="org.bdigital.ocd.model.Form" >
 				
-				  <html:link action="/caseFormDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idForm=${formItem.ref}" styleClass="news-block-link">
+				  <html:link action="/caseFormStaticDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idForm=${formItem.ref}" styleClass="news-block-link">
 	                <div class="fulldate">
 	                  <bean:write name="formItem" property="ref"/>
 	                </div>

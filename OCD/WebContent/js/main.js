@@ -384,7 +384,7 @@
   $(document).ready(function() {
       $(".botoneslateralescontainer").affix({
           offset: { 
-              top: ($('.botoneslaterales').position().top-$('.custom-menuprincipal').height()+100),
+              top: ($('.botoneslaterales').position().top-$('.custom-menuprincipal').height()),
               bottom: (74+40+20)
           }
       });
