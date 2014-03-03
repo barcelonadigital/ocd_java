@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.bdigital.ocd.model.FormData;
 
 public class FormDataAf extends org.apache.struts.action.ActionForm {
@@ -26,7 +25,13 @@ public class FormDataAf extends org.apache.struts.action.ActionForm {
 	
 	public FormDataAf(FormData obj) throws IllegalAccessException, InvocationTargetException {
 		super();
-		BeanUtils.copyProperties( this, obj ); 
+		this.name=obj.getName();
+		this.description=obj.getDescription();
+	    this.status=obj.getStatus();
+	    this.parentType=obj.getParentType();
+	    this.parentId=obj.getParentId();
+	    this.parentStatus=obj.getParentStatus();
+	    this.parentName=obj.getParentName();
 	}
 	public String getName() {
 		return name;

@@ -20,8 +20,10 @@ public class Question {
 	String tabulation;
 	String value;
 	Form form;
-    List<Option> options = new ArrayList<Option>();
-	public String getQuestionId() {
+	String condition;
+	String recommendation;
+	List<Option> options = new ArrayList<Option>();
+    public String getQuestionId() {
 		return questionId;
 	}
 	@XmlElement(name="question_id")
@@ -91,6 +93,20 @@ public class Question {
 	@XmlElementWrapper
 	public void setOptions(List<Option> options) {
 		this.options = options;
+	}
+	public String getCondition() {
+		return condition;
+	}
+	@XmlElement
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+	public String getRecommendation() {
+		return recommendation;
+	}
+	@XmlElement
+	public void setRecommendation(String recommendation) {
+		this.recommendation = recommendation;
 	}
 
 }

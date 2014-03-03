@@ -19,6 +19,7 @@ public class TabBean extends org.apache.struts.action.ActionForm {
 
 	private static final long serialVersionUID = 1L;
 
+	private String id;
 	private String title;
 	private List<RowBean> rows = new ArrayList<RowBean>();
 
@@ -36,6 +37,14 @@ public class TabBean extends org.apache.struts.action.ActionForm {
 
 	public void setRows(List<RowBean> rows) {
 		this.rows = rows;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

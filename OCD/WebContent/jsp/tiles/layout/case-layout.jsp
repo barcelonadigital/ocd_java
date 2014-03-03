@@ -34,16 +34,18 @@
     </script>
   </head>
   <body onload="bodyOnLoad();">
-    
-    <tiles:insert attribute="header"/>
-    <!-- Menú principal (final)-->
-    <tiles:insert attribute="subheader"/>
-    <div class="menuizqlayout <tiles:getAsString name="body-style"/>">
-      <div class="container">
-        <tiles:insert attribute="menu"/>
-        <tiles:insert attribute="body"/>
-      </div>
-      <!-- Contenido fin-->
+    <div id="wrapper">
+	    <tiles:insert attribute="header"/>
+	    <!-- Menú principal (final)-->
+	    <tiles:insert attribute="subheader"/>
+	    <div class="menuizqlayout <tiles:getAsString name="body-style"/>">
+	      <div class="container">
+	        <tiles:insert attribute="menu"/>
+	        <tiles:insert attribute="body"/>
+	      </div>
+	      <!-- Contenido fin-->
+	    </div>
+    	<div class="push <tiles:getAsString name="body-style"/>"></div>
     </div>
     <tiles:insert attribute="footer"/>
     

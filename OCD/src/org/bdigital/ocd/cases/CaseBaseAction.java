@@ -22,16 +22,24 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.beans.CaseBean;
+import org.bdigital.ocd.model.AIM;
 import org.bdigital.ocd.model.Action;
 import org.bdigital.ocd.model.Actions;
+import org.bdigital.ocd.model.Address;
 import org.bdigital.ocd.model.Admission;
 import org.bdigital.ocd.model.AdmissionData;
 import org.bdigital.ocd.model.AdmissionProgram;
 import org.bdigital.ocd.model.AdmissionProtocol;
 import org.bdigital.ocd.model.Admissions;
 import org.bdigital.ocd.model.Case;
+import org.bdigital.ocd.model.Contact;
 import org.bdigital.ocd.model.Data;
+import org.bdigital.ocd.model.Device;
+import org.bdigital.ocd.model.Mail;
+import org.bdigital.ocd.model.Name;
+import org.bdigital.ocd.model.Phone;
 import org.bdigital.ocd.utils.AdmissionComparator;
+import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 import org.bdigital.ocd.ws.LINKCAREException;
@@ -114,6 +122,14 @@ public abstract class CaseBaseAction extends BaseAction {
         	caseBean.setIdCase(caseId);
         	formBean.setIdCase(caseId);
         	
+        	errorMsg = new StringHolder("");
+        	result = new StringHolder("");
+        	proxy.case_get_contact(tokenLK,caseId,result,errorMsg);
+
+        	Contact contact = (Contact)UtilsWs.xmlToObject(result.value,Contact.class,Name.class,
+        			Address.class,Mail.class,AIM.class,Device.class,Phone.class);
+        	caseBean.setContact(contact);
+        	
     		errorMsg = new StringHolder("");
         	result = new StringHolder("");
         	proxy.admission_list_case(tokenLK,caseId, "true", result, errorMsg);
@@ -163,9 +179,9 @@ public abstract class CaseBaseAction extends BaseAction {
     			//TODO: enlloc de passar el parametre "5", obtenir la action_list disponible per current_date, i si esta el #ENROL:5 , passar aquest idProgram
     			errorMsg = new StringHolder("");
             	result = new StringHolder("");
-            	String currentTimeString = UtilsString.dateToString(new Date(), UtilsWs.FORMAT_DATE_WS);
-            	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,UtilsWs.FORMAT_DATE_WS);
-    			proxy.admission_insert(tokenLK, caseId, "#XENROLL:5", UtilsString.dateToString(currentTimeZero, UtilsWs.FORMAT_DATEHOUR_WS), result, errorMsg);
+            	String currentTimeString = UtilsString.dateToString(new Date(), Constants.FORMAT_DATE_WS);
+            	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,Constants.FORMAT_DATE_WS);
+    			proxy.admission_insert(tokenLK, caseId, "#XENROLL:5", UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), result, errorMsg);
     			Admission a = new Admission();
             	a.setRef(result.value);
             	AdmissionData ad = new AdmissionData();
@@ -177,7 +193,19 @@ public abstract class CaseBaseAction extends BaseAction {
             	ad.setStatus("ENROLLED");
             	admissionsAll.add(0,a);
     		}
-    		Admission a = admissionsAll.get(0);
+    		Admission a=null;
+    		if(formBean.getIdAdmission()!=null && 
+    				!"".equals(formBean.getIdAdmission())){
+    			for(int i=0;i<admissionsAll.size();i++){
+        			Admission adm = admissionsAll.get(i);
+        			if(adm.getRef().equals(formBean.getIdAdmission())){
+        				a = adm;
+        			}
+    			}
+    		}
+    		if(a==null){
+	    		a = admissionsAll.get(0);
+    		}
     		caseBean.setIdAdmission(a.getRef());
     		if(a.getData()!=null){
         		if(a.getData().getProtocol()!=null 
@@ -193,6 +221,7 @@ public abstract class CaseBaseAction extends BaseAction {
         	result = new StringHolder("");
         	proxy.action_list(tokenLK,"","MNG",a.getRef(),"","",result,errorMsg);
         	List<Action> actions = new ArrayList<Action>();
+        	List<Action> actionsTransfer = new ArrayList<Action>();
         	Actions actionsObj = (Actions)UtilsWs.xmlToObject(result.value,
         			Actions.class, Action.class);
         	boolean containsTransfer = false;
@@ -207,7 +236,6 @@ public abstract class CaseBaseAction extends BaseAction {
         		}
         	}
         	//formBean.setActions(actions);
-        	request.setAttribute("actions",actions);
         	if(containsTransfer){
         		errorMsg = new StringHolder("");
             	result = new StringHolder("");
@@ -215,8 +243,29 @@ public abstract class CaseBaseAction extends BaseAction {
             	actionsObj = (Actions)UtilsWs.xmlToObject(result.value,
             			Actions.class, Action.class);
             	//formBean.setActionsTransfer(actionsObj.getActions());
-            	request.setAttribute("actionsTransfer",actionsObj.getActions());
+            	actionsTransfer = actionsObj.getActions();
+            	
         	}
+        	for(int i = 0; i<actions.size();){
+        		Action obj = actions.get(i); 
+        		if("#XJOIN:15".equals(obj.getRef()) || 
+        				"#XJOIN:16".equals(obj.getRef())){
+        			actions.remove(obj);
+        		}else{
+        			i++;
+        		}
+        	}
+        	for(int i = 0; i<actionsTransfer.size();){
+        		Action obj = actionsTransfer.get(i); 
+        		if("#XTRANSFER_15".equals(obj.getRef()) || 
+        				"#XTRANSFER_16".equals(obj.getRef())){
+        			actionsTransfer.remove(obj);
+        		}else{
+        			i++;
+        		}
+        	}
+        	request.setAttribute("actions",actions);
+        	request.setAttribute("actionsTransfer",actionsTransfer);
         	
         	request.setAttribute("caseBean",caseBean);
         	return doCaseExecute(mapping, form, request, response);

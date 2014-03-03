@@ -8,19 +8,11 @@ package org.bdigital.ocd.cases;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.rpc.holders.StringHolder;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.bdigital.ocd.model.AIM;
 import org.bdigital.ocd.model.Address;
-import org.bdigital.ocd.model.Contact;
-import org.bdigital.ocd.model.Device;
-import org.bdigital.ocd.model.Mail;
-import org.bdigital.ocd.model.Name;
-import org.bdigital.ocd.model.Phone;
-import org.bdigital.ocd.utils.UtilsWs;
 
 /**
  *
@@ -45,7 +37,9 @@ public class CaseDetailsAction extends CaseBaseAction {
         // extract user data
     	CaseDetailsForm formBean = (CaseDetailsForm)form;
     	
-    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
+    	caseBean.setIsActiveMenuInfoPacient("true");
+    	
+//    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String caseId=(String)request.getAttribute("case_id")!=null?(String)request.getAttribute("case_id"):formBean.getIdCase();
     	
     	if(caseId!=null){
@@ -57,15 +51,17 @@ public class CaseDetailsAction extends CaseBaseAction {
         	formBean.setSex(caseBean.getSex());
         	formBean.setBirthday(caseBean.getBirthday());
 
-    		StringHolder errorMsg = new StringHolder("");
-        	StringHolder result = new StringHolder("");
-        	proxy.case_get_contact(tokenLK,caseId,result,errorMsg);
-
-        	Contact contact = (Contact)UtilsWs.xmlToObject(result.value,Contact.class,Name.class,
-        			Address.class,Mail.class,AIM.class,Device.class,Phone.class);
-        	if(contact.getAddresses()!=null && contact.getAddresses().size()>0){
+//    		StringHolder errorMsg = new StringHolder("");
+//        	StringHolder result = new StringHolder("");
+//        	proxy.case_get_contact(tokenLK,caseId,result,errorMsg);
+//
+//        	Contact contact = (Contact)UtilsWs.xmlToObject(result.value,Contact.class,Name.class,
+//        			Address.class,Mail.class,AIM.class,Device.class,Phone.class);
+        	if(caseBean.getContact()!=null && 
+        			caseBean.getContact().getAddresses()!=null && 
+        			caseBean.getContact().getAddresses().size()>0){
         		
-        		Address addressObj =contact.getAddresses().get(0);
+        		Address addressObj =caseBean.getContact().getAddresses().get(0);
         		formBean.setStreetName(addressObj.getStreet());
         		formBean.setNumber(addressObj.getNumber());
         		formBean.setFloor(addressObj.getFloor());

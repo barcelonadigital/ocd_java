@@ -16,6 +16,7 @@ public abstract class EspirometriaTab {
 		TabBean tab = new TabBean();
     	List<RowBean> rows = new ArrayList<RowBean>();
     	tab.setTitle("Espirometria");
+    	tab.setId("ESPIROMETRIA_ID");
     	UtilsTabs.addBigField("5",questionsMap,rows);
     	UtilsTabs.addSmallField("6","38",questionsMap,rows);
     	UtilsTabs.addSmallField("7","39",questionsMap,rows);

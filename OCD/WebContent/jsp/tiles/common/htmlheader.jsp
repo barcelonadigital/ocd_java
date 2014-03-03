@@ -29,3 +29,27 @@
       s.parentNode.insertBefore(g,s)}(document,'script'));
       
     </script>
+    <link rel="stylesheet" href="js/libs/jqueryui/css/base/jquery-ui.css">
+    <script src="js/libs/jqueryui/jquery-ui.js"></script>
+    <script>
+        $.datepicker.setDefaults({
+            dateFormat: 'dd/mm/yy',
+            monthNames: ["Gener","Febrer","Març","Abril","Maig","Juny",
+                            "Juliol","Agost","Setembre","Octubre","Novembre","Decembre"],
+            closeText: "Tancar", // Display text for close link
+            prevText: "Ant", // Display text for previous month link
+            nextText: "Seg", // Display text for next month link
+            currentText: "Avui", // Display text for current month link
+            monthNamesShort: ["Gen","Feb","Mar","Abr","Mai","Jun","Jul","Ago","Set","Oct","Nov","Dec"], // For formatting
+            dayNames: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"], // For formatting
+            dayNamesShort: ["Diu","Dil","Dim","Dim","Dij","Div","Dis"], // For formatting
+            dayNamesMin: ["Dg","Dl","Dm","Dc","Dj","Dv","Ds"], // Column headings for days starting at Sunday
+            weekHeader: 'Sm',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+
+        });
+
+    </script>

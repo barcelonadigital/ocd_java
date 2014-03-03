@@ -1,6 +1,7 @@
 package org.bdigital.ocd.model;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
  
 @XmlRootElement
@@ -15,6 +16,8 @@ public class Task {
 	String status;
 	String admission;
 	Case taskCase;
+	String[] refs;
+
 	public String getDescription() {
 		return description;
 	}
@@ -77,6 +80,14 @@ public class Task {
 	@XmlElement(name = "case")
 	public void setTaskCase(Case taskCase) {
 		this.taskCase = taskCase;
+	}
+	public String[] getRefs() {
+		return refs;
+	}
+    @XmlElement(name="activity")
+	@XmlElementWrapper
+	public void setRefs(String[] refs) {
+		this.refs = refs;
 	}
  
 

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<form>
+    <ref>300</ref>
+    <data>
+        <name>Dades clíniques</name>
+        <description>Dades clíniques</description>
+        <status>OPEN</status>
+        <next>
+            <ref>301</ref>
+            <status>OPEN</status>
+        </next>
+        <prev>
+            <ref>299</ref>
+            <status>OPEN</status>
+        </prev>
+        <parent_type>TASK</parent_type>
+        <parent_id>425</parent_id>
+        <parent_status>ASSIGNED/NOT DONE</parent_status>
+        <parent_name>Dades clíniques i prescripció inicial OCD (Hospital)</parent_name>
+        <questions>
+            <question>
+                <question_id>4</question_id>
+                <description>Diagnostic principal</description>
+                <num_dec/>
+                <options>
+                    <option>
+                        <option_id>1</option_id>
+                        <value>1</value>
+                        <description>Respiratori - MPOC</description>
+                    </option>
+                    <option>
+                        <option_id>2</option_id>
+                        <value>2</value>
+                        <description>Respiratori - Fibrosi pulmonar</description>
+                    </option>
+                    <option>
+                        <option_id>3</option_id>
+                        <value>3</value>
+                        <description>Respiratori - Bronquièctasis</description>
+                    </option>
+                    <option>
+                        <option_id>4</option_id>
+                        <value>4</value>
+                        <description>Respiratori - Asma</description>
+                    </option>
+                    <option>
+                        <option_id>4</option_id>
+                        <value>4</value>
+                        <description>Respiratori - Apnea del son</description>
+                    </option>
+                    <option>
+                        <option_id>4</option_id>
+                        <value>4</value>
+                        <description>Respiratori - Altres</description>
+                    </option>
+                    <option>
+                        <option_id>5</option_id>
+                        <value>5</value>
+                        <description>Cardiològic - Insuficiència cardíaca</description>
+                    </option>
+                    <option>
+                        <option_id>6</option_id>
+                        <value>6</value>
+                        <description>Malalties Neuromusculars</description>
+                    </option>
+                    <option>
+                        <option_id>7</option_id>
+                        <value>7</value>
+                        <description>Malalties Caixa toràcica</description>
+                    </option>
+                    <option>
+                        <option_id>8</option_id>
+                        <value>8</value>
+                        <description>Càncer</description>
+                    </option>
+                    <option>
+                        <option_id>9</option_id>
+                        <value>9</value>
+                        <description>Altres</description>
+                    </option>
+                </options>
+                <type>VERTICAL_RADIO</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>0</tabulation>
+                <value>9</value>
+            </question>
+            <question>
+                <question_id>36</question_id>
+                <description>Altres</description>
+                <num_dec/>
+                <type>TEXT_AREA</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <condition>$4,EQUAL,9</condition>
+            </question>
+            <question>
+                <question_id>6</question_id>
+                <description>FEV&lt;sub&gt;1&lt;/sub&gt; (Litres)</description>
+                <num_dec>2</num_dec>
+                <unity>(XX,XX)</unity>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <condition>$4,EQUAL,1</condition>
+            </question>
+            <question>
+                <question_id>38</question_id>
+                <description>FEV&lt;sub&gt;1&lt;/sub&gt; (%)</description>
+                <num_dec>2</num_dec>
+                <unity>(XX,XX)</unity>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <condition>$4,EQUAL,1</condition>
+            </question>
+            <question>
+                <question_id>7</question_id>
+                <description>FVC (Litres)</description>
+                <num_dec>2</num_dec>
+                <unity>(XX,XX)</unity>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <condition>$4,EQUAL,1</condition>
+            </question>
+            <question>
+                <question_id>39</question_id>
+                <description>FVC (%)</description>
+                <num_dec>2</num_dec>
+                <unity>(XX,XX)</unity>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <condition>$4,EQUAL,1</condition>
+            </question>
+            <question>
+                <question_id>8</question_id>
+                <description>FEV&lt;sub&gt;1&lt;/sub&gt;/FVC (%)</description>
+                <num_dec/>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <condition>$4,EQUAL,1</condition>
+            </question>
+            <question>
+                <question_id>11</question_id>
+                <description>pH</description>
+                <num_dec>2</num_dec>
+                <unity>(XX,XX)</unity>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+            </question>
+            <question>
+                <question_id>12</question_id>
+                <description>pO&lt;SUB&gt;2&lt;/SUB&gt; (mmHg)</description>
+                <num_dec/>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <recommendation>Es recomana prescriure oxigen quan la pO&lt;SUB&gt;2&lt;/SUB&gt; es troba per sota de 55 mmHg, o quan es troba entre 55 i 59 mmHg i evidencia Hipertensió pulmonar, Cor pulmonale o Policitèmia.</recommendation>
+            </question>
+            <question>
+                <question_id>40</question_id>
+                <description>en cas de que els valors PO&lt;SUB&gt;2&lt;/SUB&gt;  entre 56 i 59 anotar si evidencia:</description>
+                <num_dec/>
+                <options>
+                    <option>
+                        <option_id>1</option_id>
+                        <value>1</value>
+                        <description>Hipertensió pulmonar</description>
+                    </option>
+                    <option>
+                        <option_id>2</option_id>
+                        <value>2</value>
+                        <description>Cor pulmonale</description>
+                    </option>
+                    <option>
+                        <option_id>3</option_id>
+                        <value>3</value>
+                        <description>Policitèmia</description>
+                    </option>
+                </options>
+                <type>HORIZONTAL_RADIO</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>4</tabulation>
+                <value/>
+                <condition>$12,RANGE,56,60</condition>
+            </question>
+            <question>
+                <question_id>13</question_id>
+                <description>pCO&lt;SUB&gt;2&lt;/SUB&gt; (mmHg)</description>
+                <num_dec/>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+                <recommendation>Es recomana "xxxxx" quan la pCO&lt;SUB&gt;2&lt;/SUB&gt; es troba per sobre de 50 mmHg (hipercapnia).</recommendation>
+            </question>
+            <question>
+                <question_id>14</question_id>
+                <description>EB  (mEq/L)</description>
+                <num_dec/>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+            </question>
+            <question>
+                <question_id>15</question_id>
+                <description>Condicions en les que s´ha fet la gasometría arterial</description>
+                <num_dec/>
+                <options>
+                    <option>
+                        <option_id>1</option_id>
+                        <value>1</value>
+                        <description>Basal</description>
+                    </option>
+                    <option>
+                        <option_id>2</option_id>
+                        <value>2</value>
+                        <description>Oxigen</description>
+                    </option>
+                </options>
+                <type>VERTICAL_RADIO</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>2</tabulation>
+                <value/>
+            </question>
+            <question>
+                <question_id>16</question_id>
+                <description>Fluxe de O&lt;SUB&gt;2&lt;/SUB&gt; (litres/minut)</description>
+                <num_dec>1</num_dec>
+                <unity>(XX,X)</unity>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>4</tabulation>
+                <value/>
+                <condition>$15,EQUAL,2</condition>
+            </question>
+            <question>
+                <question_id>17</question_id>
+                <description>Saturació de  O&lt;SUB&gt;2&lt;/SUB&gt; Basal (%)</description>
+                <num_dec/>
+                <type>NUMERICAL</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>0</tabulation>
+                <value/>
+                <recommendation>Es recomana la visita a un especialista quan la SatO&lt;SUB&gt;2&lt;/SUB&gt; &#8804; 90% en condicions basals i es tracta d'un pacient respiratori crònic, o quan la Sat0&lt;SUB&gt;2&lt;/SUB&gt; &#8804; 94% en condicions basals si es tracta d'un pacient sense patologia respiratòria crònica.</recommendation>
+            </question>
+            <question>
+                <question_id>51</question_id>
+                <description>Es prescriu oxigen?</description>
+                <num_dec/>
+                <options>
+                    <option>
+                        <option_id>1</option_id>
+                        <value>1</value>
+                        <description>Si</description>
+                    </option>
+                    <option>
+                        <option_id>2</option_id>
+                        <value>2</value>
+                        <description>No</description>
+                    </option>
+                </options>
+                <type>HORIZONTAL_RADIO</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>0</tabulation>
+                <value/>
+            </question>
+            <question>
+                <question_id>52</question_id>
+                <description>Si us plau, en cas que no compleixi criteris, justifiqui el motiu pel que ha de portar el oxigen</description>
+                <num_dec/>
+                <type>TEXT_AREA</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>0</tabulation>
+                <value/>
+                <condition>$51,EQUAL,1</condition>
+            </question>
+            <question>
+                <question_id>30</question_id>
+                <description>Observacions</description>
+                <num_dec/>
+                <type>TEXT_AREA</type>
+                <mandatory>N</mandatory>
+                <exclusive>N</exclusive>
+                <tabulation>0</tabulation>
+                <value/>
+            </question>
+        </questions>
+    </data>
+</form>

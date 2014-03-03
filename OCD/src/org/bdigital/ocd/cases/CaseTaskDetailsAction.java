@@ -23,6 +23,9 @@ import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.Forms;
 import org.bdigital.ocd.model.Task;
 import org.bdigital.ocd.model.Tasks;
+import org.bdigital.ocd.model.form.FormAf;
+import org.bdigital.ocd.model.form.TaskAf;
+import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 
@@ -49,9 +52,11 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
         // extract user data
     	CaseTaskDetailsForm formBean = (CaseTaskDetailsForm)form;
     	
+    	caseBean.setIsActiveMenuFormularis("true");
+    	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	//String taskId=(String)request.getAttribute("parameterIdTask")!=null?(String)request.getAttribute("parameterIdTask"):formBean.getIdTask();
-    	String admissionId=formBean.getIdAdmission();
+    	String admissionId=caseBean.getIdAdmission();
     	
     	if(admissionId!=null){
     	//if(taskId!=null){
@@ -61,14 +66,14 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
         	
         	if(caseBean.getDataInscripcioAdmissio()!=null
         			&& !"".equals(caseBean.getDataInscripcioAdmissio())){
-        		admissionDate = UtilsString.stringtoDate(caseBean.getDataInscripcioAdmissio(),UtilsWs.FORMAT_DATEHOUR_WS);
+        		admissionDate = UtilsString.stringtoDate(caseBean.getDataInscripcioAdmissio(),Constants.FORMAT_DATEHOUR_WS);
     			admissionCal = new GregorianCalendar();
     			admissionCal.setTime(admissionDate);
         	}
         	
         	StringHolder errorMsg,result;
-        	List<Task> tasks = new ArrayList<Task>();
-        	List<Task> proTasks = new ArrayList<Task>();
+        	List<TaskAf> tasks = new ArrayList<TaskAf>();
+        	//List<Task> proTasks = new ArrayList<Task>();
         	for(int j=admissionCal.get(Calendar.YEAR);j<=todayCal.get(Calendar.YEAR)+1;j++){
 
             	errorMsg = new StringHolder("");
@@ -87,29 +92,62 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                     	if(tasksObj.getTasks()!=null){
                     		for(int i=0;i<tasksObj.getTasks().size();i++){
                     			Task t = tasksObj.getTasks().get(i);
-                    			if("PRO_TASK".equals(t.getTaskClass())){
-                    				proTasks.add(t);
-                    			}
-                    			tasks.add(t);
+                    			TaskAf tAf = new TaskAf(t);
+//                    			if("PRO_TASK".equals(t.getTaskClass())){
+//                    				proTasks.add(t);
+//                    			}
+                    			errorMsg = new StringHolder("");
+                            	result = new StringHolder("");
+                            	proxy.task_get(tokenLK, t.getId(), "ADMI", result, errorMsg);
+                            	Task taskObj = (Task)UtilsWs.xmlToObject(result.value,
+                            			Task.class);
+                    			errorMsg = new StringHolder("");
+                            	result = new StringHolder("");
+                            	proxy.task_form_list(tokenLK, t.getId(), result, errorMsg);
+                            	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
+                            			Forms.class, Form.class);
+                            	List<FormAf> forms = new ArrayList<FormAf>();
+                            	if(formsObj.getForms()!=null){
+                            		for(int l=0;l<formsObj.getForms().size();l++){
+                            			Form f = formsObj.getForms().get(l);
+                            			FormAf fAf = new FormAf(f);
+                            			if("242".equals(taskObj.getRefs()[0]) &&
+                            					l==1){
+                            				fAf.setShortName("Dades clíniques");
+                            			}else if("242".equals(taskObj.getRefs()[0]) &&
+                            					l==2){
+                            				fAf.setShortName("Prescripció inicial d'OCD");
+                            			}
+                            			if(!"242".equals(taskObj.getRefs()[0]) ||
+                            					l!=0){
+                            				forms.add(fAf);
+                            			}
+                            		}
+                            	}
+                            	if(forms.size()>0){
+		                        	tAf.setForms(forms);
+		                			tasks.add(tAf);
+                            	}
                         	}
                     	}
                 	}
             	}
         	}
+        	request.setAttribute("tasks", tasks);
 
-        	if(proTasks.size()!=1){
-            	request.setAttribute("tasks", tasks);
-            	return mapping.findForward("admission");
-        	}
-
-    		Task t = proTasks.get(0);
-    		String taskId = t.getId();
-    		errorMsg = new StringHolder("");
-        	result = new StringHolder("");
-        	proxy.task_form_list(tokenLK, taskId, result, errorMsg);
-        	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
-        			Forms.class, Form.class);
-        	formBean.setForms(formsObj.getForms());
+//        	if(proTasks.size()!=1){
+//            	request.setAttribute("tasks", tasks);
+//            	return mapping.findForward("admission");
+//        	}
+//
+//    		Task t = proTasks.get(0);
+//    		String taskId = t.getId();
+//    		errorMsg = new StringHolder("");
+//        	result = new StringHolder("");
+//        	proxy.task_form_list(tokenLK, taskId, result, errorMsg);
+//        	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
+//        			Forms.class, Form.class);
+//        	formBean.setForms(formsObj.getForms());
         	return mapping.findForward(SUCCESS);
     	}else{
     		return mapping.findForward(FAILURE);

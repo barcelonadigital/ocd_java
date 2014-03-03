@@ -18,6 +18,7 @@ public class CaseBaseForm extends org.apache.struts.action.ActionForm {
 	private static final long serialVersionUID = 1L;
 
 	private String idCase;
+	private String idAdmission;
 	
 //	private List<Admission> admissions;
 //	private List<Admission> admissionsAll;
@@ -27,9 +28,14 @@ public class CaseBaseForm extends org.apache.struts.action.ActionForm {
 	public String getIdCase() {
 		return idCase;
 	}
-
 	public void setIdCase(String idCase) {
 		this.idCase = idCase;
+	}
+	public String getIdAdmission() {
+		return idAdmission;
+	}
+	public void setIdAdmission(String idAdmission) {
+		this.idAdmission = idAdmission;
 	}
 	
 	

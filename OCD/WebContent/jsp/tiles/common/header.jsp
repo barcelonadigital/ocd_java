@@ -14,7 +14,9 @@
             <li class="user"><a href="#" data-toggle="dropdown"><img src="img/ico-clinician-m.png" alt="${sessionScope.userFullName}"><strong>${sessionScope.userFullName}</strong><span>${sessionScope.userCenter}</span></a>
               <div class="dropdown-menu">
                 <ul>
+                  <!--
                   <li><html:link action="/logoutAction"><bean:message key="label.myAccount"/></html:link></li>
+                  -->
                   <li><html:link action="/logoutAction"><bean:message key="label.logout"/></html:link></li>
                 </ul>
               </div>
@@ -25,30 +27,28 @@
     </div>
     <!-- Cabecera (final)-->
     <!-- Menú principal-->
+    
     <nav data-spy="affix" data-offset-top="106" class="custom-menuprincipal">
       <div class="container">
         <ul class="nav">
           <li><a href="#" data-toggle="dropdown" class="users">
-              <!-- botón--><strong>Usuaris</strong><span>Pacients, metges...</span></a>
+              <strong>Usuaris</strong><span>Pacients, metges...</span></a>
             <div class="dropdown-menu">
-              <!-- dropdown menu-->
+              
               <div class="newpacient"><html:link styleClass="brand" action="/caseSearchPg">Seleccionar <br>pacient</html:link></div>
-              <!-- 
-              <div class="newpacient"><a href="<html:rewrite page='/caseSearchPg'/>" role="button" data-toggle="modal">Seleccionar <br>pacient</a></div>
-              <div class="newpacient"><a href="#loadpatientModal" role="button" data-toggle="modal">Seleccionar <br>pacient</a></div>
-              -->
             </div>
           </li>
           <li><a href="#" data-toggle="dropdown" class="tasks">
-              <!-- botón--><strong>Tasques</strong><span>Prescripció OCD, Altes</span></a>
+              <strong>Tasques</strong><span>Prescripció OCD, Altes</span></a>
             <div class="dropdown-menu">
-              <!-- dropdown menu-->
+              
               <div class="task_links">
                 <ul>
+                <!-- 
                 <logic:present name="caseBean">
 			    <logic:present name="actionsTransfer">
 			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.Action" >
-					<li><html:link action="/caseTaskInsertAction?idAdmission=${caseBean.idAdmission}&idCase=${caseBean.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Dessitja continuar?');"><bean:write name="actionItem" property="name"/></html:link></li>
+					<li><html:link action="/caseTaskInsertAction?idAdmission=${caseBean.idAdmission}&idCase=${caseBean.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Desitja continuar?');"><bean:write name="actionItem" property="name"/></html:link></li>
 				</logic:iterate>
 				</logic:present>
 			    <logic:present name="actions">
@@ -57,14 +57,15 @@
 				</logic:iterate>
 				</logic:present>
 				</logic:present>
+				-->
                 </ul>
               </div>
             </div>
           </li>
           <li><a href="#" data-toggle="dropdown" class="report">
-              <!-- botón--><strong>Reports</strong><span>Estadistiques</span></a>
+              <strong>Reports</strong><span>Estadistiques</span></a>
             <div class="dropdown-menu">
-              <!-- dropdown menu-->
+              
               <div class="links">
                 <ul>
                   <li><a href="#">Link 1</a></li>
@@ -75,9 +76,9 @@
             </div>
           </li>
           <li><a href="#" data-toggle="dropdown" class="more">
-              <!-- botón--><strong>Altres</strong><span>Item1, Item2</span></a>
+              <strong>Altres</strong><span>Item1, Item2</span></a>
             <div class="dropdown-menu">
-              <!-- dropdown menu-->
+              
               <div class="links">
                 <ul>
                   <li><a href="#">Link 1</a></li>
@@ -90,3 +91,4 @@
         </ul>
       </div>
     </nav>
+    

@@ -6,6 +6,8 @@
 
 package org.bdigital.ocd.beans;
 
+import org.bdigital.ocd.model.Contact;
+
 
 
 /**
@@ -36,6 +38,12 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
 	private String birthday;
 
 	private String admissionsText;
+	
+	private String isActiveMenuHistoric;
+	private String isActiveMenuInfoPacient;
+	private String isActiveMenuFormularis;
+	
+	private Contact contact;
 
 	public String getFullname() {
 		return fullname;
@@ -171,6 +179,38 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
 
 	public void setDataInscripcioAdmissio(String dataInscripcioAdmissio) {
 		this.dataInscripcioAdmissio = dataInscripcioAdmissio;
+	}
+
+	public String getIsActiveMenuHistoric() {
+		return isActiveMenuHistoric;
+	}
+
+	public void setIsActiveMenuHistoric(String isActiveMenuHistoric) {
+		this.isActiveMenuHistoric = isActiveMenuHistoric;
+	}
+
+	public String getIsActiveMenuInfoPacient() {
+		return isActiveMenuInfoPacient;
+	}
+
+	public void setIsActiveMenuInfoPacient(String isActiveMenuInfoPacient) {
+		this.isActiveMenuInfoPacient = isActiveMenuInfoPacient;
+	}
+
+	public String getIsActiveMenuFormularis() {
+		return isActiveMenuFormularis;
+	}
+
+	public void setIsActiveMenuFormularis(String isActiveMenuFormularis) {
+		this.isActiveMenuFormularis = isActiveMenuFormularis;
+	}
+
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 	
 	

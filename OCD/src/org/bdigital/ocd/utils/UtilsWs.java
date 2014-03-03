@@ -13,9 +13,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 public class UtilsWs {
-
-	public static final String FORMAT_DATE_WS = "yyyy-MM-dd";
-	public static final String FORMAT_DATEHOUR_WS = "yyyy-MM-dd hh:mm";
 	
 	public static String objectToXml(Object caseObj, Class<?>... classesToBeBound) throws JAXBException{
 		

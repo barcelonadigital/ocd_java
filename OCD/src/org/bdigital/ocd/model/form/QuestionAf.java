@@ -21,6 +21,8 @@ public class QuestionAf extends org.apache.struts.action.ActionForm {
 	String tabulation;
 	String value;
 	FormAf form;
+	String condition;
+	String recommendation;
 	
 	public QuestionAf(Question obj) throws IllegalAccessException, InvocationTargetException {
 		super();
@@ -79,5 +81,17 @@ public class QuestionAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setForm(FormAf form) {
 		this.form = form;
+	}
+	public String getCondition() {
+		return condition;
+	}
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+	public String getRecommendation() {
+		return recommendation;
+	}
+	public void setRecommendation(String recommendation) {
+		this.recommendation = recommendation;
 	}
 }

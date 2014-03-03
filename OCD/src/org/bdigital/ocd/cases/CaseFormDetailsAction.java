@@ -41,6 +41,8 @@ public class CaseFormDetailsAction extends CaseBaseAction {
         // extract user data
     	CaseFormDetailsForm formBean = (CaseFormDetailsForm)form;
     	
+    	caseBean.setIsActiveMenuFormularis("true");
+    	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String formId=formBean.getIdForm();
     	

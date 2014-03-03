@@ -25,6 +25,9 @@
         <form-bean name="CaseTaskDetailsForm" type="org.bdigital.ocd.cases.CaseTaskDetailsForm"/>
         <form-bean name="CaseFormDetailsForm" type="org.bdigital.ocd.cases.CaseFormDetailsForm"/>
         <form-bean name="CaseFormStaticDetailsForm" type="org.bdigital.ocd.cases.CaseFormStaticDetailsForm"/>
+        <form-bean name="CaseHistoricForm" type="org.bdigital.ocd.cases.CaseBaseForm"/>
+        <form-bean name="CaseFormDocumentDetailsForm" type="org.bdigital.ocd.cases.CaseFormDocumentDetailsForm"/>
+        <form-bean name="CaseFormCatSalutForm" type="org.bdigital.ocd.cases.CaseFormCatSalutForm"/>
     </form-beans>
 
 	<global-forwards>
@@ -42,10 +45,10 @@
         </action>
         
         <action path="/caseSearchPg" forward="searchPg.page"/>
-        <action path="/mainPg" forward="mainPg.page"/>
+        <action path="/mainPg" forward="searchPg.page"/>
         <action path="/caseSearchAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
             <forward name="casejoin" path="/caseJoinAction.do"/>
-            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="success" path="/caseTaskDetailsAction.do"/>
             <forward name="failure" path="/caseSearchPg.do"/>
             <forward name="casenew" path="/caseNewPg.do"/>
         </action>
@@ -57,7 +60,7 @@
         <action path="/caseNewPg" forward="newPg.page"/>
         <action path="/caseNewAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseNewAction" validate="true" input="/caseNewPg.do">
             <forward name="casejoin" path="/caseJoinAction.do"/>
-            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="success" path="/caseTaskDetailsAction.do"/>
             <forward name="failure" path="/caseNewPg.do"/>
         </action>
         <action path="/caseDetailsPg" forward="detailsPg.page"/>
@@ -65,8 +68,9 @@
             <forward name="success" path="/caseDetailsPg.do"/>
             <forward name="failure" path="/caseDetailsPg.do"/>
         </action>
+        <action path="/provaPg" forward="/jsp/prova.jsp"/>
         <action path="/caseHistoricPg" forward="historicPg.page"/>
-        <action path="/caseHistoricAction" name="CaseDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseDetailsAction" validate="false">
+        <action path="/caseHistoricAction" name="CaseHistoricForm" scope="request" type="org.bdigital.ocd.cases.CaseHistoricAction" validate="false">
             <forward name="success" path="/caseHistoricPg.do"/>
             <forward name="failure" path="/caseHistoricPg.do"/>
         </action>
@@ -121,12 +125,25 @@
             <forward name="failure" path="/formStaticDetailsPg.do"/>
         </action>
         <action path="/formSetAnswersAction" name="FormSetAnswersForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswersAction" validate="false">
-            <forward name="success" path="/formDetailsAction.do"/>
-            <forward name="failure" path="/formDetailsAction.do"/>
+            <forward name="success" path="/caseTaskDetailsAction.do"/>
+            <forward name="failure" path="/caseFormStaticDetailsAction.do"/>
+            <forward name="document" path="/caseFormDocumentDetailsAction.do"/>
         </action>
         <action path="/formSetAnswerAction" name="FormSetAnswerForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswerAction" validate="false">
         </action>
         <action path="/formGetQuestionAction" name="FormGetQuestionForm" scope="request" type="org.bdigital.ocd.form.FormGetQuestionAction" validate="false">
+        </action>
+        <action path="/formCatSalutPg" forward="caseformcatsalutPg.page"/>
+        <action path="/caseFormCatSalutAction" name="CaseFormCatSalutForm" scope="request" type="org.bdigital.ocd.cases.CaseFormCatSalutAction" validate="false">
+            <forward name="success" path="/formCatSalutPg.do"/>
+            <forward name="failure" path="/formCatSalutPg.do"/>
+        </action>
+        <action path="/formDocumentPg" forward="caseformdocumentPg.page"/>
+        <action path="/caseFormDocumentDetailsAction" name="CaseFormDocumentDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseFormDocumentDetailsAction" validate="false">
+            <forward name="success" path="/formDocumentPg.do"/>
+            <forward name="failure" path="/formDocumentPg.do"/>
+        </action>
+        <action path="/pdfHelloWorldAction" scope="request" type="org.bdigital.ocd.docPdf.PdfHelloWorldAction" validate="false">
         </action>
     </action-mappings>
 

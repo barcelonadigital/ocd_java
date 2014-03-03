@@ -19,7 +19,6 @@ import org.bdigital.ocd.model.Form;
 public class CaseTaskDetailsForm extends CaseBaseForm {
 
 	private static final long serialVersionUID = 1L;
-	private String idAdmission;
 	private String idTask;
 	private List<Form> forms;
 	
@@ -34,12 +33,6 @@ public class CaseTaskDetailsForm extends CaseBaseForm {
 	}
 	public void setIdTask(String idTask) {
 		this.idTask = idTask;
-	}
-	public String getIdAdmission() {
-		return idAdmission;
-	}
-	public void setIdAdmission(String idAdmission) {
-		this.idAdmission = idAdmission;
 	}
 	
 }

@@ -22,6 +22,7 @@ import org.bdigital.ocd.model.AdmissionProgram;
 import org.bdigital.ocd.model.AdmissionProtocol;
 import org.bdigital.ocd.model.Admissions;
 import org.bdigital.ocd.model.Case;
+import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 
@@ -77,9 +78,9 @@ public class AdmissionInsertAction extends BaseAction {
     		
     		errorMsg = new StringHolder("");
         	result = new StringHolder("");
-        	String currentTimeString = UtilsString.dateToString(new Date(), UtilsWs.FORMAT_DATE_WS);
-        	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,UtilsWs.FORMAT_DATE_WS);
-			proxy.admission_insert(tokenLK, caseId, programId, UtilsString.dateToString(currentTimeZero, UtilsWs.FORMAT_DATEHOUR_WS), result, errorMsg);
+        	String currentTimeString = UtilsString.dateToString(new Date(), Constants.FORMAT_DATE_WS);
+        	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,Constants.FORMAT_DATE_WS);
+			proxy.admission_insert(tokenLK, caseId, programId, UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), result, errorMsg);
 			request.setAttribute("case_id",caseId);
         	return mapping.findForward(SUCCESS);
     	}else{

@@ -2,7 +2,6 @@ package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.bdigital.ocd.model.Form;
 
  
@@ -19,7 +18,12 @@ public class FormAf extends org.apache.struts.action.ActionForm {
 	
 	public FormAf(Form obj) throws IllegalAccessException, InvocationTargetException {
 		super();
-		BeanUtils.copyProperties( this, obj ); 
+		this.ref=obj.getRef();
+		this.shortName=obj.getShortName();
+		this.status=obj.getStatus();
+		if(obj.getFormData()!=null){
+			this.formData = new FormDataAf(obj.getFormData());
+		}
 	}
 	public String getRef() {
 		return ref;

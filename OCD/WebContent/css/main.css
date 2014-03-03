@@ -37,6 +37,7 @@ audio:not([controls]) {
 }
 html {
     font-size:100%;
+    height: 100%;
     -webkit-text-size-adjust:100%;
     -ms-text-size-adjust:100%
 }
@@ -155,6 +156,7 @@ body {
     font-size:14px;
     line-height:20px;
     color:#4e5c67;
+    height: 100%;
     background-color:#fff
 }
 a {
@@ -2804,7 +2806,7 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 }
 .nav-tabs>li>a {
     padding-top:8px;
-    background-color:#fff;
+    background-color:#ccc;
     padding-bottom:8px;
     line-height:20px;
     border:1px solid transparent;
@@ -3711,6 +3713,11 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
     margin-left:-1px
 }
 .modal-footer .btn-block+.btn-block {
+    margin-left:0
+}
+.modal-footer .btn-block .btn {
+    margin-bottom:5px;
+    margin-right:5px;
     margin-left:0
 }
 .tooltip {
@@ -4789,7 +4796,7 @@ a,button,a:focus,button:focus {
     position:relative;
     z-index:1120;
     background:#3a4150;
-    margin-bottom:75px;
+    margin-bottom:0px;
     min-width:1000px
 }
 .custom-cabecera .container {
@@ -5123,7 +5130,8 @@ nav.custom-menuprincipal {
     position:absolute;
     top:106px;
     left:0;
-    height:75px
+    height:75px;
+    display:none
 }
 nav.custom-menuprincipal div.container ul.nav {
     margin:0;
@@ -5552,6 +5560,12 @@ div.table>ul>li:nth-child(even) {
 .botoneslaterales div.botoneslateralescontainer div a.btn.canceldataform {
     background-position:0 -68px
 }
+.botoneslaterales div.botoneslateralescontainer div a.btn.acceptdataform {
+    background-image:url(../img/ico-editsavecanceltick-botonlateral.png)
+}
+.botoneslaterales div.botoneslateralescontainer div a.btn.acceptdataform {
+    background-position:0 -204px
+}
 .botoneslaterales div.botoneslateralescontainer div.viewform {
     display:block
 }
@@ -5564,18 +5578,18 @@ div.table>ul>li:nth-child(even) {
 .botoneslaterales div.botoneslateralescontainer.editmode div.editform {
     display:block
 }
-body>.fichalayout {
+body>.fichalayout, body>div>.fichalayout {
     background-color:#f1f1f1;
     padding-bottom:40px
 }
-body>.fichalayout>.container>.ficha {
+body>.fichalayout>.container>.ficha, body>div>.fichalayout>.container>.ficha {
     background-color:#fff;
     float:left;
     padding:0 40px 0 50px;
     width:810px;
     padding-bottom:30px
 }
-body>.fichalayout>.container>.ficha .encabezado {
+body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.container>.ficha .encabezado {
     padding-left:0
 }
 .menuizqlayout {
@@ -5766,13 +5780,29 @@ body>.fichalayout>.container>.ficha .encabezado {
     font-weight:700;
     border:0
 }
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .h3actions {
+    float:right
+}
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .h3actions a.help {
+    display:block;
+    width:21px;
+    height:21px;
+    background:url(../img/ico-info.png) no-repeat 0 0;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .h3actions a.help:hover {
+    opacity:.7;
+    filter:alpha(opacity=70)
+}
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row {
     margin-right:-6px
 }
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield {
     width:610px
 }
-.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="text"],.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="password"] {
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="text"],.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield textarea,.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="password"] {
     margin-top:6px;
     margin-bottom:20px;
     width:543px
@@ -5990,28 +6020,28 @@ body>.fichalayout>.container>.ficha .encabezado {
     opacity:.7;
     filter:alpha(opacity=70)
 }
-body>.alertmessage {
+body>.alertmessage, body>div>.alertmessage {
     background-color:#fbeaeb
 }
-body>.alertmessage>.container>div {
+body>.alertmessage>.container>div, body>div>.alertmessage>.container>div {
     padding:17px 0 17px 70px;
     background:url(../img/ico-alert.png) no-repeat 30px 16px;
     font-size:16px;
     color:#323a45
 }
-body>.alertmessage>.container>div>a {
+body>.alertmessage>.container>div>a, body>div>.alertmessage>.container>div>a {
     padding-left:22px
 }
-body>.alertmessage>.container>div>a.info {
+body>.alertmessage>.container>div>a.info, body>div>.alertmessage>.container>div>a.info {
     color:#1c82eb
 }
-body>.alertmessage>.container>div>a.warning {
+body>.alertmessage>.container>div>a.warning, body>div>.alertmessage>.container>div>a.warning {
     color:#da2228
 }
-body>.gris1 {
+body>.gris1, body>div>.gris1 {
     background-color:#f0f0f0
 }
-body>.gris2 {
+body>.gris2, body>div>.gris2 {
     background-color:#fbfbfb
 }
 hr {
@@ -6086,6 +6116,9 @@ hr {
     margin:0;
     font-size:15px;
     font-weight:600
+}
+.dataform .fields-row div label.description {
+	padding: 4px 0 7px 0;
 }
 .dataform .fields-row div.smallfield p,.dataform .fields-row div.smallfield input[type="text"],.dataform .fields-row div.smallfield input[type="password"] {
     width:280px;
@@ -7060,6 +7093,15 @@ div.dropdown-menu>ul>li>a {
     line-height:16px;
     padding:18px 30px 18px 70px
 }
+#wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -74px; /* the bottom margin is the negative value of the footer's height */
+}
+.push{
+    height:74px
+}
 .footer {
     background-color:#3a4150;
     height:74px
@@ -7100,6 +7142,10 @@ div.dropdown-menu>ul>li>a {
     display:inline-block;
     margin:10px 0px 0px 0;
 }
+.cabeceraperfil>.container>#contentnophotoslim>.contactinfo {
+    margin:0px 0px 0px 0px;
+    padding-left:32px
+}
 .cabeceraperfil>.container>.content>span {
     display:inline-block;
     font-size:16px;
@@ -7138,6 +7184,12 @@ div.dropdown-menu>ul>li>a {
 .cabeceraperfil>.container>.content>.actionsbottom>a.btn-blancogris,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.btn-blancogris,.cabeceraperfil>.container>.content>.actionsbottom>span.btn-blancogris,.cabeceraperfil>.container>.content>.actionsbottom>a.info,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.info,.cabeceraperfil>.container>.content>.actionsbottom>span.info {
     padding:8px 14px;
     width:226px
+}
+.cabeceraperfil>.container>.content>.actionsbottom>.dropdown-thin>ul {
+    width:200px
+}
+.cabeceraperfil>.container>.content>.actionsbottom>.dropdown-thin>a.btn-thin {
+    width:200px
 }
 .cabeceraperfil>.container>.content>.actionsbottom>a.btn-blancogris .caret,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.btn-blancogris .caret,.cabeceraperfil>.container>.content>.actionsbottom>span.btn-blancogris .caret,.cabeceraperfil>.container>.content>.actionsbottom>a.info .caret,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.info .caret,.cabeceraperfil>.container>.content>.actionsbottom>span.info .caret {
     float:right
@@ -7518,7 +7570,13 @@ div.table>ul.past>li>a:hover>span,div.table>ul.past>li>a:hover>img,div.table>ul.
     position:fixed;
     top:149px
 }
-body>.menuizqlayout>.container>.content h2.config {
+.contabs #newForm .botoneslaterales {
+    margin-top:129px
+}
+.contabs #newForm .botoneslaterales div.botoneslateralescontainer.affix {
+    top:204px
+}
+body>.menuizqlayout>.container>.content h2.config, body>div>.menuizqlayout>.container>.content h2.config {
     padding-left:62px;
     background:url(../img/ico-ruedadentada.png) no-repeat 0 2px
 }
@@ -7703,6 +7761,23 @@ input.digitos2 {
     text-align:left
 }
 .modal.result .modal-footer {
+    padding:0 30px 30px 30px
+}
+.modal.protocols {
+	width: 700px;
+    top:10%
+}
+.modal.protocols.fade {
+    top:0
+}
+.modal.protocols.fade.in {
+    top:10%
+}
+.modal.protocols h3 {
+    margin:0 0 0 0;
+    text-align:left
+}
+.modal.protocols .modal-footer {
     padding:0 30px 30px 30px
 }
 .modal.alert {
@@ -8405,6 +8480,17 @@ div#news-list a.news-block-link>div.message {
     width:659px;
     padding-bottom:8px
 }
+div#news-list a.news-block-link>div.form-entry {
+    width:750px;
+    padding-bottom:8px
+}
+div#news-list a.news-block-link>div.form-entry h4 {
+    padding:16px 16px 10px 22px;
+    margin:0;
+    font-size:16px;
+    line-height:18px;
+    font-weight:700
+}
 div#news-list a.news-block-link>div.message h4 {
     padding:16px 16px 10px 22px;
     margin:0;
@@ -8955,6 +9041,44 @@ legend.singlelinelegend {vertical-align:middle;}
 #contentnophoto {
 	padding-left:0px;
 }
+#contentnophotoslim {
+    padding:10px 0 10px 0px
+}
 legend.questionform {
     line-height:20px;
+}
+.tab-content>.tab-pane {
+	min-height:150px;/*per solucionar problema amb botons flotants affix quan el 'tab' era massa petit*/
+	position:relative;/*per posar imatge 'info' flotant a la dreta*/
+}
+.dataform .fields-row div.bigfield label.radio {
+    margin-bottom: 8px;
+    margin-to: 8px
+}
+.dataform .fields-row div.bigfield label.radio.active {
+    font-weight:700
+}
+#newForm .dataform .fields-row div input[type="text"][disabled],.dataform .fields-row div textarea[disabled] {
+	padding-left:16px;
+	background-color:#ccc;
+	border-width:1px;
+	color:#48525e
+}
+span.hint {
+	position: relative;
+	top: -3px;
+	left: 3px;
+}
+span.hint .dropdown-menu {
+	left: 30px;
+	top: -6px;
+	margin-top: 5px;
+	width: 120px;
+	clear: both;
+	background: #abd7c9;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 10px 15px 10px 15px;
+	color: #2c3e50;
+	font-weight: normal;
 }

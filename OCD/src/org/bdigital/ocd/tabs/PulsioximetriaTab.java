@@ -16,6 +16,7 @@ public abstract class PulsioximetriaTab {
 		TabBean tab = new TabBean();
     	List<RowBean> rows = new ArrayList<RowBean>();
     	tab.setTitle("Pulsioximetria");
+    	tab.setId("PULSIOXIMETRIA_ID");
     	UtilsTabs.addSmallField("17","",questionsMap,rows);
     	
     	if(rows.size()>0){

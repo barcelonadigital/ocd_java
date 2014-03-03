@@ -6,6 +6,8 @@
 
 package org.bdigital.ocd.form;
 
+import java.util.Iterator;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.rpc.holders.StringHolder;
@@ -14,6 +16,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.bdigital.ocd.base.BaseAction;
+import org.bdigital.ocd.model.Result;
+import org.bdigital.ocd.utils.Constants;
+import org.bdigital.ocd.utils.UtilsString;
+import org.bdigital.ocd.utils.UtilsWs;
 
 /**
  *
@@ -42,19 +48,23 @@ public class FormSetAnswersAction extends BaseAction {
     	String formId=formBean.getIdForm();
     	
     	if(formId!=null){
-    		while(formBean.getQuestionIdIterator().hasNext()){
-        		StringHolder result = new StringHolder("");
-        		StringHolder errorMsg = new StringHolder("");
+    		StringHolder result = new StringHolder("");
+    		StringHolder errorMsg = new StringHolder("");
+    		Iterator<String> iter = formBean.getQuestionIdIterator();
+    		while(iter.hasNext()){
         		StringHolder refresh = new StringHolder("");
             	StringHolder next = new StringHolder("");
             	StringHolder next_form = new StringHolder("");
-    			String questionId = formBean.getQuestionIdIterator().next();
+    			String questionId = iter.next();
             	String questionType = formBean.getQuestionType(questionId);
             	if("VERTICAL_RADIO".equals(questionType) || "HORIZONTAL_RADIO".equals(questionType) ||
-            			"TEXT".equals(questionType) || "NUMERICAL".equals(questionType) || "TEXT_AREA".equals(questionType)){
+            			"TEXT".equals(questionType) || "NUMERICAL".equals(questionType) || "TEXT_AREA".equals(questionType) || "DATE".equals(questionType)){
             		String optionId = formBean.getQuestionOption(questionId);
             		String value = formBean.getQuestionValue(questionId);
-            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
+            		if(!"".equals(value) && "DATE".equals(questionType)){
+            			value = UtilsString.dateToString(UtilsString.stringtoDate(value, Constants.FORMAT_DATE_WEB), Constants.FORMAT_DATE_WS);
+            		}
+            		//proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
             	}
     		}
 //        	for(int i=0;i<formBean.getQuestionSize();i++){
@@ -72,7 +82,17 @@ public class FormSetAnswersAction extends BaseAction {
 //            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
 //            	}
 //        	}
-        	return mapping.findForward(SUCCESS);
+    		
+    		proxy.form_get(tokenLK, formId, result, errorMsg);
+        	
+        	Result resObj = (Result)UtilsWs.xmlToObject(result.value,
+        			Result.class);
+        	if("158".equals(resObj.getTemplate()) &&
+        			"true".equals(formBean.getFinish())){
+    			return mapping.findForward("document");
+    		}else{
+    			return mapping.findForward(SUCCESS);
+    		}
     	}else{
     		return mapping.findForward(FAILURE);
     	}

@@ -3,7 +3,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
         <div class="content contabs">
-          <html:form styleId="newForm" action="/caseNewAction">
+          <html:form styleId="newForm2" action="/caseDetailsAction">
+          <html:hidden name="CaseDetailsForm" property="idCase" />
           <div class="contentconbotoneslaterales">
             <div class="tabbable">
               <!-- Only required for left/right tabs-->
@@ -91,7 +92,9 @@
                       <html:text name="CaseDetailsForm" styleId="country" property="country" disabled="true" />
                     </div>
                   </div>
-                  <button class="btn btn-large btn-info add-fields-group">Afegir adreça</button>
+                  <!-- 
+                  <button onclick="" class="btn btn-large btn-info add-fields-group">Afegir adreça</button>
+                   -->
                 </div>
               </div>
             </div>

@@ -81,9 +81,19 @@
 	    <put name="body-style" value="" />
     </definition>
     <definition name="caseformstaticPg.page" extends="casebase.definition">
+        <put name="subheader" value="/jsp/tiles/case/header-form.jsp" />
 	    <put name="body" value="/jsp/tiles/case/formstatic-body.jsp" />
 	    <put name="body-style" value="gris1" />
     </definition>
+    <definition name="caseformdocumentPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/formdocument-body.jsp" />
+	    <put name="body-style" value="" />
+    </definition>
+    <definition name="caseformcatsalutPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/formcatsalut-body.jsp" />
+	    <put name="body-style" value="" />
+    </definition>
+    
     
 
 </tiles-definitions>

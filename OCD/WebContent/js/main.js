@@ -382,10 +382,17 @@
 // 
 
   $(document).ready(function() {
+	  var offsetFn = function () {
+          var objBotoneslaterales = $('.botoneslaterales');
+          var objMenuprincipal = $('.custom-menuprincipal');
+		  var h = objBotoneslaterales.position().top-objMenuprincipal.height();
+		  console.log(objBotoneslaterales.position().top+' '+objMenuprincipal.height())
+          return h;
+      };
       $(".botoneslateralescontainer").affix({
           offset: { 
-              top: ($('.botoneslaterales').position().top-$('.custom-menuprincipal').height()),
-              bottom: (74+40+20)
+              top: offsetFn,
+              bottom: (0)
           }
       });
   });

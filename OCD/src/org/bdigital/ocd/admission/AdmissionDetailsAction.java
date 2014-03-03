@@ -29,6 +29,7 @@ import org.bdigital.ocd.model.AdmissionProtocol;
 import org.bdigital.ocd.model.Case;
 import org.bdigital.ocd.model.Task;
 import org.bdigital.ocd.model.Tasks;
+import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 
@@ -96,7 +97,7 @@ public class AdmissionDetailsAction extends BaseAction {
         	
         	if(admissionObj.getData()!=null){
         		if(admissionObj.getData().getProgram()!=null){
-        			admissionDate = UtilsString.stringtoDate(admissionObj.getData().getEnrolDate(),UtilsWs.FORMAT_DATEHOUR_WS);
+        			admissionDate = UtilsString.stringtoDate(admissionObj.getData().getEnrolDate(),Constants.FORMAT_DATEHOUR_WS);
         			//String admissionDateString = UtilsString.dateToString(admissionDate, UtilsWs.FORMAT_DATE_WS);
         			admissionCal = new GregorianCalendar();
         			admissionCal.setTime(admissionDate);
