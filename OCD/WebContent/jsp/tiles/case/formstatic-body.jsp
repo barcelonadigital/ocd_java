@@ -361,6 +361,7 @@
           <html:hidden name="CaseFormStaticDetailsForm" property="idCase"/>
           <html:hidden name="CaseFormStaticDetailsForm" property="idAdmission"/>
           <html:hidden name="CaseFormStaticDetailsForm" property="idForm"/>
+          <html:hidden name="CaseFormStaticDetailsForm" property="idTask"/>
           <div class="contentconbotoneslaterales">
             <div class="tabbable">
               <!-- Only required for left/right tabs-->

@@ -14,7 +14,7 @@
 	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/></span></h3>
 		        <logic:present name="taskItem" property="forms">
 			    <logic:iterate name="taskItem" property="forms" id="formItem" type="org.bdigital.ocd.model.form.FormAf" >
-					  <html:link action="/caseFormStaticDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${caseBean.idAdmission}&idForm=${formItem.ref}" styleClass="news-block-link">
+					  <html:link action="/caseFormStaticDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${caseBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" styleClass="news-block-link">
 		                <div class="form-entry">
 		                  <bean:define id="formShortName" name="formItem" property="shortName" type="java.lang.String"/>
 		                  <h4><%= formShortName/*.toUpperCase()*/ %></h4>

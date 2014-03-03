@@ -25,6 +25,7 @@ public class CaseFormStaticDetailsForm extends CaseBaseForm {
 	private String status;
 	private String name;
 	private String description;
+	private String idTask;
 	private List<Question> questions;
 	private HashMap<String,String> questionTypeMap = new HashMap<String,String>();
 	private HashMap<String,String> questionOptionMap = new HashMap<String,String>();
@@ -83,6 +84,12 @@ public class CaseFormStaticDetailsForm extends CaseBaseForm {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getIdTask() {
+		return idTask;
+	}
+	public void setIdTask(String idTask) {
+		this.idTask = idTask;
 	}
 	
 }

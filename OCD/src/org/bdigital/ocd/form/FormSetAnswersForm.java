@@ -22,6 +22,7 @@ public class FormSetAnswersForm extends org.apache.struts.action.ActionForm {
 	private static final long serialVersionUID = 1L;
 	private String idForm;
 	private String finish;
+	private String idTask;
 
 	private HashMap<String,String> questionTypeMap = new HashMap<String,String>();
 	private HashMap<String,String> questionOptionMap = new HashMap<String,String>();
@@ -70,5 +71,11 @@ public class FormSetAnswersForm extends org.apache.struts.action.ActionForm {
 	}
 	public void setFinish(String finish) {
 		this.finish = finish;
+	}
+	public String getIdTask() {
+		return idTask;
+	}
+	public void setIdTask(String idTask) {
+		this.idTask = idTask;
 	}
 }
