@@ -11,7 +11,7 @@
 	        </logic:empty>
 	        <logic:notEmpty name="tasks">
 		    <logic:iterate name="tasks" id="taskItem" type="org.bdigital.ocd.model.form.TaskAf" >
-	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/></span></h3>
+	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/> <strong><bean:write name="taskItem" property="status"/></strong></span></h3>
 		        <logic:present name="taskItem" property="forms">
 			    <logic:iterate name="taskItem" property="forms" id="formItem" type="org.bdigital.ocd.model.form.FormAf" >
 					  <html:link action="/caseFormStaticDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${caseBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" styleClass="news-block-link">

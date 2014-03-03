@@ -100,33 +100,36 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                             	result = new StringHolder("");
                             	proxy.task_get(tokenLK, t.getId(), "ADMI", result, errorMsg);
                             	Task taskObj = (Task)UtilsWs.xmlToObject(result.value,
-                            			Task.class);
-                    			errorMsg = new StringHolder("");
-                            	result = new StringHolder("");
-                            	proxy.task_form_list(tokenLK, t.getId(), result, errorMsg);
-                            	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
-                            			Forms.class, Form.class);
-                            	List<FormAf> forms = new ArrayList<FormAf>();
-                            	if(formsObj.getForms()!=null){
-                            		for(int l=0;l<formsObj.getForms().size();l++){
-                            			Form f = formsObj.getForms().get(l);
-                            			FormAf fAf = new FormAf(f);
-                            			if("242".equals(taskObj.getRefs()[0]) &&
-                            					l==1){
-                            				fAf.setShortName("Dades clíniques");
-                            			}else if("242".equals(taskObj.getRefs()[0]) &&
-                            					l==2){
-                            				fAf.setShortName("Prescripció inicial d'OCD");
-                            			}
-                            			if(!"242".equals(taskObj.getRefs()[0]) ||
-                            					l!=0){
-                            				forms.add(fAf);
-                            			}
-                            		}
-                            	}
-                            	if(forms.size()>0){
-		                        	tAf.setForms(forms);
-		                			tasks.add(tAf);
+                            			Task.class,Form.class);
+                            	if(taskObj.getForms()!=null &&
+                            			taskObj.getForms().size()>0){
+                        			errorMsg = new StringHolder("");
+                                	result = new StringHolder("");
+                                	proxy.task_form_list(tokenLK, t.getId(), result, errorMsg);
+                                	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
+                                			Forms.class, Form.class);
+                                	List<FormAf> forms = new ArrayList<FormAf>();
+                                	if(formsObj.getForms()!=null){
+                                		for(int l=0;l<formsObj.getForms().size();l++){
+                                			Form f = formsObj.getForms().get(l);
+                                			FormAf fAf = new FormAf(f);
+                                			if("242".equals(taskObj.getRefs()[0]) &&
+                                					l==1){
+                                				fAf.setShortName("Dades clíniques");
+                                			}else if("242".equals(taskObj.getRefs()[0]) &&
+                                					l==2){
+                                				fAf.setShortName("Prescripció inicial d'OCD");
+                                			}
+                                			if(!"242".equals(taskObj.getRefs()[0]) ||
+                                					l!=0){
+                                				forms.add(fAf);
+                                			}
+                                		}
+                                	}
+                                	if(forms.size()>0){
+    		                        	tAf.setForms(forms);
+    		                			tasks.add(tAf);
+                                	}
                             	}
                         	}
                     	}

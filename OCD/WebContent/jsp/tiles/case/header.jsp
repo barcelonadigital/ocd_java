@@ -44,8 +44,14 @@
 					<bean:define id="dataItem" name="admissionItem" property="data" type="org.bdigital.ocd.model.AdmissionData"/>
 					<bean:define id="programItem" name="dataItem" property="program" type="org.bdigital.ocd.model.AdmissionProgram"/>
 					<bean:define id="protocolItem" name="dataItem" property="protocol" type="org.bdigital.ocd.model.AdmissionProtocol"/>
+					<bean:define id="protocolName2" name="protocolItem" property="name" type="java.lang.String"/>
+					<% 
+					if(protocolName2.length()>32){
+						protocolName2 = protocolName2.substring(0, 32)+"...";
+					}
+					%>
 			           <li>
-			             <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}"><bean:write name="protocolItem" property="name"/></html:link>
+			             <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}"><%=protocolName2%></html:link>
 			           </li>
 				</logic:iterate>
 				</ul>

@@ -1,5 +1,8 @@
 package org.bdigital.ocd.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,6 +20,7 @@ public class Task {
 	String admission;
 	Case taskCase;
 	String[] refs;
+    List<Form> forms = new ArrayList<Form>();
 
 	public String getDescription() {
 		return description;
@@ -88,6 +92,14 @@ public class Task {
 	@XmlElementWrapper
 	public void setRefs(String[] refs) {
 		this.refs = refs;
+	}
+	public List<Form> getForms() {
+		return forms;
+	}
+	@XmlElement(name = "form")
+	@XmlElementWrapper
+	public void setForms(List<Form> forms) {
+		this.forms = forms;
 	}
  
 

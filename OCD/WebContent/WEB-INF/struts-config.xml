@@ -48,7 +48,7 @@
         <action path="/mainPg" forward="searchPg.page"/>
         <action path="/caseSearchAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
             <forward name="casejoin" path="/caseJoinAction.do"/>
-            <forward name="success" path="/caseTaskDetailsAction.do"/>
+            <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseSearchPg.do"/>
             <forward name="casenew" path="/caseNewPg.do"/>
         </action>
@@ -60,7 +60,7 @@
         <action path="/caseNewPg" forward="newPg.page"/>
         <action path="/caseNewAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseNewAction" validate="true" input="/caseNewPg.do">
             <forward name="casejoin" path="/caseJoinAction.do"/>
-            <forward name="success" path="/caseTaskDetailsAction.do"/>
+            <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseNewPg.do"/>
         </action>
         <action path="/caseDetailsPg" forward="detailsPg.page"/>

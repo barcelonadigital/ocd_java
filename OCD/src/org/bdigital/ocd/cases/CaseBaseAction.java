@@ -78,7 +78,16 @@ public abstract class CaseBaseAction extends BaseAction {
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String caseId=(String)request.getAttribute("case_id")!=null?(String)request.getAttribute("case_id"):formBean.getIdCase();
     	
-    	if(caseId!=null){
+    	CaseBean caseBeanStored = (CaseBean) request.getSession().getAttribute("caseBean");
+
+    	if(caseId!=null && caseBeanStored!=null && caseId.equals(caseBeanStored.getIdCase())){
+    		caseBean = caseBeanStored;
+    		caseBean.setIsActiveMenuFormularis("false");
+    		caseBean.setIsActiveMenuHistoric("false");
+    		caseBean.setIsActiveMenuInfoPacient("false");
+    		return doCaseExecute(mapping, form, request, response);
+    	}else if(caseId!=null && (caseBeanStored==null || !caseId.equals(caseBeanStored.getIdCase()))){
+    		
     		StringHolder errorMsg = new StringHolder("");
         	StringHolder result = new StringHolder("");
         	try{
@@ -162,8 +171,8 @@ public abstract class CaseBaseAction extends BaseAction {
         	Collections.reverse(admissions);
         	Collections.reverse(admissionsAll);
         	caseBean.setAdmissionsText(admStr);
-    		request.setAttribute("admissions",admissions);
-        	request.setAttribute("admissionsAll",admissionsAll);
+    		request.getSession().setAttribute("admissions",admissions);
+        	request.getSession().setAttribute("admissionsAll",admissionsAll);
     		boolean ferAdmissionInsert = false;
     		if(admissionsAll.size()>0){
         		Admission a = admissionsAll.get(0);
@@ -264,10 +273,10 @@ public abstract class CaseBaseAction extends BaseAction {
         			i++;
         		}
         	}
-        	request.setAttribute("actions",actions);
-        	request.setAttribute("actionsTransfer",actionsTransfer);
+        	request.getSession().setAttribute("actions",actions);
+        	request.getSession().setAttribute("actionsTransfer",actionsTransfer);
         	
-        	request.setAttribute("caseBean",caseBean);
+        	request.getSession().setAttribute("caseBean",caseBean);
         	return doCaseExecute(mapping, form, request, response);
 
     	}else{
