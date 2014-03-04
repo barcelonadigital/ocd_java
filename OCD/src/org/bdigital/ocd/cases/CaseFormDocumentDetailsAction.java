@@ -34,9 +34,9 @@ public class CaseFormDocumentDetailsAction extends CaseBaseAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // extract user data
-    	CaseFormDocumentDetailsForm formBean = (CaseFormDocumentDetailsForm)form;
+    	//CaseFormDocumentDetailsForm formBean = (CaseFormDocumentDetailsForm)form;
 
-    	caseBean.setIsActiveMenuFormularis("true");
+    	menuBean.setIsActiveMenuFormularis("true");
     	
     	return mapping.findForward(SUCCESS);
     }

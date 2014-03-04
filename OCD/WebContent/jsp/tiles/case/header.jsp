@@ -11,7 +11,7 @@
     	  $('#confirmationModal').modal('show');
       }
       function assignarProtocol() {
-    	  var params = { idAdmission:'${caseBean.idAdmission}', idCase:'${caseBean.idCase}', idActivity:idActivitat };
+    	  var params = { idAdmission:'${admissionBean.idAdmission}', idCase:'${caseBean.idCase}', idActivity:idActivitat };
     	  var str = $.param( params );
     	  window.location='<html:rewrite action="/caseTaskInsertAction.do"/>?'+str;
       }
@@ -27,8 +27,8 @@
           <div class="actionsbottom">
             <div class="dropdown"><a data-toggle="dropdown" class="btn btn-blancogris btn-doslineas btn-large">
                 <strong>Protocol</strong>
-				<logic:present name="caseBean" property="descProtocolActual">
-				<bean:define id="protocolName" name="caseBean" property="descProtocolActual" type="java.lang.String"/>
+				<logic:present name="admissionBean" property="descProtocolActual">
+				<bean:define id="protocolName" name="admissionBean" property="descProtocolActual" type="java.lang.String"/>
 				<% 
 				if(protocolName.length()>24){
 				    protocolName = protocolName.substring(0, 24)+"...";
@@ -60,11 +60,11 @@
             </div>
             <span class="info">
 	            <strong>Inici del protocol</strong>
-	            <bean:write name="caseBean" property="dataProtocolActual" />&nbsp;
+	            <bean:write name="admissionBean" property="dataProtocolActual" />&nbsp;
             </span>
             <span class="info">
 	            <strong>Estat del protocol</strong>
-	            <bean:write name="caseBean" property="estatProtocolActual" />&nbsp;
+	            <bean:write name="admissionBean" property="estatProtocolActual" />&nbsp;
             </span>
             <a href="#alertModal" role="button" data-toggle="modal" class="btn btn-warning btn-large custom-btn">Nou protocol</a>
           </div>

@@ -11,7 +11,7 @@
     	  $('#confirmationModal').modal('show');
       }
       function assignarProtocol() {
-    	  var params = { idAdmission:'${caseBean.idAdmission}', idCase:'${caseBean.idCase}', idActivity:idActivitat };
+    	  var params = { idAdmission:'${admissionBean.idAdmission}', idCase:'${caseBean.idCase}', idActivity:idActivitat };
     	  var str = $.param( params );
     	  window.location='<html:rewrite action="/caseTaskInsertAction.do"/>?'+str;
       }

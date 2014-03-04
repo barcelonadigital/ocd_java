@@ -34,9 +34,9 @@ public class CaseFormCatSalutAction extends CaseBaseAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // extract user data
-    	CaseFormCatSalutForm formBean = (CaseFormCatSalutForm)form;
+    	//CaseFormCatSalutForm formBean = (CaseFormCatSalutForm)form;
 
-    	caseBean.setIsActiveMenuFormularis("true");
+    	menuBean.setIsActiveMenuFormularis("true");
     	
     	return mapping.findForward(SUCCESS);
     }

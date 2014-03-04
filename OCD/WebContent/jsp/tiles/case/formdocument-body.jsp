@@ -15,7 +15,7 @@
                 style="width:750px; height:375px;"  >
 			</iframe>
             <div class="actions bottom">
-	            <a class="btn btn-warning link">Cancel.</a>
-	            <html:link styleId="botoEnviar" action="/caseFormCatSalutAction?idCase=${caseBean.idCase}&idAdmission=${caseBean.idAdmission}&idForm=${CaseFormDocumentDetailsForm.idForm}&idTask=${CaseFormDocumentDetailsForm.idTask}" styleClass="btn custom-btn btn-large btn-info">Enviar</html:link>
+	            <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="btn btn-warning link">Cancel.</html:link>
+	            <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleId="botoEnviar" styleClass="btn custom-btn btn-large btn-info">Enviar</html:link>
             </div>
         </div>

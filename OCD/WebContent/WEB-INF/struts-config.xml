@@ -103,12 +103,12 @@
             <forward name="failure" path="/taskDetailsPg.do"/>
         </action>
         <action path="/formCloseAction" name="FormCloseForm" scope="request" type="org.bdigital.ocd.form.FormCloseAction" validate="false">
-            <forward name="success" path="/taskDetailsAction.do"/>
-            <forward name="failure" path="/taskDetailsAction.do"/>
+            <forward name="success" path="/caseTaskDetailsAction.do"/>
+            <forward name="failure" path="/caseTaskDetailsAction.do"/>
         </action>
         <action path="/formOpenAction" name="FormOpenForm" scope="request" type="org.bdigital.ocd.form.FormOpenAction" validate="false">
-            <forward name="success" path="/taskDetailsAction.do"/>
-            <forward name="failure" path="/taskDetailsAction.do"/>
+            <forward name="success" path="/caseTaskDetailsAction.do"/>
+            <forward name="failure" path="/caseTaskDetailsAction.do"/>
         </action>
         <action path="/formDetailsPg" forward="caseformPg.page"/>
         <action path="/formDetailsAction" name="FormDetailsForm" scope="request" type="org.bdigital.ocd.form.FormDetailsAction" validate="false">
@@ -127,7 +127,6 @@
         <action path="/formSetAnswersAction" name="FormSetAnswersForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswersAction" validate="false">
             <forward name="success" path="/caseTaskDetailsAction.do"/>
             <forward name="failure" path="/caseFormStaticDetailsAction.do"/>
-            <forward name="document" path="/caseFormDocumentDetailsAction.do"/>
         </action>
         <action path="/formSetAnswerAction" name="FormSetAnswerForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswerAction" validate="false">
         </action>

@@ -2,6 +2,20 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+	    <script type="text/javascript">
+	    $(document).ready(function() {
+	        $(".formrow a").click(function(event) {
+	        	var target = $(event.target);
+	    		if (!$( target ).hasClass("dropdown-toggle") &&
+	    				!$( target ).hasClass("caret")) {
+	    			event.preventDefault();
+	    			event.stopPropagation();
+	    			var ct = $(event.currentTarget);
+	    			window.location = $(ct).attr("href");
+	    		}
+	        });
+	    });
+	    </script>
         <div class="content">
           <div id="news-list">
               
@@ -12,16 +26,80 @@
 	        <logic:notEmpty name="tasks">
 		    <logic:iterate name="tasks" id="taskItem" type="org.bdigital.ocd.model.form.TaskAf" >
 	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/> <strong><bean:write name="taskItem" property="status"/></strong></span></h3>
+		        
+	          <div class="formlist">
+	          <div class="table">
+	          
 		        <logic:present name="taskItem" property="forms">
 			    <logic:iterate name="taskItem" property="forms" id="formItem" type="org.bdigital.ocd.model.form.FormAf" >
-					  <html:link action="/caseFormStaticDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${caseBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" styleClass="news-block-link">
-		                <div class="form-entry">
-		                  <bean:define id="formShortName" name="formItem" property="shortName" type="java.lang.String"/>
-		                  <h4><%= formShortName/*.toUpperCase()*/ %></h4>
-		                </div>
-		              </html:link>
+	            <bean:define id="formShortName" name="formItem" property="shortName" type="java.lang.String"/>
+	              <div class="formrow">
+					<logic:equal name="formItem" property="itemType" value="DOCUMENT">
+		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
+		              <span class="col3"><span>Pendent</span></span>
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              </a>
+		              <ul class="dropdown-menu">
+	                  </ul>
+					</logic:equal>
+					<logic:equal name="formItem" property="itemType" value="CATSALUT">
+		              <a href="<html:rewrite action="/caseFormCatSalutAction.do"/>?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
+		              <logic:equal name="formItem" property="status" value="CLOSED">
+		              <span class="col3"><span>Finalitzat</span></span>
+		              </logic:equal>
+		              <logic:equal name="formItem" property="status" value="OPEN">
+		              <span class="col3"><span>Pendent</span></span>
+		              </logic:equal>
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              </a>
+		              <ul class="dropdown-menu">
+		              <logic:equal name="formItem" property="status" value="CLOSED">
+	                      <li><html:link action="/formOpenAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Reobrir</html:link></li>
+		              </logic:equal>
+		              <logic:equal name="formItem" property="status" value="OPEN">
+	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Finalitzar</html:link></li>
+		              </logic:equal>
+	                  </ul>
+					</logic:equal>
+					<logic:notEqual name="formItem" property="itemType" value="DOCUMENT">
+					<logic:notEqual name="formItem" property="itemType" value="CATSALUT">
+		              <!-- 
+		              < html : link action="/caseFormStaticDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		               -->
+		              <a href="<html:rewrite action="/caseFormStaticDetailsAction.do"/>?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		              <span class="col1"><span><strong>FORMULARI</strong></span></span>
+		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
+		              <logic:equal name="formItem" property="status" value="CLOSED">
+		              <span class="col3"><span>Finalitzat</span></span>
+		              </logic:equal>
+		              <logic:equal name="formItem" property="status" value="OPEN">
+		              <span class="col3"><span>Pendent</span></span>
+		              </logic:equal>
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              </a>
+		              <ul class="dropdown-menu">
+		              <logic:equal name="formItem" property="status" value="CLOSED">
+	                      <li><html:link action="/formOpenAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Reobrir</html:link></li>
+		              </logic:equal>
+		              <logic:equal name="formItem" property="status" value="OPEN">
+	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Finalitzar</html:link></li>
+		              </logic:equal>
+	                  </ul>
+					</logic:notEqual>
+					</logic:notEqual>
+
+	              </div>
+	              
 				</logic:iterate>
 				</logic:present>
+				
+	          </div>
+	          </div>
+				
 			</logic:iterate>
 			</logic:notEmpty>
 			</logic:present>

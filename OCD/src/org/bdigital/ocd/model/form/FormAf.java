@@ -14,6 +14,7 @@ public class FormAf extends org.apache.struts.action.ActionForm {
 	String ref;
 	String shortName;
 	String status;
+	String itemType;
 	FormDataAf formData;
 	
 	public FormAf(Form obj) throws IllegalAccessException, InvocationTargetException {
@@ -48,5 +49,11 @@ public class FormAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setFormData(FormDataAf formData) {
 		this.formData = formData;
+	}
+	public String getItemType() {
+		return itemType;
+	}
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
 	}
 }

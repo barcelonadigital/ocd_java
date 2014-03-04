@@ -9,7 +9,7 @@
                 style="width:750px; height:375px;"  >
 			</iframe>
             <div class="actions bottom">
-	            <a class="btn btn-warning link">Cancel.</a>
-	            <a id="botoCompletat" class="btn custom-btn btn-large btn-info">Completat</a>
+                <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="btn btn-warning link">Cancel.</html:link>
+	            <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleId="botoCompletat" styleClass="btn custom-btn btn-large btn-info">Completat</html:link>
             </div>
         </div>

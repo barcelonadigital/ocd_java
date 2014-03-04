@@ -88,7 +88,7 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         // extract user data
     	CaseFormStaticDetailsForm formBean = (CaseFormStaticDetailsForm)form;
     	
-    	caseBean.setIsActiveMenuFormularis("true");
+    	menuBean.setIsActiveMenuFormularis("true");
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String formId=formBean.getIdForm();
@@ -119,7 +119,8 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         	}else{
         		errorMsg = new StringHolder("");
             	result = new StringHolder("");
-            	proxy.form_get_summary_all(tokenLK, formId, result, errorMsg);
+            	//proxy.form_get_summary_all(tokenLK, formId, result, errorMsg);
+            	proxy.form_get_summary(tokenLK, formId, result, errorMsg);
             	
             	formObj = (Form)UtilsWs.xmlToObject(result.value,
             			Form.class, FormData.class, Question.class);

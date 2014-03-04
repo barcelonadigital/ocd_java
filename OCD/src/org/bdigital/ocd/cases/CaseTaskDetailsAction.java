@@ -50,13 +50,13 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // extract user data
-    	CaseTaskDetailsForm formBean = (CaseTaskDetailsForm)form;
+    	//CaseTaskDetailsForm formBean = (CaseTaskDetailsForm)form;
     	
-    	caseBean.setIsActiveMenuFormularis("true");
+    	menuBean.setIsActiveMenuFormularis("true");
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	//String taskId=(String)request.getAttribute("parameterIdTask")!=null?(String)request.getAttribute("parameterIdTask"):formBean.getIdTask();
-    	String admissionId=caseBean.getIdAdmission();
+    	String admissionId=admissionBean.getIdAdmission();
     	
     	if(admissionId!=null){
     	//if(taskId!=null){
@@ -64,9 +64,9 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
         	Calendar admissionCal = new GregorianCalendar();
         	Calendar todayCal = new GregorianCalendar();
         	
-        	if(caseBean.getDataInscripcioAdmissio()!=null
-        			&& !"".equals(caseBean.getDataInscripcioAdmissio())){
-        		admissionDate = UtilsString.stringtoDate(caseBean.getDataInscripcioAdmissio(),Constants.FORMAT_DATEHOUR_WS);
+        	if(admissionBean.getDataInscripcioAdmissio()!=null
+        			&& !"".equals(admissionBean.getDataInscripcioAdmissio())){
+        		admissionDate = UtilsString.stringtoDate(admissionBean.getDataInscripcioAdmissio(),Constants.FORMAT_DATEHOUR_WS);
     			admissionCal = new GregorianCalendar();
     			admissionCal.setTime(admissionDate);
         	}
@@ -110,6 +110,8 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 			Forms.class, Form.class);
                                 	List<FormAf> forms = new ArrayList<FormAf>();
                                 	if(formsObj.getForms()!=null){
+                                		String statusFirstItem = "";
+                                		String refFirstItem = "";
                                 		for(int l=0;l<formsObj.getForms().size();l++){
                                 			Form f = formsObj.getForms().get(l);
                                 			FormAf fAf = new FormAf(f);
@@ -123,13 +125,26 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 			if(!"242".equals(taskObj.getRefs()[0]) ||
                                 					l!=0){
                                 				forms.add(fAf);
+                                			}else{
+                                				statusFirstItem = fAf.getStatus();
+                                				refFirstItem = fAf.getRef();
                                 			}
                                 		}
+                                		if("242".equals(taskObj.getRefs()[0])){
+                                			FormAf fAf = new FormAf(new Form());
+                                    		fAf.setItemType("DOCUMENT");
+                                    		fAf.setShortName("Enviament de document al SAP");
+                                			forms.add(fAf);
+                                			fAf = new FormAf(new Form());
+                                			fAf.setItemType("CATSALUT");
+                                    		fAf.setShortName("Sol·licitud d'OCD a CatSalut");
+                                			fAf.setRef(refFirstItem);
+                                    		fAf.setStatus(statusFirstItem);
+                                			forms.add(fAf);
+                                		}
                                 	}
-                                	if(forms.size()>0){
-    		                        	tAf.setForms(forms);
-    		                			tasks.add(tAf);
-                                	}
+                                	tAf.setForms(forms);
+		                			tasks.add(tAf);
                             	}
                         	}
                     	}

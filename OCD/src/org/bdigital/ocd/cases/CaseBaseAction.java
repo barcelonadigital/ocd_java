@@ -21,7 +21,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
+import org.bdigital.ocd.beans.AdmissionBean;
 import org.bdigital.ocd.beans.CaseBean;
+import org.bdigital.ocd.beans.MenuBean;
 import org.bdigital.ocd.model.AIM;
 import org.bdigital.ocd.model.Action;
 import org.bdigital.ocd.model.Actions;
@@ -49,8 +51,10 @@ import org.bdigital.ocd.ws.LINKCAREException;
  * @author jroda
  */
 public abstract class CaseBaseAction extends BaseAction {
-    
+
     protected CaseBean caseBean;
+    protected MenuBean menuBean;
+    protected AdmissionBean admissionBean;
     
 	public abstract ActionForward doCaseExecute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -74,18 +78,21 @@ public abstract class CaseBaseAction extends BaseAction {
     	CaseBaseForm formBean = (CaseBaseForm)form;
     	
     	caseBean = new CaseBean();
+    	menuBean = new MenuBean();
+    	admissionBean = new AdmissionBean();
+    	request.setAttribute("menuBean",menuBean);
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String caseId=(String)request.getAttribute("case_id")!=null?(String)request.getAttribute("case_id"):formBean.getIdCase();
     	
     	CaseBean caseBeanStored = (CaseBean) request.getSession().getAttribute("caseBean");
 
+		if(caseId==null){
+			return mapping.findForward(FAILURE);
+		}
+
     	if(caseId!=null && caseBeanStored!=null && caseId.equals(caseBeanStored.getIdCase())){
     		caseBean = caseBeanStored;
-    		caseBean.setIsActiveMenuFormularis("false");
-    		caseBean.setIsActiveMenuHistoric("false");
-    		caseBean.setIsActiveMenuInfoPacient("false");
-    		return doCaseExecute(mapping, form, request, response);
     	}else if(caseId!=null && (caseBeanStored==null || !caseId.equals(caseBeanStored.getIdCase()))){
     		
     		StringHolder errorMsg = new StringHolder("");
@@ -138,24 +145,34 @@ public abstract class CaseBaseAction extends BaseAction {
         	Contact contact = (Contact)UtilsWs.xmlToObject(result.value,Contact.class,Name.class,
         			Address.class,Mail.class,AIM.class,Device.class,Phone.class);
         	caseBean.setContact(contact);
-        	
-    		errorMsg = new StringHolder("");
-        	result = new StringHolder("");
+
+        	request.getSession().setAttribute("caseBean",caseBean);
+    	}
+    	
+    	String admissionId=(String)request.getAttribute("admission_id")!=null?(String)request.getAttribute("admission_id"):formBean.getIdAdmission();
+    	
+    	AdmissionBean admissionBeanStored = (AdmissionBean) request.getSession().getAttribute("admissionBean");
+
+    	if(admissionId!=null && admissionBeanStored!=null && admissionId.equals(admissionBeanStored.getIdAdmission())){
+    		admissionBean = admissionBeanStored;
+    	}else{
+    		StringHolder errorMsg = new StringHolder("");
+    		StringHolder result = new StringHolder("");
         	proxy.admission_list_case(tokenLK,caseId, "true", result, errorMsg);
         	List<Admission> admissions = new ArrayList<Admission>();
         	List<Admission> admissionsAll = new ArrayList<Admission>();
         	Admissions admissionListCase = (Admissions)UtilsWs.xmlToObject(result.value,
         			Admissions.class, Admission.class, Case.class, 
         			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
-    		String admStr = "";
+//    		String admStr = "";
         	if(admissionListCase.getAdmissions()!=null){
         		for(int i=0;i<admissionListCase.getAdmissions().size();i++){
         			Admission adm = admissionListCase.getAdmissions().get(i);
-        			admStr+="<Ref:"+adm.getRef()
-            				+",ProgramDescription:"+adm.getData().getProgram().getDescription()
-            				+",EnrolDate:"+adm.getData().getEnrolDate()
-            				+",Status:"+adm.getData().getStatus()
-            				+",DateToDisplay:"+adm.getData().getDateToDisplay()+"> ";
+//        			admStr+="<Ref:"+adm.getRef()
+//            				+",ProgramDescription:"+adm.getData().getProgram().getDescription()
+//            				+",EnrolDate:"+adm.getData().getEnrolDate()
+//            				+",Status:"+adm.getData().getStatus()
+//            				+",DateToDisplay:"+adm.getData().getDateToDisplay()+"> ";
         			if(adm.getData()!=null && adm.getData().getProgram()!=null && 
         					"5".equals(adm.getData().getProgram().getId())){
         				if(adm.getData().getProtocol()!=null &&
@@ -170,7 +187,7 @@ public abstract class CaseBaseAction extends BaseAction {
         	Collections.sort(admissionsAll, new AdmissionComparator());
         	Collections.reverse(admissions);
         	Collections.reverse(admissionsAll);
-        	caseBean.setAdmissionsText(admStr);
+        	//caseBean.setAdmissionsText(admStr);
     		request.getSession().setAttribute("admissions",admissions);
         	request.getSession().setAttribute("admissionsAll",admissionsAll);
     		boolean ferAdmissionInsert = false;
@@ -203,11 +220,11 @@ public abstract class CaseBaseAction extends BaseAction {
             	admissionsAll.add(0,a);
     		}
     		Admission a=null;
-    		if(formBean.getIdAdmission()!=null && 
-    				!"".equals(formBean.getIdAdmission())){
+    		if(admissionId!=null && 
+    				!"".equals(admissionId)){
     			for(int i=0;i<admissionsAll.size();i++){
         			Admission adm = admissionsAll.get(i);
-        			if(adm.getRef().equals(formBean.getIdAdmission())){
+        			if(adm.getRef().equals(admissionId)){
         				a = adm;
         			}
     			}
@@ -215,15 +232,15 @@ public abstract class CaseBaseAction extends BaseAction {
     		if(a==null){
 	    		a = admissionsAll.get(0);
     		}
-    		caseBean.setIdAdmission(a.getRef());
+    		admissionBean.setIdAdmission(a.getRef());
     		if(a.getData()!=null){
         		if(a.getData().getProtocol()!=null 
         				&& a.getData().getProtocol().getId()!=null 
         				&& !"".equals(a.getData().getProtocol().getId())){
-        			caseBean.setDescProtocolActual(a.getData().getProtocol().getName());
-        			caseBean.setDataProtocolActual(a.getData().getAdmissionDate());
-        			caseBean.setDataInscripcioAdmissio(a.getData().getEnrolDate());
-        			caseBean.setEstatProtocolActual(a.getData().getStatus());
+        			admissionBean.setDescProtocolActual(a.getData().getProtocol().getName());
+        			admissionBean.setDataProtocolActual(a.getData().getAdmissionDate());
+        			admissionBean.setDataInscripcioAdmissio(a.getData().getEnrolDate());
+        			admissionBean.setEstatProtocolActual(a.getData().getStatus());
         		}
     		}
     		errorMsg = new StringHolder("");
@@ -273,14 +290,12 @@ public abstract class CaseBaseAction extends BaseAction {
         			i++;
         		}
         	}
+        	request.getSession().setAttribute("admissionBean",admissionBean);
         	request.getSession().setAttribute("actions",actions);
         	request.getSession().setAttribute("actionsTransfer",actionsTransfer);
-        	
-        	request.getSession().setAttribute("caseBean",caseBean);
-        	return doCaseExecute(mapping, form, request, response);
-
-    	}else{
-    		return mapping.findForward(FAILURE);
     	}
+    	
+    	
+    	return doCaseExecute(mapping, form, request, response);
     }
 }

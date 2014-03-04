@@ -37,7 +37,7 @@ public class CaseDetailsAction extends CaseBaseAction {
         // extract user data
     	CaseDetailsForm formBean = (CaseDetailsForm)form;
     	
-    	caseBean.setIsActiveMenuInfoPacient("true");
+    	menuBean.setIsActiveMenuInfoPacient("true");
     	
 //    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String caseId=(String)request.getAttribute("case_id")!=null?(String)request.getAttribute("case_id"):formBean.getIdCase();

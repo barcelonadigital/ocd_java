@@ -22,12 +22,7 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
 	private String age;
 	private String sex;
 	private String idCase;
-	private String idAdmission;
-
-	private String descProtocolActual;
-	private String dataProtocolActual;
-	private String estatProtocolActual;
-	private String dataInscripcioAdmissio;
+	
 	private String nick;
 	private String nif;
 	private String nie;
@@ -36,12 +31,6 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
     
 	private String nickname;
 	private String birthday;
-
-	private String admissionsText;
-	
-	private String isActiveMenuHistoric;
-	private String isActiveMenuInfoPacient;
-	private String isActiveMenuFormularis;
 	
 	private Contact contact;
 
@@ -75,38 +64,6 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
 
 	public void setIdCase(String idCase) {
 		this.idCase = idCase;
-	}
-
-	public String getIdAdmission() {
-		return idAdmission;
-	}
-
-	public void setIdAdmission(String idAdmission) {
-		this.idAdmission = idAdmission;
-	}
-
-	public String getDescProtocolActual() {
-		return descProtocolActual;
-	}
-
-	public void setDescProtocolActual(String descProtocolActual) {
-		this.descProtocolActual = descProtocolActual;
-	}
-
-	public String getDataProtocolActual() {
-		return dataProtocolActual;
-	}
-
-	public void setDataProtocolActual(String dataProtocolActual) {
-		this.dataProtocolActual = dataProtocolActual;
-	}
-
-	public String getEstatProtocolActual() {
-		return estatProtocolActual;
-	}
-
-	public void setEstatProtocolActual(String estatProtocolActual) {
-		this.estatProtocolActual = estatProtocolActual;
 	}
 
 	public String getNick() {
@@ -163,46 +120,6 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
 
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
-	}
-
-	public String getAdmissionsText() {
-		return admissionsText;
-	}
-
-	public void setAdmissionsText(String admissionsText) {
-		this.admissionsText = admissionsText;
-	}
-
-	public String getDataInscripcioAdmissio() {
-		return dataInscripcioAdmissio;
-	}
-
-	public void setDataInscripcioAdmissio(String dataInscripcioAdmissio) {
-		this.dataInscripcioAdmissio = dataInscripcioAdmissio;
-	}
-
-	public String getIsActiveMenuHistoric() {
-		return isActiveMenuHistoric;
-	}
-
-	public void setIsActiveMenuHistoric(String isActiveMenuHistoric) {
-		this.isActiveMenuHistoric = isActiveMenuHistoric;
-	}
-
-	public String getIsActiveMenuInfoPacient() {
-		return isActiveMenuInfoPacient;
-	}
-
-	public void setIsActiveMenuInfoPacient(String isActiveMenuInfoPacient) {
-		this.isActiveMenuInfoPacient = isActiveMenuInfoPacient;
-	}
-
-	public String getIsActiveMenuFormularis() {
-		return isActiveMenuFormularis;
-	}
-
-	public void setIsActiveMenuFormularis(String isActiveMenuFormularis) {
-		this.isActiveMenuFormularis = isActiveMenuFormularis;
 	}
 
 	public Contact getContact() {

@@ -34,7 +34,7 @@ public class CaseHistoricAction extends CaseBaseAction {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
     	
-    	caseBean.setIsActiveMenuHistoric("true");
+    	menuBean.setIsActiveMenuHistoric("true");
     	
     	return mapping.findForward(SUCCESS);
     }

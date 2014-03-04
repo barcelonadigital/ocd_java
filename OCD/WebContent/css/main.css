@@ -9048,7 +9048,7 @@ legend.questionform {
     line-height:20px;
 }
 .tab-content>.tab-pane {
-	min-height:150px;/*per solucionar problema amb botons flotants affix quan el 'tab' era massa petit*/
+	min-height:210px;/*per solucionar problema amb botons flotants affix quan el 'tab' era massa petit*/
 	position:relative;/*per posar imatge 'info' flotant a la dreta*/
 }
 .dataform .fields-row div.bigfield label.radio {
@@ -9081,4 +9081,193 @@ span.hint .dropdown-menu {
 	padding: 10px 15px 10px 15px;
 	color: #2c3e50;
 	font-weight: normal;
+}
+.formlist .filter {
+    padding:0 0 0 20px;
+    margin-bottom:20px
+}
+.formlist .filter .search {
+    float:right
+}
+.formlist .filter .search form {
+    margin:0
+}
+.formlist .filter .search form input.search-query {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    height:auto;
+    margin:0;
+    width:100%;
+    padding:7px 32px 7px 14px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    background:url(../img/ico-search-listbox.png) no-repeat right center
+}
+.formlist .filter .limit .btn-group {
+    margin:0 10px
+}
+.formlist .filter .limit .btn-group button {
+    background-color:#fff;
+    font-size:16px;
+    line-height:18px;
+    color:#a1a1a1;
+    padding-top:8px;
+    padding-bottom:8px
+}
+.formlist .table .formrow {
+    position:relative
+}
+.formlist .table .formrow:nth-child(even)>a {
+    background-color:#f5f6f7
+}
+.formlist .table .formrow>span,.formlist .table .formrow>a {
+    clear:both;
+    display:block;
+    height:60px
+}
+.formlist .table .formrow>span>span,.formlist .table .formrow>a>span,.formlist .table .formrow>span>a,.formlist .table .formrow>a>a {
+    color:#2c3e50;
+    display:block;
+    position:relative;
+    height:60px;
+    float:left;
+    font-size:16px;
+    line-height:18px
+}
+.formlist .table .formrow>span>span>span,.formlist .table .formrow>a>span>span,.formlist .table .formrow>span>a>span,.formlist .table .formrow>a>a>span {
+    display:block;
+    padding:20px 2px 0 16px
+}
+.formlist .table .formrow>span>span.col1,.formlist .table .formrow>a>span.col1,.formlist .table .formrow>span>a.col1,.formlist .table .formrow>a>a.col1 {
+    width:132px
+}
+.formlist .table .formrow>span>span.col2,.formlist .table .formrow>a>span.col2,.formlist .table .formrow>span>a.col2,.formlist .table .formrow>a>a.col2 {
+    width:268px
+}
+.formlist .table .formrow>span>span.col3,.formlist .table .formrow>a>span.col3,.formlist .table .formrow>span>a.col3,.formlist .table .formrow>a>a.col3 {
+    width:153px
+}
+.formlist .table .formrow>span>span.col4,.formlist .table .formrow>a>span.col4,.formlist .table .formrow>span>a.col4,.formlist .table .formrow>a>a.col4 {
+    width:196px
+}
+.formlist .table .formrow>span>span:first-child,.formlist .table .formrow>a>span:first-child,.formlist .table .formrow>span>a:first-child,.formlist .table .formrow>a>a:first-child {
+    border-left-width:0
+}
+.formlist .table .formrow>span>span.actions,.formlist .table .formrow>a>span.actions,.formlist .table .formrow>span>a.actions,.formlist .table .formrow>a>a.actions {
+    border-left-width:0
+}
+.formlist .table .formrow>span>span.actions>span>span.btn.dropdown-toggle,.formlist .table .formrow>a>span.actions>span>span.btn.dropdown-toggle,.formlist .table .formrow>span>a.actions>span>span.btn.dropdown-toggle,.formlist .table .formrow>a>a.actions>span>span.btn.dropdown-toggle {
+    display:none;
+    position:absolute;
+    right:17px;
+    top:10px;
+    width:154px;
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color:#fff;
+    padding-left:19px;
+    border:0;
+    color:#a1a1a1;
+    text-transform:none;
+    font-size:16px;
+    font-weight:400;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px
+}
+.formlist .table .formrow>span>span.actions>span>span.btn.dropdown-toggle span.caret,.formlist .table .formrow>a>span.actions>span>span.btn.dropdown-toggle span.caret,.formlist .table .formrow>span>a.actions>span>span.btn.dropdown-toggle span.caret,.formlist .table .formrow>a>a.actions>span>span.btn.dropdown-toggle span.caret {
+    float:right
+}
+.formlist .table .formrow>span>span.user>span,.formlist .table .formrow>a>span.user>span,.formlist .table .formrow>span>a.user>span,.formlist .table .formrow>a>a.user>span {
+    padding-left:63px
+}
+.formlist .table .formrow>span>span.user>span img,.formlist .table .formrow>a>span.user>span img,.formlist .table .formrow>span>a.user>span img,.formlist .table .formrow>a>a.user>span img {
+    position:absolute;
+    left:14px;
+    top:9px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%
+}
+.formlist .table .formrow.open>a>span.actions>span>span.btn.dropdown-toggle {
+    -webkit-border-bottom-right-radius:0;
+    -moz-border-radius-bottomright:0;
+    border-bottom-right-radius:0;
+    -webkit-border-bottom-left-radius:0;
+    -moz-border-radius-bottomleft:0;
+    border-bottom-left-radius:0;
+    -webkit-border-top-right-radius:3px;
+    -moz-border-radius-topright:3px;
+    border-top-right-radius:3px;
+    -webkit-border-top-left-radius:3px;
+    -moz-border-radius-topleft:3px;
+    border-top-left-radius:3px;
+    -webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    -moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    box-shadow:0 5px 10px rgba(0,0,0,0.2)
+}
+.formlist .table .formrow.open>a,.formlist .table .formrow>a:hover {
+    background-color:#58b094
+}
+.formlist .table .formrow.open>a>span>span,.formlist .table .formrow>a:hover>span>span {
+    color:#fff;
+    font-weight:600
+}
+.formlist .table .formrow.open>a>span>span>span.btn.dropdown-toggle,.formlist .table .formrow>a:hover>span>span>span.btn.dropdown-toggle {
+    display:inline-block;
+    opacity:1;
+    filter:alpha(opacity=100)
+}
+.formlist .table .formrow.header>span {
+    background-color:#f0f0f1
+}
+.formlist .table .formrow.header>span>a {
+    border-left-color:transparent;
+    color:#2c3e50
+}
+.formlist .table .formrow.header>span>a.ordered {
+    font-weight:700
+}
+.formlist .table .formrow.header>span>a.ordered span.order {
+    display:inline-block;
+    vertical-align:top;
+    width:14px;
+    height:16px;
+    margin-left:6px
+}
+.formlist .table .formrow.header>span>a.ordered span.order.down {
+    background:url(../img/ico-order-down-table.png) no-repeat left bottom
+}
+.formlist .table .formrow.header>span>a.ordered span.order.up {
+    background:url(../img/ico-order-up-table.png) no-repeat left bottom
+}
+.formlist .table .formrow>ul.dropdown-menu {
+    float:none;
+    min-width:185px;
+    left:auto;
+    right:18px;
+    top:51px;
+    width:178px;
+    border:0;
+    border-top:1px solid #ecf0f1;
+    padding:6px 0 14px 0;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    border-radius:0
+}
+.formlist .table .formrow>ul.dropdown-menu a {
+    color:#388cec
+}
+.formlist .table .formrow>ul.dropdown-menu a:hover {
+    color:#fff
+}
+.formlist .table .formrow>ul.dropdown-menu a.warning {
+    color:#f11
+}
+.formlist .table .formrow>ul.dropdown-menu a.warning:hover {
+    color:#fff;
+    background-color:#f11;
+    background-image:none
 }
