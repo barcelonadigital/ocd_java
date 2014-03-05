@@ -8,6 +8,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> </html>
@@ -40,6 +41,14 @@
 	    <tiles:insert attribute="subheader"/>
 	    <div class="menuizqlayout <tiles:getAsString name="body-style"/>">
 	      <div class="container">
+	        <html:messages id="msg2" property="general">
+	            <div class="formerror"><bean:write name="msg2" /></div>
+	        </html:messages>
+	        <logic:messagesNotPresent property="general">
+		        <html:messages id="msg3">
+		        <div class="formerror"><bean:write name="msg3" /></div>
+		        </html:messages>
+		    </logic:messagesNotPresent>
 	        <tiles:insert attribute="menu"/>
 	        <tiles:insert attribute="body"/>
 	      </div>

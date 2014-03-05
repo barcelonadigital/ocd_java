@@ -112,11 +112,11 @@
                 
 			    
 			    
-					<li><a href="/OCD/caseTaskInsertAction.do?idAdmission=228&idCase=723&amp;idActivity=%23XTRANSFER_18" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Dessitja continuar?');">Seguiment Paliatiu</a></li>
+					<li><a href="/OCD/caseTaskInsertAction.do?idAdmission=228&idCase=723&amp;idActivity=%23XTRANSFER_18" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Desitja continuar?');">Seguiment Paliatiu</a></li>
 				
-					<li><a href="/OCD/caseTaskInsertAction.do?idAdmission=228&idCase=723&amp;idActivity=%23XTRANSFER_19" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Dessitja continuar?');">Seguiment No Paliatiu</a></li>
+					<li><a href="/OCD/caseTaskInsertAction.do?idAdmission=228&idCase=723&amp;idActivity=%23XTRANSFER_19" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Desitja continuar?');">Seguiment No Paliatiu</a></li>
 				
-					<li><a href="/OCD/caseTaskInsertAction.do?idAdmission=228&idCase=723&amp;idActivity=%23XTRANSFER_20" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Dessitja continuar?');">Revisió d&#39;oxigen prescrit</a></li>
+					<li><a href="/OCD/caseTaskInsertAction.do?idAdmission=228&idCase=723&amp;idActivity=%23XTRANSFER_20" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Desitja continuar?');">Revisió d&#39;oxigen prescrit</a></li>
 				
 				
 			    
@@ -298,7 +298,7 @@
       </div>
       <div class="modal-body">
         <p>
-          Es finalitzarà el protocol actiu actualment. Dessitja continuar?
+          Es finalitzarà el protocol actiu actualment. Desitja continuar?
         </p>
       </div>
       <div class="modal-footer">

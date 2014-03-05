@@ -71,7 +71,7 @@
 		              < html : link action="/caseFormStaticDetailsAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
 		               -->
 		              <a href="<html:rewrite action="/caseFormStaticDetailsAction.do"/>?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
-		              <span class="col1"><span><strong>FORMULARI</strong></span></span>
+		              <span class="col1"><span><strong>QÜESTIONARI</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <logic:equal name="formItem" property="status" value="CLOSED">
 		              <span class="col3"><span>Finalitzat</span></span>
@@ -107,3 +107,29 @@
               
           </div>
         </div>
+        <logic:present name="alertFormClose">
+	    <script type="text/javascript">
+	    $(document).ready(function() {
+	    	$('#confirmFinishModal').modal('show');
+	    });
+	    function doFinish(){
+	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}&accept=true"/>';
+	    }
+	    </script>
+	    <div id="confirmFinishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
+	      <div class="modal-header">
+	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+	        <h3>Finalitzar formulari?</h3>
+	      </div>
+	      <div class="modal-body">
+	        <p>
+	          Donat que és últim formulari pendent de finalitzar, es tancarà la tasca. Desitja continuar?
+	        </p>
+	      </div>
+	      <div class="modal-footer">
+	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
+	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large">D'acord, finalitzar</button>
+	      </div>
+	    </div>
+        </logic:present>
+        

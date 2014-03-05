@@ -7093,6 +7093,14 @@ div.dropdown-menu>ul>li>a {
     line-height:16px;
     padding:18px 30px 18px 70px
 }
+.formerror {
+    margin-bottom:10px;
+    clear:both;
+    background:#f1c7c7 url(../img/ico-alert-form.png) no-repeat 26px center;
+    font-size:14px;
+    line-height:16px;
+    padding:18px 30px 18px 70px
+}
 #wrapper {
 	min-height: 100%;
 	height: auto !important;
@@ -7176,6 +7184,9 @@ div.dropdown-menu>ul>li>a {
 .cabeceraperfil>.container>.content>.actionsbottom .dropdown .dropdown-menu {
     width:254px
 }
+.cabeceraperfil>.container>.content>.actionsbottom .dropdown .dropdown-menu a.selected  {
+    font-weight:600;
+}
 .cabeceraperfil>.container>.content>.actionsbottom>a,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a,.cabeceraperfil>.container>.content>.actionsbottom>span {
     font-size:14px;
     margin-right:12px;
@@ -7220,6 +7231,9 @@ div.dropdown-menu>ul>li>a {
     position:absolute;
     top:32px;
     right:0
+}
+.cabeceraperfil>.container>#contentnophoto.content>.actionstop {
+    top:16px;
 }
 .cabeceraperfil>.container>.content>.actionstop>a {
     font-size:14px;
@@ -8888,7 +8902,7 @@ div#news-list a.news-block-link:hover>div.message p {
     padding-bottom:0px;
     z-index:1150;
     margin-top:0px;
-    //background:transparent url(../img/dropdown-triangle.png) no-repeat 50% 0;
+    background:transparent url(../img/dropdown-triangle.png) no-repeat 50% 0;
     border:0
 }
 .contactinfo .dropdown>div.dropdown-menu>ul {
@@ -9039,7 +9053,7 @@ legend.singlelinelegend {vertical-align:middle;}
     text-transform:none
 }
 #contentnophoto {
-	padding-left:0px;
+	padding:10px 0 10px 0px
 }
 #contentnophotoslim {
     padding:10px 0 10px 0px
@@ -9141,16 +9155,16 @@ span.hint .dropdown-menu {
     padding:20px 2px 0 16px
 }
 .formlist .table .formrow>span>span.col1,.formlist .table .formrow>a>span.col1,.formlist .table .formrow>span>a.col1,.formlist .table .formrow>a>a.col1 {
-    width:132px
+    width:122px
 }
 .formlist .table .formrow>span>span.col2,.formlist .table .formrow>a>span.col2,.formlist .table .formrow>span>a.col2,.formlist .table .formrow>a>a.col2 {
-    width:268px
+    width:348px
 }
 .formlist .table .formrow>span>span.col3,.formlist .table .formrow>a>span.col3,.formlist .table .formrow>span>a.col3,.formlist .table .formrow>a>a.col3 {
-    width:153px
+    width:123px
 }
 .formlist .table .formrow>span>span.col4,.formlist .table .formrow>a>span.col4,.formlist .table .formrow>span>a.col4,.formlist .table .formrow>a>a.col4 {
-    width:196px
+    width:156px
 }
 .formlist .table .formrow>span>span:first-child,.formlist .table .formrow>a>span:first-child,.formlist .table .formrow>span>a:first-child,.formlist .table .formrow>a>a:first-child {
     border-left-width:0
@@ -9163,7 +9177,7 @@ span.hint .dropdown-menu {
     position:absolute;
     right:17px;
     top:10px;
-    width:154px;
+    width:114px;
     padding-top:10px;
     padding-bottom:10px;
     background-color:#fff;
@@ -9245,11 +9259,11 @@ span.hint .dropdown-menu {
 }
 .formlist .table .formrow>ul.dropdown-menu {
     float:none;
-    min-width:185px;
+    min-width:145px;
     left:auto;
     right:18px;
     top:51px;
-    width:178px;
+    width:138px;
     border:0;
     border-top:1px solid #ecf0f1;
     padding:6px 0 14px 0;

@@ -46,12 +46,16 @@
 					<bean:define id="protocolItem" name="dataItem" property="protocol" type="org.bdigital.ocd.model.AdmissionProtocol"/>
 					<bean:define id="protocolName2" name="protocolItem" property="name" type="java.lang.String"/>
 					<% 
-					if(protocolName2.length()>32){
-						protocolName2 = protocolName2.substring(0, 32)+"...";
+					if(protocolName2.length()>30){
+						protocolName2 = protocolName2.substring(0, 30)+"...";
 					}
 					%>
+					<% request.setAttribute("classSelected",""); %>
+					<logic:equal name="admissionItem" property="ref" value="${admissionBean.idAdmission}">
+					<% request.setAttribute("classSelected","selected"); %>
+					</logic:equal>
 			           <li>
-			             <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}"><%=protocolName2%></html:link>
+			             <html:link action="/caseDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}" styleClass="${classSelected}"><%=protocolName2%></html:link>
 			           </li>
 				</logic:iterate>
 				</ul>

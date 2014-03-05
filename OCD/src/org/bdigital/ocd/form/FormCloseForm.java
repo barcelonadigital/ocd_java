@@ -17,6 +17,7 @@ public class FormCloseForm extends org.apache.struts.action.ActionForm {
 	private static final long serialVersionUID = 1L;
 	private String idForm;
 	private String idTask;
+	private String accept;
 	public String getIdForm() {
 		return idForm;
 	}
@@ -28,6 +29,12 @@ public class FormCloseForm extends org.apache.struts.action.ActionForm {
 	}
 	public void setIdTask(String idTask) {
 		this.idTask = idTask;
+	}
+	public String getAccept() {
+		return accept;
+	}
+	public void setAccept(String accept) {
+		this.accept = accept;
 	}
 	
 }

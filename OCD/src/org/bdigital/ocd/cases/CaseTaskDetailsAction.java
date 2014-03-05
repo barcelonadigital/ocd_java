@@ -133,7 +133,7 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 		if("242".equals(taskObj.getRefs()[0])){
                                 			FormAf fAf = new FormAf(new Form());
                                     		fAf.setItemType("DOCUMENT");
-                                    		fAf.setShortName("Enviament de document al SAP");
+                                    		fAf.setShortName("Enviament de document al històric clínic");
                                 			forms.add(fAf);
                                 			fAf = new FormAf(new Form());
                                 			fAf.setItemType("CATSALUT");

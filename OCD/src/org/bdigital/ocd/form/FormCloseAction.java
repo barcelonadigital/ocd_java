@@ -16,6 +16,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
+import org.bdigital.ocd.model.Form;
+import org.bdigital.ocd.model.Forms;
+import org.bdigital.ocd.model.Task;
+import org.bdigital.ocd.utils.UtilsWs;
 import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
@@ -43,24 +47,67 @@ public class FormCloseAction extends BaseAction {
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String formId=formBean.getIdForm();
+    	String idTask = formBean.getIdTask();
     	
-    	if(formId!=null){
-    		StringHolder result = new StringHolder("");
-    		StringHolder errorMsg = new StringHolder("");
-        	try{
-        		proxy.form_close(tokenLK, formId, result, errorMsg);
-            }catch(LINKCAREException e){
-            	
-            	if ("Form has mandatory questions without answer".equals(errorMsg.value)) {
+    	if(formId!=null && idTask!=null){
+//    		StringHolder errorMsg = new StringHolder("");
+//        	StringHolder result = new StringHolder("");
+//        	proxy.form_get(tokenLK, formId, result, errorMsg);
+//        	Result resObj = (Result)UtilsWs.xmlToObject(result.value,
+//        			Result.class);
+//        	String idTask = resObj.getParentId();
+        	
+        	StringHolder errorMsg = new StringHolder("");
+        	StringHolder result = new StringHolder("");
 
-                    ActionMessages errors = new ActionMessages();
-                    errors.add("general",new ActionMessage("errors.mandatoryQuestionsIncompleted"));
-                    saveErrors(request, errors);
-                    return mapping.findForward(FAILURE);
-                }else{
-                	throw e;
-                }
-            }
+        	proxy.task_form_list(tokenLK, idTask, result, errorMsg);
+        	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
+        			Forms.class, Form.class);
+        	boolean hiHaFormsPendents = false;
+        	if(formsObj.getForms()!=null){
+        		for(int l=0;l<formsObj.getForms().size();l++){
+        			Form f = formsObj.getForms().get(l);
+        			if(!formId.equals(f.getRef())
+        					&& "OPEN".equals(f.getStatus())){
+        				hiHaFormsPendents = true;
+        			}
+        		}
+        	}
+        	
+    		if(!hiHaFormsPendents && 
+    				(formBean.getAccept()==null || !"true".equals(formBean.getAccept()))){
+    			request.setAttribute("alertFormClose", "true");
+    			return mapping.findForward(FAILURE);
+    		}else{
+	        	try{
+	        		errorMsg = new StringHolder("");
+                	result = new StringHolder("");
+	        		proxy.form_close(tokenLK, formId, result, errorMsg);
+	        		
+	        		if(!hiHaFormsPendents){
+		        		errorMsg = new StringHolder("");
+	                	result = new StringHolder("");
+	                	proxy.task_get(tokenLK, idTask, "ADMI", result, errorMsg);
+	                	Task taskObj = (Task)UtilsWs.xmlToObject(result.value,
+	                			Task.class,Form.class);
+	                	if("242".equals(taskObj.getRefs()[0])){
+	                		request.setAttribute("activity_id", "#XTRANSFER_19");
+	                		return mapping.findForward("insert");
+	                	}
+	        		}
+	            }catch(LINKCAREException e){
+	            	
+	            	if ("Form has mandatory questions without answer".equals(errorMsg.value)) {
+	
+	                    ActionMessages errors = new ActionMessages();
+	                    errors.add("general",new ActionMessage("errors.mandatoryQuestionsIncompleted"));
+	                    saveErrors(request, errors);
+	                    return mapping.findForward(FAILURE);
+	                }else{
+	                	throw e;
+	                }
+	            }
+    		}
         	
         	return mapping.findForward(SUCCESS);
     	}else{

@@ -9,7 +9,7 @@
 	        }
 		</script>
         <div class="content">
-            <h2 class="newsession">Enviament de document al SAP</h2>
+            <h2 class="newsession">Enviament de document al històric clínic</h2>
             <h4>Per a enviar el document, prèmer el botó que hi ha a <a href="#botoEnviar">peu de pàgina</a>.</h4>
             <iframe src="http://localhost:8080/OCD/pdfHelloWorldAction.do"
                 style="width:750px; height:375px;"  >

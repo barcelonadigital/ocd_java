@@ -51,7 +51,7 @@ public class TaskInsertAction extends BaseAction {
    	TaskInsertForm formBean = (TaskInsertForm)form;
    	
    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
-   	String activityId=formBean.getIdActivity();
+   	String activityId=(String)request.getAttribute("activity_id")!=null?(String)request.getAttribute("activity_id"):formBean.getIdActivity();
    	String admissionId=formBean.getIdAdmission();
    	
    	if(activityId!=null && admissionId!=null){
@@ -79,6 +79,8 @@ public class TaskInsertAction extends BaseAction {
        	String currentTimeString = UtilsString.dateToString(new Date(), Constants.FORMAT_DATE_WS);
        	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,Constants.FORMAT_DATE_WS);
 		proxy.task_insert(tokenLK,admissionId, activityId, UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), "", result, errorMsg);
+		request.getSession().setAttribute("admissionBean",null);
+		request.setAttribute("admission_id","");
 		return mapping.findForward(SUCCESS);
    	}else{
    		return mapping.findForward(FAILURE);

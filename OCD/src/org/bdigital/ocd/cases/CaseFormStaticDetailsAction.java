@@ -147,10 +147,13 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
 //                	options.add(op2);
 //					questionObj.setOptions(options);
 /*
+            		errorMsg = new StringHolder("");
+                	result = new StringHolder("");
                 	proxy.form_get_question(tokenLK, formId, questionObj.getQuestionId(), result, errorMsg);
                 	questionObj = (Question)UtilsWs.xmlToObject(result.value,
                 			Question.class,Form.class,Option.class);
                 	formObj.getFormData().getQuestions().set(i,questionObj);
+                	questionsMap.put(questionObj.getQuestionId(), questionObj);
                 	*/
 //                	if(gasometriaIdList.contains(questionObj.getQuestionId())){
 //                		isThereGasometria=true;
