@@ -1,6 +1,11 @@
 package org.bdigital.ocd.docPdf;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -285,7 +290,9 @@ public class PdfHelloWorldAction extends Action {
         String text="";
         Paragraph text1 = new Paragraph(text,LletraNormal);
         documento.add(text1);
-                
+        
+        setDiaHoraRealitzacio();
+        
         Phrase myPhrase = new Phrase(TAGs[21][llengua]+"     ", LletraNormalNegreta12);
         documento.add(myPhrase);    
         text="";
@@ -314,7 +321,27 @@ public class PdfHelloWorldAction extends Action {
         
     }
 
-    /**
+    private static void setDiaHoraRealitzacio() {
+    	
+    	Calendar now = GregorianCalendar.getInstance();
+    	Date date = now.getTime();
+    	
+    	//System.out.println("DATE: "+date.toString());
+    	
+    	SimpleDateFormat sdf_data = new SimpleDateFormat("dd.MM.yyyy");
+    	SimpleDateFormat sdf_hora = new SimpleDateFormat("hh:mm:ss");
+
+    	String data = sdf_data.format(date.getTime());
+    	String hora = sdf_hora.format(date.getTime());
+    	
+        //System.out.println("Fecha Formateada: "+data+" "+hora);
+    	
+    	TAGs[22][1]=data;
+        TAGs[23][1]=hora;
+		
+	}
+
+	/**
      * Crea la part de dades dels comentaris
      */
     private static void setComentaris(Document documento, int llengua) throws DocumentException {
