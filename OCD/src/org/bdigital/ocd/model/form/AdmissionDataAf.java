@@ -1,9 +1,11 @@
 package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 
-import org.apache.commons.beanutils.BeanUtils;
+import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.model.AdmissionData;
+import org.bdigital.ocd.utils.UtilsString;
 
 
 public class AdmissionDataAf extends org.apache.struts.action.ActionForm {
@@ -22,13 +24,40 @@ public class AdmissionDataAf extends org.apache.struts.action.ActionForm {
     String rejectedDate;
     String notes;
     String status;
+    String descStatus;
     String dateToDisplay;
     String ageToDisplay;
     String hisEpisodeRef;
 	
-	public AdmissionDataAf(AdmissionData obj) throws IllegalAccessException, InvocationTargetException {
+	public AdmissionDataAf(AdmissionData obj) throws IllegalAccessException, InvocationTargetException, ParseException {
 		super();
-		BeanUtils.copyProperties( this, obj ); 
+		this.enrolDate=UtilsString.stringDateHourWStoStringDateHourWeb(obj.getEnrolDate());
+		this.admissionDate=UtilsString.stringDateHourWStoStringDateHourWeb(obj.getAdmissionDate());
+	    this.dischargeDate=UtilsString.stringDateHourWStoStringDateHourWeb(obj.getDischargeDate());
+	    this.suspendedDate=UtilsString.stringDateHourWStoStringDateHourWeb(obj.getSuspendedDate());
+	    this.rejectedDate=UtilsString.stringDateHourWStoStringDateHourWeb(obj.getRejectedDate());
+	    this.notes=obj.getNotes();
+	    this.status=obj.getStatus();
+	    MessageResources messages = MessageResources.getMessageResources("ApplicationResource");
+	    if("DISCHARGED".equals(this.status)){
+	    	this.descStatus=messages.getMessage("admission.status.discharged");
+	    }else if("ACTIVE".equals(this.status)){
+	    	this.descStatus=messages.getMessage("admission.status.active");
+	    }else{
+	    	this.descStatus=this.status;
+	    }
+	    this.dateToDisplay=obj.getDateToDisplay();
+	    this.ageToDisplay=obj.getAgeToDisplay();
+	    this.hisEpisodeRef=obj.getHisEpisodeRef();
+		if(obj.getAdmissionCase()!=null){
+			this.admissionCase = new CaseAf(obj.getAdmissionCase());
+		}
+		if(obj.getProgram()!=null){
+			this.program = new AdmissionProgramAf(obj.getProgram());
+		}
+		if(obj.getProtocol()!=null){
+			this.protocol = new AdmissionProtocolAf(obj.getProtocol());
+		}
 	}
 	public CaseAf getAdmissionCase() {
 		return admissionCase;
@@ -107,5 +136,11 @@ public class AdmissionDataAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setHisEpisodeRef(String hisEpisodeRef) {
 		this.hisEpisodeRef = hisEpisodeRef;
+	}
+	public String getDescStatus() {
+		return descStatus;
+	}
+	public void setDescStatus(String descStatus) {
+		this.descStatus = descStatus;
 	}
 }

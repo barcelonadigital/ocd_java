@@ -25,7 +25,7 @@
 	        </logic:empty>
 	        <logic:notEmpty name="tasks">
 		    <logic:iterate name="tasks" id="taskItem" type="org.bdigital.ocd.model.form.TaskAf" >
-	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/> <strong><bean:write name="taskItem" property="status"/></strong></span></h3>
+	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/> <strong><bean:write name="taskItem" property="descStatus"/></strong></span></h3>
 		        
 	          <div class="formlist">
 	          <div class="table">

@@ -1,8 +1,8 @@
 package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.bdigital.ocd.model.Admission;
 
  
@@ -15,9 +15,12 @@ public class AdmissionAf extends org.apache.struts.action.ActionForm {
 	String ref;
 	AdmissionDataAf data;
 	
-	public AdmissionAf(Admission obj) throws IllegalAccessException, InvocationTargetException {
+	public AdmissionAf(Admission obj) throws IllegalAccessException, InvocationTargetException, ParseException {
 		super();
-		BeanUtils.copyProperties( this, obj ); 
+		this.ref=obj.getRef();
+		if(obj.getData()!=null){
+			this.data = new AdmissionDataAf(obj.getData());
+		}
 	}
 	public String getRef() {
 		return ref;

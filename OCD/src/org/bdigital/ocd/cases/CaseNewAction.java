@@ -150,13 +150,8 @@ public class CaseNewAction extends BaseAction {
             saveErrors(request, errors);
             return mapping.findForward(FAILURE);
     	}
-    	if("true".equals(formBean.getDoJoin())){
-    		request.setAttribute("parameterIdCase",caseId);
-    		return mapping.findForward("casejoin");
-    	}else{
-        	request.setAttribute("case_id",caseId);
-    		return mapping.findForward(SUCCESS);
-    	}
+    	request.setAttribute("case_id",caseId);
+		return mapping.findForward(SUCCESS);
     }
         
 }

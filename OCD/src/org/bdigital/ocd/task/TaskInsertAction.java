@@ -6,7 +6,9 @@
 
 package org.bdigital.ocd.task;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +24,12 @@ import org.bdigital.ocd.model.Admission;
 import org.bdigital.ocd.model.AdmissionData;
 import org.bdigital.ocd.model.AdmissionProgram;
 import org.bdigital.ocd.model.AdmissionProtocol;
+import org.bdigital.ocd.model.Assignment;
 import org.bdigital.ocd.model.Case;
+import org.bdigital.ocd.model.Form;
+import org.bdigital.ocd.model.Role;
+import org.bdigital.ocd.model.Task;
+import org.bdigital.ocd.model.User;
 import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
@@ -51,6 +58,7 @@ public class TaskInsertAction extends BaseAction {
    	TaskInsertForm formBean = (TaskInsertForm)form;
    	
    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
+   	String roleId=(String)request.getAttribute("role_id")!=null?(String)request.getAttribute("role_id"):formBean.getIdRole();
    	String activityId=(String)request.getAttribute("activity_id")!=null?(String)request.getAttribute("activity_id"):formBean.getIdActivity();
    	String admissionId=formBean.getIdAdmission();
    	
@@ -79,6 +87,32 @@ public class TaskInsertAction extends BaseAction {
        	String currentTimeString = UtilsString.dateToString(new Date(), Constants.FORMAT_DATE_WS);
        	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,Constants.FORMAT_DATE_WS);
 		proxy.task_insert(tokenLK,admissionId, activityId, UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), "", result, errorMsg);
+		if(roleId!=null){
+	       	String idTask = result.value;
+	       	//errorMsg = new StringHolder("");
+			//result = new StringHolder("");
+	       	//proxy.task_role_list(tokenLK, idTask, "", "", result, errorMsg);
+	       	errorMsg = new StringHolder("");
+	       	result = new StringHolder("");
+	       	proxy.task_get(tokenLK, idTask, "ADMI", result, errorMsg);
+	       	Task taskObj = (Task)UtilsWs.xmlToObject(result.value,
+        			Task.class,Form.class,Role.class,User.class,Assignment.class);
+	       	List<Assignment> assignments;
+	       	if(taskObj.getAssignments()!=null){
+	       		assignments = taskObj.getAssignments();
+	       	}else{
+	       		assignments = new ArrayList<Assignment>();
+	       		taskObj.setAssignments(assignments);
+	       	}
+	       	Assignment assignment = new Assignment();
+	       	Role role = new Role();
+	       	role.setId(roleId);
+	       	assignment.setRole(role);
+	       	assignments.add(assignment);
+	       	String taskXmlString = UtilsWs.objectToXml(taskObj,Task.class,Form.class,
+	       			Role.class,User.class,Assignment.class);
+	       	proxy.task_set(tokenLK, taskXmlString, result, errorMsg);
+		}
 		request.getSession().setAttribute("admissionBean",null);
 		request.setAttribute("admission_id","");
 		return mapping.findForward(SUCCESS);

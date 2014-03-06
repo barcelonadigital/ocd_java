@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.model.Task;
 
  
@@ -20,6 +21,7 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	String hour;
 	String description;
 	String status;
+	String descStatus;
 	String admission;
 	CaseAf taskCase;
 	List<FormAf> forms = new ArrayList<FormAf>();
@@ -33,6 +35,14 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 		this.hour=obj.getHour();
 		this.description=obj.getDescription();
 		this.status=obj.getStatus();
+		MessageResources messages = MessageResources.getMessageResources("ApplicationResource");
+	    if("DONE".equals(this.status)){
+	    	this.descStatus=messages.getMessage("task.status.done");
+	    }else if("UNASSIGNED".equals(this.status)){
+	    	this.descStatus=messages.getMessage("task.status.unassigned");
+	    }else{
+	    	this.descStatus=this.status;
+	    }
 		this.admission=obj.getAdmission();
 	}
 	public String getTaskClass() {
@@ -94,5 +104,11 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setForms(List<FormAf> forms) {
 		this.forms = forms;
+	}
+	public String getDescStatus() {
+		return descStatus;
+	}
+	public void setDescStatus(String descStatus) {
+		this.descStatus = descStatus;
 	}
 }

@@ -2,7 +2,6 @@ package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.bdigital.ocd.model.AdmissionProtocol;
 
 
@@ -18,7 +17,9 @@ public class AdmissionProtocolAf extends org.apache.struts.action.ActionForm {
 	
 	public AdmissionProtocolAf(AdmissionProtocol obj) throws IllegalAccessException, InvocationTargetException {
 		super();
-		BeanUtils.copyProperties( this, obj ); 
+		this.id=obj.getId();
+		this.name=obj.getName();
+		this.description=obj.getDescription();
 	}
 	public String getId() {
 		return id;

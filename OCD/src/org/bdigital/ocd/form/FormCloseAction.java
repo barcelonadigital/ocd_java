@@ -92,6 +92,7 @@ public class FormCloseAction extends BaseAction {
 	                			Task.class,Form.class);
 	                	if("242".equals(taskObj.getRefs()[0])){
 	                		request.setAttribute("activity_id", "#XTRANSFER_19");
+	                		request.setAttribute("role_id", "21");
 	                		return mapping.findForward("insert");
 	                	}
 	        		}

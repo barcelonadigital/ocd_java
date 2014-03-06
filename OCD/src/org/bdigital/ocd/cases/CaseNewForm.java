@@ -40,7 +40,6 @@ public class CaseNewForm extends ValidatorForm {
 	private String country;
 	
 	private String showLinkCreate;
-	private String doJoin;
 	private String doNew;
 
 	public String getNick() {
@@ -114,12 +113,6 @@ public class CaseNewForm extends ValidatorForm {
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
-	}
-	public String getDoJoin() {
-		return doJoin;
-	}
-	public void setDoJoin(String doJoin) {
-		this.doJoin = doJoin;
 	}
 	public String getStreetName() {
 		return streetName;

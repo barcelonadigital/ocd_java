@@ -40,6 +40,7 @@ import org.bdigital.ocd.model.Device;
 import org.bdigital.ocd.model.Mail;
 import org.bdigital.ocd.model.Name;
 import org.bdigital.ocd.model.Phone;
+import org.bdigital.ocd.model.form.AdmissionAf;
 import org.bdigital.ocd.utils.AdmissionComparator;
 import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
@@ -159,8 +160,8 @@ public abstract class CaseBaseAction extends BaseAction {
     		StringHolder errorMsg = new StringHolder("");
     		StringHolder result = new StringHolder("");
         	proxy.admission_list_case(tokenLK,caseId, "true", result, errorMsg);
-        	List<Admission> admissions = new ArrayList<Admission>();
-        	List<Admission> admissionsAll = new ArrayList<Admission>();
+        	List<AdmissionAf> admissions = new ArrayList<AdmissionAf>();
+        	List<AdmissionAf> admissionsAll = new ArrayList<AdmissionAf>();
         	Admissions admissionListCase = (Admissions)UtilsWs.xmlToObject(result.value,
         			Admissions.class, Admission.class, Case.class, 
         			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
@@ -168,18 +169,19 @@ public abstract class CaseBaseAction extends BaseAction {
         	if(admissionListCase.getAdmissions()!=null){
         		for(int i=0;i<admissionListCase.getAdmissions().size();i++){
         			Admission adm = admissionListCase.getAdmissions().get(i);
+        			AdmissionAf admAf = new AdmissionAf(adm);
 //        			admStr+="<Ref:"+adm.getRef()
 //            				+",ProgramDescription:"+adm.getData().getProgram().getDescription()
 //            				+",EnrolDate:"+adm.getData().getEnrolDate()
 //            				+",Status:"+adm.getData().getStatus()
 //            				+",DateToDisplay:"+adm.getData().getDateToDisplay()+"> ";
-        			if(adm.getData()!=null && adm.getData().getProgram()!=null && 
-        					"5".equals(adm.getData().getProgram().getId())){
-        				if(adm.getData().getProtocol()!=null &&
-        						!"".equals(adm.getData().getProtocol().getId())){
-        					admissions.add(adm);
+        			if(admAf.getData()!=null && admAf.getData().getProgram()!=null && 
+        					"5".equals(admAf.getData().getProgram().getId())){
+        				if(admAf.getData().getProtocol()!=null &&
+        						!"".equals(admAf.getData().getProtocol().getId())){
+        					admissions.add(admAf);
         				}
-        				admissionsAll.add(adm);
+        				admissionsAll.add(admAf);
         			}
         		}
         	}
@@ -192,7 +194,7 @@ public abstract class CaseBaseAction extends BaseAction {
         	request.getSession().setAttribute("admissionsAll",admissionsAll);
     		boolean ferAdmissionInsert = false;
     		if(admissionsAll.size()>0){
-        		Admission a = admissionsAll.get(0);
+        		AdmissionAf a = admissionsAll.get(0);
         		if(a.getData()!=null && !"ENROLLED".equals(a.getData().getStatus()) && 
         				!"PAUSED".equals(a.getData().getStatus()) && 
         				!"ACTIVE".equals(a.getData().getStatus())){
@@ -217,35 +219,37 @@ public abstract class CaseBaseAction extends BaseAction {
             	ad.setProgram(apg);
             	ad.setProtocol(apt);
             	ad.setStatus("ENROLLED");
-            	admissionsAll.add(0,a);
+            	admissionsAll.add(0,new AdmissionAf(a));
     		}
-    		Admission a=null;
+    		AdmissionAf admissionFirst = admissionsAll.get(0);
+    		AdmissionAf admissionSelected=null;
     		if(admissionId!=null && 
     				!"".equals(admissionId)){
     			for(int i=0;i<admissionsAll.size();i++){
-        			Admission adm = admissionsAll.get(i);
+    				AdmissionAf adm = admissionsAll.get(i);
         			if(adm.getRef().equals(admissionId)){
-        				a = adm;
+        				admissionSelected = adm;
         			}
     			}
     		}
-    		if(a==null){
-	    		a = admissionsAll.get(0);
+    		if(admissionSelected==null){
+	    		admissionSelected = admissionFirst;
     		}
-    		admissionBean.setIdAdmission(a.getRef());
-    		if(a.getData()!=null){
-        		if(a.getData().getProtocol()!=null 
-        				&& a.getData().getProtocol().getId()!=null 
-        				&& !"".equals(a.getData().getProtocol().getId())){
-        			admissionBean.setDescProtocolActual(a.getData().getProtocol().getName());
-        			admissionBean.setDataProtocolActual(a.getData().getAdmissionDate());
-        			admissionBean.setDataInscripcioAdmissio(a.getData().getEnrolDate());
-        			admissionBean.setEstatProtocolActual(a.getData().getStatus());
+    		admissionBean.setIdAdmission(admissionSelected.getRef());
+    		admissionBean.setIdAdmissionFirst(admissionFirst.getRef());
+    		if(admissionSelected.getData()!=null){
+        		if(admissionSelected.getData().getProtocol()!=null 
+        				&& admissionSelected.getData().getProtocol().getId()!=null 
+        				&& !"".equals(admissionSelected.getData().getProtocol().getId())){
+        			admissionBean.setDescProtocolActual(admissionSelected.getData().getProtocol().getName());
+        			admissionBean.setDataProtocolActual(admissionSelected.getData().getAdmissionDate());
+        			admissionBean.setDataInscripcioAdmissio(admissionSelected.getData().getEnrolDate());
+        			admissionBean.setEstatProtocolActual(admissionSelected.getData().getDescStatus());
         		}
     		}
     		errorMsg = new StringHolder("");
         	result = new StringHolder("");
-        	proxy.action_list(tokenLK,"","MNG",a.getRef(),"","",result,errorMsg);
+        	proxy.action_list(tokenLK,"","MNG",admissionFirst.getRef(),"","",result,errorMsg);
         	List<Action> actions = new ArrayList<Action>();
         	List<Action> actionsTransfer = new ArrayList<Action>();
         	Actions actionsObj = (Actions)UtilsWs.xmlToObject(result.value,
@@ -265,7 +269,7 @@ public abstract class CaseBaseAction extends BaseAction {
         	if(containsTransfer){
         		errorMsg = new StringHolder("");
             	result = new StringHolder("");
-            	proxy.action_list(tokenLK,"","MNG",a.getRef(),"","#XPATH:TRANSFER",result,errorMsg);
+            	proxy.action_list(tokenLK,"","MNG",admissionFirst.getRef(),"","#XPATH:TRANSFER",result,errorMsg);
             	actionsObj = (Actions)UtilsWs.xmlToObject(result.value,
             			Actions.class, Action.class);
             	//formBean.setActionsTransfer(actionsObj.getActions());

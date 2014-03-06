@@ -18,6 +18,7 @@ public class AdmissionBean extends org.apache.struts.action.ActionForm {
 	private static final long serialVersionUID = 1L;
 
 	private String idAdmission;
+	private String idAdmissionFirst;
 
 	private String descProtocolActual;
 	private String dataProtocolActual;
@@ -52,6 +53,12 @@ public class AdmissionBean extends org.apache.struts.action.ActionForm {
 	}
 	public void setDataInscripcioAdmissio(String dataInscripcioAdmissio) {
 		this.dataInscripcioAdmissio = dataInscripcioAdmissio;
+	}
+	public String getIdAdmissionFirst() {
+		return idAdmissionFirst;
+	}
+	public void setIdAdmissionFirst(String idAdmissionFirst) {
+		this.idAdmissionFirst = idAdmissionFirst;
 	}
 	
 }

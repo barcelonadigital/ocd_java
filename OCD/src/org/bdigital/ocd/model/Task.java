@@ -12,6 +12,7 @@ public class Task {
 
 	String taskClass;
 	String id;
+	String ref;
 	String type;
 	String date;
 	String hour;
@@ -21,6 +22,7 @@ public class Task {
 	Case taskCase;
 	String[] refs;
     List<Form> forms = new ArrayList<Form>();
+    List<Assignment> assignments = new ArrayList<Assignment>();
 
 	public String getDescription() {
 		return description;
@@ -100,6 +102,21 @@ public class Task {
 	@XmlElementWrapper
 	public void setForms(List<Form> forms) {
 		this.forms = forms;
+	}
+	public List<Assignment> getAssignments() {
+		return assignments;
+	}
+	@XmlElement(name = "assignment")
+	@XmlElementWrapper
+	public void setAssignments(List<Assignment> assignments) {
+		this.assignments = assignments;
+	}
+	public String getRef() {
+		return ref;
+	}
+	@XmlElement
+	public void setRef(String ref) {
+		this.ref = ref;
 	}
  
 

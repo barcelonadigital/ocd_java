@@ -18,6 +18,7 @@ public class TaskInsertForm extends org.apache.struts.action.ActionForm {
 	private String idActivity;
 	private String idAdmission;
 	private String idCase;
+	private String idRole;
 	public String getIdActivity() {
 		return idActivity;
 	}
@@ -35,6 +36,12 @@ public class TaskInsertForm extends org.apache.struts.action.ActionForm {
 	}
 	public void setIdCase(String idCase) {
 		this.idCase = idCase;
+	}
+	public String getIdRole() {
+		return idRole;
+	}
+	public void setIdRole(String idRole) {
+		this.idRole = idRole;
 	}
 	
 }

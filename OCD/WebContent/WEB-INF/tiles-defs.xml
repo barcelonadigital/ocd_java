@@ -64,16 +64,8 @@
 	    <put name="body" value="/jsp/tiles/case/details-body.jsp" />
 	    <put name="body-style" value="gris1" />
     </definition>
-    <definition name="historicPg.page" extends="casebase.definition">
-	    <put name="body" value="/jsp/tiles/case/historic-body.jsp" />
-	    <put name="body-style" value="" />
-    </definition>
     <definition name="casetaskPg.page" extends="casebase.definition">
 	    <put name="body" value="/jsp/tiles/case/task-body.jsp" />
-	    <put name="body-style" value="" />
-    </definition>
-    <definition name="caseadmissionPg.page" extends="casebase.definition">
-	    <put name="body" value="/jsp/tiles/case/admission-body.jsp" />
 	    <put name="body-style" value="" />
     </definition>
     <definition name="caseformPg.page" extends="casebase.definition">

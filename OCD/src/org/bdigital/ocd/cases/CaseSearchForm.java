@@ -29,7 +29,6 @@ public class CaseSearchForm extends ValidatorForm {
 	private String familyName2;
 	
 	private String showLinkCreate;
-	private String doJoin;
 	private String doNew;
 
 	public String getNick() {
@@ -97,12 +96,6 @@ public class CaseSearchForm extends ValidatorForm {
 	}
 	public void setShowLinkCreate(String showLinkCreate) {
 		this.showLinkCreate = showLinkCreate;
-	}
-	public String getDoJoin() {
-		return doJoin;
-	}
-	public void setDoJoin(String doJoin) {
-		this.doJoin = doJoin;
 	}
 	public String getDoNew() {
 		return doNew;

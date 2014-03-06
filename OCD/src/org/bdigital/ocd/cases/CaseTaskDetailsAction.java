@@ -66,7 +66,7 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
         	
         	if(admissionBean.getDataInscripcioAdmissio()!=null
         			&& !"".equals(admissionBean.getDataInscripcioAdmissio())){
-        		admissionDate = UtilsString.stringtoDate(admissionBean.getDataInscripcioAdmissio(),Constants.FORMAT_DATEHOUR_WS);
+        		admissionDate = UtilsString.stringtoDate(admissionBean.getDataInscripcioAdmissio(),Constants.FORMAT_DATEHOUR_WEB);
     			admissionCal = new GregorianCalendar();
     			admissionCal.setTime(admissionDate);
         	}
@@ -79,6 +79,7 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
             	errorMsg = new StringHolder("");
             	result = new StringHolder("");
         		proxy.task_calendar_year(tokenLK, ""+j, "ADMI", admissionId, result, errorMsg);
+        		//proxy.task_calendar_year(tokenLK, "", "ADMI", admissionId, result, errorMsg);
         		if(result.value!=null){
                 	String[] datesArray = result.value.split("#");
                 	for(int k=0;k<datesArray.length;k++){
@@ -91,21 +92,25 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                     			Tasks.class, Task.class);
                     	if(tasksObj.getTasks()!=null){
                     		for(int i=0;i<tasksObj.getTasks().size();i++){
-                    			Task t = tasksObj.getTasks().get(i);
-                    			TaskAf tAf = new TaskAf(t);
+                    			Task taskObj = tasksObj.getTasks().get(i);
+                    			TaskAf tAf = new TaskAf(taskObj);
 //                    			if("PRO_TASK".equals(t.getTaskClass())){
 //                    				proTasks.add(t);
 //                    			}
+//                    			if("PRO_TASK".equals(taskObj.getTaskClass())){
                     			errorMsg = new StringHolder("");
                             	result = new StringHolder("");
-                            	proxy.task_get(tokenLK, t.getId(), "ADMI", result, errorMsg);
-                            	Task taskObj = (Task)UtilsWs.xmlToObject(result.value,
+                            	proxy.task_get(tokenLK, taskObj.getId(), "ADMI", result, errorMsg);
+                            	taskObj = (Task)UtilsWs.xmlToObject(result.value,
                             			Task.class,Form.class);
+                        		if("227".equals(taskObj.getRefs()[0])){
+                        			tAf.setDescription("Visita de seguiment");
+                        		}
                             	if(taskObj.getForms()!=null &&
                             			taskObj.getForms().size()>0){
                         			errorMsg = new StringHolder("");
                                 	result = new StringHolder("");
-                                	proxy.task_form_list(tokenLK, t.getId(), result, errorMsg);
+                                	proxy.task_form_list(tokenLK, tAf.getId(), result, errorMsg);
                                 	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
                                 			Forms.class, Form.class);
                                 	List<FormAf> forms = new ArrayList<FormAf>();

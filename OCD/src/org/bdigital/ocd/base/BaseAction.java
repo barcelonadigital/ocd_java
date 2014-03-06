@@ -50,14 +50,14 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
             throws Exception {
         
     	proxy = new org.bdigital.ocd.ws.LINKCAREProxyWrapper();
-    	//proxy.setEndpoint("http://dev3.linkcare.es/ws/ServerWSDL.php");
-    	proxy.setEndpoint("http://localhost:8081/BDIGITAL-LCWS/ServerWSDL.php");
+    	proxy.setEndpoint("http://dev3.linkcare.es/ws/ServerWSDL.php");
+    	//proxy.setEndpoint("http://localhost:8081/BDIGITAL-LCWS/ServerWSDL.php");
     	HttpSession session = request.getSession();
     	String tokenLK = (String) session.getAttribute("tokenLK");
     	if(tokenLK == null && !(this instanceof LoginAction)){
     		if(autologin){
 	    		LoginForm formBean = new LoginForm();
-	            formBean.setUsername("claudia.perez");
+	            formBean.setUsername("jim.roldan");
 	            formBean.setPassword("linkcare");
 	            request.setAttribute("LoginForm", formBean);
 	            return mapping.findForward("loginAuto");
@@ -80,7 +80,7 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
         }catch(RemoteException e){
     		MessageResources msgResource = getResources(request);
         	String msgError="";
-    		if(e.detail.getClass() == java.net.ConnectException.class){
+    		if(e.detail!=null && e.detail.getClass() == java.net.ConnectException.class){
             	String msg = msgResource.getMessage("errors.connection");
     			msgError = msg+": "+e.detail.getMessage();
     		}else{

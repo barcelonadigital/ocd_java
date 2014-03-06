@@ -11,17 +11,13 @@
         <form-bean name="CaseSearchForm" type="org.bdigital.ocd.cases.CaseSearchForm"/>
         <form-bean name="CaseNewForm" type="org.bdigital.ocd.cases.CaseNewForm"/>
         <form-bean name="CaseDetailsForm" type="org.bdigital.ocd.cases.CaseDetailsForm"/>
-        <form-bean name="AdmissionInsertForm" type="org.bdigital.ocd.admission.AdmissionInsertForm"/>
-        <form-bean name="AdmissionDetailsForm" type="org.bdigital.ocd.admission.AdmissionDetailsForm"/>
         <form-bean name="TaskInsertForm" type="org.bdigital.ocd.task.TaskInsertForm"/>
-        <form-bean name="TaskDetailsForm" type="org.bdigital.ocd.task.TaskDetailsForm"/>
         <form-bean name="FormCloseForm" type="org.bdigital.ocd.form.FormCloseForm"/>
         <form-bean name="FormOpenForm" type="org.bdigital.ocd.form.FormOpenForm"/>
         <form-bean name="FormDetailsForm" type="org.bdigital.ocd.form.FormDetailsForm"/>
         <form-bean name="FormSetAnswersForm" type="org.bdigital.ocd.form.FormSetAnswersForm"/>
         <form-bean name="FormSetAnswerForm" type="org.bdigital.ocd.form.FormSetAnswerForm"/>
         <form-bean name="FormGetQuestionForm" type="org.bdigital.ocd.form.FormGetQuestionForm"/>
-        <form-bean name="CaseJoinForm" type="org.bdigital.ocd.cases.CaseJoinForm"/>
         <form-bean name="CaseTaskDetailsForm" type="org.bdigital.ocd.cases.CaseTaskDetailsForm"/>
         <form-bean name="CaseFormDetailsForm" type="org.bdigital.ocd.cases.CaseFormDetailsForm"/>
         <form-bean name="CaseFormStaticDetailsForm" type="org.bdigital.ocd.cases.CaseFormStaticDetailsForm"/>
@@ -47,19 +43,12 @@
         <action path="/caseSearchPg" forward="searchPg.page"/>
         <action path="/mainPg" forward="searchPg.page"/>
         <action path="/caseSearchAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
-            <forward name="casejoin" path="/caseJoinAction.do"/>
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseSearchPg.do"/>
             <forward name="casenew" path="/caseNewPg.do"/>
         </action>
-        <action path="/caseJoinAction" name="CaseJoinForm" scope="request" type="org.bdigital.ocd.cases.CaseJoinAction" validate="false">
-            <forward name="admission" path="/admissionInsertAction.do"/>
-            <forward name="success" path="/caseDetailsAction.do"/>
-            <forward name="failure" path="/caseSearchPg.do"/>
-        </action>
         <action path="/caseNewPg" forward="newPg.page"/>
         <action path="/caseNewAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseNewAction" validate="true" input="/caseNewPg.do">
-            <forward name="casejoin" path="/caseJoinAction.do"/>
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseNewPg.do"/>
         </action>
@@ -68,37 +57,12 @@
             <forward name="success" path="/caseDetailsPg.do"/>
             <forward name="failure" path="/caseDetailsPg.do"/>
         </action>
-        <action path="/provaPg" forward="/jsp/prova.jsp"/>
-        <action path="/caseHistoricPg" forward="historicPg.page"/>
-        <action path="/caseHistoricAction" name="CaseHistoricForm" scope="request" type="org.bdigital.ocd.cases.CaseHistoricAction" validate="false">
-            <forward name="success" path="/caseHistoricPg.do"/>
-            <forward name="failure" path="/caseHistoricPg.do"/>
-        </action>
-        <action path="/admissionInsertAction" name="AdmissionInsertForm" scope="request" type="org.bdigital.ocd.admission.AdmissionInsertAction" validate="false">
-            <forward name="success" path="/caseDetailsAction.do"/>
-            <forward name="failure" path="/caseDetailsAction.do"/>
-        </action>
-        <action path="/admissionDetailsPg" forward="caseadmissionPg.page"/>
-        <action path="/admissionDetailsAction" name="AdmissionDetailsForm" scope="request" type="org.bdigital.ocd.admission.AdmissionDetailsAction" validate="false">
-            <forward name="success" path="/admissionDetailsPg.do"/>
-            <forward name="failure" path="/admissionDetailsPg.do"/>
-            <forward name="task" path="/taskDetailsAction.do"/>
-        </action>
-        <action path="/taskInsertAction" name="TaskInsertForm" scope="request" type="org.bdigital.ocd.task.TaskInsertAction" validate="false">
-            <forward name="success" path="/admissionDetailsAction.do"/>
-            <forward name="failure" path="/admissionDetailsAction.do"/>
-        </action>
         <action path="/caseTaskInsertAction" name="TaskInsertForm" scope="request" type="org.bdigital.ocd.task.TaskInsertAction" validate="false">
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseDetailsAction.do"/>
         </action>
         <action path="/taskDetailsPg" forward="casetaskPg.page"/>
         <action path="/caseTaskDetailsAction" name="CaseTaskDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseTaskDetailsAction" validate="false">
-            <forward name="success" path="/taskDetailsPg.do"/>
-            <forward name="failure" path="/taskDetailsPg.do"/>
-            <forward name="admission" path="/admissionDetailsPg.do"/>
-        </action>
-        <action path="/taskDetailsAction" name="TaskDetailsForm" scope="request" type="org.bdigital.ocd.task.TaskDetailsAction" validate="false">
             <forward name="success" path="/taskDetailsPg.do"/>
             <forward name="failure" path="/taskDetailsPg.do"/>
         </action>

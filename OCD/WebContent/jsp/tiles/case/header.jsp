@@ -11,7 +11,7 @@
     	  $('#confirmationModal').modal('show');
       }
       function assignarProtocol() {
-    	  var params = { idAdmission:'${admissionBean.idAdmission}', idCase:'${caseBean.idCase}', idActivity:idActivitat };
+    	  var params = { idAdmission:'${admissionBean.idAdmissionFirst}', idCase:'${caseBean.idCase}', idActivity:idActivitat };
     	  var str = $.param( params );
     	  window.location='<html:rewrite action="/caseTaskInsertAction.do"/>?'+str;
       }
@@ -40,10 +40,10 @@
 			    <logic:present name="admissions">
 			    <logic:notEmpty name="admissions">
 			    <ul class="dropdown-menu">
-			    <logic:iterate name="admissions" id="admissionItem" type="org.bdigital.ocd.model.Admission" >
-					<bean:define id="dataItem" name="admissionItem" property="data" type="org.bdigital.ocd.model.AdmissionData"/>
-					<bean:define id="programItem" name="dataItem" property="program" type="org.bdigital.ocd.model.AdmissionProgram"/>
-					<bean:define id="protocolItem" name="dataItem" property="protocol" type="org.bdigital.ocd.model.AdmissionProtocol"/>
+			    <logic:iterate name="admissions" id="admissionItem" type="org.bdigital.ocd.model.form.AdmissionAf" >
+					<bean:define id="dataItem" name="admissionItem" property="data" type="org.bdigital.ocd.model.form.AdmissionDataAf"/>
+					<bean:define id="programItem" name="dataItem" property="program" type="org.bdigital.ocd.model.form.AdmissionProgramAf"/>
+					<bean:define id="protocolItem" name="dataItem" property="protocol" type="org.bdigital.ocd.model.form.AdmissionProtocolAf"/>
 					<bean:define id="protocolName2" name="protocolItem" property="name" type="java.lang.String"/>
 					<% 
 					if(protocolName2.length()>30){
@@ -168,10 +168,10 @@
             <th>Opcions</th>
           </tr>
 	    <logic:present name="admissions">
-	    <logic:iterate name="admissions" id="admissionItem" type="org.bdigital.ocd.model.Admission" >
-			<bean:define id="dataItem" name="admissionItem" property="data" type="org.bdigital.ocd.model.AdmissionData"/>
-			<bean:define id="programItem" name="dataItem" property="program" type="org.bdigital.ocd.model.AdmissionProgram"/>
-			<bean:define id="protocolItem" name="dataItem" property="protocol" type="org.bdigital.ocd.model.AdmissionProtocol"/>
+	    <logic:iterate name="admissions" id="admissionItem" type="org.bdigital.ocd.model.form.AdmissionAf" >
+			<bean:define id="dataItem" name="admissionItem" property="data" type="org.bdigital.ocd.model.form.AdmissionDataAf"/>
+			<bean:define id="programItem" name="dataItem" property="program" type="org.bdigital.ocd.model.form.AdmissionProgramAf"/>
+			<bean:define id="protocolItem" name="dataItem" property="protocol" type="org.bdigital.ocd.model.form.AdmissionProtocolAf"/>
             <tr>
                 <td><bean:write name="protocolItem" property="name"/></td>
                 <td><bean:write name="dataItem" property="dateToDisplay"/></td>
