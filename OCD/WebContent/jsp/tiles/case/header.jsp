@@ -11,7 +11,10 @@
     	  $('#confirmationModal').modal('show');
       }
       function assignarProtocol() {
-    	  var params = { idAdmission:'${admissionBean.idAdmissionFirst}', idCase:'${caseBean.idCase}', idActivity:idActivitat };
+    	  assignarProtocolParam(idActivitat);
+      }
+      function assignarProtocolParam(paramActivitat) {
+    	  var params = { idAdmission:'${admissionBean.idAdmissionFirst}', idCase:'${caseBean.idCase}', idActivity:paramActivitat };
     	  var str = $.param( params );
     	  window.location='<html:rewrite action="/caseTaskInsertAction.do"/>?'+str;
       }
@@ -55,7 +58,7 @@
 					<% request.setAttribute("classSelected","selected"); %>
 					</logic:equal>
 			           <li>
-			             <html:link action="/caseDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}" styleClass="${classSelected}"><%=protocolName2%></html:link>
+			             <html:link action="/caseMainAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}" styleClass="${classSelected}"><%=protocolName2%></html:link>
 			           </li>
 				</logic:iterate>
 				</ul>
@@ -126,13 +129,13 @@
         <div class="btn-block">
                 <logic:present name="caseBean">
 			    <logic:present name="actionsTransfer">
-			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.Action" >
+			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
 					<button onclick="preAssignarProtocol('${actionItem.ref}')" class="btn btn-warning custom-btn btn-large"><bean:write name="actionItem" property="name"/></button>
 				</logic:iterate>
 				</logic:present>
 			    <logic:present name="actions">
-			    <logic:iterate name="actions" id="actionItem" type="org.bdigital.ocd.model.Action" >
-					<button onclick="preAssignarProtocol('${actionItem.ref}')" class="btn btn-warning custom-btn btn-large"><bean:write name="actionItem" property="name"/></button>
+			    <logic:iterate name="actions" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
+					<button onclick="assignarProtocolParam('${actionItem.ref}')" class="btn btn-warning custom-btn btn-large"><bean:write name="actionItem" property="name"/></button>
 				</logic:iterate>
 				</logic:present>
 				</logic:present>

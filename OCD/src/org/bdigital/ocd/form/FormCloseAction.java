@@ -84,7 +84,7 @@ public class FormCloseAction extends BaseAction {
                 	result = new StringHolder("");
 	        		proxy.form_close(tokenLK, formId, result, errorMsg);
 	        		
-	        		if(!hiHaFormsPendents){
+	        		if(!hiHaFormsPendents && "true".equals(formBean.getCreateTask())){
 		        		errorMsg = new StringHolder("");
 	                	result = new StringHolder("");
 	                	proxy.task_get(tokenLK, idTask, "ADMI", result, errorMsg);

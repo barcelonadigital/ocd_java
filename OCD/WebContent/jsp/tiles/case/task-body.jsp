@@ -115,20 +115,24 @@
 	    function doFinish(){
 	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}&accept=true"/>';
 	    }
+	    function doFinishAndNewTask(){
+	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}&accept=true&createTask=true"/>';
+	    }
 	    </script>
 	    <div id="confirmFinishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
 	      <div class="modal-header">
 	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-	        <h3>Finalitzar formulari?</h3>
+	        <h3>Visita de seguiment?</h3>
 	      </div>
 	      <div class="modal-body">
 	        <p>
-	          Donat que és últim formulari pendent de finalitzar, es tancarà la tasca. Desitja continuar?
+	          Donat que és últim formulari pendent de finalitzar, es tancarà la tasca i es programarà la visita de seguiment. Desitja continuar?
 	        </p>
 	      </div>
 	      <div class="modal-footer">
 	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large">D'acord, finalitzar</button>
+	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large">Finalitzar</button>
+	        <button onclick="doFinishAndNewTask()" class="btn btn-primary custom-btn btn-large">Finalitzar i visita de seguiment</button>
 	      </div>
 	    </div>
         </logic:present>

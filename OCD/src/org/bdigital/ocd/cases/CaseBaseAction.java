@@ -40,6 +40,7 @@ import org.bdigital.ocd.model.Device;
 import org.bdigital.ocd.model.Mail;
 import org.bdigital.ocd.model.Name;
 import org.bdigital.ocd.model.Phone;
+import org.bdigital.ocd.model.form.ActionAf;
 import org.bdigital.ocd.model.form.AdmissionAf;
 import org.bdigital.ocd.utils.AdmissionComparator;
 import org.bdigital.ocd.utils.Constants;
@@ -250,18 +251,19 @@ public abstract class CaseBaseAction extends BaseAction {
     		errorMsg = new StringHolder("");
         	result = new StringHolder("");
         	proxy.action_list(tokenLK,"","MNG",admissionFirst.getRef(),"","",result,errorMsg);
-        	List<Action> actions = new ArrayList<Action>();
-        	List<Action> actionsTransfer = new ArrayList<Action>();
+        	List<ActionAf> actions = new ArrayList<ActionAf>();
+        	List<ActionAf> actionsTransfer = new ArrayList<ActionAf>();
         	Actions actionsObj = (Actions)UtilsWs.xmlToObject(result.value,
         			Actions.class, Action.class);
         	boolean containsTransfer = false;
         	if(actionsObj.getActions()!=null){
         		for(int i=0;i<actionsObj.getActions().size();i++){
         			Action act = actionsObj.getActions().get(i);
+            		ActionAf actAf = new ActionAf(act);
         			if("#XPATH:TRANSFER".equals(act.getRef())){
         				containsTransfer = true;
         			}else{
-        				actions.add(act);
+        				actions.add(actAf);
         			}
         		}
         	}
@@ -273,11 +275,27 @@ public abstract class CaseBaseAction extends BaseAction {
             	actionsObj = (Actions)UtilsWs.xmlToObject(result.value,
             			Actions.class, Action.class);
             	//formBean.setActionsTransfer(actionsObj.getActions());
-            	actionsTransfer = actionsObj.getActions();
-            	
+            	for(int i=0;i<actionsObj.getActions().size();i++){
+        			Action act = actionsObj.getActions().get(i);
+            		ActionAf actAf = new ActionAf(act);
+            		actionsTransfer.add(actAf);
+            	}
         	}
         	for(int i = 0; i<actions.size();){
-        		Action obj = actions.get(i); 
+        		ActionAf obj = actions.get(i);
+        		if("#XDISCHARGE".equals(obj.getRef())){
+        			obj.setDescription("Alta del protocol");
+        			obj.setName("Alta del protocol");
+        		}else if("#XREJECT".equals(obj.getRef())){
+        			obj.setDescription("Rebuig del protocol");
+        			obj.setName("Rebuig del protocol");
+        		}else if("#XPAUSE".equals(obj.getRef())){
+        			obj.setDescription("Pausa del protocol");
+        			obj.setName("Pausa del protocol");
+        		}else if("#XRESUME".equals(obj.getRef())){
+        			obj.setDescription("Reactivació del protocol");
+        			obj.setName("Reactivació del protocol");
+        		} 
         		if("#XJOIN:15".equals(obj.getRef()) || 
         				"#XJOIN:16".equals(obj.getRef())){
         			actions.remove(obj);
@@ -286,7 +304,7 @@ public abstract class CaseBaseAction extends BaseAction {
         		}
         	}
         	for(int i = 0; i<actionsTransfer.size();){
-        		Action obj = actionsTransfer.get(i); 
+        		ActionAf obj = actionsTransfer.get(i); 
         		if("#XTRANSFER_15".equals(obj.getRef()) || 
         				"#XTRANSFER_16".equals(obj.getRef())){
         			actionsTransfer.remove(obj);

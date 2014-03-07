@@ -43,13 +43,13 @@
         <action path="/caseSearchPg" forward="searchPg.page"/>
         <action path="/mainPg" forward="searchPg.page"/>
         <action path="/caseSearchAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseSearchAction" validate="false">
-            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="success" path="/caseMainAction.do"/>
             <forward name="failure" path="/caseSearchPg.do"/>
             <forward name="casenew" path="/caseNewPg.do"/>
         </action>
         <action path="/caseNewPg" forward="newPg.page"/>
         <action path="/caseNewAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseNewAction" validate="true" input="/caseNewPg.do">
-            <forward name="success" path="/caseDetailsAction.do"/>
+            <forward name="success" path="/caseMainAction.do"/>
             <forward name="failure" path="/caseNewPg.do"/>
         </action>
         <action path="/caseDetailsPg" forward="detailsPg.page"/>
@@ -57,9 +57,13 @@
             <forward name="success" path="/caseDetailsPg.do"/>
             <forward name="failure" path="/caseDetailsPg.do"/>
         </action>
+        <action path="/caseMainAction" name="CaseTaskDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseTaskDetailsAction" validate="false">
+            <forward name="success" path="/taskDetailsPg.do"/>
+            <forward name="failure" path="/taskDetailsPg.do"/>
+        </action>
         <action path="/caseTaskInsertAction" name="TaskInsertForm" scope="request" type="org.bdigital.ocd.task.TaskInsertAction" validate="false">
-            <forward name="success" path="/caseDetailsAction.do"/>
-            <forward name="failure" path="/caseDetailsAction.do"/>
+            <forward name="success" path="/caseMainAction.do"/>
+            <forward name="failure" path="/caseMainAction.do"/>
         </action>
         <action path="/taskDetailsPg" forward="casetaskPg.page"/>
         <action path="/caseTaskDetailsAction" name="CaseTaskDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseTaskDetailsAction" validate="false">

@@ -21,8 +21,8 @@
           <ul>
             <!-- 
              -->
-            <li><html:link action="/caseDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="${infoPacientClass}">Informació pacient</html:link></li>
             <li><html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="${formularisClass}">Tasques</html:link></li>
+            <li><html:link action="/caseDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="${infoPacientClass}">Informació pacient</html:link></li>
             <!-- 
             <li><html:link action="/caseHistoricAction?idCase=${caseBean.idCase}" styleClass="${historicClass}">Protocols anteriors</html:link></li>
              -->

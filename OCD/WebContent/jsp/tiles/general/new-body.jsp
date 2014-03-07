@@ -13,7 +13,7 @@
       <div class="container">
         <!-- Encabezado-->
         <div class="encabezado">
-          <h1>Usuaris<strong>— Pacients</strong></h1>
+          <h1><strong>Pacients</strong></h1>
         </div>
         <hr>
         <!-- Encabezado fin-->

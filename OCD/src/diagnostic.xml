@@ -83,7 +83,7 @@
                 <mandatory>N</mandatory>
                 <exclusive>N</exclusive>
                 <tabulation>0</tabulation>
-                <value>9</value>
+                <value/>
             </question>
             <question>
                 <question_id>36</question_id>

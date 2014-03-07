@@ -30,7 +30,7 @@
             <html:link action="/caseNewPg.do" styleClass="btn btn-large btn-warning">Nou pacient</html:link>
           </div>
           <header>
-            <h1>Usuaris<strong>— Pacients</strong></h1>
+            <h1><strong>Pacients</strong></h1>
           </header>
         </div>
         <!-- Encabezado fin-->

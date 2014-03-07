@@ -47,12 +47,12 @@
                 <!-- 
                 <logic:present name="caseBean">
 			    <logic:present name="actionsTransfer">
-			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.Action" >
+			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
 					<li><html:link action="/caseTaskInsertAction?idAdmission=${admissionBean.idAdmission}&idCase=${caseBean.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref" onclick="return confirm('Es finalitzarà (DISCHARGE) el protocol actiu actualment. Desitja continuar?');"><bean:write name="actionItem" property="name"/></html:link></li>
 				</logic:iterate>
 				</logic:present>
 			    <logic:present name="actions">
-			    <logic:iterate name="actions" id="actionItem" type="org.bdigital.ocd.model.Action" >
+			    <logic:iterate name="actions" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
 					<li><html:link action="/caseTaskInsertAction?idAdmission=${admissionBean.idAdmission}&idCase=${caseBean.idCase}" paramId="idActivity" paramName="actionItem" paramProperty="ref"><bean:write name="actionItem" property="name"/></html:link></li>
 				</logic:iterate>
 				</logic:present>

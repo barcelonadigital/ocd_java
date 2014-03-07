@@ -1,11 +1,13 @@
 package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.model.Task;
+import org.bdigital.ocd.utils.UtilsString;
 
  
 public class TaskAf extends org.apache.struts.action.ActionForm {
@@ -26,12 +28,12 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	CaseAf taskCase;
 	List<FormAf> forms = new ArrayList<FormAf>();
 	
-	public TaskAf(Task obj) throws IllegalAccessException, InvocationTargetException {
+	public TaskAf(Task obj) throws IllegalAccessException, InvocationTargetException, ParseException {
 		super();
 		this.taskClass=obj.getTaskClass();
 		this.id=obj.getId();
 		this.type=obj.getType();
-		this.date=obj.getDate();
+		this.date=UtilsString.stringDateWStoStringDateWeb(obj.getDate());
 		this.hour=obj.getHour();
 		this.description=obj.getDescription();
 		this.status=obj.getStatus();
@@ -40,6 +42,8 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	    	this.descStatus=messages.getMessage("task.status.done");
 	    }else if("UNASSIGNED".equals(this.status)){
 	    	this.descStatus=messages.getMessage("task.status.unassigned");
+	    }else if("PENDING".equals(this.status)){
+	    	this.descStatus=messages.getMessage("task.status.pending");
 	    }else{
 	    	this.descStatus=this.status;
 	    }

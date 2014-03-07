@@ -18,6 +18,7 @@ public class FormCloseForm extends org.apache.struts.action.ActionForm {
 	private String idForm;
 	private String idTask;
 	private String accept;
+	private String createTask;
 	public String getIdForm() {
 		return idForm;
 	}
@@ -35,6 +36,12 @@ public class FormCloseForm extends org.apache.struts.action.ActionForm {
 	}
 	public void setAccept(String accept) {
 		this.accept = accept;
+	}
+	public String getCreateTask() {
+		return createTask;
+	}
+	public void setCreateTask(String createTask) {
+		this.createTask = createTask;
 	}
 	
 }
