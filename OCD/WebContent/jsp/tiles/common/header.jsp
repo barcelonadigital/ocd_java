@@ -35,15 +35,28 @@
               <strong>Usuaris</strong><span>Pacients, metges...</span></a>
             <div class="dropdown-menu">
               
+              <logic:present name="caseBean">
+              <div class="user_data">
+                <div><strong>Pacient actual</strong></div>
+                <div class="user"><bean:write name="caseBean" property="fullname"/></div>
+                <ul>
+	              <li><html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="${formularisClass}">Tasques</html:link></li>
+	              <li><html:link action="/caseDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="${infoPacientClass}">Informació pacient</html:link></li>
+                </ul>
+              </div>
+              </logic:present>
+              <logic:notPresent name="caseBean">
               <div class="newpacient"><html:link styleClass="brand" action="/caseSearchPg">Seleccionar <br>pacient</html:link></div>
+              </logic:notPresent>
             </div>
           </li>
           <li><a href="#" data-toggle="dropdown" class="tasks">
-              <strong>Tasques</strong><span>Prescripció OCD, Altes</span></a>
+              <strong>Tasques</strong><span>Pendents, Altes</span></a>
             <div class="dropdown-menu">
               
               <div class="task_links">
                 <ul>
+                <li><html:link action="/tasksAssignedAction">Pendents</html:link></li>
                 <!-- 
                 <logic:present name="caseBean">
 			    <logic:present name="actionsTransfer">

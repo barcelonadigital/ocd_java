@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts.util.MessageResources;
+import org.bdigital.ocd.model.Admission;
 import org.bdigital.ocd.model.Task;
 import org.bdigital.ocd.utils.UtilsString;
 
@@ -24,7 +25,7 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	String description;
 	String status;
 	String descStatus;
-	String admission;
+	AdmissionAf admission;
 	CaseAf taskCase;
 	List<FormAf> forms = new ArrayList<FormAf>();
 	
@@ -47,7 +48,12 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	    }else{
 	    	this.descStatus=this.status;
 	    }
-		this.admission=obj.getAdmission();
+		if(obj.getAdmission()!=null){
+			this.admission = new AdmissionAf(obj.getAdmission());
+		}
+		if(obj.getTaskCase()!=null){
+			this.taskCase = new CaseAf(obj.getTaskCase());
+		}
 	}
 	public String getTaskClass() {
 		return taskClass;
@@ -91,10 +97,10 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getAdmission() {
+	public AdmissionAf getAdmission() {
 		return admission;
 	}
-	public void setAdmission(String admission) {
+	public void setAdmission(AdmissionAf admission) {
 		this.admission = admission;
 	}
 	public CaseAf getTaskCase() {

@@ -1,0 +1,128 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+	    <script type="text/javascript">
+	    var options;
+        <bean:size id="arraySize" name="tasks" />
+        var totalElem = <bean:write name="arraySize" />;
+        var elemPerPage = 6;
+	    $(document).ready(function() {
+	        $(".formrow a").click(function(event) {
+	        	var target = $(event.target);
+	    		if (!$( target ).hasClass("dropdown-toggle") &&
+	    				!$( target ).hasClass("caret")) {
+	    			event.preventDefault();
+	    			event.stopPropagation();
+	    			var ct = $(event.currentTarget);
+	    			window.location = $(ct).attr("href");
+	    		}
+	        });
+	        
+	        $('#elemTotal').text(totalElem);
+	        options = {
+	            currentPage: 1,
+	            totalPages: Math.ceil(totalElem/elemPerPage),
+	            onPageChanged: function(e,oldPage,newPage){
+	            	loadPage(newPage);
+	            }
+	        };
+	
+	        $('#example').bootstrapPaginator(options);
+	        $('#example').hide();
+	        loadPage(1);
+	    });
+        function loadPage(newPage) {
+        	if(totalElem<newPage*elemPerPage){
+        		$('#elemLast').text(totalElem);
+        	}else{
+        		$('#elemLast').text(newPage*elemPerPage);
+        	}
+        	$('#elemFirst').text((newPage-1)*elemPerPage+1);
+            $('.formrow').each(function(i, item) {
+            	if(!$(item).hasClass('header')){
+	            	if(newPage*elemPerPage>=i && (newPage-1)*elemPerPage<i){
+	            		$(item).show();
+	            	}else{
+	            		$(item).hide();
+	            	}
+                }
+              });
+        }
+        function doSubmit() {
+            document.getElementById('newForm').submit();
+            return false;
+        }
+    </script>
+    <!-- Menú principal (final)-->
+    
+    <div class="gris2">
+      <div class="container">
+        <!-- Encabezado-->
+        <div class="encabezado">
+          <h1>Tasques <strong>— Pendents</strong></h1>
+        </div>
+        <hr>
+        <!-- Encabezado fin-->
+      </div>
+    </div>
+    <div class="menuizqlayout gris2 recentlayout">
+      <div class="container">
+        <div class="bloqueizq">
+          <div class="recentbox">
+            <h4>Recent...</h4>
+          </div>
+        </div>
+        <div class="content">
+	      
+	      
+	      	  <div class="formlist">
+	          <div class="table">
+	          
+	            <div class="formrow header">
+		            <span>
+			            <a href="#" class="col1"><span>Data</span></a>
+			            <a href="#" class="col2"><span>Tasca</span></a>
+			            <a href="#" class="col3"><span>Pacient</span></a>
+			            <a href="#" class="col4"><span></span></a>
+		            </span>
+	            </div>
+		        <logic:present name="tasks">
+			    <logic:iterate name="tasks" id="taskItem" type="org.bdigital.ocd.model.form.TaskAf" >
+			    <bean:define id="caseItem" name="taskItem" property="taskCase" type="org.bdigital.ocd.model.form.CaseAf"/>
+			    <bean:define id="dataItem" name="caseItem" property="data" type="org.bdigital.ocd.model.form.DataAf"/>
+			    <bean:define id="admissionItem" name="taskItem" property="admission" type="org.bdigital.ocd.model.form.AdmissionAf"/>
+	              <div class="formrow">
+					
+		              <a href="<html:rewrite action="/caseTaskDetailsAction.do"/>?idCase=${caseItem.ref}&idAdmission=${admissionItem.ref}" data-toggle="dropdown">
+		              <span class="col1"><span><strong><bean:write name="taskItem" property="date"/></strong></span></span>
+		              <span class="col2"><span><bean:write name="taskItem" property="description"/></span></span>
+		              <span class="col3"><span><bean:write name="dataItem" property="nickname"/></span></span>
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              </a>
+		              <ul class="dropdown-menu">
+	                      <li></li>
+	                  </ul>
+
+	              </div>
+	              
+				</logic:iterate>
+				</logic:present>
+				
+	          </div>
+	          
+            <div class="pagination">
+              <div class="navigation">
+              <a href="#" onclick="$('#example').bootstrapPaginator('showFirst');">Primer</a>
+              <a href="#" class="btn btn-large btn-info prev" onclick="$('#example').bootstrapPaginator('showPrevious');">Anterior</a>
+              <a href="#" class="btn btn-large btn-info next" onclick="$('#example').bootstrapPaginator('showNext');">Següent</a>
+              <a href="#" onclick="$('#example').bootstrapPaginator('showLast');">Últim</a></div>
+              <div class="status">Mostrant <span id="elemFirst">1</span> a <span id="elemLast">10</span> de <a href="#"><span id="elemTotal">10</span> entrades</a></div>
+            </div>
+	        <div id="example"></div>
+	        </div>
+	      
+        </div>
+      </div>
+      <!-- Contenido fin-->
+    </div>

@@ -85,6 +85,9 @@
 	    <put name="body" value="/jsp/tiles/case/formcatsalut-body.jsp" />
 	    <put name="body-style" value="" />
     </definition>
+    <definition name="tasksAssignedPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/tiles/task/assigned-body.jsp" />
+    </definition>
     
     
 

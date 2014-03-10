@@ -37,7 +37,6 @@ audio:not([controls]) {
 }
 html {
     font-size:100%;
-    height: 100%;
     -webkit-text-size-adjust:100%;
     -ms-text-size-adjust:100%
 }
@@ -156,7 +155,6 @@ body {
     font-size:14px;
     line-height:20px;
     color:#4e5c67;
-    height: 100%;
     background-color:#fff
 }
 a {
@@ -2806,7 +2804,6 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 }
 .nav-tabs>li>a {
     padding-top:8px;
-    background-color:#ccc;
     padding-bottom:8px;
     line-height:20px;
     border:1px solid transparent;
@@ -3713,11 +3710,6 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
     margin-left:-1px
 }
 .modal-footer .btn-block+.btn-block {
-    margin-left:0
-}
-.modal-footer .btn-block .btn {
-    margin-bottom:5px;
-    margin-right:5px;
     margin-left:0
 }
 .tooltip {
@@ -4812,6 +4804,7 @@ a,button,a:focus,button:focus {
 }
 .custom-cabecera .container ul.nav {
     float:right;
+    margin-right:62px
 }
 .custom-cabecera .container ul.nav li {
     position:relative;
@@ -5245,15 +5238,12 @@ nav.custom-menuprincipal div.container ul.nav>li div.dropdown-menu>div>ul li a {
 nav.custom-menuprincipal div.container ul.nav>li div.dropdown-menu>div.links>ul>li>a {
     font-size:15px
 }
-nav.custom-menuprincipal div.container ul.nav>li div.dropdown-menu>div.task_links>ul>li>a {
-    font-size:12px
-}
 nav.custom-menuprincipal div.container ul.nav>li div.dropdown-menu>div.user_data div.user {
     position:relative;
     font-size:16px;
     font-weight:300;
     line-height:19px;
-    padding:10px 10px 14px 10px
+    padding:10px 10px 14px 53px
 }
 nav.custom-menuprincipal div.container ul.nav>li div.dropdown-menu>div.user_data div.user img {
     position:absolute;
@@ -5559,12 +5549,6 @@ div.table>ul>li:nth-child(even) {
 .botoneslaterales div.botoneslateralescontainer div a.btn.canceldataform {
     background-position:0 -68px
 }
-.botoneslaterales div.botoneslateralescontainer div a.btn.acceptdataform {
-    background-image:url(../img/ico-editsavecanceltick-botonlateral.png)
-}
-.botoneslaterales div.botoneslateralescontainer div a.btn.acceptdataform {
-    background-position:0 -204px
-}
 .botoneslaterales div.botoneslateralescontainer div.viewform {
     display:block
 }
@@ -5577,18 +5561,18 @@ div.table>ul>li:nth-child(even) {
 .botoneslaterales div.botoneslateralescontainer.editmode div.editform {
     display:block
 }
-body>.fichalayout, body>div>.fichalayout {
+body>.fichalayout {
     background-color:#f1f1f1;
     padding-bottom:40px
 }
-body>.fichalayout>.container>.ficha, body>div>.fichalayout>.container>.ficha {
+body>.fichalayout>.container>.ficha {
     background-color:#fff;
     float:left;
     padding:0 40px 0 50px;
     width:810px;
     padding-bottom:30px
 }
-body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.container>.ficha .encabezado {
+body>.fichalayout>.container>.ficha .encabezado {
     padding-left:0
 }
 .menuizqlayout {
@@ -5716,8 +5700,7 @@ body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.containe
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tabbable .nav li a {
     color:#48525e;
     font-size:14px;
-    padding:10px 16px;
-    border-top:3px solid
+    padding:10px 16px
 }
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tabbable .nav li.active a {
     font-weight:700;
@@ -5779,29 +5762,13 @@ body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.containe
     font-weight:700;
     border:0
 }
-.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .h3actions {
-    float:right
-}
-.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .h3actions a.help {
-    display:block;
-    width:21px;
-    height:21px;
-    background:url(../img/ico-info.png) no-repeat 0 0;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-}
-.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .h3actions a.help:hover {
-    opacity:.7;
-    filter:alpha(opacity=70)
-}
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row {
     margin-right:-6px
 }
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield {
     width:610px
 }
-.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="text"],.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield textarea,.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="password"] {
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="text"],.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .bigfield input[type="password"] {
     margin-top:6px;
     margin-bottom:20px;
     width:543px
@@ -6019,28 +5986,28 @@ body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.containe
     opacity:.7;
     filter:alpha(opacity=70)
 }
-body>.alertmessage, body>div>.alertmessage {
+body>.alertmessage {
     background-color:#fbeaeb
 }
-body>.alertmessage>.container>div, body>div>.alertmessage>.container>div {
+body>.alertmessage>.container>div {
     padding:17px 0 17px 70px;
     background:url(../img/ico-alert.png) no-repeat 30px 16px;
     font-size:16px;
     color:#323a45
 }
-body>.alertmessage>.container>div>a, body>div>.alertmessage>.container>div>a {
+body>.alertmessage>.container>div>a {
     padding-left:22px
 }
-body>.alertmessage>.container>div>a.info, body>div>.alertmessage>.container>div>a.info {
+body>.alertmessage>.container>div>a.info {
     color:#1c82eb
 }
-body>.alertmessage>.container>div>a.warning, body>div>.alertmessage>.container>div>a.warning {
+body>.alertmessage>.container>div>a.warning {
     color:#da2228
 }
-body>.gris1, body>div>.gris1 {
+body>.gris1 {
     background-color:#f0f0f0
 }
-body>.gris2, body>div>.gris2 {
+body>.gris2 {
     background-color:#fbfbfb
 }
 hr {
@@ -6115,9 +6082,6 @@ hr {
     margin:0;
     font-size:15px;
     font-weight:600
-}
-.dataform .fields-row div label.description {
-	padding: 4px 0 7px 0;
 }
 .dataform .fields-row div.smallfield p,.dataform .fields-row div.smallfield input[type="text"],.dataform .fields-row div.smallfield input[type="password"] {
     width:280px;
@@ -7092,23 +7056,6 @@ div.dropdown-menu>ul>li>a {
     line-height:16px;
     padding:18px 30px 18px 70px
 }
-.formerror {
-    margin-bottom:10px;
-    clear:both;
-    background:#f1c7c7 url(../img/ico-alert-form.png) no-repeat 26px center;
-    font-size:14px;
-    line-height:16px;
-    padding:18px 30px 18px 70px
-}
-#wrapper {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -74px; /* the bottom margin is the negative value of the footer's height */
-}
-.push{
-    height:74px
-}
 .footer {
     background-color:#3a4150;
     height:74px
@@ -7149,10 +7096,6 @@ div.dropdown-menu>ul>li>a {
     display:inline-block;
     margin:10px 0px 0px 0;
 }
-.cabeceraperfil>.container>#contentnophotoslim>.contactinfo {
-    margin:0px 0px 0px 0px;
-    padding-left:32px
-}
 .cabeceraperfil>.container>.content>span {
     display:inline-block;
     font-size:16px;
@@ -7183,9 +7126,6 @@ div.dropdown-menu>ul>li>a {
 .cabeceraperfil>.container>.content>.actionsbottom .dropdown .dropdown-menu {
     width:254px
 }
-.cabeceraperfil>.container>.content>.actionsbottom .dropdown .dropdown-menu a.selected  {
-    font-weight:600;
-}
 .cabeceraperfil>.container>.content>.actionsbottom>a,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a,.cabeceraperfil>.container>.content>.actionsbottom>span {
     font-size:14px;
     margin-right:12px;
@@ -7194,12 +7134,6 @@ div.dropdown-menu>ul>li>a {
 .cabeceraperfil>.container>.content>.actionsbottom>a.btn-blancogris,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.btn-blancogris,.cabeceraperfil>.container>.content>.actionsbottom>span.btn-blancogris,.cabeceraperfil>.container>.content>.actionsbottom>a.info,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.info,.cabeceraperfil>.container>.content>.actionsbottom>span.info {
     padding:8px 14px;
     width:226px
-}
-.cabeceraperfil>.container>.content>.actionsbottom>.dropdown-thin>ul {
-    width:200px
-}
-.cabeceraperfil>.container>.content>.actionsbottom>.dropdown-thin>a.btn-thin {
-    width:200px
 }
 .cabeceraperfil>.container>.content>.actionsbottom>a.btn-blancogris .caret,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.btn-blancogris .caret,.cabeceraperfil>.container>.content>.actionsbottom>span.btn-blancogris .caret,.cabeceraperfil>.container>.content>.actionsbottom>a.info .caret,.cabeceraperfil>.container>.content>.actionsbottom>.dropdown>a.info .caret,.cabeceraperfil>.container>.content>.actionsbottom>span.info .caret {
     float:right
@@ -7230,9 +7164,6 @@ div.dropdown-menu>ul>li>a {
     position:absolute;
     top:32px;
     right:0
-}
-.cabeceraperfil>.container>#contentnophoto.content>.actionstop {
-    top:16px;
 }
 .cabeceraperfil>.container>.content>.actionstop>a {
     font-size:14px;
@@ -7430,7 +7361,7 @@ a.h2:hover {
     filter:alpha(opacity=70)
 }
 a.h2 span:before {
-    content:"\2190";
+    content:"â†�?";
     font-family:Arial,"Open Sans",sans-serif;
     padding-right:16px
 }
@@ -7583,13 +7514,7 @@ div.table>ul.past>li>a:hover>span,div.table>ul.past>li>a:hover>img,div.table>ul.
     position:fixed;
     top:149px
 }
-.contabs #newForm .botoneslaterales {
-    margin-top:129px
-}
-.contabs #newForm .botoneslaterales div.botoneslateralescontainer.affix {
-    top:204px
-}
-body>.menuizqlayout>.container>.content h2.config, body>div>.menuizqlayout>.container>.content h2.config {
+body>.menuizqlayout>.container>.content h2.config {
     padding-left:62px;
     background:url(../img/ico-ruedadentada.png) no-repeat 0 2px
 }
@@ -7774,23 +7699,6 @@ input.digitos2 {
     text-align:left
 }
 .modal.result .modal-footer {
-    padding:0 30px 30px 30px
-}
-.modal.protocols {
-	width: 700px;
-    top:10%
-}
-.modal.protocols.fade {
-    top:0
-}
-.modal.protocols.fade.in {
-    top:10%
-}
-.modal.protocols h3 {
-    margin:0 0 0 0;
-    text-align:left
-}
-.modal.protocols .modal-footer {
     padding:0 30px 30px 30px
 }
 .modal.alert {
@@ -8377,18 +8285,6 @@ div#news-detail div.new h2 {
 div#news-detail div.new p {
     margin-bottom:18px
 }
-div#search-patient {
-    margin-top:20px
-}
-div#search-patient label {
-    font-weight:600
-}
-div#search-patient input[type=text] {
-    width:312px;
-    padding:8px 18px 7px 18px;
-    color:#363636
-}
-
 div#new-topic {
     margin-top:20px
 }
@@ -8419,12 +8315,6 @@ div#news-list a.news-block-link>div {
     display:table-cell;
     background-color:#f8f8f8;
     vertical-align:top
-}
-div#news-list a.news-block-link>div.fulldate {
-    width:90px;
-    border-right:1px solid #dfe0e2;
-    text-align:center;
-    padding:16px 0 13px 0
 }
 div#news-list a.news-block-link>div.date {
     width:90px;
@@ -8458,19 +8348,6 @@ div#news-list a.news-block-link>div.date span.year {
     font-size:10px;
     line-height:12px
 }
-div#news-list a.news-block-link>div.status {
-    width:89px;
-    border-right:1px solid #dfe0e2;
-    text-align:center;
-    padding:16px 0 13px 0
-}
-div#news-list a.news-block-link>div.status strong {
-    display:block;
-    padding-top:6px;
-    font-size:12px;
-    line-height:14px;
-    font-weight:300
-}
 div#news-list a.news-block-link>div.user {
     width:89px;
     border-right:1px solid #dfe0e2;
@@ -8492,17 +8369,6 @@ div#news-list a.news-block-link>div.user strong {
 div#news-list a.news-block-link>div.message {
     width:659px;
     padding-bottom:8px
-}
-div#news-list a.news-block-link>div.form-entry {
-    width:750px;
-    padding-bottom:8px
-}
-div#news-list a.news-block-link>div.form-entry h4 {
-    padding:16px 16px 10px 22px;
-    margin:0;
-    font-size:16px;
-    line-height:18px;
-    font-weight:700
 }
 div#news-list a.news-block-link>div.message h4 {
     padding:16px 16px 10px 22px;
@@ -8901,7 +8767,7 @@ div#news-list a.news-block-link:hover>div.message p {
     padding-bottom:0px;
     z-index:1150;
     margin-top:0px;
-    background:transparent url(../img/dropdown-triangle.png) no-repeat 50% 0;
+    //background:transparent url(../img/dropdown-triangle.png) no-repeat 50% 0;
     border:0
 }
 .contactinfo .dropdown>div.dropdown-menu>ul {
@@ -9050,237 +8916,4 @@ legend.singlelinelegend {vertical-align:middle;}
     margin-right:14px;
     line-height:18px;
     text-transform:none
-}
-#contentnophoto {
-	padding:10px 0 10px 0px
-}
-#contentnophotoslim {
-    padding:10px 0 10px 0px
-}
-legend.questionform {
-    line-height:20px;
-}
-.tab-content>.tab-pane {
-	min-height:210px;/*per solucionar problema amb botons flotants affix quan el 'tab' era massa petit*/
-	position:relative;/*per posar imatge 'info' flotant a la dreta*/
-}
-.dataform .fields-row div.bigfield label.radio {
-    margin-bottom: 8px;
-    margin-to: 8px
-}
-.dataform .fields-row div.bigfield label.radio.active {
-    font-weight:700
-}
-#newForm .dataform .fields-row div input[type="text"][disabled],.dataform .fields-row div textarea[disabled] {
-	padding-left:16px;
-	background-color:#ccc;
-	border-width:1px;
-	color:#48525e
-}
-span.hint {
-	position: relative;
-	top: -3px;
-	left: 3px;
-}
-span.hint .dropdown-menu {
-	left: 30px;
-	top: -6px;
-	margin-top: 5px;
-	width: 120px;
-	clear: both;
-	background: #abd7c9;
-	font-size: 14px;
-	line-height: 16px;
-	padding: 10px 15px 10px 15px;
-	color: #2c3e50;
-	font-weight: normal;
-}
-.formlist .filter {
-    padding:0 0 0 20px;
-    margin-bottom:20px
-}
-.formlist .filter .search {
-    float:right
-}
-.formlist .filter .search form {
-    margin:0
-}
-.formlist .filter .search form input.search-query {
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-    height:auto;
-    margin:0;
-    width:100%;
-    padding:7px 32px 7px 14px;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-    background:url(../img/ico-search-listbox.png) no-repeat right center
-}
-.formlist .filter .limit .btn-group {
-    margin:0 10px
-}
-.formlist .filter .limit .btn-group button {
-    background-color:#fff;
-    font-size:16px;
-    line-height:18px;
-    color:#a1a1a1;
-    padding-top:8px;
-    padding-bottom:8px
-}
-.formlist .table .formrow {
-    position:relative
-}
-.formlist .table .formrow:nth-child(even)>a {
-    background-color:#f5f6f7
-}
-.formlist .table .formrow>span,.formlist .table .formrow>a {
-    clear:both;
-    display:block;
-    height:60px
-}
-.formlist .table .formrow>span>span,.formlist .table .formrow>a>span,.formlist .table .formrow>span>a,.formlist .table .formrow>a>a {
-    color:#2c3e50;
-    display:block;
-    position:relative;
-    height:60px;
-    float:left;
-    font-size:16px;
-    line-height:18px
-}
-.formlist .table .formrow>span>span>span,.formlist .table .formrow>a>span>span,.formlist .table .formrow>span>a>span,.formlist .table .formrow>a>a>span {
-    display:block;
-    padding:20px 2px 0 16px
-}
-.formlist .table .formrow>span>span.col1,.formlist .table .formrow>a>span.col1,.formlist .table .formrow>span>a.col1,.formlist .table .formrow>a>a.col1 {
-    width:122px
-}
-.formlist .table .formrow>span>span.col2,.formlist .table .formrow>a>span.col2,.formlist .table .formrow>span>a.col2,.formlist .table .formrow>a>a.col2 {
-    width:348px
-}
-.formlist .table .formrow>span>span.col3,.formlist .table .formrow>a>span.col3,.formlist .table .formrow>span>a.col3,.formlist .table .formrow>a>a.col3 {
-    width:123px
-}
-.formlist .table .formrow>span>span.col4,.formlist .table .formrow>a>span.col4,.formlist .table .formrow>span>a.col4,.formlist .table .formrow>a>a.col4 {
-    width:156px
-}
-.formlist .table .formrow>span>span:first-child,.formlist .table .formrow>a>span:first-child,.formlist .table .formrow>span>a:first-child,.formlist .table .formrow>a>a:first-child {
-    border-left-width:0
-}
-.formlist .table .formrow>span>span.actions,.formlist .table .formrow>a>span.actions,.formlist .table .formrow>span>a.actions,.formlist .table .formrow>a>a.actions {
-    border-left-width:0
-}
-.formlist .table .formrow>span>span.actions>span>span.btn.dropdown-toggle,.formlist .table .formrow>a>span.actions>span>span.btn.dropdown-toggle,.formlist .table .formrow>span>a.actions>span>span.btn.dropdown-toggle,.formlist .table .formrow>a>a.actions>span>span.btn.dropdown-toggle {
-    display:none;
-    position:absolute;
-    right:17px;
-    top:10px;
-    width:114px;
-    padding-top:10px;
-    padding-bottom:10px;
-    background-color:#fff;
-    padding-left:19px;
-    border:0;
-    color:#a1a1a1;
-    text-transform:none;
-    font-size:16px;
-    font-weight:400;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px
-}
-.formlist .table .formrow>span>span.actions>span>span.btn.dropdown-toggle span.caret,.formlist .table .formrow>a>span.actions>span>span.btn.dropdown-toggle span.caret,.formlist .table .formrow>span>a.actions>span>span.btn.dropdown-toggle span.caret,.formlist .table .formrow>a>a.actions>span>span.btn.dropdown-toggle span.caret {
-    float:right
-}
-.formlist .table .formrow>span>span.user>span,.formlist .table .formrow>a>span.user>span,.formlist .table .formrow>span>a.user>span,.formlist .table .formrow>a>a.user>span {
-    padding-left:63px
-}
-.formlist .table .formrow>span>span.user>span img,.formlist .table .formrow>a>span.user>span img,.formlist .table .formrow>span>a.user>span img,.formlist .table .formrow>a>a.user>span img {
-    position:absolute;
-    left:14px;
-    top:9px;
-    -webkit-border-radius:50%;
-    -moz-border-radius:50%;
-    border-radius:50%
-}
-.formlist .table .formrow.open>a>span.actions>span>span.btn.dropdown-toggle {
-    -webkit-border-bottom-right-radius:0;
-    -moz-border-radius-bottomright:0;
-    border-bottom-right-radius:0;
-    -webkit-border-bottom-left-radius:0;
-    -moz-border-radius-bottomleft:0;
-    border-bottom-left-radius:0;
-    -webkit-border-top-right-radius:3px;
-    -moz-border-radius-topright:3px;
-    border-top-right-radius:3px;
-    -webkit-border-top-left-radius:3px;
-    -moz-border-radius-topleft:3px;
-    border-top-left-radius:3px;
-    -webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
-    -moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
-    box-shadow:0 5px 10px rgba(0,0,0,0.2)
-}
-.formlist .table .formrow.open>a,.formlist .table .formrow>a:hover {
-    background-color:#58b094
-}
-.formlist .table .formrow.open>a>span>span,.formlist .table .formrow>a:hover>span>span {
-    color:#fff;
-    font-weight:600
-}
-.formlist .table .formrow.open>a>span>span>span.btn.dropdown-toggle,.formlist .table .formrow>a:hover>span>span>span.btn.dropdown-toggle {
-    display:inline-block;
-    opacity:1;
-    filter:alpha(opacity=100)
-}
-.formlist .table .formrow.header>span {
-    background-color:#f0f0f1
-}
-.formlist .table .formrow.header>span>a {
-    border-left-color:transparent;
-    color:#2c3e50
-}
-.formlist .table .formrow.header>span>a.ordered {
-    font-weight:700
-}
-.formlist .table .formrow.header>span>a.ordered span.order {
-    display:inline-block;
-    vertical-align:top;
-    width:14px;
-    height:16px;
-    margin-left:6px
-}
-.formlist .table .formrow.header>span>a.ordered span.order.down {
-    background:url(../img/ico-order-down-table.png) no-repeat left bottom
-}
-.formlist .table .formrow.header>span>a.ordered span.order.up {
-    background:url(../img/ico-order-up-table.png) no-repeat left bottom
-}
-.formlist .table .formrow>ul.dropdown-menu {
-    float:none;
-    min-width:145px;
-    left:auto;
-    right:18px;
-    top:51px;
-    width:138px;
-    border:0;
-    border-top:1px solid #ecf0f1;
-    padding:6px 0 14px 0;
-    -webkit-border-radius:0;
-    -moz-border-radius:0;
-    border-radius:0
-}
-.formlist .table .formrow>ul.dropdown-menu a {
-    color:#388cec
-}
-.formlist .table .formrow>ul.dropdown-menu a:hover {
-    color:#fff
-}
-.formlist .table .formrow>ul.dropdown-menu a.warning {
-    color:#f11
-}
-.formlist .table .formrow>ul.dropdown-menu a.warning:hover {
-    color:#fff;
-    background-color:#f11;
-    background-image:none
 }

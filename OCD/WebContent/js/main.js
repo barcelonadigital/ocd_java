@@ -386,7 +386,6 @@
           var objBotoneslaterales = $('.botoneslaterales');
           var objMenuprincipal = $('.custom-menuprincipal');
 		  var h = objBotoneslaterales.position().top-objMenuprincipal.height();
-		  console.log(objBotoneslaterales.position().top+' '+objMenuprincipal.height())
           return h;
       };
       $(".botoneslateralescontainer").affix({

@@ -2,7 +2,6 @@ package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.bdigital.ocd.model.Data;
 
  
@@ -22,7 +21,13 @@ public class DataAf extends org.apache.struts.action.ActionForm {
 	
 	public DataAf(Data obj) throws IllegalAccessException, InvocationTargetException {
 		super();
-		BeanUtils.copyProperties( this, obj ); 
+		this.bdate=obj.getBdate();
+		this.nickname=obj.getNickname();
+		this.fullname=obj.getFullname();
+		this.gender=obj.getGender();
+		this.age=obj.getAge();
+		this.status=obj.getStatus();
+		this.byear=obj.getByear();
 	}
 	public String getBdate() {
 		return bdate;

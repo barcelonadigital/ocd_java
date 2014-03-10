@@ -28,6 +28,7 @@ import org.bdigital.ocd.model.Device;
 import org.bdigital.ocd.model.Mail;
 import org.bdigital.ocd.model.Name;
 import org.bdigital.ocd.model.Phone;
+import org.bdigital.ocd.model.form.CaseAf;
 import org.bdigital.ocd.utils.UtilsWs;
 
 /**
@@ -84,33 +85,36 @@ public class CaseNewAction extends BaseAction {
     		errorMsg = new StringHolder("");
         	result = new StringHolder("");
         	proxy.case_get(tokenLK,caseId,result,errorMsg);
-    		String caseDesc = "";
+//    		String caseDesc = "";
         	if (result.value!=null) {
 
         		Case caseGet = (Case)UtilsWs.xmlToObject(result.value,Case.class,
         				Data.class);
+        		CaseAf caseAf = new CaseAf(caseGet);
             	
-            	if(caseGet.getData()!=null){
-            		caseDesc += caseGet.getData().getNickname()+" ";
-            	}
-            	for(int i=0;i<caseGet.getRefs().length;i++){
-            		String item = caseGet.getRefs()[i];
-            		if(item.indexOf("NICK")==0){
-            			caseDesc += "<NICK: "+UtilsWs.getValue(item, "NICK") + "> ";
-            		}else if(item.indexOf("NIF")==0){
-            			caseDesc += "<NIF: "+UtilsWs.getValue(item, "NIF") + "> ";
-            		}else if(item.indexOf("NIE")==0){
-            			caseDesc += "<NIE: "+UtilsWs.getValue(item, "NIE") + "> ";
-            		}else if(item.indexOf("PAS")==0){
-            			caseDesc += "<PAS: "+UtilsWs.getValue(item, "PAS") + "> ";
-            		}else if(item.indexOf("CIP")==0){
-            			caseDesc += "<CIP: "+UtilsWs.getValue(item, "CIP") + "> ";
-            		}
-            	}
+//            	if(caseGet.getData()!=null){
+//            		caseDesc += caseGet.getData().getNickname()+" ";
+//            	}
+//            	for(int i=0;i<caseGet.getRefs().length;i++){
+//            		String item = caseGet.getRefs()[i];
+//            		if(item.indexOf("NICK")==0){
+//            			caseDesc += "<NICK: "+UtilsWs.getValue(item, "NICK") + "> ";
+//            		}else if(item.indexOf("NIF")==0){
+//            			caseDesc += "<NIF: "+UtilsWs.getValue(item, "NIF") + "> ";
+//            		}else if(item.indexOf("NIE")==0){
+//            			caseDesc += "<NIE: "+UtilsWs.getValue(item, "NIE") + "> ";
+//            		}else if(item.indexOf("PAS")==0){
+//            			caseDesc += "<PAS: "+UtilsWs.getValue(item, "PAS") + "> ";
+//            		}else if(item.indexOf("CIP")==0){
+//            			caseDesc += "<CIP: "+UtilsWs.getValue(item, "CIP") + "> ";
+//            		}
+//            	}
+                request.setAttribute("foundCaseBean", caseAf);
         	}
-    		ActionMessages errors = new ActionMessages();
-            errors.add("error",new ActionMessage("errors.caseNewExists",caseDesc));
-            saveErrors(request, errors);
+//    		ActionMessages errors = new ActionMessages();
+//            errors.add("error",new ActionMessage("errors.caseNewExists",caseDesc));
+//            saveErrors(request, errors);
+            request.setAttribute("errorCaseNew", "true");
             return mapping.findForward(FAILURE);
     	}else if ("NEW".equals(type.value)) {
     		Contact caseContactObj = new Contact();

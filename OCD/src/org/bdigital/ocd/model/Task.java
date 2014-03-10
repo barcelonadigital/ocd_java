@@ -18,7 +18,7 @@ public class Task {
 	String hour;
 	String description;
 	String status;
-	String admission;
+	Admission admission;
 	Case taskCase;
 	String[] refs;
     List<Form> forms = new ArrayList<Form>();
@@ -73,11 +73,11 @@ public class Task {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getAdmission() {
+	public Admission getAdmission() {
 		return admission;
 	}
 	@XmlElement
-	public void setAdmission(String admission) {
+	public void setAdmission(Admission admission) {
 		this.admission = admission;
 	}
 	public Case getTaskCase() {

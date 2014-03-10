@@ -21,6 +21,7 @@
     <![endif]-->
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/bootstrap-slider-edited.js"></script>
+    <script src="js/vendor/bootstrap-paginator.js"></script>
     <script src="js/main.js"></script>
     <script>
       var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

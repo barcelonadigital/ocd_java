@@ -13,7 +13,7 @@
       <div class="container">
         <!-- Encabezado-->
         <div class="encabezado">
-          <h1><strong>Pacients</strong></h1>
+          <h1>Usuaris <strong>— Pacients</strong></h1>
         </div>
         <hr>
         <!-- Encabezado fin-->
@@ -156,3 +156,46 @@
       </div>
       <!-- Contenido fin-->
     </div>
+    <logic:present name="errorCaseNew">
+	    <script type="text/javascript">
+	    $(document).ready(function() {
+	    	$('#loadsessionModal').modal('show');
+	    });
+	    function doFinish(){
+	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}&accept=true"/>';
+	    }
+	    function doFinishAndNewTask(){
+	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}&accept=true&createTask=true"/>';
+	    }
+	    </script>
+    <!-- Lightbox-->
+    <bean:define id="caseItem" name="foundCaseBean" type="org.bdigital.ocd.model.form.CaseAf"/>
+    <bean:define id="dataItem" name="caseItem" property="data" type="org.bdigital.ocd.model.form.DataAf"/>
+    <div id="loadsessionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal loadsession hide fade">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+        <h3>Pacient ja existent</h3>
+      </div>
+      <div class="modal-body table">
+        <table>
+          <tr>
+            <th>Nom</th>
+            <th>Dades personals</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td><bean:write name="dataItem" property="fullname"/></td>
+            <td>
+              <span><strong>Edat:</strong> <bean:write name="dataItem" property="age"/></span><br/>
+              <span><strong><bean:message key="label.sex"/>:</strong> <bean:write name="dataItem" property="gender"/></span><br/>
+              <span><strong>CIP:</strong> <bean:write name="caseItem" property="cip"/></span><br/>
+              <span><strong>NIF:</strong> <bean:write name="caseItem" property="nif"/></span>
+            </td>
+            <td>
+            <html:link action="/caseTaskDetailsAction?idCase=${caseItem.ref}&idAdmission=${admissionBean.idAdmission}" styleClass="btn btn-primary custom-btn">Accedir</html:link>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    </logic:present>
