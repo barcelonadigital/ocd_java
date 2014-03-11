@@ -13,6 +13,13 @@ public class UtilsString {
 			return inputString;
 		}
 	}
+	public static String stringDateWebtoStringDateWS(String inputString) throws ParseException {
+		if(inputString!=null && !"".equals(inputString)){
+			return UtilsString.dateToString(UtilsString.stringtoDate(inputString, Constants.FORMAT_DATE_WEB), Constants.FORMAT_DATE_WS);
+		}else{
+			return inputString;
+		}
+	}
 	public static String stringDateHourWStoStringDateHourWeb(String inputString) throws ParseException {
 		if(inputString!=null && !"".equals(inputString)){
 			return UtilsString.dateToString(UtilsString.stringtoDate(inputString, Constants.FORMAT_DATEHOUR_WS), Constants.FORMAT_DATEHOUR_WEB);

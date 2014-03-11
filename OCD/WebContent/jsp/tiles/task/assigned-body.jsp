@@ -7,7 +7,8 @@
         <bean:size id="arraySize" name="tasks" />
         var totalElem = <bean:write name="arraySize" />;
         var elemPerPage = 6;
-	    $(document).ready(function() {
+        var currPage=1;
+        $(document).ready(function() {
 	        $(".formrow a").click(function(event) {
 	        	var target = $(event.target);
 	    		if (!$( target ).hasClass("dropdown-toggle") &&
@@ -19,18 +20,22 @@
 	    		}
 	        });
 	        
-	        $('#elemTotal').text(totalElem);
-	        options = {
-	            currentPage: 1,
-	            totalPages: Math.ceil(totalElem/elemPerPage),
-	            onPageChanged: function(e,oldPage,newPage){
-	            	loadPage(newPage);
-	            }
-	        };
-	
-	        $('#example').bootstrapPaginator(options);
-	        $('#example').hide();
-	        loadPage(1);
+	        if(totalElem>0){
+		        $('#elemTotal').text(totalElem);
+		        options = {
+		            currentPage: currPage,
+		            totalPages: Math.ceil(totalElem/elemPerPage),
+		            onPageChanged: function(e,oldPage,newPage){
+		            	loadPage(newPage);
+		            }
+		        };
+		
+		        $('#example').bootstrapPaginator(options);
+		        $('#example').hide();
+		        loadPage(currPage);
+	        }else{
+	        	$('.pagination').hide();
+	        }
 	    });
         function loadPage(newPage) {
         	if(totalElem<newPage*elemPerPage){
@@ -107,16 +112,24 @@
 	              </div>
 	              
 				</logic:iterate>
+				<logic:empty name="tasks">
+	              <div class="formrow">
+					
+		              No hi ha elements per mostrar.
+
+	              </div>
+				</logic:empty>
 				</logic:present>
 				
 	          </div>
 	          
             <div class="pagination">
               <div class="navigation">
-              <a href="#" onclick="$('#example').bootstrapPaginator('showFirst');">Primer</a>
-              <a href="#" class="btn btn-large btn-info prev" onclick="$('#example').bootstrapPaginator('showPrevious');">Anterior</a>
-              <a href="#" class="btn btn-large btn-info next" onclick="$('#example').bootstrapPaginator('showNext');">Següent</a>
-              <a href="#" onclick="$('#example').bootstrapPaginator('showLast');">Últim</a></div>
+	            <a href="#" onclick="$('#example').bootstrapPaginator('showFirst');">Primer</a>
+	            <a href="#" class="btn btn-large btn-info prev" onclick="$('#example').bootstrapPaginator('showPrevious');">Anterior</a>
+	            <a href="#" class="btn btn-large btn-info next" onclick="$('#example').bootstrapPaginator('showNext');">Següent</a>
+	            <a href="#" onclick="$('#example').bootstrapPaginator('showLast');">Últim</a>
+              </div>
               <div class="status">Mostrant <span id="elemFirst">1</span> a <span id="elemLast">10</span> de <a href="#"><span id="elemTotal">10</span> entrades</a></div>
             </div>
 	        <div id="example"></div>

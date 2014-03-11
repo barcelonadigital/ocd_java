@@ -42,6 +42,7 @@ import org.bdigital.ocd.model.Name;
 import org.bdigital.ocd.model.Phone;
 import org.bdigital.ocd.model.form.ActionAf;
 import org.bdigital.ocd.model.form.AdmissionAf;
+import org.bdigital.ocd.model.form.CaseAf;
 import org.bdigital.ocd.utils.AdmissionComparator;
 import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
@@ -116,27 +117,19 @@ public abstract class CaseBaseAction extends BaseAction {
         	
         	Case caseGet = (Case)UtilsWs.xmlToObject(result.value,Case.class,
     				Data.class);
-        	if(caseGet.getData()!=null){
-        		caseBean.setFullname(caseGet.getData().getFullname());
-        		caseBean.setNickname(caseGet.getData().getNickname());
-        		caseBean.setBirthday(caseGet.getData().getBdate());
-        		caseBean.setAge(caseGet.getData().getAge());
-        		caseBean.setSex(caseGet.getData().getGender());
+        	CaseAf caseGetAf = new CaseAf(caseGet);
+        	if(caseGetAf.getData()!=null){
+        		caseBean.setFullname(caseGetAf.getData().getFullname());
+        		caseBean.setNickname(caseGetAf.getData().getNickname());
+        		caseBean.setBirthday(caseGetAf.getData().getBdate());
+        		caseBean.setAge(caseGetAf.getData().getAge());
+        		caseBean.setSex(caseGetAf.getData().getDescGender());
         	}
-        	for(int i=0;i<caseGet.getRefs().length;i++){
-        		String item = caseGet.getRefs()[i];
-        		if(item.indexOf("NICK")==0){
-        			caseBean.setNick(UtilsWs.getValue(item, "NICK"));
-        		}else if(item.indexOf("NIF")==0){
-        			caseBean.setNif(UtilsWs.getValue(item, "NIF"));
-        		}else if(item.indexOf("NIE")==0){
-        			caseBean.setNie(UtilsWs.getValue(item, "NIE"));
-        		}else if(item.indexOf("PAS")==0){
-        			caseBean.setPas(UtilsWs.getValue(item, "PAS"));
-        		}else if(item.indexOf("CIP")==0){
-        			caseBean.setCip(UtilsWs.getValue(item, "CIP"));
-        		} 
-        	}
+        	caseBean.setNick(caseGetAf.getNick());
+			caseBean.setNif(caseGetAf.getNif());
+			caseBean.setNie(caseGetAf.getNie());
+			caseBean.setPas(caseGetAf.getPas());
+			caseBean.setCip(caseGetAf.getCip());
         	caseBean.setIdCase(caseId);
         	formBean.setIdCase(caseId);
         	

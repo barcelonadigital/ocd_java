@@ -36,12 +36,22 @@
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="birthday">Data Naixement (aaaa-mm-dd)</label>
+                      <label for="birthday">Data Naixement</label>
                       <html:text name="CaseDetailsForm" styleId="birthday" property="birthday" disabled="true" />
+	                  <script>
+				        $( "#birthday" ).datepicker();
+				      </script>
                     </div>
                     <div class="smallfield">
-                      <label for="sex">Gènere (M/F)</label>
-                      <html:text name="CaseDetailsForm" styleId="sex" property="sex" disabled="true" />
+                      <label for="sex">Gènere</label>
+	                  <div class="btn-group">
+	                    <html:hidden property="sex" styleId="sex" />
+	                    <button disabled="disabled" data-toggle="dropdown" data-target="sex" class="btn btn-large dropdown-toggle disabled"><bean:write name="CaseDetailsForm" property="sex" /><span class="caret triangulo"></span></button>
+	                    <ul class="dropdown-menu">
+	                      <li><a href="#"><bean:message key="label.sex.dona"/></a></li>
+	                      <li><a href="#"><bean:message key="label.sex.home"/></a></li>
+	                    </ul>
+	                  </div>
                     </div>
                   </div>
                 </div>

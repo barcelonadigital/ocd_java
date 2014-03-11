@@ -45,6 +45,7 @@
       event.preventDefault();
       $(".dataform").addClass("editmode");
       $(".dataform input").removeAttr("disabled");
+      $("button.disabled").removeAttr("disabled");
       $("button.disabled").removeClass("disabled");
       $(".botoneslateralescontainer").addClass("editmode");
     });
@@ -74,7 +75,9 @@
 
 // Para usar dropdown como un select. Para enviar los datos en formulario hay que recoger el contenido .text() de button.dropdown-toggle como valor.
     $(".dropdown-menu li a").click(function(event) {
-      //event.preventDefault();
+      if($(this).attr("href")==='#'){
+        event.preventDefault();
+      }
       var triangulo=($(this).parent().parent().parent().children('button.btn.dropdown-toggle span.caret.triangulo'));
       $(this).parent().parent().parent().children('button.btn.dropdown-toggle').html($(this).text() + "<span class=\"caret"+(triangulo?" triangulo":"")+"\"></span>");
       $(this).parent().parent().parent().removeClass('open');
@@ -374,6 +377,23 @@
   $(document).ready(function() {
     sessionListEventos();
   });
+  $(document).ready(function() {
+	  $( "form" ).submit(function() {
+		  $("button.dropdown-toggle").each(function(i, item) {
+			  var optionSelected = $(item).parent().children(".dropdown-menu").children(":contains('"+$(item).text()+"')");
+			  if(optionSelected.length>0){
+				  var targetId = $(item).data('target');
+				  if(typeof targetId !== 'undefined'){
+					  var targetObj = $('#'+targetId);
+					  if(targetObj.length>0){
+						  $(targetObj).val($(item).text());
+					  }
+				  }
+			  }
+		  });
+	  });
+  });
+
 
 //  ____  __  _  _  ____  ____    ____  __  ____  _  _    ____  _  _  ____  ____  __   __ _  ____ 
 // (  __)(  )( \/ )(  __)(    \  (  __)/  \(  _ \( \/ )  (  _ \/ )( \(_  _)(_  _)/  \ (  ( \/ ___)

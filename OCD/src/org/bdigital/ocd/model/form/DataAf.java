@@ -1,8 +1,11 @@
 package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 
+import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.model.Data;
+import org.bdigital.ocd.utils.UtilsString;
 
  
 public class DataAf extends org.apache.struts.action.ActionForm {
@@ -18,13 +21,22 @@ public class DataAf extends org.apache.struts.action.ActionForm {
 	String age;
 	String status;
 	String byear;
+	String descGender;
 	
-	public DataAf(Data obj) throws IllegalAccessException, InvocationTargetException {
+	public DataAf(Data obj) throws IllegalAccessException, InvocationTargetException, ParseException {
 		super();
-		this.bdate=obj.getBdate();
+		this.bdate=UtilsString.stringDateWStoStringDateWeb(obj.getBdate());
 		this.nickname=obj.getNickname();
 		this.fullname=obj.getFullname();
 		this.gender=obj.getGender();
+		MessageResources messages = MessageResources.getMessageResources("ApplicationResource");
+	    if("M".equals(this.gender)){
+	    	this.descGender=messages.getMessage("label.sex.home");
+	    }else if("F".equals(this.gender)){
+	    	this.descGender=messages.getMessage("label.sex.dona");
+	    }else{
+	    	this.descGender=this.gender;
+	    }
 		this.age=obj.getAge();
 		this.status=obj.getStatus();
 		this.byear=obj.getByear();
@@ -70,5 +82,11 @@ public class DataAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setByear(String byear) {
 		this.byear = byear;
+	}
+	public String getDescGender() {
+		return descGender;
+	}
+	public void setDescGender(String descGender) {
+		this.descGender = descGender;
 	}
 }

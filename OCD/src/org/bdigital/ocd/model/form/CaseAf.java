@@ -1,6 +1,7 @@
 package org.bdigital.ocd.model.form;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 
 import org.bdigital.ocd.model.Case;
 import org.bdigital.ocd.utils.UtilsWs;
@@ -21,7 +22,7 @@ public class CaseAf extends org.apache.struts.action.ActionForm {
 	String[] refs;
 	DataAf data;
 	
-	public CaseAf(Case obj) throws IllegalAccessException, InvocationTargetException {
+	public CaseAf(Case obj) throws IllegalAccessException, InvocationTargetException, ParseException {
 		super();
 		this.ref=obj.getRef();
 		this.refs=obj.getRefs();

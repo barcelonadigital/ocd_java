@@ -3,10 +3,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
     <script>
-      function doSubmit() {
-          document.getElementById('newForm').submit();
-          return false;
-      }
+	    function doSubmit() {
+		  //$('#sex').val($('#sexSelect').text());
+	      $( "#newForm" ).submit();
+	      return false;
+	    }
     </script>
     <!-- Menú principal (final)-->
     <div class="gris1">
@@ -86,12 +87,22 @@
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="birthday"><bean:message key="label.birthday"/> (aaaa-mm-dd)</label>
+                  <label for="birthday"><bean:message key="label.birthday"/></label>
                   <html:text styleId="birthday" property="birthday" />
+                  <script>
+			        $( "#birthday" ).datepicker();
+			      </script>
                 </div>
                 <div class="smallfield">
-                  <label for="sex"><bean:message key="label.sex"/> (M/F)</label>
-                  <html:text styleId="sex" property="sex" />
+                  <label for="sex"><bean:message key="label.sex"/></label>
+                  <div class="btn-group">
+                    <html:hidden property="sex" styleId="sex" />
+                    <button data-toggle="dropdown" data-target="sex" class="btn btn-large dropdown-toggle">Seleccioni una opció<span class="caret triangulo"></span></button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#"><bean:message key="label.sex.dona"/></a></li>
+                      <li><a href="#"><bean:message key="label.sex.home"/></a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               <h3>Dades de contacte</h3>

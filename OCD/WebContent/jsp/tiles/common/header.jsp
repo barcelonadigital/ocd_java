@@ -44,6 +44,7 @@
 	              <li><html:link action="/caseDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="${infoPacientClass}">Informació pacient</html:link></li>
                 </ul>
               </div>
+              <div class="newpacient"><html:link styleClass="brand" action="/caseSearchPg">Seleccionar un <br>altre pacient</html:link></div>
               </logic:present>
               <logic:notPresent name="caseBean">
               <div class="newpacient"><html:link styleClass="brand" action="/caseSearchPg">Seleccionar <br>pacient</html:link></div>
@@ -84,6 +85,22 @@
                   <li><a href="#">Link 1</a></li>
                   <li><a href="#">Link 2</a></li>
                   <li><a href="#">Link 3</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="#" data-toggle="dropdown" class="community">
+              <!-- botón--><strong>Community</strong><span>Forum, news, ranking</span></a>
+            <div class="dropdown-menu">
+              <!-- dropdown menu-->
+              <div class="links">
+                <ul>
+                  <li><a href="#">Link 1</a></li>
+                  <li><a href="#">Link 2</a></li>
+                  <li><a href="#">Link 3</a></li>
+                  <li><a href="#">Link 4</a></li>
+                  <li><a href="#">Link 5</a></li>
+                  <li><a href="#">Link 6</a></li>
                 </ul>
               </div>
             </div>

@@ -18,6 +18,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.model.AIM;
 import org.bdigital.ocd.model.Address;
@@ -29,6 +30,7 @@ import org.bdigital.ocd.model.Mail;
 import org.bdigital.ocd.model.Name;
 import org.bdigital.ocd.model.Phone;
 import org.bdigital.ocd.model.form.CaseAf;
+import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 
 /**
@@ -56,18 +58,23 @@ public class CaseNewAction extends BaseAction {
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	
-    	String birthday = (formBean.getBirthday()!=null)?formBean.getBirthday():"";
+    	String birthday = UtilsString.stringDateWebtoStringDateWS(formBean.getBirthday());
     	String nie = (formBean.getNie()!=null)?"NIE/"+formBean.getNie():"";
     	String pas = (formBean.getPas()!=null)?"PAS/"+formBean.getPas():"";
     	String cip = (formBean.getCip()!=null)?"CIP/"+formBean.getCip():"";
     	String nick = (formBean.getNick()!=null)?"NICK/"+formBean.getNick():"";
     	String nif = (formBean.getNif()!=null)?"NIF/"+formBean.getNif():"";
     			
+    	MessageResources msgResource = getResources(request);
     	Case caseObj = new Case();
     	caseObj.setRef("");
     	Data dataObj = new Data();
     	dataObj.setBdate(birthday);
-    	dataObj.setGender("M");
+    	if(formBean.getSex().equals(msgResource.getMessage("label.sex.home"))){
+    		dataObj.setGender("M");
+    	}else if(formBean.getSex().equals(msgResource.getMessage("label.sex.dona"))){
+    		dataObj.setGender("F");
+    	}
     	dataObj.setStatus("ACTIVE");
     	caseObj.setData(dataObj);
     	String[] refs = new String[]{nie,nif,pas,cip,nick};

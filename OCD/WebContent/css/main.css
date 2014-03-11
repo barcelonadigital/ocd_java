@@ -5190,12 +5190,15 @@ nav.custom-menuprincipal div.container ul.nav>li>a.tasks {
     background-image:url(../img/ico-tasks-menuprincipal.png)
 }
 nav.custom-menuprincipal div.container ul.nav>li>a.report {
+    visibility:hidden;
     background-image:url(../img/ico-report-menuprincipal.png)
 }
 nav.custom-menuprincipal div.container ul.nav>li>a.community {
+    visibility:hidden;
     background-image:url(../img/ico-community-menuprincipal.png)
 }
 nav.custom-menuprincipal div.container ul.nav>li>a.more {
+    visibility:hidden;
     background-image:url(../img/ico-more-menuprincipal.png)
 }
 nav.custom-menuprincipal div.container ul.nav>li.open a {
@@ -5809,6 +5812,10 @@ body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.containe
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .smallfield {
     width:297px
 }
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .smallfield button.dropdown-toggle {
+	height:40px;
+	width:264px
+}
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tab-content .fields-row .smallfield:first-child {
     margin-right:16px
 }
@@ -5865,6 +5872,10 @@ body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.containe
 .menuizqlayout.recentlayout>.container>.content .contentconbotoneslaterales .smallfield {
     width:309px;
     margin-right:40px
+}
+.menuizqlayout.recentlayout>.container>.content .contentconbotoneslaterales .smallfield button.dropdown-toggle {
+    height:40px;
+	widthwidth:309px
 }
 .menuizqlayout.recentlayout>.container>.content .contentconbotoneslaterales .smallfield input[type=text] {
     width:275px
@@ -6128,6 +6139,13 @@ hr {
     font-size:15px;
     color:#000;
     border:1px solid #d0d0d0
+}
+.dataform .fields-row div.smallfield button.dropdown-toggle.disabled{
+	opacity:1;
+	font-size: 15px;
+	padding-left: 0;
+	color:#a0a0a0;
+    border-width:0
 }
 .dataform .fields-row div.smallfield input[type="text"][disabled],.dataform .fields-row div.smallfield input[type="password"][disabled] {
     color:#a0a0a0;
