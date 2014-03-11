@@ -158,6 +158,37 @@ public class PdfHelloWorldAction extends Action {
         TAGs[28][0]="DIAGNOSTICO FINAL";
         TAGs[29][0]="";
         
+        TAGs[0][1]=" ";
+        TAGs[1][1]=" ";
+        TAGs[2][1]=" ";
+        TAGs[3][1]=" ";
+        TAGs[4][1]=" ";
+        TAGs[5][1]=" ";
+        TAGs[6][1]=" ";
+        TAGs[7][1]=" ";
+        TAGs[8][1]=" ";
+        TAGs[9][1]=" ";
+        TAGs[10][1]=" ";
+        TAGs[11][1]=" ";
+        TAGs[12][1]=" ";
+        TAGs[13][1]=" ";
+        TAGs[14][1]=" ";
+        TAGs[15][1]=" ";
+        TAGs[16][1]=" ";
+        TAGs[17][1]=" ";
+        TAGs[18][1]=" ";
+        TAGs[19][1]=" ";
+        TAGs[20][1]=" ";
+        TAGs[21][1]=" ";
+        TAGs[22][1]=" ";
+        TAGs[23][1]=" ";
+        TAGs[24][1]=" ";
+        TAGs[25][1]=" ";
+        TAGs[26][1]=" ";
+        TAGs[27][1]=" ";
+        TAGs[28][1]=" ";
+        TAGs[29][1]="";
+        
         TAGs[0][2]="TITLE: ";
         TAGs[1][2]="Patient: ";
         TAGs[2][2]="NHC:";
@@ -226,7 +257,7 @@ public class PdfHelloWorldAction extends Action {
         setTAGs();
         
         //Entrada de Dades Har
-        entradaDadesHardcoded();
+        //entradaDadesHardcoded();
         
         //Entrada de Dades via Formularis
         entradaDadesForms(request);
@@ -251,7 +282,10 @@ public class PdfHelloWorldAction extends Action {
 				
 		String address = buildAddress(direccio);
 		
-        TAGs[1][1]= caseBeanStored.getFullname().toUpperCase();
+		String cognomNom= getCognomNom(request);
+		
+		TAGs[0][1]="CONSULTA DE VALIDACIÓ I SEGUIMENT D'OXIGENOTERAPIA";
+        TAGs[1][1]= cognomNom;
         TAGs[3][1]= caseBeanStored.getSex();
         TAGs[4][1]= caseBeanStored.getBirthday();
         TAGs[5][1]= caseBeanStored.getAge()+ " anys";
@@ -259,7 +293,23 @@ public class PdfHelloWorldAction extends Action {
         TAGs[7][1]= direccio.getPostcode();
         TAGs[8][1]= direccio.getCity().toUpperCase();
         TAGs[10][1]= telf;
+        
+        TAGs[25][1]= "CONSULTA DE VALIDACIÓ";
 
+	}
+
+	private static String getCognomNom(HttpServletRequest request) {
+		
+		String nomConvertit = "";
+		
+		nomConvertit = caseBeanStored.getContact().getName().getFamilyName();
+		nomConvertit = nomConvertit.concat(" "+caseBeanStored.getContact().getName().getFamilyName2());
+		
+		nomConvertit = nomConvertit.concat(", "+caseBeanStored.getContact().getName().getGivenName());
+		nomConvertit = nomConvertit.concat(" "+caseBeanStored.getContact().getName().getMiddleName());
+		
+		return nomConvertit;
+		
 	}
 
 	private static String buildAddress(Address direccio) {
