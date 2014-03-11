@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,11 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.bdigital.ocd.beans.CaseBean;
 import org.bdigital.ocd.cases.CaseFormStaticDetailsAction;
+import org.bdigital.ocd.model.Address;
+import org.bdigital.ocd.model.Contact;
+import org.bdigital.ocd.model.Phone;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -67,16 +72,22 @@ public class PdfHelloWorldAction extends Action {
     private static Font LletraNormal10;
     private static Font Lletra6;
     
+    protected static CaseBean caseBeanStored;
+    
 	@Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+		
 		Document documento = new Document();
+		String idCase = request.getParameter("idCase");
+		//System.out.println("IDCASE: "+idCase);
+		
 		try{
 			
 			//Registrem les fonts a usar en l'Informe
 	        registraFontsText();
-	        
+	        	
 	        //Triem la llengua amb que realitzarem l'Informe
 	        //int llengua = triaLlenguaInforme();  
 	        int llengua = 0;
@@ -211,14 +222,66 @@ public class PdfHelloWorldAction extends Action {
     /**
      * Crea la matriu de TAGs, captura les dades per consola i els imprimeix per consola
      */
-    private static void setGetTAGs() throws IOException {
+    private static void setGetTAGs(HttpServletRequest request) throws IOException {
         setTAGs();
+        
+        //Entrada de Dades Har
         entradaDadesHardcoded();
+        
+        //Entrada de Dades via Formularis
+        entradaDadesForms(request);
+        
         //entradaDadesPerConsola();
         //imprimeixTAGs();    
     }
 
-    /**
+    private static void entradaDadesForms(HttpServletRequest request) {
+    	
+    	caseBeanStored = new CaseBean(); 
+		caseBeanStored = (CaseBean) request.getSession().getAttribute("caseBean");
+				
+		Contact contacte = caseBeanStored.getContact();
+		
+		List<Phone> phone = contacte.getPhones();
+		String telf = phone.get(0).getNumber();
+		
+		List<Address> addresses = contacte.getAddresses();
+		
+		Address direccio = addresses.get(0);
+				
+		String address = buildAddress(direccio);
+		
+        TAGs[1][1]= caseBeanStored.getFullname().toUpperCase();
+        TAGs[3][1]= caseBeanStored.getSex();
+        TAGs[4][1]= caseBeanStored.getBirthday();
+        TAGs[5][1]= caseBeanStored.getAge()+ " anys";
+        TAGs[6][1]= address;
+        TAGs[7][1]= direccio.getPostcode();
+        TAGs[8][1]= direccio.getCity().toUpperCase();
+        TAGs[10][1]= telf;
+
+	}
+
+	private static String buildAddress(Address direccio) {
+		String address ="";
+		
+		//Concat the street
+		address = address.concat(direccio.getStreet().toUpperCase());
+		
+		//Concat the number
+		address = address.concat(", "+direccio.getNumber());
+		
+		//Concat the floor
+		address = address.concat(" "+direccio.getFloor());
+		
+		//Concat the suite
+		address = address.concat("-"+direccio.getSuite());
+		
+		return address;
+		
+	}
+
+	/**
      * Crea la capçalera del Document
      */
     private static void setCapcalera(Document documento) throws DocumentException {
@@ -609,7 +672,7 @@ public class PdfHelloWorldAction extends Action {
 
     private void procesaInforme(HttpServletRequest request, Document documento, int llengua, PdfWriter writer) throws IOException {
         // Creem la matriu de TAGs de l'Informe
-        setGetTAGs();
+        setGetTAGs(request);
         
         
         // Creem el arxiu on guardarem el pdf generat
