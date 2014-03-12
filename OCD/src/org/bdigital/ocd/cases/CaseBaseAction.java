@@ -170,7 +170,7 @@ public abstract class CaseBaseAction extends BaseAction {
 //            				+",Status:"+adm.getData().getStatus()
 //            				+",DateToDisplay:"+adm.getData().getDateToDisplay()+"> ";
         			if(admAf.getData()!=null && admAf.getData().getProgram()!=null && 
-        					"5".equals(admAf.getData().getProgram().getId())){
+        					"6".equals(admAf.getData().getProgram().getId())){
         				if(admAf.getData().getProtocol()!=null &&
         						!"".equals(admAf.getData().getProtocol().getId())){
         					admissions.add(admAf);
@@ -198,12 +198,12 @@ public abstract class CaseBaseAction extends BaseAction {
     			ferAdmissionInsert = true;
     		}
     		if(ferAdmissionInsert){
-    			//TODO: enlloc de passar el parametre "5", obtenir la action_list disponible per current_date, i si esta el #ENROL:5 , passar aquest idProgram
+    			//TODO: enlloc de passar el parametre "6", obtenir la action_list disponible per current_date, i si esta el #ENROL:6 , passar aquest idProgram
     			errorMsg = new StringHolder("");
             	result = new StringHolder("");
             	String currentTimeString = UtilsString.dateToString(new Date(), Constants.FORMAT_DATE_WS);
             	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,Constants.FORMAT_DATE_WS);
-    			proxy.admission_insert(tokenLK, caseId, "#XENROLL:5", UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), result, errorMsg);
+    			proxy.admission_insert(tokenLK, caseId, "#XENROLL:6", UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), result, errorMsg);
     			Admission a = new Admission();
             	a.setRef(result.value);
             	AdmissionData ad = new AdmissionData();

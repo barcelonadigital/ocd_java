@@ -22,6 +22,7 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.bdigital.ocd.beans.RowBean;
 import org.bdigital.ocd.beans.TabBean;
 import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.FormData;
@@ -46,6 +47,7 @@ import org.bdigital.ocd.tabs.SistemaAdmTab;
 import org.bdigital.ocd.tabs.SituacioPacientTab;
 import org.bdigital.ocd.tabs.SollicitantTab;
 import org.bdigital.ocd.tabs.SollicitudTab;
+import org.bdigital.ocd.tabs.UtilsTabs;
 import org.bdigital.ocd.utils.UtilsWs;
 
 /**
@@ -97,6 +99,8 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
 //    	List<String> gasometriaIdList = Arrays.asList(gasometriaIds);
 //    	boolean isThereGasometria=false;
     	HashMap<String,Question> questionsMap = new HashMap<String,Question>();
+    	//HashMap<String,List<Option>> optionsMap = new HashMap<String,List<Option>>();
+    	HashMap<String,String> valuesMap = new HashMap<String,String>();
     	
     	if(formId!=null){
 
@@ -109,6 +113,7 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         	
         	Form formObj;
         	String xml2;
+        	String idForm1="",idForm2="",idForm3="",idForm4="",idForm5="",idForm6="";
         	if("157".equals(resObj.getTemplate())){
         		xml2 = readFile("diagnostic.xml");
             	formObj = (Form)UtilsWs.xmlToObject(xml2,
@@ -125,6 +130,53 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
             	
             	formObj = (Form)UtilsWs.xmlToObject(result.value,
             			Form.class, FormData.class, Question.class);
+            	
+            	if("164".equals(resObj.getTemplate())){
+            		if(formObj.getFormData().getName().equals("Variables")){
+                		xml2 = readFile("variables.xml");
+            		}else if(formObj.getFormData().getName().equals("CVSO")){
+            			xml2 = readFile("cvso.xml");
+            		}else{
+            			return mapping.findForward(FAILURE);
+            		}
+                	formObj = (Form)UtilsWs.xmlToObject(result.value,
+                			Form.class, FormData.class, Question.class);
+                	if(formObj.getFormData()!=null && formObj.getFormData().getQuestions()!=null){
+                		for(int i=0;i<formObj.getFormData().getQuestions().size();i++){
+                			Question questionObj = formObj.getFormData().getQuestions().get(i);
+                			questionObj.setQuestionId(questionObj.getQuestionId().replaceAll("/", "_"));
+                        	valuesMap.put(questionObj.getQuestionId(), questionObj.getValue());
+                		}
+                	}
+                	
+                	idForm1 = ""+(Integer.parseInt(formId)+1);
+                	idForm2 = ""+(Integer.parseInt(formId)+2);
+                	idForm3 = ""+(Integer.parseInt(formId)+3);
+                	idForm4 = ""+(Integer.parseInt(formId)+4);
+                	idForm5 = ""+(Integer.parseInt(formId)+5);
+                	idForm6 = ""+(Integer.parseInt(formId)+6);
+            		String[] idsArray = new String[]{idForm1,idForm2,idForm3,
+                			idForm4,idForm5,idForm6};
+                	List<Question> questions=new ArrayList<Question>();
+            		Form form2Obj = (Form)UtilsWs.xmlToObject(xml2,
+                			Form.class, FormData.class, Question.class);
+                	if(form2Obj.getFormData()!=null && form2Obj.getFormData().getQuestions()!=null){
+                		for(int i=0;i<form2Obj.getFormData().getQuestions().size();i++){
+                			Question questionObj = form2Obj.getFormData().getQuestions().get(i);
+                			questionObj.setQuestionId(replaceIDs(questionObj.getQuestionId(),idsArray));
+                			questionObj.setCondition(replaceIDs(questionObj.getCondition(),idsArray));
+                			questionObj.setValue(valuesMap.get(questionObj.getQuestionId()));
+                			for(int j=0;j<questionObj.getOptions().size();j++){
+                				Option optionObj = questionObj.getOptions().get(j);
+                				if(optionObj.getDescription().equals(questionObj.getValue())){
+                					questionObj.setValue(optionObj.getOptionId());
+                				}
+                			}
+                		}
+                		questions.addAll(form2Obj.getFormData().getQuestions());
+                	}
+                	formObj.getFormData().setQuestions(questions);
+            	}
         	}
 
     		if(formObj.getFormData()!=null){
@@ -138,6 +190,7 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
                 	formBean.setQuestionId(questionObj.getQuestionId(), questionObj.getQuestionId());
                 	formBean.setQuestionValue(questionObj.getQuestionId(), questionObj.getValue());
                 	formBean.setQuestionOption(questionObj.getQuestionId(), questionObj.getValue());
+                	//questionObj.setOptions(optionsMap.get(questionObj.getQuestionId()));
                 	questionsMap.put(questionObj.getQuestionId(), questionObj);
 //                	List<Option> options=new ArrayList<Option>();
 //                	Option op1 = new Option();
@@ -166,7 +219,241 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
 //        		getpregunta10
 //        		new row large 
 //        	}
-        	if("157".equals(resObj.getTemplate())){
+    		if("164".equals(resObj.getTemplate()) && formObj.getFormData().getName().equals("Variables")){
+    			
+        		List<TabBean> tabs = new ArrayList<TabBean>();
+        		
+        		TabBean tab;
+            	List<RowBean> rows;
+            	
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Diagnostic");
+            	UtilsTabs.addBigField(idForm2+"_8",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm2+"_9",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+        		
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Espirometria");
+            	tab.setId("ESPIROMETRIA_ID");
+            	UtilsTabs.addSmallField(idForm3+"_10",idForm3+"_11",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_12",idForm3+"_13",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_14",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Gasometria");
+            	tab.setId("GASOMETRIA_ID");
+            	UtilsTabs.addSmallField(idForm3+"_15",idForm3+"_16",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_18",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_19",idForm3+"_20",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_21",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_22",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Pulsioximetria");
+            	tab.setId("PULSIOXIMETRIA_ID");
+            	UtilsTabs.addSmallField(idForm3+"_23",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Motiu de la sol·licitud");
+            	UtilsTabs.addSmallField(idForm1+"_5",null,questionsMap,rows);
+            	UtilsTabs.addBigField(idForm1+"_6",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm1+"_7",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+            	
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Situació del pacient");
+            	UtilsTabs.addBigField(idForm4+"_24",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Equip prescrit");
+            	UtilsTabs.addBigField(idForm4+"_25",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_26",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_27",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_28",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_29",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Administració d'oxigen");
+            	UtilsTabs.addBigField(idForm4+"_30",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_31",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm4+"_32",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Fluxe i hores");
+            	UtilsTabs.addSmallField(idForm4+"_34",idForm4+"_35",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm4+"_36",null,questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_33",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("CPAP/BIPAP");
+            	UtilsTabs.addBigField(idForm4+"_37",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_38",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Plà terapèutic");
+            	UtilsTabs.addBigField(idForm4+"_39",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm4+"_40",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Proveïdor");
+            	UtilsTabs.addBigField(idForm5+"_41",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm5+"_42",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Metge sol·licitant");
+            	UtilsTabs.addBigField(idForm6+"_44",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm6+"_45",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Observacions");
+            	UtilsTabs.addBigField(idForm5+"_43",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+            	
+            	request.setAttribute("tabs", tabs);
+        	}else if("164".equals(resObj.getTemplate()) && formObj.getFormData().getName().equals("CVSO")){
+
+        		List<TabBean> tabs = new ArrayList<TabBean>();
+        		
+        		TabBean tab;
+            	List<RowBean> rows;
+            	
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Identificació");
+            	UtilsTabs.addBigField(idForm1+"_1",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm1+"_2",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm1+"_3",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm1+"_4",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm1+"_5",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm1+"_6",idForm1+"_7",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm1+"_8",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+        		
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Adequació i Adherencia");
+            	UtilsTabs.addBigField(idForm2+"_9",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_10",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_11",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_12",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_13",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_14",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_15",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_17",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_18",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm2+"_19",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Proves complementàries");
+            	UtilsTabs.addBigField(idForm3+"_20",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_21",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_22",null,questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_23",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_24",idForm3+"_25",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_26",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_27",null,questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_28",idForm3+"_29",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_30",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_31",null,questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_32",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_33",null,questionsMap,rows);
+            	UtilsTabs.addBigField(idForm3+"_34",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_35",null,questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_36",idForm3+"_37",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_38",null,questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_39",null,questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm3+"_42",null,questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Habit tabàquic");
+            	UtilsTabs.addBigField(idForm4+"_62",questionsMap,rows);
+            	UtilsTabs.addSmallField(null,idForm4+"_64",questionsMap,rows);
+            	UtilsTabs.addSmallField(idForm4+"_65",idForm4+"_66",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm4+"_69",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Estratificació");
+            	UtilsTabs.addBigField(idForm5+"_43",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_44",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_45",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_46",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_47",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_48",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_49",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_50",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_51",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_52",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_53",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_54",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_55",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_56",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_57",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_58",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_59",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_60",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm5+"_61",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+            	
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Seguiment OCD");
+            	UtilsTabs.addBigField(idForm6+"_67",questionsMap,rows);
+            	UtilsTabs.addBigField(idForm6+"_68",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+            	
+            	request.setAttribute("tabs", tabs);
+        	}else if("157".equals(resObj.getTemplate())){
         		List<TabBean> tabs = new ArrayList<TabBean>();
             	DiagnosticTab.generateTab(questionsMap,tabs);
             	EspirometriaTab.generateTab(questionsMap,tabs);
@@ -196,7 +483,7 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         		AltresTab.generateTab(questionsMap,tabs);
             	request.setAttribute("tabs", tabs);
         	}
-        	
+    		
         	
         	return mapping.findForward(SUCCESS);
             	
@@ -204,4 +491,18 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
     		return mapping.findForward(FAILURE);
     	}
     }
+	private String replaceIDs(String inputString, String[] idsArray) {
+		if(inputString==null){
+			return inputString;
+		}else{
+			inputString = inputString.replaceAll("ID2", idsArray[0]);
+			inputString = inputString.replaceAll("ID3", idsArray[1]);
+			inputString = inputString.replaceAll("ID4", idsArray[2]);
+			inputString = inputString.replaceAll("ID5", idsArray[3]);
+			inputString = inputString.replaceAll("ID6", idsArray[4]);
+			inputString = inputString.replaceAll("ID7", idsArray[5]);
+			inputString = inputString.replaceAll("/", "_");
+			return inputString;
+		}
+	}
 }

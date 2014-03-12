@@ -500,7 +500,9 @@
             <div class="botoneslateralescontainer">
               <div>
 	            <html:link href="#" styleClass="btn-primary btn savedataform" onclick="return doSave();">Desar</html:link>
+	            <!-- 
 	            <html:link href="#" styleClass="btn-primary btn acceptdataform" onclick="return doConfirm();">Finalitz.</html:link>
+	             -->
                 <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="btn-warning btn canceldataform">Cancel.</html:link>
               </div>
             </div>

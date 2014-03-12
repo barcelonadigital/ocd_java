@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.rpc.holders.StringHolder;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -41,27 +42,32 @@ public class FormSetAnswersAction extends BaseAction {
         // extract user data
     	FormSetAnswersForm formBean = (FormSetAnswersForm)form;
     	
-//    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
+    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	String formId=formBean.getIdForm();
     	
     	if(formId!=null){
-//    		StringHolder result = new StringHolder("");
-//    		StringHolder errorMsg = new StringHolder("");
+    		StringHolder result = new StringHolder("");
+    		StringHolder errorMsg = new StringHolder("");
     		Iterator<String> iter = formBean.getQuestionIdIterator();
     		while(iter.hasNext()){
-//        		StringHolder refresh = new StringHolder("");
-//            	StringHolder next = new StringHolder("");
-//            	StringHolder next_form = new StringHolder("");
+        		result = new StringHolder("");
+        		errorMsg = new StringHolder("");
+        		StringHolder refresh = new StringHolder("");
+            	StringHolder next = new StringHolder("");
+            	StringHolder next_form = new StringHolder("");
     			String questionId = iter.next();
             	String questionType = formBean.getQuestionType(questionId);
             	if("VERTICAL_RADIO".equals(questionType) || "HORIZONTAL_RADIO".equals(questionType) ||
             			"TEXT".equals(questionType) || "NUMERICAL".equals(questionType) || "TEXT_AREA".equals(questionType) || "DATE".equals(questionType)){
-//            		String optionId = formBean.getQuestionOption(questionId);
+            		String optionId = formBean.getQuestionOption(questionId);
             		String value = formBean.getQuestionValue(questionId);
             		if(!"".equals(value) && "DATE".equals(questionType)){
             			value = UtilsString.dateToString(UtilsString.stringtoDate(value, Constants.FORMAT_DATE_WEB), Constants.FORMAT_DATE_WS);
+            		}else if(value==null){
+            			value="";
             		}
-            		//proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
+            		questionId = questionId.replaceAll("_","/");
+            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
             	}
     		}
 //        	for(int i=0;i<formBean.getQuestionSize();i++){
