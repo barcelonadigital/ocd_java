@@ -73,12 +73,10 @@
 		              <a href="<html:rewrite action="/caseFormStaticDetailsAction.do"/>?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>QÜESTIONARI</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
-		              <logic:equal name="formItem" property="status" value="CLOSED">
-		              <span class="col3"><span>Finalitzat</span></span>
-		              </logic:equal>
-		              <logic:equal name="formItem" property="status" value="OPEN">
-		              <span class="col3"><span>Pendent</span></span>
-		              </logic:equal>
+		              <span class="col3"><span>
+		              <logic:equal name="formItem" property="status" value="CLOSED">Finalitzat</logic:equal>
+		              <logic:equal name="formItem" property="status" value="OPEN">Pendent</logic:equal>
+		              </span></span>
 		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
 		              </a>
 		              <ul class="dropdown-menu">

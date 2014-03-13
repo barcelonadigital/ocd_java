@@ -123,7 +123,8 @@ public abstract class CaseBaseAction extends BaseAction {
         		caseBean.setNickname(caseGetAf.getData().getNickname());
         		caseBean.setBirthday(caseGetAf.getData().getBdate());
         		caseBean.setAge(caseGetAf.getData().getAge());
-        		caseBean.setSex(caseGetAf.getData().getDescGender());
+        		caseBean.setSex(caseGetAf.getData().getGender());
+        		caseBean.setDescSex(caseGetAf.getData().getDescGender());
         	}
         	caseBean.setNick(caseGetAf.getNick());
 			caseBean.setNif(caseGetAf.getNif());

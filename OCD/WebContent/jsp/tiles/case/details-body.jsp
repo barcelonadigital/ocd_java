@@ -2,8 +2,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+	    <script type="text/javascript">
+		    function doSave() {
+	          document.getElementById('newForm2').submit();
+	          return false;
+	        }
+	    </script>
         <div class="content contabs">
-          <html:form styleId="newForm2" action="/caseDetailsAction">
+          <html:form styleId="newForm2" action="/caseSaveAction">
           <html:hidden name="CaseDetailsForm" property="idCase" />
           <div class="contentconbotoneslaterales">
             <div class="tabbable">
@@ -119,7 +125,7 @@
               	<a href="#" class="btn-primary btn editdataform">Editar</a>
               </div>
               <div class="editform">
-	            <a href="#" class="btn-primary btn savedataform">Desar</a>
+	            <a onclick="doSave()" href="#" class="btn-primary btn savedataform">Desar</a>
 	            <a href="#" class="btn-warning btn canceldataform">Cancel.</a>
               </div>
             </div>

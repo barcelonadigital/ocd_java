@@ -31,6 +31,7 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
     
 	private String nickname;
 	private String birthday;
+	private String descSex;
 	
 	private Contact contact;
 
@@ -128,6 +129,14 @@ public class CaseBean extends org.apache.struts.action.ActionForm {
 
 	public void setContact(Contact contact) {
 		this.contact = contact;
+	}
+
+	public String getDescSex() {
+		return descSex;
+	}
+
+	public void setDescSex(String descSex) {
+		this.descSex = descSex;
 	}
 	
 	
