@@ -282,12 +282,16 @@ public class PdfHelloWorldAction extends Action {
 				
 		String address = buildAddress(direccio);
 		
-		String cognomNom= getCognomNom(request);
+		String cognomNom = getCognomNom();
+		
+		String birthday = getBirthday(caseBeanStored.getBirthday());
+		
+		String SexForReport = getSexForReport(caseBeanStored.getSex());
 		
 		TAGs[0][1]="CONSULTA DE VALIDACIÓ I SEGUIMENT D'OXIGENOTERAPIA";
         TAGs[1][1]= cognomNom;
-        TAGs[3][1]= caseBeanStored.getSex();
-        TAGs[4][1]= caseBeanStored.getBirthday();
+        TAGs[3][1]= SexForReport;
+        TAGs[4][1]= birthday;
         TAGs[5][1]= caseBeanStored.getAge()+ " anys";
         TAGs[6][1]= address;
         TAGs[7][1]= direccio.getPostcode();
@@ -298,7 +302,25 @@ public class PdfHelloWorldAction extends Action {
 
 	}
 
-	private static String getCognomNom(HttpServletRequest request) {
+	private static String getSexForReport(String sex) {
+		String result = "";
+
+		if(sex.contains("M")){
+			result = "Masc.";
+			
+		}else if(sex.contains("F")){
+			result = "Fem.";
+			
+		}
+		return result;
+	}
+
+	private static String getBirthday(String birthday) {
+		birthday = birthday.replace("/", ".");
+		return birthday;
+	}
+
+	private static String getCognomNom() {
 		
 		String nomConvertit = "";
 		
