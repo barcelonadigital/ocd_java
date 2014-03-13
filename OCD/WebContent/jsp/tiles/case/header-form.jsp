@@ -32,9 +32,7 @@
               <a href="#" data-toggle="dropdown" class="btn-large dropdown-toggle">Dades de contacte<span class="caret"></span></a>
               <div class="dropdown-menu">
               <ul>
-                <logic:present name="caseBean" property="contact">
                 <bean:define id="contactItem" name="caseBean" property="contact" type="org.bdigital.ocd.model.Contact"/>
-                <logic:present name="contactItem" property="addresses">
 			    <logic:iterate name="contactItem" property="addresses" id="addressItem" indexId="addressIdx" type="org.bdigital.ocd.model.Address" >
                       <li><b>Adreça ${addressIdx+1}:</b></li>
                       <li><bean:write name="addressItem" property="street" />
@@ -45,17 +43,15 @@
                           <bean:write name="addressItem" property="city" /></li>
                       <li><bean:write name="addressItem" property="country" /><br></li>
 				</logic:iterate>
+				<logic:iterate name="contactItem" property="phones" id="phoneItem" indexId="phoneIdx" type="org.bdigital.ocd.model.Phone" >
+                      <logic:notEmpty name="phoneItem" property="number"><logic:equal name="phoneItem" property="type" value="home">
+                      <li><b>Telèfon:</b></li>
+                      <li><bean:write name="phoneItem" property="number" /><br></li>
+                      </logic:equal></logic:notEmpty>
+				</logic:iterate>
 				<logic:empty name="contactItem" property="addresses">
                       <li>No hi ha cap adreça</li>
 				</logic:empty>
-				</logic:present>
-                <logic:notPresent name="contactItem" property="addresses">
-                      <li>No hi ha cap adreça</li>
-                </logic:notPresent>
-				</logic:present>
-                <logic:notPresent name="caseBean" property="contact">
-                      <li>No hi ha cap adreça</li>
-                </logic:notPresent>
               </ul></div>
             </div>  
           </div>

@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.bdigital.ocd.model.Address;
+import org.bdigital.ocd.model.Phone;
 
 /**
  *
@@ -57,20 +58,27 @@ public class CaseDetailsAction extends CaseBaseAction {
 //
 //        	Contact contact = (Contact)UtilsWs.xmlToObject(result.value,Contact.class,Name.class,
 //        			Address.class,Mail.class,AIM.class,Device.class,Phone.class);
-        	if(caseBean.getContact()!=null && 
-        			caseBean.getContact().getAddresses()!=null && 
+        	if(caseBean.getContact()!=null){ 
+        		if(caseBean.getContact().getAddresses()!=null && 
         			caseBean.getContact().getAddresses().size()>0){
         		
-        		Address addressObj =caseBean.getContact().getAddresses().get(0);
-        		formBean.setStreetName(addressObj.getStreet());
-        		formBean.setNumber(addressObj.getNumber());
-        		formBean.setFloor(addressObj.getFloor());
-        		formBean.setSuite(addressObj.getSuite());
-        		formBean.setDistrict(addressObj.getDistrict());
-        		formBean.setCity(addressObj.getCity());
-        		formBean.setPostcode(addressObj.getPostcode());
-        		formBean.setState(addressObj.getState());
-        		formBean.setCountry(addressObj.getCountry());
+	        		Address addressObj =caseBean.getContact().getAddresses().get(0);
+	        		formBean.setStreetName(addressObj.getStreet());
+	        		formBean.setNumber(addressObj.getNumber());
+	        		formBean.setFloor(addressObj.getFloor());
+	        		formBean.setSuite(addressObj.getSuite());
+	        		formBean.setDistrict(addressObj.getDistrict());
+	        		formBean.setCity(addressObj.getCity());
+	        		formBean.setPostcode(addressObj.getPostcode());
+	        		formBean.setState(addressObj.getState());
+	        		formBean.setCountry(addressObj.getCountry());
+        		}
+        		if(caseBean.getContact().getPhones()!=null && 
+            			caseBean.getContact().getPhones().size()>0){
+            		
+	        		Phone phoneObj =caseBean.getContact().getPhones().get(0);
+	        		formBean.setPhoneNumber(phoneObj.getNumber());
+        		}
         	}
         	
         	return mapping.findForward(SUCCESS);

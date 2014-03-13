@@ -101,6 +101,10 @@
                       <label for="country">País</label>
                       <html:text name="CaseDetailsForm" styleId="country" property="country" disabled="true" />
                     </div>
+                    <div class="smallfield">
+                      <label for="phoneNumber">Telèfon</label>
+                      <html:text name="CaseDetailsForm" styleId="phoneNumber" property="phoneNumber" disabled="true" />
+                    </div>
                   </div>
                   <!-- 
                   <button onclick="" class="btn btn-large btn-info add-fields-group">Afegir adreça</button>

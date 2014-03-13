@@ -133,6 +133,11 @@ public class CaseNewAction extends BaseAction {
         	nameObj.setFamilyName(formBean.getFamilyName());
         	nameObj.setFamilyName2(formBean.getFamilyName2());
         	caseContactObj.setName(nameObj);
+        	Phone phoneObj = new Phone();
+        	phoneObj.setNumber(formBean.getPhoneNumber());
+        	phoneObj.setType("home");
+        	List<Phone> phones = new LinkedList<Phone>();
+        	phones.add(phoneObj);
         	Address addressObj = new Address();
         	addressObj.setKind("Main Address");
         	addressObj.setStreet(formBean.getStreetName());
@@ -148,6 +153,7 @@ public class CaseNewAction extends BaseAction {
         	List<Address> addresses = new LinkedList<Address>();
         	addresses.add(addressObj);
         	caseContactObj.setAddresses(addresses);
+        	caseContactObj.setPhones(phones);
         	
         	caseXmlString = UtilsWs.objectToXml(caseContactObj,Contact.class,Name.class,
         			Address.class,Mail.class,AIM.class,Device.class,Phone.class);

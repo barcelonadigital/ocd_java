@@ -38,6 +38,7 @@ public class CaseNewForm extends ValidatorForm {
 	private String postcode;
 	private String state;
 	private String country;
+	private String phoneNumber;
 	
 	private String showLinkCreate;
 	private String doNew;
@@ -173,6 +174,12 @@ public class CaseNewForm extends ValidatorForm {
 	}
 	public void setDoNew(String doNew) {
 		this.doNew = doNew;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
     
 

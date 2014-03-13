@@ -32,6 +32,7 @@ public class CaseDetailsForm extends CaseBaseForm {
 	private String postcode;
 	private String state;
 	private String country;
+	private String phoneNumber;
 
 	public String getStreetName() {
 		return streetName;
@@ -151,6 +152,14 @@ public class CaseDetailsForm extends CaseBaseForm {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
 	

@@ -355,7 +355,7 @@
 	    </script>
         <div class="content contabs">
           <bean:define id="formShortName" name="CaseFormStaticDetailsForm" property="name" type="java.lang.String"/>
-          <h3><%= formShortName/*.toUpperCase()*/ %></h3>
+          <h2 class="asses"><%= formShortName/*.toUpperCase()*/ %></h2>
           <html:form styleId="newForm" action="/formSetAnswersAction">
           <html:hidden property="finish"/>
           <html:hidden name="CaseFormStaticDetailsForm" property="idCase"/>
