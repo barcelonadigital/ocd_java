@@ -288,6 +288,8 @@ public class PdfHelloWorldAction extends Action {
 		
 		String SexForReport = getSexForReport(caseBeanStored.getSex());
 		
+		
+		//SET DADES
 		TAGs[0][1]="CONSULTA DE VALIDACIÓ I SEGUIMENT D'OXIGENOTERAPIA";
         TAGs[1][1]= cognomNom;
         TAGs[3][1]= SexForReport;
@@ -297,6 +299,7 @@ public class PdfHelloWorldAction extends Action {
         TAGs[7][1]= direccio.getPostcode();
         TAGs[8][1]= direccio.getCity().toUpperCase();
         TAGs[10][1]= telf;
+        TAGs[12][1]= caseBeanStored.getCip();
         
         TAGs[25][1]= "CONSULTA DE VALIDACIÓ";
 
@@ -304,7 +307,7 @@ public class PdfHelloWorldAction extends Action {
 
 	private static String getSexForReport(String sex) {
 		String result = "";
-
+		
 		if(sex.contains("M")){
 			result = "Masc.";
 			
