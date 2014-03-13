@@ -52,7 +52,7 @@
             </div>
           </li>
           <li><a href="#" data-toggle="dropdown" class="tasks">
-              <strong>Tasques</strong><span>Pendents, Altes</span></a>
+              <strong>Tasques</strong><span>Pendents, ...</span></a>
             <div class="dropdown-menu">
               
               <div class="task_links">

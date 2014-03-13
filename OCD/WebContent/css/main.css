@@ -9089,7 +9089,7 @@ legend.questionform {
 .dataform .fields-row div.bigfield label.radio.active {
     font-weight:700
 }
-#newForm .dataform .fields-row div input[type="text"][disabled],.dataform .fields-row div textarea[disabled] {
+#formSearch div input[type="text"][disabled],#newForm .dataform .fields-row div input[type="text"][disabled],.dataform .fields-row div textarea[disabled] {
 	padding-left:16px;
 	background-color:#ccc;
 	border-width:1px;

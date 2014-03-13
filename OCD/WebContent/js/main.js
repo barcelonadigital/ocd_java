@@ -217,6 +217,69 @@
           }
       }
   }
+
+  $(document).ready(function() {
+	  checkNifNiePas();
+	  $("#nie").keyup(function() {
+		  checkNifNiePas();
+	  });
+	  $("#nif").keyup(function() {
+		  checkNifNiePas();
+	  });
+	  $("#pas").keyup(function() {
+		  checkNifNiePas();
+	  });
+	  $("#formSearch #cip").keyup(function() {
+		  checkNifNiePas();
+	  });
+  });
+  function checkNifNiePas() {
+	  var nieInput = $("#nie");
+	  var nifInput = $("#nif");
+	  var pasInput = $("#pas");
+	  var cipInput = $("#formSearch #cip");
+	  if (typeof nieInput !== 'undefined' && typeof $(nieInput).val() !== 'undefined' && $(nieInput).val() !== '') {
+		  $(nieInput).not( "#newForm2 #nie" ).attr('disabled', false);
+		  $(nifInput).not( "#newForm2 #nif" ).attr('disabled', true);
+		  $(pasInput).not( "#newForm2 #pas" ).attr('disabled', true);
+		  $(cipInput).attr('disabled', true);
+		  $("#newForm2 #nie").attr('readonly', false);
+		  $("#newForm2 #nif").attr('readonly', true);
+		  $("#newForm2 #pas").attr('readonly', true);
+	  }else if (typeof nifInput !== 'undefined' && typeof $(nifInput).val() !== 'undefined' && $(nifInput).val() !== '') {
+		  $(nieInput).not( "#newForm2 #nie" ).attr('disabled', true);
+		  $(nifInput).not( "#newForm2 #nif" ).attr('disabled', false);
+		  $(pasInput).not( "#newForm2 #pas" ).attr('disabled', true);
+		  $(cipInput).attr('disabled', true);
+		  $("#newForm2 #nie").attr('readonly', true);
+		  $("#newForm2 #nif").attr('readonly', false);
+		  $("#newForm2 #pas").attr('readonly', true);
+	  }else if (typeof pasInput !== 'undefined' && typeof $(pasInput).val() !== 'undefined' && $(pasInput).val() !== '') {
+		  $(nieInput).not( "#newForm2 #nie" ).attr('disabled', true);
+		  $(nifInput).not( "#newForm2 #nif" ).attr('disabled', true);
+		  $(pasInput).not( "#newForm2 #pas" ).attr('disabled', false);
+		  $(cipInput).attr('disabled', true);
+		  $("#newForm2 #nie").attr('readonly', true);
+		  $("#newForm2 #nif").attr('readonly', true);
+		  $("#newForm2 #pas").attr('readonly', false);
+	  }else if (typeof cipInput !== 'undefined' && typeof $(cipInput).val() !== 'undefined' && $(cipInput).val() !== '') {
+		  $(nieInput).not( "#newForm2 #nie" ).attr('disabled', true);
+		  $(nifInput).not( "#newForm2 #nif" ).attr('disabled', true);
+		  $(pasInput).not( "#newForm2 #pas" ).attr('disabled', true);
+		  $(cipInput).attr('disabled', false);
+		  $("#newForm2 #nie").attr('readonly', true);
+		  $("#newForm2 #nif").attr('readonly', true);
+		  $("#newForm2 #pas").attr('readonly', true);
+	  }else{
+		  $(nieInput).not( "#newForm2 #nie" ).attr('disabled', false);
+		  $(nifInput).not( "#newForm2 #nif" ).attr('disabled', false);
+		  $(pasInput).not( "#newForm2 #pas" ).attr('disabled', false);
+		  $(cipInput).attr('disabled', false);
+		  $("#newForm2 #nie").attr('readonly', false);
+		  $("#newForm2 #nif").attr('readonly', false);
+		  $("#newForm2 #pas").attr('readonly', false);
+	  }
+  }
   
 // Cambia los fondos de la tabla según el estado en admin-matrix.html
   $(document).ready(function() {

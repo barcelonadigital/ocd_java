@@ -61,7 +61,7 @@ public class FormSetAnswersAction extends BaseAction {
             			"TEXT".equals(questionType) || "NUMERICAL".equals(questionType) || "TEXT_AREA".equals(questionType) || "DATE".equals(questionType)){
             		String optionId = formBean.getQuestionOption(questionId);
             		String value = formBean.getQuestionValue(questionId);
-            		if(!"".equals(value) && "DATE".equals(questionType)){
+            		if(value!=null && !"".equals(value) && "DATE".equals(questionType)){
             			value = UtilsString.dateToString(UtilsString.stringtoDate(value, Constants.FORMAT_DATE_WEB), Constants.FORMAT_DATE_WS);
             		}else if(value==null){
             			value="";

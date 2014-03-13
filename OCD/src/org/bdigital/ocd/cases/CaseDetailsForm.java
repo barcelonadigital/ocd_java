@@ -22,6 +22,7 @@ public class CaseDetailsForm extends CaseBaseForm {
 	private String cip;
 	private String birthday;
 	private String sex;
+	private String descSex;
 	
 	private String streetName;
 	private String number;
@@ -160,6 +161,14 @@ public class CaseDetailsForm extends CaseBaseForm {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getDescSex() {
+		return descSex;
+	}
+
+	public void setDescSex(String descSex) {
+		this.descSex = descSex;
 	}
 	
 	

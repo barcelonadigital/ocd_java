@@ -25,7 +25,7 @@
           <small>Pacient</small>
           <h2><bean:write name="caseBean" property="fullname" /></h2>
           <span><strong>Edat:</strong> <bean:write name="caseBean" property="age" /></span>
-          <span><strong>Gènere:</strong> <bean:write name="caseBean" property="sex" /></span>
+          <span><strong>Gènere:</strong> <bean:write name="caseBean" property="descSex" /></span>
           <span><strong>CIP:</strong> <bean:write name="caseBean" property="cip" /></span>
           <div class="contactinfo">
             <div class="dropdown">

@@ -50,6 +50,7 @@ public class CaseDetailsAction extends CaseBaseAction {
         	formBean.setPas(caseBean.getPas());
         	formBean.setNie(caseBean.getNie());
         	formBean.setSex(caseBean.getSex());
+        	formBean.setDescSex(caseBean.getDescSex());
         	formBean.setBirthday(caseBean.getBirthday());
 
 //    		StringHolder errorMsg = new StringHolder("");

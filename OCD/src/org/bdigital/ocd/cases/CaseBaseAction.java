@@ -100,20 +100,7 @@ public abstract class CaseBaseAction extends BaseAction {
     		
     		StringHolder errorMsg = new StringHolder("");
         	StringHolder result = new StringHolder("");
-        	try{
-            	proxy.case_get(tokenLK,caseId,result,errorMsg);
-            }catch(LINKCAREException e){
-            	
-            	if ("".equals(result.value) || result.value==null) {
-
-                    ActionMessages errors = new ActionMessages();
-                    errors.add("general",new ActionMessage("errors.resultWS",""));
-                    saveErrors(request, errors);
-                    return mapping.findForward(FAILURE);
-                }else{
-                	throw e;
-                }
-            }
+        	proxy.case_get(tokenLK,caseId,result,errorMsg);
         	
         	Case caseGet = (Case)UtilsWs.xmlToObject(result.value,Case.class,
     				Data.class);

@@ -389,6 +389,12 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         		rows = new ArrayList<RowBean>();
             	tab.setTitle("Proves complementàries");
             	UtilsTabs.addBigField(idForm3+"_20",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Test de la marxa");
             	UtilsTabs.addBigField(idForm3+"_21",questionsMap,rows);
             	UtilsTabs.addSmallField(idForm3+"_22",null,questionsMap,rows);
             	UtilsTabs.addBigField(idForm3+"_23",questionsMap,rows);
@@ -396,6 +402,12 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
             	UtilsTabs.addBigField(idForm3+"_26",questionsMap,rows);
             	UtilsTabs.addSmallField(idForm3+"_27",null,questionsMap,rows);
             	UtilsTabs.addSmallField(idForm3+"_28",idForm3+"_29",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Pulsioximetria nocturna");
             	UtilsTabs.addBigField(idForm3+"_30",questionsMap,rows);
             	UtilsTabs.addSmallField(idForm3+"_31",null,questionsMap,rows);
             	UtilsTabs.addBigField(idForm3+"_32",questionsMap,rows);
@@ -423,6 +435,12 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         		rows = new ArrayList<RowBean>();
             	tab.setTitle("Estratificació");
             	UtilsTabs.addBigField(idForm5+"_43",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Atenció Primària / RAE");
             	UtilsTabs.addBigField(idForm5+"_44",questionsMap,rows);
             	UtilsTabs.addBigField(idForm5+"_45",questionsMap,rows);
             	UtilsTabs.addBigField(idForm5+"_46",questionsMap,rows);
@@ -431,6 +449,12 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
             	UtilsTabs.addBigField(idForm5+"_49",questionsMap,rows);
             	UtilsTabs.addBigField(idForm5+"_50",questionsMap,rows);
             	UtilsTabs.addBigField(idForm5+"_51",questionsMap,rows);
+        		tab.setRows(rows);
+        		tabs.add(tab);
+
+        		tab = new TabBean();
+        		rows = new ArrayList<RowBean>();
+            	tab.setTitle("Pneumologia");
             	UtilsTabs.addBigField(idForm5+"_52",questionsMap,rows);
             	UtilsTabs.addBigField(idForm5+"_53",questionsMap,rows);
             	UtilsTabs.addBigField(idForm5+"_54",questionsMap,rows);

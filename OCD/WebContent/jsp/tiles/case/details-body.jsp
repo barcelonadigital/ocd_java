@@ -23,7 +23,7 @@
                   <div class="fields-row">
                     <div class="smallfield">
                       <label for="cip">CIP</label>
-                      <html:text name="CaseDetailsForm" styleId="cip" property="cip" disabled="true" />
+                      <html:text name="CaseDetailsForm" styleId="cip" property="cip" disabled="true" readonly="true" />
                     </div>
                     <div class="smallfield">
                       <label for="nif">NIF</label>
@@ -49,10 +49,10 @@
 				      </script>
                     </div>
                     <div class="smallfield">
-                      <label for="sex">Gènere</label>
+                      <label for="descSex">Gènere</label>
 	                  <div class="btn-group">
-	                    <html:hidden property="sex" styleId="sex" />
-	                    <button disabled="disabled" data-toggle="dropdown" data-target="sex" class="btn btn-large dropdown-toggle disabled"><bean:write name="CaseDetailsForm" property="sex" /><span class="caret triangulo"></span></button>
+	                    <html:hidden property="descSex" styleId="descSex" />
+	                    <button disabled="disabled" data-toggle="dropdown" data-target="descSex" class="btn btn-large dropdown-toggle disabled"><bean:write name="CaseDetailsForm" property="descSex" /><span class="caret triangulo"></span></button>
 	                    <ul class="dropdown-menu">
 	                      <li><a href="#"><bean:message key="label.sex.dona"/></a></li>
 	                      <li><a href="#"><bean:message key="label.sex.home"/></a></li>
