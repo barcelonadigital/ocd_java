@@ -57,7 +57,7 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
     	if(tokenLK == null && !(this instanceof LoginAction)){
     		if(autologin){
 	    		LoginForm formBean = new LoginForm();
-	            formBean.setUsername("jim.roldan");
+	            formBean.setUsername("claudia.perez");
 	            formBean.setPassword("linkcare");
 	            request.setAttribute("LoginForm", formBean);
 	            return mapping.findForward("loginAuto");

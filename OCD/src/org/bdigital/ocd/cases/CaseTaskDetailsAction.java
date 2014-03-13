@@ -135,7 +135,7 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 				refFirstItem = fAf.getRef();
                                 			}
                                 		}
-                                		if("242".equals(taskObj.getRefs()[0])){
+                                		if("253".equals(taskObj.getRefs()[0])){
                                 			FormAf fAf = new FormAf(new Form());
                                     		fAf.setItemType("DOCUMENT");
                                     		fAf.setShortName("Enviament de document al històric clínic");
