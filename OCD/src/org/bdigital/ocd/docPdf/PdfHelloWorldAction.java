@@ -273,36 +273,50 @@ public class PdfHelloWorldAction extends Action {
 				
 		Contact contacte = caseBeanStored.getContact();
 		
-		List<Phone> phone = contacte.getPhones();
-		String telf = phone.get(0).getNumber();
+		entradaAddresses(contacte);
 		
-		List<Address> addresses = contacte.getAddresses();
+		entradaDadesPers(contacte);
 		
-		Address direccio = addresses.get(0);
-				
-		String address = buildAddress(direccio);
-		
+		//SET DADES FIXES
+		TAGs[0][1]="CONSULTA DE VALIDACIÓ I SEGUIMENT D'OXIGENOTERAPIA";
+		TAGs[25][1]= "CONSULTA DE VALIDACIÓ";
+			
+
+	}
+
+	private static void entradaDadesPers(Contact contacte) {
 		String cognomNom = getCognomNom();
 		
 		String birthday = getBirthday(caseBeanStored.getBirthday());
 		
 		String SexForReport = getSexForReport(caseBeanStored.getSex());
 		
+		List<Phone> phone = contacte.getPhones();
+		String telf = phone.get(0).getNumber();
 		
 		//SET DADES
-		TAGs[0][1]="CONSULTA DE VALIDACIÓ I SEGUIMENT D'OXIGENOTERAPIA";
         TAGs[1][1]= cognomNom;
         TAGs[3][1]= SexForReport;
         TAGs[4][1]= birthday;
         TAGs[5][1]= caseBeanStored.getAge()+ " anys";
-        TAGs[6][1]= address;
-        TAGs[7][1]= direccio.getPostcode();
-        TAGs[8][1]= direccio.getCity().toUpperCase();
+        
         TAGs[10][1]= telf;
         TAGs[12][1]= caseBeanStored.getCip();
-        
-        TAGs[25][1]= "CONSULTA DE VALIDACIÓ";
+        	
+	}
 
+	private static void entradaAddresses(Contact contacte) {
+		List<Address> addresses = contacte.getAddresses();
+		
+		if(!addresses.isEmpty()){
+			
+			Address direccio = addresses.get(0);
+			String address = buildAddress(direccio);
+			
+			TAGs[6][1]= address;
+	        TAGs[7][1]= direccio.getPostcode();
+	        TAGs[8][1]= direccio.getCity().toUpperCase();
+		}			
 	}
 
 	private static String getSexForReport(String sex) {
