@@ -50,15 +50,15 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
             throws Exception {
         
     	proxy = new org.bdigital.ocd.ws.LINKCAREProxyWrapper();
-    	proxy.setEndpoint("http://dev3.linkcare.es/ws/ServerWSDL.php");
-    	//proxy.setEndpoint("http://localhost:8081/BDIGITAL-LCWS/ServerWSDL.php");
+    	//proxy.setEndpoint("http://dev3.linkcare.es/ws/ServerWSDL.php");
+    	proxy.setEndpoint("http://localhost:8081/BDIGITAL-LCWS/ServerWSDL.php");
     	HttpSession session = request.getSession();
     	String tokenLK = (String) session.getAttribute("tokenLK");
     	if(tokenLK == null && !(this instanceof LoginAction)){
     		if(autologin){
 	    		LoginForm formBean = new LoginForm();
 	            formBean.setUsername("ernest.pastor");
-	            formBean.setPassword("linkcare");
+	            formBean.setPassword("bdigital");
 	            request.setAttribute("LoginForm", formBean);
 	            return mapping.findForward("loginAuto");
 	    	}else{

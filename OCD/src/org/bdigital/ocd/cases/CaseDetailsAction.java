@@ -77,8 +77,12 @@ public class CaseDetailsAction extends CaseBaseAction {
         		if(caseBean.getContact().getPhones()!=null && 
             			caseBean.getContact().getPhones().size()>0){
             		
-	        		Phone phoneObj =caseBean.getContact().getPhones().get(0);
-	        		formBean.setPhoneNumber(phoneObj.getNumber());
+        			for(int i=0;i<caseBean.getContact().getPhones().size();i++){
+        				Phone phoneObj =caseBean.getContact().getPhones().get(i);
+        				if("home".equals(phoneObj.getType())){
+        					formBean.setPhoneNumber(phoneObj.getNumber());
+        				}
+        			}
         		}
         	}
         	
