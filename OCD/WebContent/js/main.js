@@ -217,21 +217,16 @@
           }
       }
   }
-
   $(document).ready(function() {
 	  checkNifNiePas();
-	  $("#nie").keyup(function() {
-		  checkNifNiePas();
-	  });
-	  $("#nif").keyup(function() {
-		  checkNifNiePas();
-	  });
-	  $("#pas").keyup(function() {
-		  checkNifNiePas();
-	  });
-	  $("#formSearch #cip").keyup(function() {
-		  checkNifNiePas();
-	  });
+	  $("#nie").keyup(function() {checkNifNiePas();});
+	  $("#nif").keyup(function() {checkNifNiePas();});
+	  $("#pas").keyup(function() {checkNifNiePas();});
+	  $("#formSearch #cip").keyup(function() {checkNifNiePas();});
+	  $("#nie").change(function() {checkNifNiePas();});
+	  $("#nif").change(function() {checkNifNiePas();});
+	  $("#pas").change(function() {checkNifNiePas();});
+	  $("#formSearch #cip").change(function() {checkNifNiePas();});
   });
   function checkNifNiePas() {
 	  var nieInput = $("#nie");
@@ -481,3 +476,25 @@
 
 
 }).call(this);
+
+var myApp;
+$(document).ready(function() {
+	myApp = myApp || (function () {
+	  var pleaseWaitDiv = $('#pleaseWaitDialog');
+	  return {
+	    showPleaseWait: function() {
+	      pleaseWaitDiv.modal();
+	    },
+	    hidePleaseWait: function () {
+	      pleaseWaitDiv.modal('hide');
+	    },
+	  };
+	})();
+});
+function showModalPleaseWait(){
+	  myApp.showPleaseWait();
+}
+
+window.onbeforeunload = function() {
+	  showModalPleaseWait();
+};
