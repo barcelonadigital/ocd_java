@@ -279,8 +279,7 @@ public class PdfHelloWorldAction extends Action {
 		
 		//SET DADES FIXES
 		TAGs[0][1]="CONSULTA DE VALIDACIÓ I SEGUIMENT D'OXIGENOTERAPIA";
-		TAGs[25][1]= "CONSULTA DE VALIDACIÓ";
-			
+		TAGs[25][1]= "CONSULTA DE VALIDACIÓ";	
 
 	}
 
@@ -292,8 +291,13 @@ public class PdfHelloWorldAction extends Action {
 		String SexForReport = getSexForReport(caseBeanStored.getSex());
 		
 		List<Phone> phone = contacte.getPhones();
-		String telf = phone.get(0).getNumber();
 		
+		//Sempre hi haura 3 telfs : Home, Work, ...
+		//System.out.println("PHONE LIST: "+phone.size());
+
+		String telf = phone.get(1).getNumber();
+		//System.out.println("TELF: "+telf);
+
 		//SET DADES
         TAGs[1][1]= cognomNom;
         TAGs[3][1]= SexForReport;
@@ -478,16 +482,12 @@ public class PdfHelloWorldAction extends Action {
     	Calendar now = GregorianCalendar.getInstance();
     	Date date = now.getTime();
     	
-    	//System.out.println("DATE: "+date.toString());
-    	
     	SimpleDateFormat sdf_data = new SimpleDateFormat("dd.MM.yyyy");
-    	SimpleDateFormat sdf_hora = new SimpleDateFormat("hh:mm:ss");
+    	SimpleDateFormat sdf_hora = new SimpleDateFormat("HH:mm:ss");
 
     	String data = sdf_data.format(date.getTime());
     	String hora = sdf_hora.format(date.getTime());
-    	
-        //System.out.println("Fecha Formateada: "+data+" "+hora);
-    	
+    	    	
     	TAGs[22][1]=data;
         TAGs[23][1]=hora;
 		
