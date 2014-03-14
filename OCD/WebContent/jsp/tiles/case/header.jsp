@@ -73,7 +73,6 @@
 	            <strong>Estat del protocol</strong>
 	            <bean:write name="admissionBean" property="estatProtocolActual" />&nbsp;
             </span>
-            <a href="#alertModal" role="button" data-toggle="modal" class="btn btn-warning btn-large custom-btn">Nou protocol</a>
           </div>
           <div class="actionstop"><html:link action="/caseSearchPg" styleClass="btn btn-large">Seleccionar un altre pacient</html:link></div>
           <div class="contactinfo">

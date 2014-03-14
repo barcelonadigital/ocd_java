@@ -18,8 +18,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.beans.AdmissionBean;
 import org.bdigital.ocd.beans.CaseBean;
@@ -47,7 +45,6 @@ import org.bdigital.ocd.utils.AdmissionComparator;
 import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
-import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
  *
@@ -161,6 +158,18 @@ public abstract class CaseBaseAction extends BaseAction {
         					"6".equals(admAf.getData().getProgram().getId())){
         				if(admAf.getData().getProtocol()!=null &&
         						!"".equals(admAf.getData().getProtocol().getId())){
+        					//TODO:cal corregir WS: la seguent crida no hauria de caler fer pq ja hauria de contenir el name. 
+        					if(admAf.getData().getProtocol().getName()==null || 
+        							"".equals(admAf.getData().getProtocol().getName().trim())){
+        						errorMsg = new StringHolder("");
+        		            	result = new StringHolder("");
+        		    			proxy.admission_get(tokenLK, adm.getRef(), result, errorMsg);
+        		    			Admission admissionObj = (Admission)UtilsWs.xmlToObject(result.value,
+        		            			Admission.class, Case.class, 
+        		            			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
+        		    			admAf.getData().getProtocol().setName(admissionObj.getData().getProtocol().getName());
+        		    			admAf.getData().getProtocol().setDescription(admissionObj.getData().getProtocol().getDescription());
+        					}
         					admissions.add(admAf);
         				}
         				admissionsAll.add(admAf);

@@ -68,6 +68,10 @@
 	    <put name="body" value="/jsp/tiles/case/task-body.jsp" />
 	    <put name="body-style" value="" />
     </definition>
+    <definition name="casetaskunitPg.page" extends="casebase.definition">
+	    <put name="body" value="/jsp/tiles/case/taskunit-body.jsp" />
+	    <put name="body-style" value="" />
+    </definition>
     <definition name="caseformPg.page" extends="casebase.definition">
 	    <put name="body" value="/jsp/tiles/case/form-body.jsp" />
 	    <put name="body-style" value="" />

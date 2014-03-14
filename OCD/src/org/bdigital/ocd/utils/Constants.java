@@ -9,5 +9,8 @@ public final class Constants {
 	public static final String FORMAT_DATEHOUR_WS = "yyyy-MM-dd hh:mm";
 
 	public static final String FORMAT_DATE_WEB = "dd/MM/yyyy";
+	public static final String FORMAT_MONTH_WEB = "MMM";
+	public static final String FORMAT_YEAR_WEB = "yyyy";
+	public static final String FORMAT_DAY_WEB = "dd";
 	public static final String FORMAT_DATEHOUR_WEB = "dd/MM/yyyy hh:mm";
 }

@@ -26,6 +26,7 @@
         <form-bean name="CaseFormCatSalutForm" type="org.bdigital.ocd.cases.CaseFormCatSalutForm"/>
         <form-bean name="TasksAssignedForm" type="org.bdigital.ocd.task.TasksAssignedForm"/>
         <form-bean name="CaseSaveForm" type="org.bdigital.ocd.cases.CaseSaveForm"/>
+        <form-bean name="CaseTaskUnitDetailsForm" type="org.bdigital.ocd.cases.CaseTaskUnitDetailsForm"/>
     </form-beans>
 
 	<global-forwards>
@@ -66,6 +67,11 @@
         <action path="/caseTaskInsertAction" name="TaskInsertForm" scope="request" type="org.bdigital.ocd.task.TaskInsertAction" validate="false">
             <forward name="success" path="/caseMainAction.do"/>
             <forward name="failure" path="/caseMainAction.do"/>
+        </action>
+        <action path="/taskUnitDetailsPg" forward="casetaskunitPg.page"/>
+        <action path="/caseTaskUnitDetailsAction" name="CaseTaskUnitDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseTaskUnitDetailsAction" validate="false">
+            <forward name="success" path="/taskUnitDetailsPg.do"/>
+            <forward name="failure" path="/taskUnitDetailsPg.do"/>
         </action>
         <action path="/taskDetailsPg" forward="casetaskPg.page"/>
         <action path="/caseTaskDetailsAction" name="CaseTaskDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseTaskDetailsAction" validate="false">

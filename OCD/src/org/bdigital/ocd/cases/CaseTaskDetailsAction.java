@@ -94,6 +94,9 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                     		for(int i=0;i<tasksObj.getTasks().size();i++){
                     			Task taskObj = tasksObj.getTasks().get(i);
                     			TaskAf tAf = new TaskAf(taskObj);
+                    			tAf.setDateDay(UtilsString.dateToString(UtilsString.stringtoDate(taskObj.getDate(), Constants.FORMAT_DATE_WS), Constants.FORMAT_DAY_WEB));
+                    			tAf.setDateMonth(UtilsString.dateToString(UtilsString.stringtoDate(taskObj.getDate(), Constants.FORMAT_DATE_WS), Constants.FORMAT_MONTH_WEB));
+                    			tAf.setDateYear(UtilsString.dateToString(UtilsString.stringtoDate(taskObj.getDate(), Constants.FORMAT_DATE_WS), Constants.FORMAT_YEAR_WEB));
 //                    			if("PRO_TASK".equals(t.getTaskClass())){
 //                    				proTasks.add(t);
 //                    			}
