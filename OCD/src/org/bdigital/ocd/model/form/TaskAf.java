@@ -18,6 +18,7 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	private static final long serialVersionUID = 1L;
 	String taskClass;
 	String id;
+	String ref;
 	String type;
 	String date;
 	String hour;
@@ -36,6 +37,7 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 		super();
 		this.taskClass=obj.getTaskClass();
 		this.id=obj.getId();
+		this.ref=obj.getRef();
 		this.type=obj.getType();
 		this.date=UtilsString.stringDateWStoStringDateWeb(obj.getDate());
 		this.hour=obj.getHour();
@@ -147,5 +149,11 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setDescriptionLong(String descriptionLong) {
 		this.descriptionLong = descriptionLong;
+	}
+	public String getRef() {
+		return ref;
+	}
+	public void setRef(String ref) {
+		this.ref = ref;
 	}
 }

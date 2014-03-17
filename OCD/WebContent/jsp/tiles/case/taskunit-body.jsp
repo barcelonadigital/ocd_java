@@ -32,7 +32,7 @@
 	            <bean:define id="formShortName" name="formItem" property="shortName" type="java.lang.String"/>
 	              <div class="formrow">
 					<logic:equal name="formItem" property="itemType" value="DOCUMENT">
-		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>REPORT</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
@@ -45,7 +45,7 @@
 	                   -->
 					</logic:equal>
 					<logic:equal name="formItem" property="itemType" value="CATSALUT">
-		              <a href="<html:rewrite action="/caseFormCatSalutAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		              <a href="<html:rewrite action="/caseFormCatSalutAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>REPORT</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
@@ -60,9 +60,9 @@
 					<logic:notEqual name="formItem" property="itemType" value="DOCUMENT">
 					<logic:notEqual name="formItem" property="itemType" value="CATSALUT">
 		              <!-- 
-		              < html : link action="/caseFormStaticDetailsAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		              < html : link action="/caseFormStaticDetailsAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
 		               -->
-		              <a href="<html:rewrite action="/caseFormStaticDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
+		              <a href="<html:rewrite action="/caseFormStaticDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>QÜESTIONARI</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
@@ -94,10 +94,10 @@
 	    	$('#confirmFinishModal').modal('show');
 	    });
 	    function doFinish(){
-	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}&accept=true"/>';
+	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}&accept=true"/>';
 	    }
 	    function doFinishAndNewTask(){
-	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}&accept=true&createTask=true"/>';
+	    	window.location='<html:rewrite action="/formCloseAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}&accept=true&createTask=true"/>';
 	    }
 	    </script>
 	    <div id="confirmFinishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">

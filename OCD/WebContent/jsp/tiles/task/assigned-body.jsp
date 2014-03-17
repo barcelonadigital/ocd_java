@@ -99,7 +99,7 @@
 			    <bean:define id="admissionItem" name="taskItem" property="admission" type="org.bdigital.ocd.model.form.AdmissionAf"/>
 	              <div class="formrow">
 					
-		              <a href="<html:rewrite action="/caseTaskDetailsAction.do"/>?idCase=${caseItem.ref}&idAdmission=${admissionItem.ref}" data-toggle="dropdown">
+		              <a href="<html:rewrite action="/caseTaskUnitDetailsAction.do"/>?idCase=${caseItem.ref}&idAdmission=${admissionItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
 		              <span class="col1"><span><strong><bean:write name="taskItem" property="date"/></strong></span></span>
 		              <span class="col2"><span><bean:write name="taskItem" property="description"/></span></span>
 		              <span class="col3"><span><bean:write name="dataItem" property="nickname"/></span></span>

@@ -129,7 +129,7 @@ public class TaskInsertAction extends BaseAction {
        	String currentTimeString = UtilsString.dateToString(new Date(), Constants.FORMAT_DATE_WS);
        	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,Constants.FORMAT_DATE_WS);
 		proxy.task_insert(tokenLK,admissionId, activityId, UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), "", result, errorMsg);
-		if(roleId!=null){
+		if(activityId.equals("#TASK:N261")){
 	       	String idTask = result.value;
 	       	//errorMsg = new StringHolder("");
 			//result = new StringHolder("");
@@ -148,11 +148,28 @@ public class TaskInsertAction extends BaseAction {
 	       	}
 	       	Assignment assignment = new Assignment();
 	       	Role role = new Role();
-	       	role.setId(roleId);
+	       	role.setId("24");
+	       	User user = new User();
+	       	user.setId("1");
 	       	assignment.setRole(role);
+	       	assignment.setUser(user);
 	       	assignments.add(assignment);
 	       	String taskXmlString = UtilsWs.objectToXml(taskObj,Task.class,Form.class,
 	       			Role.class,User.class,Assignment.class);
+	       	proxy.task_set(tokenLK, taskXmlString, result, errorMsg);
+		}else if(activityId.equals("#XDISCHARGE")){
+	       	String idTask = result.value;
+			errorMsg = new StringHolder("");
+	       	result = new StringHolder("");
+	       	proxy.task_get(tokenLK, idTask, "ADMI", result, errorMsg);
+	       	Task taskObj = (Task)UtilsWs.xmlToObject(result.value,
+        			Task.class,Form.class,Role.class,User.class,Assignment.class);
+	       	List<Assignment> assignments = new ArrayList<Assignment>();
+       		taskObj.setAssignments(assignments);
+	       	String taskXmlString = UtilsWs.objectToXml(taskObj,Task.class,Form.class,
+	       			Role.class,User.class,Assignment.class);
+	       	errorMsg = new StringHolder("");
+	       	result = new StringHolder("");
 	       	proxy.task_set(tokenLK, taskXmlString, result, errorMsg);
 		}
 		request.getSession().setAttribute("admissionBean",null);

@@ -20,10 +20,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.bdigital.ocd.model.Form;
-import org.bdigital.ocd.model.Forms;
 import org.bdigital.ocd.model.Task;
 import org.bdigital.ocd.model.Tasks;
-import org.bdigital.ocd.model.form.FormAf;
 import org.bdigital.ocd.model.form.TaskAf;
 import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
@@ -111,9 +109,13 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                         			tAf.setDescription("Visita de seguiment");
                         		}
                         		if("253".equals(taskObj.getRefs()[0])){
+                        			tAf.setDescription("Prescripció d'OCD");
                         			tAf.setDescriptionLong("QÜESTIONARI VARIABLES. REPORT Enviament de document al històric clínic. REPORT Sol·licitud d'OCD a CatSalut.");
                         		}else if("261".equals(taskObj.getRefs()[0])){
+                        			tAf.setDescription("Visita de seguiment");
                         			tAf.setDescriptionLong("QÜESTIONARI CVSO.");
+                        		}else if("DISCHARGE".equals(taskObj.getType())){
+                        			tAf.setDescriptionLong("QÜESTIONARI REGISTRE D´ALTA DEL PROGRAMA.");
                         		}
                         		if(taskObj.getForms()!=null &&
                             			taskObj.getForms().size()>0){

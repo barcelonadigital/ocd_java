@@ -68,6 +68,7 @@ public class FormSetAnswersAction extends BaseAction {
             		}
             		questionId = questionId.replaceAll("_","/");
             		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
+            		//TODO:aniria bé un WS form_set per desar totes les respostes amb una sola crida
             	}
     		}
 //        	for(int i=0;i<formBean.getQuestionSize();i++){
@@ -85,6 +86,8 @@ public class FormSetAnswersAction extends BaseAction {
 //            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
 //            	}
 //        	}
+    		//TODO: si poguessim evitar el tancament automatic de tasques, la seguent linia que reseteja el admissionBean la podriem estalviar i posar-la només en cas de tancament volutari
+    		request.getSession().setAttribute("admissionBean",null);
     		
     		return mapping.findForward(SUCCESS);
     	}else{

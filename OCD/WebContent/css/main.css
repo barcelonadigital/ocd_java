@@ -7459,6 +7459,13 @@ a.h2.noh2 {
     float:right;
     margin-top:24px
 }
+.h2actions a.btn-warning {
+    width:auto;
+    padding:14px 25px;
+    font-size:14px;
+    margin-top:-10px;
+    text-transform:uppercase
+}
 .h2actions a.print {
     display:inline-block;
     width:37px;

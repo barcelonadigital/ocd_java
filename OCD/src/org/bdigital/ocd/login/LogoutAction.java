@@ -6,6 +6,8 @@
 
 package org.bdigital.ocd.login;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +15,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.bdigital.ocd.base.BaseAction;
+import org.bdigital.ocd.model.form.ActionAf;
 
 /**
  *
@@ -38,6 +41,12 @@ public class LogoutAction extends BaseAction {
     	request.getSession().setAttribute("tokenLK", null);
     	request.getSession().setAttribute("userFullName", null);
     	request.getSession().setAttribute("userCenter", null);
+    	request.getSession().setAttribute("caseBean",null);
+    	request.getSession().setAttribute("admissions",null);
+    	request.getSession().setAttribute("admissionsAll",null);
+    	request.getSession().setAttribute("admissionBean",null);
+    	request.getSession().setAttribute("actions",null);
+    	request.getSession().setAttribute("actionsTransfer",null);
     	return mapping.findForward("login");
     }
 }

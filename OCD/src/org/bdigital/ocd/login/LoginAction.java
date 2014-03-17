@@ -73,6 +73,12 @@ public class LoginAction extends BaseAction {
     	request.getSession().setAttribute("tokenLK", token.value);
     	request.getSession().setAttribute("userFullName", name.value);
     	request.getSession().setAttribute("userCenter", center.value);
+    	request.getSession().setAttribute("caseBean",null);
+    	request.getSession().setAttribute("admissions",null);
+    	request.getSession().setAttribute("admissionsAll",null);
+    	request.getSession().setAttribute("admissionBean",null);
+    	request.getSession().setAttribute("actions",null);
+    	request.getSession().setAttribute("actionsTransfer",null);
     	return mapping.findForward(SUCCESS);
     }
 }

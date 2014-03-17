@@ -70,12 +70,13 @@
         <h3>Avís</h3>
       </div>
       <div class="modal-body">
-        <p>Si us plau, seleccioni la tasca que vol assignar al pacient:</p>
+        <p>Si us plau, seleccioni la tasca que vol realitzar:</p>
       </div>
       <div class="modal-footer">
         <div class="btn-block">
-                <button onclick="assignarProtocolParam('#TASK:N253')" class="btn btn-warning custom-btn btn-large">Variables</button>
-                <button onclick="assignarProtocolParam('#TASK:N261')" class="btn btn-warning custom-btn btn-large">CVSO</button>
+                <button onclick="assignarProtocolParam('#TASK:N253')" class="btn btn-warning custom-btn btn-large">Prescripció d'OCD</button>
+                <button onclick="assignarProtocolParam('#TASK:N261')" class="btn btn-warning custom-btn btn-large">Visita de seguiment</button>
+                <button onclick="assignarProtocolParam('#XDISCHARGE')" class="btn btn-warning custom-btn btn-large">Alta del pacient</button>
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@
       <div class="container">
         <ul class="nav">
           <li><a href="#" data-toggle="dropdown" class="users">
-              <strong>Usuaris</strong><span>Pacients, metges...</span></a>
+              <strong>Usuaris</strong><span>Pacients, ...</span></a>
             <div class="dropdown-menu">
               
               <logic:present name="caseBean">

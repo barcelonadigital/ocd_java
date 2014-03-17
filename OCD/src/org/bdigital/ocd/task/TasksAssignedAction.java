@@ -83,6 +83,38 @@ public class TasksAssignedAction extends BaseAction {
                 			Task taskObj = tasksObj.getTasks().get(i);
                 			TaskAf tAf = new TaskAf(taskObj);
                 			tasks.add(tAf);
+                			if("VARIABLES".equals(taskObj.getDescription())){
+                    			tAf.setDescription("Prescripció d'OCD");
+                    		}else if("CVSO".equals(taskObj.getDescription())){
+                    			tAf.setDescription("Visita de seguiment");
+                    		}
+//                			if(!"1539".equals(tAf.getId())){
+//                				errorMsg = new StringHolder("");
+//                		       	result = new StringHolder("");
+//                		       	proxy.task_get(tokenLK, tAf.getId(), "ADMI", result, errorMsg);
+//                		       	taskObj = (Task)UtilsWs.xmlToObject(result.value,
+//                	        			Task.class,Form.class,Role.class,User.class,Assignment.class);
+//                		       	List<Assignment> assignments;
+//                		       	if(taskObj.getAssignments()!=null){
+//                		       		assignments = taskObj.getAssignments();
+//                		       	}else{
+//                		       		assignments = new ArrayList<Assignment>();
+//                		       		taskObj.setAssignments(assignments);
+//                		       	}
+//                		       	for(int l=0;l<assignments.size();l++){
+//                		       		Assignment assignment = assignments.get(l);
+//                		       		if(assignment.getRole()!=null && assignment.getRole().getId().equals("24") &&
+//                		       				assignment.getUser()!=null && assignment.getUser().getId().equals("1") ){
+//                		       			assignments.remove(l);
+//                		       			l--;
+//                		       		}
+//                		       	}
+//                		       	String taskXmlString = UtilsWs.objectToXml(taskObj,Task.class,Form.class,
+//                		       			Role.class,User.class,Assignment.class);
+//                		       	errorMsg = new StringHolder("");
+//                		       	result = new StringHolder("");
+//                		       	proxy.task_set(tokenLK, taskXmlString, result, errorMsg);
+//                			}
                 		}
                 	}
             	}

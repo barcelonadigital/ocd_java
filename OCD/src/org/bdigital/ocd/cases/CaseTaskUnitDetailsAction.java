@@ -62,8 +62,12 @@ public class CaseTaskUnitDetailsAction extends CaseBaseAction {
         	TaskAf tAf = new TaskAf(taskObj);
     		if("227".equals(taskObj.getRefs()[0])){
     			tAf.setDescription("Visita de seguiment");
+    		}else if("253".equals(taskObj.getRefs()[0])){
+    			tAf.setDescription("Prescripció d'OCD");
+    		}else if("261".equals(taskObj.getRefs()[0])){
+    			tAf.setDescription("Visita de seguiment");
     		}
-        	if(taskObj.getForms()!=null &&
+    		if(taskObj.getForms()!=null &&
         			taskObj.getForms().size()>0){
     			errorMsg = new StringHolder("");
             	result = new StringHolder("");
