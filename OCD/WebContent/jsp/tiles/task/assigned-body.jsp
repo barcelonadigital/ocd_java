@@ -103,11 +103,14 @@
 		              <span class="col1"><span><strong><bean:write name="taskItem" property="date"/></strong></span></span>
 		              <span class="col2"><span><bean:write name="taskItem" property="description"/></span></span>
 		              <span class="col3"><span><bean:write name="dataItem" property="nickname"/></span></span>
-		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              <span class="col4"><span>&nbsp;</span></span>
 		              </a>
+		              <!-- 
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
 		              <ul class="dropdown-menu">
 	                      <li></li>
 	                  </ul>
+	                   -->
 
 	              </div>
 	              

@@ -61,7 +61,7 @@ public class TaskInsertAction extends BaseAction {
    	TaskInsertForm formBean = (TaskInsertForm)form;
    	
    	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
-   	String roleId=(String)request.getAttribute("role_id")!=null?(String)request.getAttribute("role_id"):formBean.getIdRole();
+   	//String roleId=(String)request.getAttribute("role_id")!=null?(String)request.getAttribute("role_id"):formBean.getIdRole();
    	String activityId=(String)request.getAttribute("activity_id")!=null?(String)request.getAttribute("activity_id"):formBean.getIdActivity();
    	String admissionId=formBean.getIdAdmission();
    	String caseId=formBean.getIdCase();

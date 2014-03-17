@@ -62,9 +62,9 @@ public class CaseTaskUnitDetailsAction extends CaseBaseAction {
         	TaskAf tAf = new TaskAf(taskObj);
     		if("227".equals(taskObj.getRefs()[0])){
     			tAf.setDescription("Visita de seguiment");
-    		}else if("253".equals(taskObj.getRefs()[0])){
+    		}else if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){
     			tAf.setDescription("Prescripció d'OCD");
-    		}else if("261".equals(taskObj.getRefs()[0])){
+    		}else if("CVSO".equals(taskObj.getDescription().toUpperCase())){
     			tAf.setDescription("Visita de seguiment");
     		}
     		if(taskObj.getForms()!=null &&
@@ -96,7 +96,7 @@ public class CaseTaskUnitDetailsAction extends CaseBaseAction {
             				refFirstItem = fAf.getRef();
             			}
             		}
-            		if("253".equals(taskObj.getRefs()[0])){
+            		if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){
             			FormAf fAf = new FormAf(new Form());
                 		fAf.setItemType("DOCUMENT");
                 		fAf.setShortName("Enviament de document al històric clínic");

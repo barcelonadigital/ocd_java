@@ -19,7 +19,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.Task;
 import org.bdigital.ocd.model.Tasks;
 import org.bdigital.ocd.model.form.TaskAf;
@@ -99,23 +98,26 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
 //                    				proTasks.add(t);
 //                    			}
 //                    			if("PRO_TASK".equals(taskObj.getTaskClass())){
-                    			errorMsg = new StringHolder("");
-                            	result = new StringHolder("");
                             	//TODO:Modificar task_list_date per evitar la següent crida, que nomes es fa per obtenir el taskObj.getRefs()[0]. 
-                            	proxy.task_get(tokenLK, taskObj.getId(), "ADMI", result, errorMsg);
-                            	taskObj = (Task)UtilsWs.xmlToObject(result.value,
-                            			Task.class,Form.class);
-                        		if("227".equals(taskObj.getRefs()[0])){
-                        			tAf.setDescription("Visita de seguiment");
-                        		}
-                        		if("253".equals(taskObj.getRefs()[0])){
+//                    			errorMsg = new StringHolder("");
+//                            	result = new StringHolder("");
+//                            	proxy.task_get(tokenLK, taskObj.getId(), "ADMI", result, errorMsg);
+//                            	taskObj = (Task)UtilsWs.xmlToObject(result.value,
+//                            			Task.class,Form.class);
+//                        		if("227".equals(taskObj.getRefs()[0])){
+//                        			tAf.setDescription("Visita de seguiment");
+//                        		}
+                        		if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){
                         			tAf.setDescription("Prescripció d'OCD");
                         			tAf.setDescriptionLong("QÜESTIONARI VARIABLES. REPORT Enviament de document al històric clínic. REPORT Sol·licitud d'OCD a CatSalut.");
-                        		}else if("261".equals(taskObj.getRefs()[0])){
+                        			tasks.add(tAf);
+                        		}else if("CVSO".equals(taskObj.getDescription().toUpperCase())){
                         			tAf.setDescription("Visita de seguiment");
                         			tAf.setDescriptionLong("QÜESTIONARI CVSO.");
+                        			tasks.add(tAf);
                         		}else if("DISCHARGE".equals(taskObj.getType())){
                         			tAf.setDescriptionLong("QÜESTIONARI REGISTRE D´ALTA DEL PROGRAMA.");
+                        			tasks.add(tAf);
                         		}
                         		if(taskObj.getForms()!=null &&
                             			taskObj.getForms().size()>0){

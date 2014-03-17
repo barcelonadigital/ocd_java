@@ -6,8 +6,6 @@
 
 package org.bdigital.ocd.login;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +13,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.bdigital.ocd.base.BaseAction;
-import org.bdigital.ocd.model.form.ActionAf;
 
 /**
  *
