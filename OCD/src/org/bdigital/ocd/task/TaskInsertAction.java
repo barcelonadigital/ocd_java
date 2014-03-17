@@ -7,7 +7,9 @@
 package org.bdigital.ocd.task;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ import org.bdigital.ocd.model.Case;
 import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.Role;
 import org.bdigital.ocd.model.Task;
+import org.bdigital.ocd.model.Tasks;
 import org.bdigital.ocd.model.User;
 import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
@@ -61,8 +64,47 @@ public class TaskInsertAction extends BaseAction {
    	String roleId=(String)request.getAttribute("role_id")!=null?(String)request.getAttribute("role_id"):formBean.getIdRole();
    	String activityId=(String)request.getAttribute("activity_id")!=null?(String)request.getAttribute("activity_id"):formBean.getIdActivity();
    	String admissionId=formBean.getIdAdmission();
+   	String caseId=formBean.getIdCase();
    	
-   	if(activityId!=null && admissionId!=null){
+   	if(admissionId==null || "".equals(admissionId.trim())){
+   		if(caseId==null){
+   			return mapping.findForward(FAILURE);
+   		}
+   	    //TODO: enlloc de passar el parametre "6", obtenir la action_list disponible per current_date, i si esta el #ENROL:6 , passar aquest idProgram
+   		StringHolder errorMsg = new StringHolder("");
+   		StringHolder result = new StringHolder("");
+    	String currentTimeString = UtilsString.dateToString(new Date(), Constants.FORMAT_DATE_WS);
+    	Date currentTimeZero = UtilsString.stringtoDate(currentTimeString,Constants.FORMAT_DATE_WS);
+		proxy.admission_insert(tokenLK, caseId, "#XENROLL:6", UtilsString.dateToString(currentTimeZero, Constants.FORMAT_DATEHOUR_WS), result, errorMsg);
+		admissionId=result.value;
+		
+    	Calendar todayCal = new GregorianCalendar();
+		for(int j=todayCal.get(Calendar.YEAR);j<=todayCal.get(Calendar.YEAR)+1;j++){
+        	errorMsg = new StringHolder("");
+        	result = new StringHolder("");
+    		proxy.task_calendar_year(tokenLK, ""+j, "ADMI", admissionId, result, errorMsg);
+    		if(result.value!=null){
+            	String[] datesArray = result.value.split("#");
+            	for(int k=0;k<datesArray.length;k++){
+            		String dateItem = datesArray[k];
+            		String[] infoDateArray = dateItem.split("\\|");
+                	errorMsg = new StringHolder("");
+                	result = new StringHolder("");
+            		proxy.task_list_date(tokenLK, infoDateArray[0], "ADMI", admissionId, result, errorMsg);
+            		Tasks tasksObj = (Tasks)UtilsWs.xmlToObject(result.value,
+                			Tasks.class, Task.class);
+                	if(tasksObj.getTasks()!=null){
+                		for(int i=0;i<tasksObj.getTasks().size();i++){
+                			Task taskObj = tasksObj.getTasks().get(i);
+                			proxy.task_delete(tokenLK, taskObj.getId(), "DELETE", errorMsg);
+                		}
+                	}
+            	}
+    		}
+		}
+   	}
+   	if(activityId!=null && !"".equals(activityId.trim()) && 
+   			admissionId!=null && !"".equals(admissionId.trim())){
    	   	//TODO:Validar que si JOIN, llavors admission no tingui idProtocol assignat
    	   	//TODO: Aquesta validacio no la podria fer el WS?
    		if(activityId.indexOf("JOIN")!=-1){

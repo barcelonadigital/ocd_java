@@ -34,25 +34,7 @@
 	                <div class="date"><span class="month"><bean:write name="taskItem" property="dateMonth"/></span><span class="day"><bean:write name="taskItem" property="dateDay"/></span><span class="year"><bean:write name="taskItem" property="dateYear"/></span></div>
 	                <div class="message">
 	                  <h4><bean:write name="taskItem" property="description"/></h4>
-	                  <p>
-	                 
-		        <logic:present name="taskItem" property="forms">
-			    <logic:iterate name="taskItem" property="forms" id="formItem" type="org.bdigital.ocd.model.form.FormAf" >
-	            <bean:define id="formShortName" name="formItem" property="shortName" type="java.lang.String"/>
-	                  <logic:equal name="formItem" property="itemType" value="DOCUMENT">
-	                      REPORT <%= formShortName/*.toUpperCase()*/ %>.
-					</logic:equal>
-					<logic:equal name="formItem" property="itemType" value="CATSALUT">
-	                      REPORT <%= formShortName/*.toUpperCase()*/ %>.
-					</logic:equal>
-					<logic:notEqual name="formItem" property="itemType" value="DOCUMENT">
-					<logic:notEqual name="formItem" property="itemType" value="CATSALUT">
-					      QÜESTIONARI <%= formShortName/*.toUpperCase()*/ %>.
-					</logic:notEqual>
-					</logic:notEqual>
-				</logic:iterate>
-				</logic:present>
-	                  </p>
+	                  <p><bean:write name="taskItem" property="descriptionLong"/></p>
 	                </div>
                 </a>
                 

@@ -57,7 +57,8 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
     	//String taskId=(String)request.getAttribute("parameterIdTask")!=null?(String)request.getAttribute("parameterIdTask"):formBean.getIdTask();
     	String admissionId=admissionBean.getIdAdmission();
-    	
+
+    	List<TaskAf> tasks = new ArrayList<TaskAf>();
     	if(admissionId!=null){
     	//if(taskId!=null){
     		Date admissionDate = null;
@@ -72,7 +73,6 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
         	}
         	
         	StringHolder errorMsg,result;
-        	List<TaskAf> tasks = new ArrayList<TaskAf>();
         	//List<Task> proTasks = new ArrayList<Task>();
         	for(int j=admissionCal.get(Calendar.YEAR);j<=todayCal.get(Calendar.YEAR)+1;j++){
 
@@ -103,13 +103,19 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
 //                    			if("PRO_TASK".equals(taskObj.getTaskClass())){
                     			errorMsg = new StringHolder("");
                             	result = new StringHolder("");
+                            	//TODO:Modificar task_list_date per evitar la següent crida, que nomes es fa per obtenir el taskObj.getRefs()[0]. 
                             	proxy.task_get(tokenLK, taskObj.getId(), "ADMI", result, errorMsg);
                             	taskObj = (Task)UtilsWs.xmlToObject(result.value,
                             			Task.class,Form.class);
                         		if("227".equals(taskObj.getRefs()[0])){
                         			tAf.setDescription("Visita de seguiment");
                         		}
-                            	if(taskObj.getForms()!=null &&
+                        		if("253".equals(taskObj.getRefs()[0])){
+                        			tAf.setDescriptionLong("QÜESTIONARI VARIABLES. REPORT Enviament de document al històric clínic. REPORT Sol·licitud d'OCD a CatSalut.");
+                        		}else if("261".equals(taskObj.getRefs()[0])){
+                        			tAf.setDescriptionLong("QÜESTIONARI CVSO.");
+                        		}
+                            	/*if(taskObj.getForms()!=null &&
                             			taskObj.getForms().size()>0){
                         			errorMsg = new StringHolder("");
                                 	result = new StringHolder("");
@@ -152,31 +158,19 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 		}
                                 	}
                                 	tAf.setForms(forms);
-		                			tasks.add(tAf);
-                            	}
+                            	}*/
+	                			tasks.add(tAf);
                         	}
                     	}
                 	}
             	}
         	}
-        	request.setAttribute("tasks", tasks);
-
-//        	if(proTasks.size()!=1){
-//            	request.setAttribute("tasks", tasks);
-//            	return mapping.findForward("admission");
-//        	}
-//
-//    		Task t = proTasks.get(0);
-//    		String taskId = t.getId();
-//    		errorMsg = new StringHolder("");
-//        	result = new StringHolder("");
-//        	proxy.task_form_list(tokenLK, taskId, result, errorMsg);
-//        	Forms formsObj = (Forms)UtilsWs.xmlToObject(result.value,
-//        			Forms.class, Form.class);
-//        	formBean.setForms(formsObj.getForms());
-        	return mapping.findForward(SUCCESS);
-    	}else{
-    		return mapping.findForward(FAILURE);
+//        	request.setAttribute("tasks", tasks);
+//        	return mapping.findForward(SUCCESS);
+//    	}else{
+//    		return mapping.findForward(FAILURE);
     	}
+    	request.setAttribute("tasks", tasks);
+    	return mapping.findForward(SUCCESS);
     }
 }

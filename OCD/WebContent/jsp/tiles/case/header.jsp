@@ -14,7 +14,7 @@
     	  assignarProtocolParam(idActivitat);
       }
       function assignarProtocolParam(paramActivitat) {
-    	  var params = { idAdmission:'${admissionBean.idAdmissionFirst}', idCase:'${caseBean.idCase}', idActivity:paramActivitat };
+    	  var params = { idAdmission:'${admissionBean.idAdmission}', idCase:'${caseBean.idCase}', idActivity:paramActivitat };
     	  var str = $.param( params );
     	  window.location='<html:rewrite action="/caseTaskInsertAction.do"/>?'+str;
       }
@@ -29,7 +29,7 @@
           <span><strong>CIP:</strong> <bean:write name="caseBean" property="cip" /></span>
           <div class="actionsbottom">
             <div class="dropdown"><a data-toggle="dropdown" class="btn btn-blancogris btn-doslineas btn-large">
-                <strong>Protocol</strong>
+                <strong>Programa</strong>
 				<logic:present name="admissionBean" property="descProtocolActual">
 				<bean:define id="protocolName" name="admissionBean" property="descProtocolActual" type="java.lang.String"/>
 				<% 
@@ -47,7 +47,7 @@
 					<bean:define id="dataItem" name="admissionItem" property="data" type="org.bdigital.ocd.model.form.AdmissionDataAf"/>
 					<bean:define id="programItem" name="dataItem" property="program" type="org.bdigital.ocd.model.form.AdmissionProgramAf"/>
 					<bean:define id="protocolItem" name="dataItem" property="protocol" type="org.bdigital.ocd.model.form.AdmissionProtocolAf"/>
-					<bean:define id="protocolName2" name="protocolItem" property="name" type="java.lang.String"/>
+					<bean:define id="protocolName2" name="programItem" property="name" type="java.lang.String"/>
 					<% 
 					if(protocolName2.length()>30){
 						protocolName2 = protocolName2.substring(0, 30)+"...";
@@ -66,11 +66,11 @@
 				</logic:present>
             </div>
             <span class="info">
-	            <strong>Inici del protocol</strong>
+	            <strong>Inici del programa</strong>
 	            <bean:write name="admissionBean" property="dataProtocolActual" />&nbsp;
             </span>
             <span class="info">
-	            <strong>Estat del protocol</strong>
+	            <strong>Estat del programa</strong>
 	            <bean:write name="admissionBean" property="estatProtocolActual" />&nbsp;
             </span>
           </div>
@@ -118,22 +118,12 @@
         <h3>Avís</h3>
       </div>
       <div class="modal-body">
-        <p>Si us plau, seleccioni el protocol que vol assignar al pacient:</p>
+        <p>Si us plau, seleccioni la tasca que vol assignar al pacient:</p>
       </div>
       <div class="modal-footer">
         <div class="btn-block">
-                <logic:present name="caseBean">
-			    <logic:present name="actionsTransfer">
-			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
-					<button onclick="preAssignarProtocol('${actionItem.ref}')" class="btn btn-warning custom-btn btn-large"><bean:write name="actionItem" property="name"/></button>
-				</logic:iterate>
-				</logic:present>
-			    <logic:present name="actions">
-			    <logic:iterate name="actions" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
-					<button onclick="assignarProtocolParam('${actionItem.ref}')" class="btn btn-warning custom-btn btn-large"><bean:write name="actionItem" property="name"/></button>
-				</logic:iterate>
-				</logic:present>
-				</logic:present>
+                <button onclick="assignarProtocolParam('#TASK:N253')" class="btn btn-warning custom-btn btn-large">Variables</button>
+                <button onclick="assignarProtocolParam('#TASK:N261')" class="btn btn-warning custom-btn btn-large">CVSO</button>
         </div>
       </div>
     </div>

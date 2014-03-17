@@ -20,6 +20,7 @@
           <div id="news-list">
               
 	        <bean:define id="taskItem" name="task" type="org.bdigital.ocd.model.form.TaskAf"/>
+            <div class="h2actions"><a href="#alertModal" role="button" data-toggle="modal" class="btn btn-warning btn-large custom-btn">Nova tasca</a></div>
             <h2 class="asses">Tasques</h2>
 	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/> <strong></strong></span></h3>
 		        
@@ -34,32 +35,27 @@
 		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>REPORT</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
-		              <span class="col3"><span>Pendent</span></span>
-		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              <span class="col3"><span>&nbsp;</span></span>
+		              <span class="col4"><span>&nbsp;</span></span>
 		              </a>
+		              <!-- 
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
 		              <ul class="dropdown-menu">
 	                  </ul>
+	                   -->
 					</logic:equal>
 					<logic:equal name="formItem" property="itemType" value="CATSALUT">
 		              <a href="<html:rewrite action="/caseFormCatSalutAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>REPORT</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
-		              <logic:equal name="formItem" property="status" value="CLOSED">
-		              <span class="col3"><span>Finalitzat</span></span>
-		              </logic:equal>
-		              <logic:equal name="formItem" property="status" value="OPEN">
-		              <span class="col3"><span>Pendent</span></span>
-		              </logic:equal>
-		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              <span class="col3"><span>&nbsp;</span></span>
+		              <span class="col4"><span>&nbsp;</span></span>
 		              </a>
+		              <!-- 
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
 		              <ul class="dropdown-menu">
-		              <logic:equal name="formItem" property="status" value="CLOSED">
-	                      <li><html:link action="/formOpenAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Reobrir</html:link></li>
-		              </logic:equal>
-		              <logic:equal name="formItem" property="status" value="OPEN">
-	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Finalitzar</html:link></li>
-		              </logic:equal>
 	                  </ul>
+	                   -->
 					</logic:equal>
 					<logic:notEqual name="formItem" property="itemType" value="DOCUMENT">
 					<logic:notEqual name="formItem" property="itemType" value="CATSALUT">
@@ -69,20 +65,14 @@
 		              <a href="<html:rewrite action="/caseFormStaticDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>QÜESTIONARI</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
-		              <span class="col3"><span>
-		              <logic:equal name="formItem" property="status" value="CLOSED">Finalitzat</logic:equal>
-		              <logic:equal name="formItem" property="status" value="OPEN">Pendent</logic:equal>
-		              </span></span>
-		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              <span class="col3"><span>&nbsp;</span></span>
+		              <span class="col4"><span>&nbsp;</span></span>
 		              </a>
+		              <!-- 
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
 		              <ul class="dropdown-menu">
-		              <logic:equal name="formItem" property="status" value="CLOSED">
-	                      <li><html:link action="/formOpenAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Reobrir</html:link></li>
-		              </logic:equal>
-		              <logic:equal name="formItem" property="status" value="OPEN">
-	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Finalitzar</html:link></li>
-		              </logic:equal>
 	                  </ul>
+	                   -->
 					</logic:notEqual>
 					</logic:notEqual>
 

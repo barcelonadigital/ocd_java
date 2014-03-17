@@ -27,6 +27,7 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	String dateMonth;
 	String dateYear;
 	String dateDay;
+	String descriptionLong;
 	AdmissionAf admission;
 	CaseAf taskCase;
 	List<FormAf> forms = new ArrayList<FormAf>();
@@ -140,5 +141,11 @@ public class TaskAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setDateDay(String dateDay) {
 		this.dateDay = dateDay;
+	}
+	public String getDescriptionLong() {
+		return descriptionLong;
+	}
+	public void setDescriptionLong(String descriptionLong) {
+		this.descriptionLong = descriptionLong;
 	}
 }

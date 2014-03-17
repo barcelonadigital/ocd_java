@@ -14,7 +14,7 @@
     	  assignarProtocolParam(idActivitat);
       }
       function assignarProtocolParam(paramActivitat) {
-    	  var params = { idAdmission:'${admissionBean.idAdmissionFirst}', idCase:'${caseBean.idCase}', idActivity:paramActivitat };
+    	  var params = { idAdmission:'${admissionBean.idAdmission}', idCase:'${caseBean.idCase}', idActivity:paramActivitat };
     	  var str = $.param( params );
     	  window.location='<html:rewrite action="/caseTaskInsertAction.do"/>?'+str;
       }
@@ -70,22 +70,12 @@
         <h3>Avís</h3>
       </div>
       <div class="modal-body">
-        <p>Si us plau, seleccioni el protocol que vol assignar al pacient:</p>
+        <p>Si us plau, seleccioni la tasca que vol assignar al pacient:</p>
       </div>
       <div class="modal-footer">
         <div class="btn-block">
-                <logic:present name="caseBean">
-			    <logic:present name="actionsTransfer">
-			    <logic:iterate name="actionsTransfer" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
-					<button onclick="preAssignarProtocol('${actionItem.ref}')" class="btn btn-warning custom-btn btn-large"><bean:write name="actionItem" property="name"/></button>
-				</logic:iterate>
-				</logic:present>
-			    <logic:present name="actions">
-			    <logic:iterate name="actions" id="actionItem" type="org.bdigital.ocd.model.form.ActionAf" >
-					<button onclick="assignarProtocolParam('${actionItem.ref}')" class="btn btn-warning custom-btn btn-large"><bean:write name="actionItem" property="name"/></button>
-				</logic:iterate>
-				</logic:present>
-				</logic:present>
+                <button onclick="assignarProtocolParam('#TASK:N253')" class="btn btn-warning custom-btn btn-large">Variables</button>
+                <button onclick="assignarProtocolParam('#TASK:N261')" class="btn btn-warning custom-btn btn-large">CVSO</button>
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@ package org.bdigital.ocd.cases;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +22,6 @@ import org.bdigital.ocd.beans.AdmissionBean;
 import org.bdigital.ocd.beans.CaseBean;
 import org.bdigital.ocd.beans.MenuBean;
 import org.bdigital.ocd.model.AIM;
-import org.bdigital.ocd.model.Action;
-import org.bdigital.ocd.model.Actions;
 import org.bdigital.ocd.model.Address;
 import org.bdigital.ocd.model.Admission;
 import org.bdigital.ocd.model.AdmissionData;
@@ -42,8 +39,6 @@ import org.bdigital.ocd.model.form.ActionAf;
 import org.bdigital.ocd.model.form.AdmissionAf;
 import org.bdigital.ocd.model.form.CaseAf;
 import org.bdigital.ocd.utils.AdmissionComparator;
-import org.bdigital.ocd.utils.Constants;
-import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 
 /**
@@ -139,6 +134,60 @@ public abstract class CaseBaseAction extends BaseAction {
     		StringHolder errorMsg = new StringHolder("");
     		StringHolder result = new StringHolder("");
         	proxy.admission_list_case(tokenLK,caseId, "true", result, errorMsg);
+        	List<AdmissionAf> admissionsAll = new ArrayList<AdmissionAf>();
+        	Admissions admissionListCase = (Admissions)UtilsWs.xmlToObject(result.value,
+        			Admissions.class, Admission.class, Case.class, 
+        			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
+        	if(admissionListCase.getAdmissions()!=null){
+        		for(int i=0;i<admissionListCase.getAdmissions().size();i++){
+        			Admission adm = admissionListCase.getAdmissions().get(i);
+        			AdmissionAf admAf = new AdmissionAf(adm);
+        			if(admAf.getData()!=null && admAf.getData().getProgram()!=null && 
+        					"6".equals(admAf.getData().getProgram().getId())){
+        				admissionsAll.add(admAf);
+        			}
+        		}
+        	}
+        	Collections.sort(admissionsAll, new AdmissionComparator());
+        	Collections.reverse(admissionsAll);
+    		request.getSession().setAttribute("admissions",admissionsAll);
+        	request.getSession().setAttribute("admissionsAll",admissionsAll);
+    		
+        	AdmissionAf admissionFirst = null;
+    		AdmissionAf admissionSelected=null;
+    		if(admissionsAll.size()>0){
+    			admissionFirst = admissionsAll.get(0);
+    			admissionSelected = admissionFirst;
+	    		if(admissionId!=null && 
+	    				!"".equals(admissionId)){
+	    			for(int i=0;i<admissionsAll.size();i++){
+	    				AdmissionAf adm = admissionsAll.get(i);
+	        			if(adm.getRef().equals(admissionId)){
+	        				admissionSelected = adm;
+	        			}
+	    			}
+	    		}
+    		}
+        	if(admissionSelected!=null){
+        		admissionBean.setIdAdmission(admissionSelected.getRef());
+        		if(admissionSelected.getData()!=null){
+            		if(admissionSelected.getData().getProtocol()!=null 
+            				&& admissionSelected.getData().getProtocol().getId()!=null 
+            				&& !"".equals(admissionSelected.getData().getProtocol().getId())){
+            			admissionBean.setDescProtocolActual(admissionSelected.getData().getProgram().getName());
+            			admissionBean.setDataProtocolActual(admissionSelected.getData().getAdmissionDate());
+            			admissionBean.setDataInscripcioAdmissio(admissionSelected.getData().getEnrolDate());
+            			admissionBean.setEstatProtocolActual(admissionSelected.getData().getDescStatus());
+            		}
+        		}
+        	}
+        	request.getSession().setAttribute("admissionBean",admissionBean);
+        	request.getSession().setAttribute("actions",new ArrayList<ActionAf>());
+        	request.getSession().setAttribute("actionsTransfer",new ArrayList<ActionAf>());
+    		/*
+    		StringHolder errorMsg = new StringHolder("");
+    		StringHolder result = new StringHolder("");
+        	proxy.admission_list_case(tokenLK,caseId, "true", result, errorMsg);
         	List<AdmissionAf> admissions = new ArrayList<AdmissionAf>();
         	List<AdmissionAf> admissionsAll = new ArrayList<AdmissionAf>();
         	Admissions admissionListCase = (Admissions)UtilsWs.xmlToObject(result.value,
@@ -159,17 +208,17 @@ public abstract class CaseBaseAction extends BaseAction {
         				if(admAf.getData().getProtocol()!=null &&
         						!"".equals(admAf.getData().getProtocol().getId())){
         					//TODO:cal corregir WS: la seguent crida no hauria de caler fer pq ja hauria de contenir el name. 
-        					if(admAf.getData().getProtocol().getName()==null || 
-        							"".equals(admAf.getData().getProtocol().getName().trim())){
-        						errorMsg = new StringHolder("");
-        		            	result = new StringHolder("");
-        		    			proxy.admission_get(tokenLK, adm.getRef(), result, errorMsg);
-        		    			Admission admissionObj = (Admission)UtilsWs.xmlToObject(result.value,
-        		            			Admission.class, Case.class, 
-        		            			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
-        		    			admAf.getData().getProtocol().setName(admissionObj.getData().getProtocol().getName());
-        		    			admAf.getData().getProtocol().setDescription(admissionObj.getData().getProtocol().getDescription());
-        					}
+//        					if(admAf.getData().getProtocol().getName()==null || 
+//        							"".equals(admAf.getData().getProtocol().getName().trim())){
+//        						errorMsg = new StringHolder("");
+//        		            	result = new StringHolder("");
+//        		    			proxy.admission_get(tokenLK, adm.getRef(), result, errorMsg);
+//        		    			Admission admissionObj = (Admission)UtilsWs.xmlToObject(result.value,
+//        		            			Admission.class, Case.class, 
+//        		            			AdmissionData.class, AdmissionProgram.class, AdmissionProtocol.class);
+//        		    			admAf.getData().getProtocol().setName(admissionObj.getData().getProtocol().getName());
+//        		    			admAf.getData().getProtocol().setDescription(admissionObj.getData().getProtocol().getDescription());
+//        					}
         					admissions.add(admAf);
         				}
         				admissionsAll.add(admAf);
@@ -305,6 +354,7 @@ public abstract class CaseBaseAction extends BaseAction {
         	request.getSession().setAttribute("admissionBean",admissionBean);
         	request.getSession().setAttribute("actions",actions);
         	request.getSession().setAttribute("actionsTransfer",actionsTransfer);
+        	*/
     	}
     	
     	
