@@ -110,6 +110,7 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         	
         	Result resObj = (Result)UtilsWs.xmlToObject(result.value,
         			Result.class);
+        	formBean.setName(resObj.getShortName());
         	
         	Form formObj;
         	String xml2;
@@ -132,9 +133,9 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
             			Form.class, FormData.class, Question.class);
             	
             	if("164".equals(resObj.getTemplate())){
-            		if(formObj.getFormData().getName().equals("Variables")){
+            		if(formObj.getFormData().getName().equals("Variables") || formObj.getFormData().getParentName().equals("Variables")){
                 		xml2 = readFile("variables.xml");
-            		}else if(formObj.getFormData().getName().equals("CVSO")){
+            		}else if(formObj.getFormData().getName().equals("CVSO") || formObj.getFormData().getParentName().equals("CVSO")){
             			xml2 = readFile("cvso.xml");
             		}else{
             			return mapping.findForward(FAILURE);
@@ -219,7 +220,7 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
 //        		getpregunta10
 //        		new row large 
 //        	}
-    		if("164".equals(resObj.getTemplate()) && formObj.getFormData().getName().equals("Variables")){
+    		if("164".equals(resObj.getTemplate()) && (formObj.getFormData().getName().equals("Variables") || formObj.getFormData().getParentName().equals("Variables"))){
     			
         		List<TabBean> tabs = new ArrayList<TabBean>();
         		
@@ -349,7 +350,7 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         		tabs.add(tab);
             	
             	request.setAttribute("tabs", tabs);
-        	}else if("164".equals(resObj.getTemplate()) && formObj.getFormData().getName().equals("CVSO")){
+        	}else if("164".equals(resObj.getTemplate()) && (formObj.getFormData().getName().equals("CVSO") || formObj.getFormData().getParentName().equals("CVSO"))){
 
         		List<TabBean> tabs = new ArrayList<TabBean>();
         		

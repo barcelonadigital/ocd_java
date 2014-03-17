@@ -115,6 +115,10 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                         		}else if("261".equals(taskObj.getRefs()[0])){
                         			tAf.setDescriptionLong("QÜESTIONARI CVSO.");
                         		}
+                        		if(taskObj.getForms()!=null &&
+                            			taskObj.getForms().size()>0){
+                        			tasks.add(tAf);
+                        		}
                             	/*if(taskObj.getForms()!=null &&
                             			taskObj.getForms().size()>0){
                         			errorMsg = new StringHolder("");
@@ -159,7 +163,6 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 	}
                                 	tAf.setForms(forms);
                             	}*/
-	                			tasks.add(tAf);
                         	}
                     	}
                 	}
