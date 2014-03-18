@@ -31,8 +31,47 @@
 			    <logic:iterate name="taskItem" property="forms" id="formItem" type="org.bdigital.ocd.model.form.FormAf" >
 	            <bean:define id="formShortName" name="formItem" property="shortName" type="java.lang.String"/>
 	              <div class="formrow">
+					<logic:equal name="formItem" property="itemType" value="DOCUMENTALTA">
+		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENTALTA&idTask=${taskItem.ref}" data-toggle="dropdown">
+		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
+		              <span class="col3"><span>&nbsp;</span></span>
+		              <span class="col4"><span>&nbsp;</span></span>
+		              </a>
+		              <!-- 
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              <ul class="dropdown-menu">
+	                  </ul>
+	                   -->
+					</logic:equal>
+					<logic:equal name="formItem" property="itemType" value="DOCUMENTVISIT">
+		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENTVISIT&idTask=${taskItem.ref}" data-toggle="dropdown">
+		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
+		              <span class="col3"><span>&nbsp;</span></span>
+		              <span class="col4"><span>&nbsp;</span></span>
+		              </a>
+		              <!-- 
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              <ul class="dropdown-menu">
+	                  </ul>
+	                   -->
+					</logic:equal>
+					<logic:equal name="formItem" property="itemType" value="DOCUMENTPRESC">
+		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENTPRESC&idTask=${taskItem.ref}" data-toggle="dropdown">
+		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
+		              <span class="col3"><span>&nbsp;</span></span>
+		              <span class="col4"><span>&nbsp;</span></span>
+		              </a>
+		              <!-- 
+		              <span class="col4 actions"><span><span class="btn dropdown-toggle">Opcions<span class="caret"></span></span></span></span>
+		              <ul class="dropdown-menu">
+	                  </ul>
+	                   -->
+					</logic:equal>
 					<logic:equal name="formItem" property="itemType" value="DOCUMENT">
-		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
+		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENT&idTask=${taskItem.ref}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>REPORT</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
@@ -57,6 +96,9 @@
 	                  </ul>
 	                   -->
 					</logic:equal>
+					<logic:notEqual name="formItem" property="itemType" value="DOCUMENTALTA">
+					<logic:notEqual name="formItem" property="itemType" value="DOCUMENTPRESC">
+					<logic:notEqual name="formItem" property="itemType" value="DOCUMENTVISIT">
 					<logic:notEqual name="formItem" property="itemType" value="DOCUMENT">
 					<logic:notEqual name="formItem" property="itemType" value="CATSALUT">
 		              <!-- 
@@ -73,6 +115,9 @@
 		              <ul class="dropdown-menu">
 	                  </ul>
 	                   -->
+					</logic:notEqual>
+					</logic:notEqual>
+					</logic:notEqual>
 					</logic:notEqual>
 					</logic:notEqual>
 

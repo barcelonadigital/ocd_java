@@ -476,25 +476,3 @@
 
 
 }).call(this);
-
-var myApp;
-$(document).ready(function() {
-	myApp = myApp || (function () {
-	  var pleaseWaitDiv = $('#pleaseWaitDialog');
-	  return {
-	    showPleaseWait: function() {
-	      pleaseWaitDiv.modal();
-	    },
-	    hidePleaseWait: function () {
-	      pleaseWaitDiv.modal('hide');
-	    },
-	  };
-	})();
-});
-function showModalPleaseWait(){
-	  myApp.showPleaseWait();
-}
-
-window.onbeforeunload = function() {
-	  showModalPleaseWait();
-};

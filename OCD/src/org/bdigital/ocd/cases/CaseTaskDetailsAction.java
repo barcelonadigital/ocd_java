@@ -109,14 +109,14 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
 //                        		}
                         		if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){
                         			tAf.setDescription("Prescripció d'OCD");
-                        			tAf.setDescriptionLong("QÜESTIONARI VARIABLES. REPORT Enviament de document al històric clínic. REPORT Sol·licitud d'OCD a CatSalut.");
+                        			tAf.setDescriptionLong("QÜESTIONARI VARIABLES. REPORT Enviament de document a la historia clínica. REPORT Sol·licitud d'OCD a CatSalut.");
                         			tasks.add(tAf);
                         		}else if("CVSO".equals(taskObj.getDescription().toUpperCase())){
                         			tAf.setDescription("Visita de seguiment");
-                        			tAf.setDescriptionLong("QÜESTIONARI CVSO.");
+                        			tAf.setDescriptionLong("QÜESTIONARI CVSO. REPORT Enviament de document a la historia clínica. REPORT Sol·licitud d'OCD a CatSalut.");
                         			tasks.add(tAf);
                         		}else if("DISCHARGE".equals(taskObj.getType())){
-                        			tAf.setDescriptionLong("QÜESTIONARI REGISTRE D´ALTA DEL PROGRAMA.");
+                        			tAf.setDescriptionLong("QÜESTIONARI REGISTRE D´ALTA DEL PROGRAMA. REPORT Enviament de document a la historia clínica. REPORT Sol·licitud d'OCD a CatSalut.");
                         			tasks.add(tAf);
                         		}
                         		if(taskObj.getForms()!=null &&
@@ -155,7 +155,7 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 		if("253".equals(taskObj.getRefs()[0])){
                                 			FormAf fAf = new FormAf(new Form());
                                     		fAf.setItemType("DOCUMENT");
-                                    		fAf.setShortName("Enviament de document al històric clínic");
+                                    		fAf.setShortName("Enviament de document a la historia clínica");
                                 			forms.add(fAf);
                                 			fAf = new FormAf(new Form());
                                 			fAf.setItemType("CATSALUT");

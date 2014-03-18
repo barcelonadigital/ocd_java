@@ -189,6 +189,9 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         			Question questionObj = formObj.getFormData().getQuestions().get(i);
         			formBean.setQuestionType(questionObj.getQuestionId(), questionObj.getType());
                 	formBean.setQuestionId(questionObj.getQuestionId(), questionObj.getQuestionId());
+                	if(questionObj.getValue()!=null && !"".equals(questionObj.getValue()) && "NUMERICAL".equals(questionObj.getType())){
+                		questionObj.setValue(questionObj.getValue().replaceAll(",", "" ).replaceAll("[.]+", "," ));
+            		}
                 	formBean.setQuestionValue(questionObj.getQuestionId(), questionObj.getValue());
                 	formBean.setQuestionOption(questionObj.getQuestionId(), questionObj.getValue());
                 	//questionObj.setOptions(optionsMap.get(questionObj.getQuestionId()));

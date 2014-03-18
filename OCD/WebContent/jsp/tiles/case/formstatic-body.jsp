@@ -290,6 +290,14 @@
 		    	}
 		    }
 		    
+		    function fieldModified(idQuestion){
+		    	var valueObj = document.getElementsByName("questionModified("+idQuestion+")")[0];
+		        if (typeof valueObj !== "undefined") {
+		        	valueObj.value = 'true';
+		        }
+		        checkConditions();
+		    }
+		    
 		    function checkConditions(){
 		    	for(var i=0;i<arrayConditions.length;i++){
 		    		var condition = arrayConditions[i];
@@ -428,6 +436,7 @@
 							  </label>
 						      <html:hidden name="CaseFormStaticDetailsForm" property="questionType(${questionItem.questionId})"/>
 						      <html:hidden name="CaseFormStaticDetailsForm" property="questionId(${questionItem.questionId})"/>
+						      <html:hidden name="CaseFormStaticDetailsForm" property="questionModified(${questionItem.questionId})"/>
 						      <% boolean isRadioType = false; %>  
 			 				  <logic:equal name="questionItem" property="type" value="VERTICAL_RADIO">  
 			 				  <% isRadioType = true; %>
@@ -442,7 +451,7 @@
 		 				          <% request.setAttribute("activeClass","active"); %>
 		 				        </logic:equal>
 		 				        <label class="radio ${activeClass}">
-		 				        <html:radio name="CaseFormStaticDetailsForm" property="questionOption(${questionItem.questionId})" value="${optionItem.optionId}" onchange="checkConditions()" />
+		 				        <html:radio name="CaseFormStaticDetailsForm" property="questionOption(${questionItem.questionId})" value="${optionItem.optionId}" onchange="fieldModified('${questionItem.questionId}')" />
 		 				        <bean:write name="optionItem" property="description"/>
 		 				        </label>
 		 					  </logic:iterate>
@@ -455,16 +464,16 @@
 			 				  <% isTextType = true; %>  
 			 				  </logic:equal>  
 			 				  <% if (isTextType) {  %>  
-		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" onkeyup="checkConditions()" ></html:text>
+		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" onkeyup="fieldModified('${questionItem.questionId}')" ></html:text>
 			  				  <% } %>  
 			  				  <logic:equal name="questionItem" property="type" value="FORMULA">
 			  				    <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" readonly="true"></html:text>
 			  				  </logic:equal>
 			  				  <logic:equal name="questionItem" property="type" value="TEXT_AREA">
-		                        <html:textarea name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" onkeyup="checkConditions()" />
+		                        <html:textarea name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" onkeyup="fieldModified('${questionItem.questionId}')" />
 		                      </logic:equal>
 		                      <logic:equal name="questionItem" property="type" value="DATE">
-		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleId="questionValue${questionItem.questionId}" onkeyup="checkConditions()" />
+		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleId="questionValue${questionItem.questionId}" onkeyup="fieldModified('${questionItem.questionId}')" />
 							    <script>
 							        $( "#questionValue${questionItem.questionId}" ).datepicker();
 							    </script>

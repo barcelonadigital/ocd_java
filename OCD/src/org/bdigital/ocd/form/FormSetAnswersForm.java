@@ -28,6 +28,7 @@ public class FormSetAnswersForm extends org.apache.struts.action.ActionForm {
 	private HashMap<String,String> questionOptionMap = new HashMap<String,String>();
 	private HashMap<String,String> questionIdMap = new HashMap<String,String>();
 	private HashMap<String,String> questionValueMap = new HashMap<String,String>();
+	private HashMap<String,String> questionModifiedMap = new HashMap<String,String>();
 
 
 	public String getIdForm() {
@@ -62,6 +63,12 @@ public class FormSetAnswersForm extends org.apache.struts.action.ActionForm {
 	}
 	public void setQuestionValue(String index, String value) {
 		this.questionValueMap.put(index,value);
+	}
+	public String getQuestionModified(String index) {
+		return questionModifiedMap.get(index);
+	}
+	public void setQuestionModified(String index, String value) {
+		this.questionModifiedMap.put(index,value);
 	}
 	public Iterator<String> getQuestionIdIterator() {
 		return questionIdMap.values().iterator();

@@ -84,22 +84,12 @@
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="district">Barri</label>
-                      <html:text name="CaseDetailsForm" styleId="district" property="district" disabled="true" />
-                    </div>
-                    <div class="smallfield">
-                      <label for="city">Ciutat</label>
-                      <html:text name="CaseDetailsForm" styleId="city" property="city" disabled="true" />
-                    </div>
-                  </div>
-                  <div class="fields-row">
-                    <div class="smallfield">
                       <label for="postcode">Codi postal</label>
                       <html:text name="CaseDetailsForm" styleId="postcode" property="postcode" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="state">Estat</label>
-                      <html:text name="CaseDetailsForm" styleId="state" property="state" disabled="true" />
+                      <label for="city">Ciutat</label>
+                      <html:text name="CaseDetailsForm" styleId="city" property="city" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">

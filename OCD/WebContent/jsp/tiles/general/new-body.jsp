@@ -128,22 +128,12 @@
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="district">Barri</label>
-                  <html:text styleId="district" property="district" />
-                </div>
-                <div class="smallfield">
-                  <label for="city">Ciutat</label>
-                  <html:text styleId="city" property="city" />
-                </div>
-              </div>
-              <div class="fields-row">
-                <div class="smallfield">
                   <label for="postcode">Codi postal</label>
                   <html:text styleId="postcode" property="postcode" />
                 </div>
                 <div class="smallfield">
-                  <label for="state">Estat</label>
-                  <html:text styleId="state" property="state" />
+                  <label for="city">Ciutat</label>
+                  <html:text styleId="city" property="city" />
                 </div>
               </div>
               <div class="fields-row">

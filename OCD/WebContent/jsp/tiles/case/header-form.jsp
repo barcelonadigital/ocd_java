@@ -76,7 +76,7 @@
         <div class="btn-block">
                 <button onclick="assignarProtocolParam('#TASK:N253')" class="btn btn-warning custom-btn btn-large">Prescripció d'OCD</button>
                 <button onclick="assignarProtocolParam('#TASK:N261')" class="btn btn-warning custom-btn btn-large">Visita de seguiment</button>
-                <button onclick="assignarProtocolParam('#XDISCHARGE')" class="btn btn-warning custom-btn btn-large">Alta del pacient</button>
+                <button onclick="assignarProtocolParam('#XDISCHARGE')" class="btn btn-warning custom-btn btn-large">Alta del programa</button>
         </div>
       </div>
     </div>

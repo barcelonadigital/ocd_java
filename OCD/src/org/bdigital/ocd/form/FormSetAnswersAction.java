@@ -48,28 +48,39 @@ public class FormSetAnswersAction extends BaseAction {
     	if(formId!=null){
     		StringHolder result = new StringHolder("");
     		StringHolder errorMsg = new StringHolder("");
+    		StringHolder refresh = new StringHolder("");
+        	StringHolder next = new StringHolder("");
+        	StringHolder nextForm = new StringHolder("");
     		Iterator<String> iter = formBean.getQuestionIdIterator();
     		while(iter.hasNext()){
-        		result = new StringHolder("");
-        		errorMsg = new StringHolder("");
-        		StringHolder refresh = new StringHolder("");
-            	StringHolder next = new StringHolder("");
-            	StringHolder next_form = new StringHolder("");
     			String questionId = iter.next();
-            	String questionType = formBean.getQuestionType(questionId);
-            	if("VERTICAL_RADIO".equals(questionType) || "HORIZONTAL_RADIO".equals(questionType) ||
-            			"TEXT".equals(questionType) || "NUMERICAL".equals(questionType) || "TEXT_AREA".equals(questionType) || "DATE".equals(questionType)){
-            		String optionId = formBean.getQuestionOption(questionId);
-            		String value = formBean.getQuestionValue(questionId);
-            		if(value!=null && !"".equals(value) && "DATE".equals(questionType)){
-            			value = UtilsString.dateToString(UtilsString.stringtoDate(value, Constants.FORMAT_DATE_WEB), Constants.FORMAT_DATE_WS);
-            		}else if(value==null){
-            			value="";
-            		}
-            		questionId = questionId.replaceAll("_","/");
-            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, next_form, errorMsg);
-            		//TODO:aniria bé un WS form_set per desar totes les respostes amb una sola crida
-            	}
+        		String modified = formBean.getQuestionModified(questionId);
+        		if("true".equals(modified)){
+                	String questionType = formBean.getQuestionType(questionId);
+	            	if("VERTICAL_RADIO".equals(questionType) || "HORIZONTAL_RADIO".equals(questionType) ||
+	            			"TEXT".equals(questionType) || "NUMERICAL".equals(questionType) || "TEXT_AREA".equals(questionType) || "DATE".equals(questionType)){
+	            		String optionId = formBean.getQuestionOption(questionId);
+	            		String value = formBean.getQuestionValue(questionId);
+	            		if(value!=null && !"".equals(value) && "DATE".equals(questionType)){
+	            			value = UtilsString.dateToString(UtilsString.stringtoDate(value, Constants.FORMAT_DATE_WEB), Constants.FORMAT_DATE_WS);
+	            		}else if(value==null){
+	            			value="";
+	            		}
+	            		if(value!=null && !"".equals(value) && "NUMERICAL".equals(questionType)){
+	            			value = value.replaceAll("[.]+", "" ).replaceAll(",", "." );
+	            		}else if(value==null){
+	            			value="";
+	            		}
+	            		questionId = questionId.replaceAll("_","/");
+	            		result = new StringHolder("");
+	            		errorMsg = new StringHolder("");
+	            		refresh = new StringHolder("");
+	                	next = new StringHolder("");
+	                	nextForm = new StringHolder("");
+	            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, nextForm, errorMsg);
+	            		//TODO:aniria bé un WS form_set per desar totes les respostes amb una sola crida
+	            	}
+        		}
     		}
 //        	for(int i=0;i<formBean.getQuestionSize();i++){
 //        		StringHolder result = new StringHolder("");

@@ -98,8 +98,30 @@ public class CaseTaskUnitDetailsAction extends CaseBaseAction {
             		}
             		if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){
             			FormAf fAf = new FormAf(new Form());
-                		fAf.setItemType("DOCUMENT");
-                		fAf.setShortName("Enviament de document al històric clínic");
+                		fAf.setItemType("DOCUMENTPRESC");
+                		fAf.setShortName("Enviament de document a la historia clínica");
+            			forms.add(fAf);
+            			fAf = new FormAf(new Form());
+            			fAf.setItemType("CATSALUT");
+                		fAf.setShortName("Sol·licitud d'OCD a CatSalut");
+            			fAf.setRef(refFirstItem);
+                		fAf.setStatus(statusFirstItem);
+            			forms.add(fAf);
+            		}else if("CVSO".equals(taskObj.getDescription().toUpperCase())){
+            			FormAf fAf = new FormAf(new Form());
+                		fAf.setItemType("DOCUMENTVISIT");
+                		fAf.setShortName("Enviament de document a la historia clínica");
+            			forms.add(fAf);
+            			fAf = new FormAf(new Form());
+            			fAf.setItemType("CATSALUT");
+                		fAf.setShortName("Sol·licitud d'OCD a CatSalut");
+            			fAf.setRef(refFirstItem);
+                		fAf.setStatus(statusFirstItem);
+            			forms.add(fAf);
+            		}else if("DISCHARGE".equals(taskObj.getType())){
+            			FormAf fAf = new FormAf(new Form());
+                		fAf.setItemType("DOCUMENTALTA");
+                		fAf.setShortName("Enviament de document a la historia clínica");
             			forms.add(fAf);
             			fAf = new FormAf(new Form());
             			fAf.setItemType("CATSALUT");
