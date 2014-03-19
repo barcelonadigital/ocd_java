@@ -4,7 +4,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 	    <script type="text/javascript">
 		    function doSave() {
-	          document.getElementById('newForm2').submit();
+	          $('#newForm2').submit();
 	          return false;
 	        }
 	    </script>

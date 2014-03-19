@@ -171,7 +171,9 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
                 			questionObj.setValue(valuesMap.get(questionObj.getQuestionId()));
                 			for(int j=0;j<questionObj.getOptions().size();j++){
                 				Option optionObj = questionObj.getOptions().get(j);
-                				if(optionObj.getDescription().equals(questionObj.getValue())){
+                				if(optionObj.getDescription()!=null && 
+                						questionObj.getValue()!=null &&
+                						optionObj.getDescription().trim().equals(questionObj.getValue().trim())){
                 					questionObj.setValue(optionObj.getOptionId());
                 				}
                 			}

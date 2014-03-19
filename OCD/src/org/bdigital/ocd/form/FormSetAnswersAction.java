@@ -6,6 +6,7 @@
 
 package org.bdigital.ocd.form;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,13 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.utils.UtilsString;
+import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
  *
@@ -51,6 +56,7 @@ public class FormSetAnswersAction extends BaseAction {
     		StringHolder refresh = new StringHolder("");
         	StringHolder next = new StringHolder("");
         	StringHolder nextForm = new StringHolder("");
+        	HashMap<String,String> questionErrorMap = new HashMap<String,String>();
     		Iterator<String> iter = formBean.getQuestionIdIterator();
     		while(iter.hasNext()){
     			String questionId = iter.next();
@@ -77,10 +83,37 @@ public class FormSetAnswersAction extends BaseAction {
 	            		refresh = new StringHolder("");
 	                	next = new StringHolder("");
 	                	nextForm = new StringHolder("");
-	            		proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, nextForm, errorMsg);
+	            		try{
+	            			proxy.form_set_answer(tokenLK, formId, questionId, value, optionId, "", result, refresh, next, nextForm, errorMsg);
+	            		}catch(LINKCAREException e){
+	            			if (errorMsg.value.contains("Maximum") && errorMsg.value.contains("exceeded")) {
+	            				
+	            				String errorWs = errorMsg.value;
+	            				int idxMaximum = errorWs.indexOf("Maximum");
+	            				int idxExceeded = errorWs.indexOf("exceeded");
+	            				int lenghtMaximum = "Maximum".length();
+	            				String number = errorWs.substring(idxMaximum+lenghtMaximum+1,idxExceeded-1);
+	            				number = number.replaceAll(",", "" ).replaceAll("[.]+", "," );
+	            				MessageResources msgResource = getResources(request);
+	            	        	String msgError=msgResource.getMessage("errors.maxnumber",number);
+	            				questionErrorMap.put(questionId.replaceAll("/","_"), msgError);
+	            				
+	    	                }else{
+	            				String errorWs = errorMsg.value;
+	            				questionErrorMap.put(questionId.replaceAll("/","_"), errorWs);
+	    	                }
+	            		}
 	            		//TODO:aniria bé un WS form_set per desar totes les respostes amb una sola crida
+	            		//TODO:que succeeix si no es desen en ordre les preguntes que pengen d'altres preguntes
 	            	}
         		}
+    		}
+    		if(!questionErrorMap.isEmpty()){
+    			ActionMessages errors = new ActionMessages();
+                errors.add("general",new ActionMessage("errors.formContainsInvalidAnswers"));
+                saveErrors(request, errors);
+    			request.setAttribute("questionErrors", questionErrorMap);
+                return mapping.findForward(FAILURE);
     		}
 //        	for(int i=0;i<formBean.getQuestionSize();i++){
 //        		StringHolder result = new StringHolder("");

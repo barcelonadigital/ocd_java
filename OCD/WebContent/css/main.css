@@ -9309,3 +9309,23 @@ span.hint .dropdown-menu {
     background-color:#f11;
     background-image:none
 }
+.smallfield .help-inline {
+    color:#e0282d;
+    margin-top:-10px;
+}
+.smallfield.error input {
+	background-image: url(../img/ico-error-input.png);
+	background-repeat: no-repeat;
+	background-position: 95% 50%;
+	border-color: #d0d0d0;
+	background-color: #fff3f2;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tabbable .nav li.error a {
+	color: #e0282d;
+}
+.menuizqlayout>.container>.content .contentconbotoneslaterales .tabbable .nav li.error.active a {
+	color: #48525e;
+}

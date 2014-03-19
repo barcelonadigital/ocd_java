@@ -387,7 +387,16 @@
                 <logic:notEqual name="index" value="0">
                 <% request.setAttribute("activeClass",""); %>
                 </logic:notEqual>
-                <li class="${activeClass}"><a href="#tab${index}" data-toggle="tab"><bean:write name="tabItem" property="title"/></a></li>
+                <% request.setAttribute("divErrorClass",""); %>
+                <logic:iterate name="tabItem" property="rows" id="rowItem" indexId="indexRow" type="org.bdigital.ocd.beans.RowBean" >
+                <logic:iterate name="rowItem" property="fields" id="fieldItem" indexId="indexField" type="org.bdigital.ocd.beans.FieldBean" >
+                    <bean:define id="questionItem" name="fieldItem" property="question" type="org.bdigital.ocd.model.Question"/>
+                    <logic:present name="questionErrors" property="${questionItem.questionId}">
+                        <% request.setAttribute("divErrorClass","error"); %>
+	 				</logic:present>
+			 	</logic:iterate>
+			 	</logic:iterate>
+                <li class="${activeClass} ${divErrorClass}"><a href="#tab${index}" data-toggle="tab"><bean:write name="tabItem" property="title"/></a></li>
                 </logic:iterate></logic:present>
               </ul>
               <div class="tab-content">
@@ -413,17 +422,25 @@
                   <div class="h3actions"><a href="#helpEspiroModal" role="button" data-toggle="modal" class="help"></a></div>
                   </logic:equal>
                   <logic:iterate name="tabItem" property="rows" id="rowItem" indexId="indexRow" type="org.bdigital.ocd.beans.RowBean" >
+                  <% request.setAttribute("hiHaError","false"); %>
                   <div class="fields-row">
                     <logic:iterate name="rowItem" property="fields" id="fieldItem" indexId="indexField" type="org.bdigital.ocd.beans.FieldBean" >
                             <bean:define id="questionItem" name="fieldItem" property="question" type="org.bdigital.ocd.model.Question"/>
+		                    <% request.setAttribute("divClass",""); %>
 		                    <logic:equal name="fieldItem" property="fieldType" value="<%=org.bdigital.ocd.utils.Constants.HTML_FIELDTYPE_BIG%>">
 		                    <% request.setAttribute("divClass","bigfield"); %>
 		                    </logic:equal>
 		                    <logic:notEqual name="fieldItem" property="fieldType" value="<%=org.bdigital.ocd.utils.Constants.HTML_FIELDTYPE_BIG%>">
 		                    <% request.setAttribute("divClass","smallfield"); %>
 		                    </logic:notEqual>
-		                    <div class="${divClass}" id='fila<bean:write name="questionItem" property="questionId"/>'>
-		                      
+		                    <% request.setAttribute("divErrorClass",""); %>
+                            <logic:present name="questionErrors" property="${questionItem.questionId}">
+                            <% request.setAttribute("divErrorClass","error"); %>
+                            <% request.setAttribute("hiHaError","true"); %>
+			 				</logic:present>
+
+		                    <div class="${divClass} ${divErrorClass}" id='fila<bean:write name="questionItem" property="questionId"/>'>
+                              
 		                      <label class="description">
 								<bean:write name="questionItem" property="description" filter="false"/>
 								<span id='statusSaving<bean:write name="questionItem" property="questionId"/>' style='color:#bbb'></span>
@@ -456,7 +473,7 @@
 		 				          <% request.setAttribute("activeClass","active"); %>
 		 				        </logic:equal>
 		 				        <label class="radio ${activeClass}">
-		 				        <html:radio name="CaseFormStaticDetailsForm" property="questionOption(${questionItem.questionId})" value="${optionItem.optionId}" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" />
+		 				        <html:radio name="CaseFormStaticDetailsForm" property="questionOption(${questionItem.questionId})" value="${optionItem.optionId}" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" onclick="$(this).trigger('keyup');" />
 		 				        <bean:write name="optionItem" property="description"/>
 		 				        </label>
 		 					  </logic:iterate>
@@ -503,6 +520,28 @@
 		                    </div>
                     </logic:iterate>
                   </div>
+                  <logic:equal name="hiHaError" value="true">  
+                  <div class="fields-row">
+                    <logic:iterate name="rowItem" property="fields" id="fieldItem" indexId="indexField" type="org.bdigital.ocd.beans.FieldBean" >
+                    <bean:define id="questionItem" name="fieldItem" property="question" type="org.bdigital.ocd.model.Question"/>
+                    <% request.setAttribute("divClass",""); %>
+                    <logic:equal name="fieldItem" property="fieldType" value="<%=org.bdigital.ocd.utils.Constants.HTML_FIELDTYPE_BIG%>">
+                    <% request.setAttribute("divClass","bigfield"); %>
+                    </logic:equal>
+                    <logic:notEqual name="fieldItem" property="fieldType" value="<%=org.bdigital.ocd.utils.Constants.HTML_FIELDTYPE_BIG%>">
+                    <% request.setAttribute("divClass","smallfield"); %>
+                    </logic:notEqual>
+                    <div class="${divClass}">
+                      <logic:present name="questionErrors" property="${questionItem.questionId}">
+	 				  <span class="help-inline"><bean:write name="questionErrors" property="${questionItem.questionId}" filter="false"/></span>
+	 				  </logic:present>
+	 				  <logic:notPresent name="questionErrors" property="${questionItem.questionId}">
+	 				  &nbsp;
+	 				  </logic:notPresent>
+                    </div>
+                    </logic:iterate>
+                  </div>
+                  </logic:equal>
                   </logic:iterate>
                 </div>
                 </logic:iterate>

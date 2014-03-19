@@ -436,7 +436,7 @@
     sessionListEventos();
   });
   $(document).ready(function() {
-	  $( "form" ).submit(function() {
+	  $(document).on('submit', 'form', function(e) {
 		  $("button.dropdown-toggle").each(function(i, item) {
 			  var optionSelected = $(item).parent().children(".dropdown-menu").children(":contains('"+$(item).text()+"')");
 			  if(optionSelected.length>0){
