@@ -360,6 +360,11 @@
 	          document.getElementById('newForm').submit();
 	          return false;
 	        }
+	        $(document).ready(function() {
+	      	  $( ".modificable" ).change(function() {
+	      		$(this).trigger('keyup');
+	      	  });
+	        });
 	    </script>
         <div class="content contabs">
           <bean:define id="formShortName" name="CaseFormStaticDetailsForm" property="name" type="java.lang.String"/>
@@ -451,7 +456,7 @@
 		 				          <% request.setAttribute("activeClass","active"); %>
 		 				        </logic:equal>
 		 				        <label class="radio ${activeClass}">
-		 				        <html:radio name="CaseFormStaticDetailsForm" property="questionOption(${questionItem.questionId})" value="${optionItem.optionId}" onchange="fieldModified('${questionItem.questionId}')" />
+		 				        <html:radio name="CaseFormStaticDetailsForm" property="questionOption(${questionItem.questionId})" value="${optionItem.optionId}" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" />
 		 				        <bean:write name="optionItem" property="description"/>
 		 				        </label>
 		 					  </logic:iterate>
@@ -464,16 +469,16 @@
 			 				  <% isTextType = true; %>  
 			 				  </logic:equal>  
 			 				  <% if (isTextType) {  %>  
-		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" onkeyup="fieldModified('${questionItem.questionId}')" ></html:text>
+		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" ></html:text>
 			  				  <% } %>  
 			  				  <logic:equal name="questionItem" property="type" value="FORMULA">
 			  				    <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" readonly="true"></html:text>
 			  				  </logic:equal>
 			  				  <logic:equal name="questionItem" property="type" value="TEXT_AREA">
-		                        <html:textarea name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" onkeyup="fieldModified('${questionItem.questionId}')" />
+		                        <html:textarea name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" />
 		                      </logic:equal>
 		                      <logic:equal name="questionItem" property="type" value="DATE">
-		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleId="questionValue${questionItem.questionId}" onkeyup="fieldModified('${questionItem.questionId}')" />
+		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleId="questionValue${questionItem.questionId}" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" />
 							    <script>
 							        $( "#questionValue${questionItem.questionId}" ).datepicker();
 							    </script>

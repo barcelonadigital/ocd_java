@@ -48,6 +48,8 @@ import org.bdigital.ocd.tabs.SituacioPacientTab;
 import org.bdigital.ocd.tabs.SollicitantTab;
 import org.bdigital.ocd.tabs.SollicitudTab;
 import org.bdigital.ocd.tabs.UtilsTabs;
+import org.bdigital.ocd.utils.Constants;
+import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 
 /**
@@ -189,6 +191,9 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
         			Question questionObj = formObj.getFormData().getQuestions().get(i);
         			formBean.setQuestionType(questionObj.getQuestionId(), questionObj.getType());
                 	formBean.setQuestionId(questionObj.getQuestionId(), questionObj.getQuestionId());
+                	if(questionObj.getValue()!=null && !"".equals(questionObj.getValue()) && "DATE".equals(questionObj.getType())){
+                		questionObj.setValue(UtilsString.dateToString(UtilsString.stringtoDate(questionObj.getValue(), Constants.FORMAT_DATE_WS), Constants.FORMAT_DATE_WEB));
+                	}
                 	if(questionObj.getValue()!=null && !"".equals(questionObj.getValue()) && "NUMERICAL".equals(questionObj.getType())){
                 		questionObj.setValue(questionObj.getValue().replaceAll(",", "" ).replaceAll("[.]+", "," ));
             		}

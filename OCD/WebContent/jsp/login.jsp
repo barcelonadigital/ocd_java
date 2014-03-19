@@ -39,12 +39,14 @@
   </head>
   <body class="login">
     <div class="container">
+      <!-- 
       <div class="nav">
         <ul>
           <li><a href="#">English</a></li>
           <li><a href="#">Español</a></li>
         </ul>
       </div>
+       -->
       <h1 class="logo-ocd">OCD</h1>
       <div class="caja">
         <html:form action="/loginAction">

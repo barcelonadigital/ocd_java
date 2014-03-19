@@ -8,6 +8,7 @@ package org.bdigital.ocd.cases;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.bdigital.ocd.model.Task;
 import org.bdigital.ocd.model.Tasks;
 import org.bdigital.ocd.model.form.TaskAf;
 import org.bdigital.ocd.utils.Constants;
+import org.bdigital.ocd.utils.TaskComparator;
 import org.bdigital.ocd.utils.UtilsString;
 import org.bdigital.ocd.utils.UtilsWs;
 
@@ -177,6 +179,7 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
 //    	}else{
 //    		return mapping.findForward(FAILURE);
     	}
+    	Collections.sort(tasks, new TaskComparator());
     	request.setAttribute("tasks", tasks);
     	return mapping.findForward(SUCCESS);
     }

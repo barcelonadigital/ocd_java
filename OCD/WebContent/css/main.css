@@ -4805,7 +4805,7 @@ a,button,a:focus,button:focus {
 .custom-cabecera .container a.brand {
     display:block;
     background: url(../img/logo-ocd.png) no-repeat 20px 40px;
-    width:150px;
+    width:450px;
     height:106px;
     text-indent:-9999px;
     float:left
