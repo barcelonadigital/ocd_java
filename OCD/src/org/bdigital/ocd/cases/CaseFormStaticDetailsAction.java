@@ -199,7 +199,14 @@ public class CaseFormStaticDetailsAction extends CaseBaseAction {
                 	if(questionObj.getValue()!=null && !"".equals(questionObj.getValue()) && "NUMERICAL".equals(questionObj.getType())){
                 		questionObj.setValue(questionObj.getValue().replaceAll(",", "" ).replaceAll("[.]+", "," ));
             		}
-                	formBean.setQuestionValue(questionObj.getQuestionId(), questionObj.getValue());
+                    @SuppressWarnings("unchecked")
+					HashMap<String,String> questionErrorMap = (HashMap<String,String>)request.getAttribute("questionErrors");
+                    if(questionErrorMap!=null && questionErrorMap.get(questionObj.getQuestionId())!=null){
+                    	//TODO:enlloc d'esborrar el valor caldria mantenir el valor no valid que ha provocat l'error
+                    	formBean.setQuestionValue(questionObj.getQuestionId(), "");
+                    }else{
+                    	formBean.setQuestionValue(questionObj.getQuestionId(), questionObj.getValue());
+                    }
                 	formBean.setQuestionOption(questionObj.getQuestionId(), questionObj.getValue());
                 	//questionObj.setOptions(optionsMap.get(questionObj.getQuestionId()));
                 	questionsMap.put(questionObj.getQuestionId(), questionObj);
