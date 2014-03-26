@@ -5595,6 +5595,7 @@ body>.fichalayout>.container>.ficha .encabezado, body>div>.fichalayout>.containe
     padding-left:0
 }
 .menuizqlayout {
+	min-width:1000px;
     padding:30px 0 50px 0;
     color:#2c3e50
 }
@@ -6049,10 +6050,12 @@ body>.alertmessage>.container>div>a.warning, body>div>.alertmessage>.container>d
     color:#da2228
 }
 body>.gris1, body>div>.gris1 {
-    background-color:#f0f0f0
+	min-width:1000px;
+	background-color:#f0f0f0
 }
 body>.gris2, body>div>.gris2 {
-    background-color:#fbfbfb
+	min-width:1000px;
+	background-color:#fbfbfb
 }
 hr {
     margin:10px 0 0 0;
@@ -7129,6 +7132,8 @@ div.dropdown-menu>ul>li>a {
 }
 .footer {
     background-color:#3a4150;
+    min-width: 1000px;
+    padding-left: 10px;
     height:74px
 }
 .footer .container {
@@ -7137,6 +7142,7 @@ div.dropdown-menu>ul>li>a {
     color:#fff
 }
 .cabeceraperfil {
+    min-width: 1000px;
     background-color:#f1f1f1
 }
 .cabeceraperfil>.container>.content {
@@ -9077,10 +9083,10 @@ legend.singlelinelegend {vertical-align:middle;}
     text-transform:none
 }
 #contentnophoto {
-	padding:10px 0 10px 0px
+	padding:10px 0 10px 10px
 }
 #contentnophotoslim {
-    padding:10px 0 10px 0px
+    padding:10px 0 10px 10px
 }
 legend.questionform {
     line-height:20px;
