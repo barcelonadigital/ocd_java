@@ -27,7 +27,7 @@
         <!-- Encabezado-->
         <div class="encabezado bordebajo">
           <div class="h1actions">
-            <html:link action="/caseNewPg.do" styleClass="btn btn-large btn-warning">Nou pacient</html:link>
+            <a href="#confirmNewModal" role="button" data-toggle="modal" class="btn btn-large btn-warning">Nou pacient</a>
           </div>
           <header>
             <h1>Usuaris <strong>— Pacients</strong></h1>
@@ -56,14 +56,11 @@
                 </span>
 			</logic:equal>
             <div id="search-patient">
-                <label for="cip">CIP</label>
-                <html:text styleId="cip" property="cip" />
-                <label for="nif">NIF</label>
-                <html:text styleId="nif" property="nif" />
-                <label for="nie">NIE</label>
-                <html:text styleId="nie" property="nie" />
-                <label for="pas">PAS</label>
-                <html:text styleId="pas" property="pas" />
+                <label for="searchStr">
+                Cerca per tots els camps
+				<a href="#info1" role="button" data-toggle="modal" class="info_popup">Info</a>               
+                </label>
+                <html:text styleId="searchStr" property="searchStr" />
                 
             </div>
             <div class="actions bottom">
@@ -74,4 +71,31 @@
         </div>
       </div>
       <!-- Contenido fin-->
+    </div>
+    <!-- Lightboxes-->
+    <div id="info1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal detail hide fade">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+        <h3>Seleccionar pacient</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Sobre quins camps es realitza la cerca?</h4>
+        <p><strong>CIP i NHC</strong>, en cas de pacients que existeixin al <strong>HIS</strong>.</p>
+        <p><strong>CIP, NHC, NIF, NIE, passaport, nom, cognoms i telèfon</strong>, en cas de pacients que existeixin al <strong>Open Health Practice</strong>.</p>
+      </div>
+    </div>
+    <div id="confirmNewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+        <h3>El HIS no s'actualitzarà</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          El pacient només es crearà al Open Health Practice. <br/>El HIS s'haurà d'actualitzar a part. Desitja continuar?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
+        <button onclick="window.location='<html:rewrite action="/caseNewPg.do"/>'" class="btn btn-primary custom-btn btn-large">D'acord, continuar</button>
+      </div>
     </div>

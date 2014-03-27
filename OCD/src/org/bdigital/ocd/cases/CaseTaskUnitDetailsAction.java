@@ -88,12 +88,18 @@ public class CaseTaskUnitDetailsAction extends CaseBaseAction {
             					l==2){
             				fAf.setShortName("Prescripció inicial d'OCD");
             			}
-            			if(!"242".equals(taskObj.getRefs()[0]) ||
-            					l!=0){
-            				forms.add(fAf);
-            			}else{
+            			if("242".equals(taskObj.getRefs()[0]) &&
+            					l==0){
             				statusFirstItem = fAf.getStatus();
             				refFirstItem = fAf.getRef();
+            			}else if(("VARIABLES".equals(taskObj.getDescription().toUpperCase())
+                				|| "CVSO".equals(taskObj.getDescription().toUpperCase()))
+            					&& l==0){
+            				statusFirstItem = fAf.getStatus();
+            				refFirstItem = fAf.getRef();
+            				forms.add(fAf);
+            			}else{
+            				forms.add(fAf);
             			}
             		}
             		if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){

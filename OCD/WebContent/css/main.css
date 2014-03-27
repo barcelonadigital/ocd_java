@@ -9196,6 +9196,18 @@ span.hint .dropdown-menu {
 .formlist .table .formrow>span>span.col4,.formlist .table .formrow>a>span.col4,.formlist .table .formrow>span>a.col4,.formlist .table .formrow>a>a.col4 {
     width:156px
 }
+.formlist .table .formrow>span>span.item1,.formlist .table .formrow>a>span.item1,.formlist .table .formrow>span>a.item1,.formlist .table .formrow>a>a.item1 {
+    width:162px
+}
+.formlist .table .formrow>span>span.item2,.formlist .table .formrow>a>span.item2,.formlist .table .formrow>span>a.item2,.formlist .table .formrow>a>a.item2 {
+	width:123px
+	}
+.formlist .table .formrow>span>span.item3,.formlist .table .formrow>a>span.item3,.formlist .table .formrow>span>a.item3,.formlist .table .formrow>a>a.item3 {
+    width:308px
+}
+.formlist .table .formrow>span>span.item4,.formlist .table .formrow>a>span.item4,.formlist .table .formrow>span>a.item4,.formlist .table .formrow>a>a.item4 {
+    width:156px
+}
 .formlist .table .formrow>span>span:first-child,.formlist .table .formrow>a>span:first-child,.formlist .table .formrow>span>a:first-child,.formlist .table .formrow>a>a:first-child {
     border-left-width:0
 }
@@ -9334,4 +9346,36 @@ span.hint .dropdown-menu {
 }
 .menuizqlayout>.container>.content .contentconbotoneslaterales .tabbable .nav li.error.active a {
 	color: #48525e;
+}
+.columnboxes {
+    padding:10px 0 10px 0
+}
+.columnboxes .column:last-child {
+    margin-right: 0px;
+}
+.columnboxes .column {
+    float: left;
+    margin-right: 22px;
+}
+.columnboxes .column.por3 {
+    width: 318px;
+}
+.columnboxes .column.por2 {
+    width: 364px;
+}
+.columnboxes .column fieldset .question {
+    font-weight:bold;
+}
+.columnboxes .column fieldset .answer {
+    font-weight:none;
+}
+a.info_popup {
+  display: inline-block;
+  vertical-align: text-top;
+  width: 24px;
+  height: 24px;
+  background: url(../img/ico-info-popup.png) no-repeat center center;
+  margin: 0 12px;
+  overflow: hidden;
+  text-indent: -9999px;
 }

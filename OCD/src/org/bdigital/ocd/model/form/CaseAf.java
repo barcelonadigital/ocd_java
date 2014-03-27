@@ -19,12 +19,19 @@ public class CaseAf extends org.apache.struts.action.ActionForm {
 	String nie;
 	String pas;
 	String cip;
+	String nhc;
+	String id;
+	String nickname;
+	String nameComplete;
 	String[] refs;
 	DataAf data;
 	
 	public CaseAf(Case obj) throws IllegalAccessException, InvocationTargetException, ParseException {
 		super();
 		this.ref=obj.getRef();
+		this.id=obj.getId();
+		this.nickname=obj.getNickname();
+		this.nameComplete=obj.getNameComplete();
 		this.refs=obj.getRefs();
 		if(obj.getRefs()!=null){
 	    	for(int i=0;i<obj.getRefs().length;i++){
@@ -39,6 +46,8 @@ public class CaseAf extends org.apache.struts.action.ActionForm {
 					this.pas = UtilsWs.getValue(item, "PAS");
 				}else if(item.indexOf("CIP")==0){
 					this.cip = UtilsWs.getValue(item, "CIP");
+				}else if(item.indexOf("NHC")==0){
+					this.nhc = UtilsWs.getValue(item, "NHC");
 				}
 			}
 		}
@@ -93,6 +102,30 @@ public class CaseAf extends org.apache.struts.action.ActionForm {
 	}
 	public void setCip(String cip) {
 		this.cip = cip;
+	}
+	public String getNhc() {
+		return nhc;
+	}
+	public void setNhc(String nhc) {
+		this.nhc = nhc;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getNameComplete() {
+		return nameComplete;
+	}
+	public void setNameComplete(String nameComplete) {
+		this.nameComplete = nameComplete;
 	}
  
 }

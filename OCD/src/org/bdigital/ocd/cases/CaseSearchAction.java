@@ -49,22 +49,15 @@ public class CaseSearchAction extends BaseAction {
     	}
     	
     	String tokenLK = (String)request.getSession().getAttribute("tokenLK");
-    	
-    	String birthday = (formBean.getBirthday()!=null)?formBean.getBirthday():"";
-    	String nie = (formBean.getNie()!=null)?"NIE/"+formBean.getNie():"";
-    	String pas = (formBean.getPas()!=null)?"PAS/"+formBean.getPas():"";
-    	String cip = (formBean.getCip()!=null)?"CIP/"+formBean.getCip():"";
-    	String nick = (formBean.getNick()!=null)?"NICK/"+formBean.getNick():"";
-    	String nif = (formBean.getNif()!=null)?"NIF/"+formBean.getNif():"";
+
+    	String cip = "CIP/"+formBean.getSearchStr();
+    	String nhc = "NHC/"+formBean.getSearchStr();
     			
     	Case caseObj = new Case();
     	caseObj.setRef("");
     	Data dataObj = new Data();
-    	dataObj.setBdate(birthday);
-    	dataObj.setGender("M");
-    	dataObj.setStatus("ACTIVE");
     	caseObj.setData(dataObj);
-    	String[] refs = new String[]{nie,nif,pas,cip,nick};
+    	String[] refs = new String[]{cip,nhc};
     	caseObj.setRefs(refs);
    
     	String caseXmlString = UtilsWs.objectToXml(caseObj,Case.class,Data.class);
@@ -76,10 +69,30 @@ public class CaseSearchAction extends BaseAction {
     	try{
     		proxy.case_insert(tokenLK,caseXmlString,result,type,errorMsg);
         }catch(LINKCAREException e){
-        	
+
         	if ("Fill all reguired fields".equals(e.getMessage())) {
-        		formBean.setShowLinkCreate("true");
-                return mapping.findForward(FAILURE);
+	        	String nie = "NIE/"+formBean.getSearchStr();
+	        	String pas = "PAS/"+formBean.getSearchStr();
+	        	String nif = "NIF/"+formBean.getSearchStr();
+	        	refs = new String[]{nie,nif,pas};
+	        	caseObj.setRefs(refs);
+	        	
+	        	caseXmlString = UtilsWs.objectToXml(caseObj,Case.class,Data.class);
+	
+	        	errorMsg = new StringHolder("");
+	        	type = new StringHolder("");
+	        	result = new StringHolder("");
+	        	
+	        	try{
+	        		proxy.case_insert(tokenLK,caseXmlString,result,type,errorMsg);
+	            }catch(LINKCAREException e2){
+	
+	            	if ("Fill all reguired fields".equals(e.getMessage())) {
+	            		return mapping.findForward("result");
+	            	}else{
+	                	throw e;
+	                }
+	            }
         	}else{
             	throw e;
             }

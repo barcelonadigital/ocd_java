@@ -27,6 +27,7 @@
         <form-bean name="TasksAssignedForm" type="org.bdigital.ocd.task.TasksAssignedForm"/>
         <form-bean name="CaseSaveForm" type="org.bdigital.ocd.cases.CaseSaveForm"/>
         <form-bean name="CaseTaskUnitDetailsForm" type="org.bdigital.ocd.cases.CaseTaskUnitDetailsForm"/>
+        <form-bean name="CaseResultForm" type="org.bdigital.ocd.cases.CaseResultForm"/>
     </form-beans>
 
 	<global-forwards>
@@ -49,12 +50,14 @@
             <forward name="success" path="/caseMainAction.do"/>
             <forward name="failure" path="/caseSearchPg.do"/>
             <forward name="casenew" path="/caseNewPg.do"/>
+            <forward name="result" path="/caseResultAction.do"/>
         </action>
         <action path="/caseNewPg" forward="newPg.page"/>
         <action path="/caseNewAction" name="CaseNewForm" scope="request" type="org.bdigital.ocd.cases.CaseNewAction" validate="true" input="/caseNewPg.do">
             <forward name="success" path="/caseMainAction.do"/>
             <forward name="failure" path="/caseNewPg.do"/>
         </action>
+        <action path="/caseResultPg" forward="resultPg.page"/>
         <action path="/caseDetailsPg" forward="detailsPg.page"/>
         <action path="/caseDetailsAction" name="CaseDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseDetailsAction" validate="false">
             <forward name="success" path="/caseDetailsPg.do"/>
@@ -129,6 +132,11 @@
         <action path="/caseSaveAction" name="CaseSaveForm" scope="request" type="org.bdigital.ocd.cases.CaseSaveAction" validate="false">
             <forward name="success" path="/caseDetailsAction.do"/>
             <forward name="failure" path="/caseDetailsAction.do"/>
+        </action>
+        <action path="/caseResultAction" name="CaseResultForm" scope="request" type="org.bdigital.ocd.cases.CaseResultAction" validate="false">
+            <forward name="success" path="/caseResultPg.do"/>
+            <forward name="failure" path="/caseResultPg.do"/>
+            <forward name="caseMain" path="/caseMainAction.do"/>
         </action>
     </action-mappings>
 

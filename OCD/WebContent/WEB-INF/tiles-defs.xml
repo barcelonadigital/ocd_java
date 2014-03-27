@@ -92,6 +92,9 @@
     <definition name="tasksAssignedPg.page" extends="base.definition">
 	    <put name="body" value="/jsp/tiles/task/assigned-body.jsp" />
     </definition>
+    <definition name="resultPg.page" extends="base.definition">
+	    <put name="body" value="/jsp/tiles/general/result-body.jsp" />
+    </definition>
     
     
 

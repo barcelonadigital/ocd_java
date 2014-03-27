@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Case {
 
 	String ref;
+	String id;
+	String nickname;
+	String nameComplete;
 	String[] refs;
 	Data data;
  
@@ -37,5 +40,32 @@ public class Case {
 	@XmlElement
 	public void setData(Data data) {
 		this.data = data;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	@XmlElement
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	@XmlElement
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getNameComplete() {
+		return nameComplete;
+	}
+
+	@XmlElement(name="name_complete")
+	public void setNameComplete(String nameComplete) {
+		this.nameComplete = nameComplete;
 	}
 }

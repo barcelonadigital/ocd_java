@@ -21,6 +21,7 @@ public class CaseNewForm extends ValidatorForm {
 	private String nie;
 	private String pas;
 	private String cip;
+	private String searchStr;
     
 	private String birthday;
 	private String givenName;
@@ -180,6 +181,12 @@ public class CaseNewForm extends ValidatorForm {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public String getSearchStr() {
+		return searchStr;
+	}
+	public void setSearchStr(String searchStr) {
+		this.searchStr = searchStr;
 	}
     
 

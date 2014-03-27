@@ -110,6 +110,7 @@ public abstract class CaseBaseAction extends BaseAction {
 			caseBean.setNie(caseGetAf.getNie());
 			caseBean.setPas(caseGetAf.getPas());
 			caseBean.setCip(caseGetAf.getCip());
+			caseBean.setNhc(caseGetAf.getNhc());
         	caseBean.setIdCase(caseId);
         	formBean.setIdCase(caseId);
         	
