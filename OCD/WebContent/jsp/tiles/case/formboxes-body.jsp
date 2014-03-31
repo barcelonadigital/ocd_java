@@ -391,6 +391,7 @@
           <h2 class="asses"><%= formShortName/*.toUpperCase()*/ %></h2>
           
           <div class="columnboxes clearfix">
+            <logic:present name="columns">
             <logic:iterate name="columns" id="columnItem" indexId="idxColumn" type="org.bdigital.ocd.beans.ColumnBean" >
             <div class="column por3">
               <logic:iterate name="columnItem" property="boxes" id="boxItem" indexId="idxBox" type="org.bdigital.ocd.beans.BoxBean" >
@@ -429,6 +430,7 @@
               </logic:iterate>
             </div>
             </logic:iterate>
+            </logic:present>
           </div>
         </div>
     <html:form styleId="newForm" action="/formSetAnswersAction">
@@ -437,6 +439,7 @@
     <html:hidden name="CaseFormBoxesDetailsForm" property="idAdmission"/>
     <html:hidden name="CaseFormBoxesDetailsForm" property="idForm"/>
     <html:hidden name="CaseFormBoxesDetailsForm" property="idTask"/>
+    <logic:present name="columns">
     <logic:iterate name="columns" id="columnItem" indexId="idxColumn" type="org.bdigital.ocd.beans.ColumnBean" >
     <logic:iterate name="columnItem" property="boxes" id="boxItem" indexId="idxBox" type="org.bdigital.ocd.beans.BoxBean" >
     <logic:notEmpty name="boxItem" property="groups">
@@ -696,7 +699,7 @@
           <button type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-warning link">Cancel·lar</button>
       </div>
     </div>
-    </logic:iterate></logic:notEmpty></logic:iterate></logic:iterate>
+    </logic:iterate></logic:notEmpty></logic:iterate></logic:iterate></logic:present>
     </html:form>
           
     

@@ -112,10 +112,25 @@
               	<a href="#" class="btn-primary btn editdataform">Editar</a>
               </div>
               <div class="editform">
-	            <a onclick="doSave()" href="#" class="btn-primary btn savedataform">Desar</a>
+	            <a href="#confirmSaveModal" role="button" data-toggle="modal" class="btn-primary btn savedataform">Desar</a>
 	            <a href="#" class="btn-warning btn canceldataform">Cancel.</a>
               </div>
             </div>
           </div>
           </html:form>
         </div>
+	    <div id="confirmSaveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
+	      <div class="modal-header">
+	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+	        <h3>El HIS no s'actualitzarà</h3>
+	      </div>
+	      <div class="modal-body">
+	        <p>
+	          La modificació només es desarà al Open Health Practice. <br/>El HIS s'haurà d'actualitzar a part. Desitja continuar?
+	        </p>
+	      </div>
+	      <div class="modal-footer">
+	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
+	        <button onclick="doSave()" class="btn btn-primary custom-btn btn-large">D'acord, continuar</button>
+	      </div>
+	    </div>
