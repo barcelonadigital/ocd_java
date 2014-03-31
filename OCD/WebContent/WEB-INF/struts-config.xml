@@ -28,6 +28,7 @@
         <form-bean name="CaseSaveForm" type="org.bdigital.ocd.cases.CaseSaveForm"/>
         <form-bean name="CaseTaskUnitDetailsForm" type="org.bdigital.ocd.cases.CaseTaskUnitDetailsForm"/>
         <form-bean name="CaseResultForm" type="org.bdigital.ocd.cases.CaseResultForm"/>
+        <form-bean name="CaseFormBoxesDetailsForm" type="org.bdigital.ocd.cases.CaseFormBoxesDetailsForm"/>
     </form-beans>
 
 	<global-forwards>
@@ -99,14 +100,19 @@
             <forward name="success" path="/formDetailsPg.do"/>
             <forward name="failure" path="/formDetailsPg.do"/>
         </action>
+        <action path="/formBoxesDetailsPg" forward="caseformboxesPg.page"/>
+        <action path="/caseFormBoxesDetailsAction" name="CaseFormBoxesDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseFormBoxesDetailsAction" validate="false">
+            <forward name="success" path="/formBoxesDetailsPg.do"/>
+            <forward name="failure" path="/formBoxesDetailsPg.do"/>
+        </action>
         <action path="/formStaticDetailsPg" forward="caseformstaticPg.page"/>
         <action path="/caseFormStaticDetailsAction" name="CaseFormStaticDetailsForm" scope="request" type="org.bdigital.ocd.cases.CaseFormStaticDetailsAction" validate="false">
             <forward name="success" path="/formStaticDetailsPg.do"/>
             <forward name="failure" path="/formStaticDetailsPg.do"/>
         </action>
         <action path="/formSetAnswersAction" name="FormSetAnswersForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswersAction" validate="false">
-            <forward name="success" path="/caseTaskUnitDetailsAction.do"/>
-            <forward name="failure" path="/caseFormStaticDetailsAction.do"/>
+            <forward name="success" path="/caseFormBoxesDetailsAction.do"/>
+            <forward name="failure" path="/caseFormBoxesDetailsAction.do"/>
         </action>
         <action path="/formSetAnswerAction" name="FormSetAnswerForm" scope="request" type="org.bdigital.ocd.form.FormSetAnswerAction" validate="false">
         </action>

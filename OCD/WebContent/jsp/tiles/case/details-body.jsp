@@ -43,19 +43,16 @@
                   <div class="fields-row">
                     <div class="smallfield">
                       <label for="birthday">Data Naixement</label>
-                      <html:text name="CaseDetailsForm" styleId="birthday" property="birthday" disabled="true" />
-	                  <script>
-				        $( "#birthday" ).datepicker();
-				      </script>
+                      <html:text name="CaseDetailsForm" styleId="birthday" property="birthday" disabled="true" styleClass="form-control date" />
                     </div>
                     <div class="smallfield">
                       <label for="descSex">Gènere</label>
 	                  <div class="btn-group">
-	                    <html:hidden property="descSex" styleId="descSex" />
-	                    <button disabled="disabled" data-toggle="dropdown" data-target="descSex" class="btn btn-large dropdown-toggle disabled"><bean:write name="CaseDetailsForm" property="descSex" /><span class="caret triangulo"></span></button>
+	                    <html:hidden property="sex" styleId="sex" />
+	                    <button disabled="disabled" data-toggle="dropdown" data-targetinput="sex" class="btn btn-large dropdown-toggle disabled"><bean:write name="CaseDetailsForm" property="descSex" /><span class="caret triangulo"></span></button>
 	                    <ul class="dropdown-menu">
-	                      <li><a href="#"><bean:message key="label.sex.dona"/></a></li>
-	                      <li><a href="#"><bean:message key="label.sex.home"/></a></li>
+	                      <li><a data-value="<%=org.bdigital.ocd.utils.Constants.LINKCARE_CASEGENDER_FEMININE%>" href="#"><bean:message key="label.sex.dona"/></a></li>
+	                      <li><a data-value="<%=org.bdigital.ocd.utils.Constants.LINKCARE_CASEGENDER_MASCULINE%>" href="#"><bean:message key="label.sex.home"/></a></li>
 	                    </ul>
 	                  </div>
                     </div>

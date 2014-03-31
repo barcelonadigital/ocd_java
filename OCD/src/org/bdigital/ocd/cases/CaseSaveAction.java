@@ -16,7 +16,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.model.AIM;
 import org.bdigital.ocd.model.Address;
 import org.bdigital.ocd.model.Case;
@@ -81,14 +80,8 @@ public class CaseSaveAction extends CaseBaseAction {
         	String[] refs = new String[]{nie,nif,pas,cip,nick};
 	    	caseObj.setRefs(refs);
 
-	    	MessageResources msgResource = getResources(request);
-	    	
 	    	caseObj.getData().setBdate(birthday);
-	    	if(formBean.getDescSex().equals(msgResource.getMessage("label.sex.home"))){
-	    		caseObj.getData().setGender("M");
-	    	}else if(formBean.getDescSex().equals(msgResource.getMessage("label.sex.dona"))){
-	    		caseObj.getData().setGender("F");
-	    	}
+	    	caseObj.getData().setGender(formBean.getSex());
 
 	    	String caseXmlString = UtilsWs.objectToXml(caseObj,Case.class,Data.class);
 	    	

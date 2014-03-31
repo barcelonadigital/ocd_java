@@ -81,6 +81,21 @@
       var triangulo=($(this).parent().parent().parent().children('button.btn.dropdown-toggle span.caret.triangulo'));
       $(this).parent().parent().parent().children('button.btn.dropdown-toggle').html($(this).text() + "<span class=\"caret"+(triangulo?" triangulo":"")+"\"></span>");
       $(this).parent().parent().parent().removeClass('open');
+      
+      if($(this).parent().parent().parent().children('button.btn.dropdown-toggle').length>0){
+    	  var item = $(this).parent().parent().parent().children('button.btn.dropdown-toggle')[0];
+          var targetId = $(item).data('targetinput');
+    	  var valueSelected = $(this).data('value');
+    	  if(typeof targetId !== 'undefined' && typeof valueSelected !== 'undefined'){
+    		  //var targetObj = $('#'+targetId);
+    		  //var targetObj=document.getElementsByName(targetId);
+    		  var targetObj=$('[name="' + targetId + '"]');
+    		  if(targetObj.length>0){
+    			  $(targetObj).val(valueSelected);
+    			  $(targetObj).change()
+    		  }
+    	  }
+      }
     });
   });
   
@@ -435,22 +450,21 @@
   $(document).ready(function() {
     sessionListEventos();
   });
-  $(document).ready(function() {
-	  $(document).on('submit', 'form', function(e) {
-		  $("button.dropdown-toggle").each(function(i, item) {
-			  var optionSelected = $(item).parent().children(".dropdown-menu").children(":contains('"+$(item).text()+"')");
-			  if(optionSelected.length>0){
-				  var targetId = $(item).data('target');
-				  if(typeof targetId !== 'undefined'){
-					  var targetObj = $('#'+targetId);
-					  if(targetObj.length>0){
-						  $(targetObj).val($(item).text());
-					  }
-				  }
-			  }
-		  });
-	  });
-  });
+
+// ____   __  ____  ____  ____  __  ___  __ _  ____  ____ 
+//(    \ / _\(_  _)(  __)(  _ \(  )/ __)(  / )(  __)(  _ \
+// ) D (/    \ )(   ) _)  ) __/ )(( (__  )  (  ) _)  )   /
+//(____/\_/\_/(__) (____)(__)  (__)\___)(__\_)(____)(__\_)
+//
+
+ $(document).ready(function() {
+   $('input.form-control.date').datepicker({
+       format: "dd/mm/yyyy",
+       weekStart: 1
+       ,
+       language: "ca"
+   });
+ });
 
 
 //  ____  __  _  _  ____  ____    ____  __  ____  _  _    ____  _  _  ____  ____  __   __ _  ____ 

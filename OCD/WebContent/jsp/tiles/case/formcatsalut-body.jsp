@@ -69,7 +69,7 @@
                     <p>
                     <span class="question">Ulleres nasals</span> <span class="answer"><bean:write name="CaseFormCatSalutForm" property="descCanulaNasals"/></span><br/>
                     <span class="question">Flux repos I/MIN</span> <span class="answer"><bean:write name="CaseFormCatSalutForm" property="fluxRepos"/></span><br/>
-                    <span class="question">Hores/Dia>15/</span> <span class="answer"><bean:write name="CaseFormCatSalutForm" property="horesDia"/></span><br/>
+                    <span class="question">Hores/Dia&gt;15/</span> <span class="answer"><bean:write name="CaseFormCatSalutForm" property="horesDia"/></span><br/>
                     <span class="question">Observacions</span> <span class="answer"><bean:write name="CaseFormCatSalutForm" property="observacions"/></span><br/>
                     </p>
                   </fieldset>

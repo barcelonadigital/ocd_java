@@ -495,10 +495,7 @@
 		                        <html:textarea name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" />
 		                      </logic:equal>
 		                      <logic:equal name="questionItem" property="type" value="DATE">
-		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleId="questionValue${questionItem.questionId}" styleClass="modificable" onkeyup="fieldModified('${questionItem.questionId}')" />
-							    <script>
-							        $( "#questionValue${questionItem.questionId}" ).datepicker();
-							    </script>
+		                        <html:text name="CaseFormStaticDetailsForm" property="questionValue(${questionItem.questionId})" styleId="questionValue${questionItem.questionId}" styleClass="modificable form-control date" onkeyup="fieldModified('${questionItem.questionId}')" />
 		                      </logic:equal>
 		                      <logic:notEqual name="questionItem" property="type" value="TEXT_AREA">
 			 				  <logic:notEqual name="questionItem" property="type" value="TEXT">

@@ -16,8 +16,6 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.utils.Constants;
@@ -109,9 +107,9 @@ public class FormSetAnswersAction extends BaseAction {
         		}
     		}
     		if(!questionErrorMap.isEmpty()){
-    			ActionMessages errors = new ActionMessages();
-                errors.add("general",new ActionMessage("errors.formContainsInvalidAnswers"));
-                saveErrors(request, errors);
+//    			ActionMessages errors = new ActionMessages();
+//                errors.add("general",new ActionMessage("errors.formContainsInvalidAnswers"));
+//                saveErrors(request, errors);
     			request.setAttribute("questionErrors", questionErrorMap);
                 return mapping.findForward(FAILURE);
     		}

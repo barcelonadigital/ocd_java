@@ -18,7 +18,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.base.BaseAction;
 import org.bdigital.ocd.model.AIM;
 import org.bdigital.ocd.model.Address;
@@ -65,16 +64,11 @@ public class CaseNewAction extends BaseAction {
     	String nick = (formBean.getNick()!=null)?"NICK/"+formBean.getNick():"";
     	String nif = (formBean.getNif()!=null)?"NIF/"+formBean.getNif():"";
     			
-    	MessageResources msgResource = getResources(request);
     	Case caseObj = new Case();
     	caseObj.setRef("");
     	Data dataObj = new Data();
     	dataObj.setBdate(birthday);
-    	if(formBean.getSex().equals(msgResource.getMessage("label.sex.home"))){
-    		dataObj.setGender("M");
-    	}else if(formBean.getSex().equals(msgResource.getMessage("label.sex.dona"))){
-    		dataObj.setGender("F");
-    	}
+    	dataObj.setGender(formBean.getSex());
     	dataObj.setStatus("ACTIVE");
     	caseObj.setData(dataObj);
     	String[] refs = new String[]{nie,nif,pas,cip,nick};

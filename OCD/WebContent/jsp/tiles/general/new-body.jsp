@@ -88,19 +88,16 @@
               <div class="fields-row">
                 <div class="smallfield">
                   <label for="birthday"><bean:message key="label.birthday"/></label>
-                  <html:text styleId="birthday" property="birthday" />
-                  <script>
-			        $( "#birthday" ).datepicker();
-			      </script>
+                  <html:text styleId="birthday" property="birthday" styleClass="form-control date" />
                 </div>
                 <div class="smallfield">
                   <label for="sex"><bean:message key="label.sex"/></label>
                   <div class="btn-group">
                     <html:hidden property="sex" styleId="sex" />
-                    <button data-toggle="dropdown" data-target="sex" class="btn btn-large dropdown-toggle">Seleccioni una opció<span class="caret triangulo"></span></button>
+                    <button data-toggle="dropdown" data-targetinput="sex" class="btn btn-large dropdown-toggle">Seleccioni una opció<span class="caret triangulo"></span></button>
                     <ul class="dropdown-menu">
-                      <li><a href="#"><bean:message key="label.sex.dona"/></a></li>
-                      <li><a href="#"><bean:message key="label.sex.home"/></a></li>
+                      <li><a data-value="<%=org.bdigital.ocd.utils.Constants.LINKCARE_CASEGENDER_FEMININE%>" href="#" ><bean:message key="label.sex.dona"/></a></li>
+                      <li><a data-value="<%=org.bdigital.ocd.utils.Constants.LINKCARE_CASEGENDER_MASCULINE%>" href="#"><bean:message key="label.sex.home"/></a></li>
                     </ul>
                   </div>
                 </div>

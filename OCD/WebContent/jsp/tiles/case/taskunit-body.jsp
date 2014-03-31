@@ -102,9 +102,9 @@
 					<logic:notEqual name="formItem" property="itemType" value="DOCUMENT">
 					<logic:notEqual name="formItem" property="itemType" value="CATSALUT">
 		              <!-- 
-		              < html : link action="/caseFormStaticDetailsAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
+		              < html : link action="/caseFormBoxesDetailsAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
 		               -->
-		              <a href="<html:rewrite action="/caseFormStaticDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
+		              <a href="<html:rewrite action="/caseFormBoxesDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
 		              <span class="col1"><span><strong>QÜESTIONARI</strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
