@@ -16,4 +16,10 @@ public final class Constants {
 
 	public static final String LINKCARE_CASEGENDER_MASCULINE = "M";
 	public static final String LINKCARE_CASEGENDER_FEMININE = "F";
+	
+	public static final String LINKCARE_ERRORMSG_LOGININVALID = "ERROR:Invalid user/password";
+
+	public static final String LINKCARE_TASKCODE_PRESCRIPTION = "#TASK:N253";
+	public static final String LINKCARE_TASKCODE_VISITFOLLOWUP = "#TASK:N261";
+	public static final String LINKCARE_TASKCODE_DISCHARGE = "#XDISCHARGE";
 }

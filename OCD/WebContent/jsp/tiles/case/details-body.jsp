@@ -15,38 +15,38 @@
             <div class="tabbable">
               <!-- Only required for left/right tabs-->
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1" data-toggle="tab">Dades personals</a></li>
-                <li><a href="#tab2" data-toggle="tab">Dades de contacte</a></li>
+                <li class="active"><a href="#tab1" data-toggle="tab"><bean:message key="label.personalData"/></a></li>
+                <li><a href="#tab2" data-toggle="tab"><bean:message key="label.contactData"/></a></li>
               </ul>
               <div class="tab-content">
                 <div id="tab1" class="tab-pane dataform active">
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="cip">CIP</label>
+                      <label for="cip"><bean:message key="label.cip"/></label>
                       <html:text name="CaseDetailsForm" styleId="cip" property="cip" disabled="true" readonly="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="nif">NIF</label>
+                      <label for="nif"><bean:message key="label.nif"/></label>
                       <html:text name="CaseDetailsForm" styleId="nif" property="nif" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="nie">NIE</label>
+                      <label for="nie"><bean:message key="label.nie"/></label>
                       <html:text name="CaseDetailsForm" styleId="nie" property="nie" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="pas">PAS</label>
+                      <label for="pas"><bean:message key="label.pas"/></label>
                       <html:text name="CaseDetailsForm" styleId="pas" property="pas" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="birthday">Data Naixement</label>
+                      <label for="birthday"><bean:message key="label.birthday"/></label>
                       <html:text name="CaseDetailsForm" styleId="birthday" property="birthday" disabled="true" styleClass="form-control date" />
                     </div>
                     <div class="smallfield">
-                      <label for="descSex">Gènere</label>
+                      <label for="descSex"><bean:message key="label.sex"/></label>
 	                  <div class="btn-group">
 	                    <html:hidden property="sex" styleId="sex" />
 	                    <button disabled="disabled" data-toggle="dropdown" data-targetinput="sex" class="btn btn-large dropdown-toggle disabled"><bean:write name="CaseDetailsForm" property="descSex" /><span class="caret triangulo"></span></button>
@@ -61,41 +61,41 @@
                 <div id="tab2" class="tab-pane dataform">
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="streetName">Carrer</label>
+                      <label for="streetName"><bean:message key="label.street"/></label>
                       <html:text name="CaseDetailsForm" styleId="streetName" property="streetName" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="number">Número</label>
+                      <label for="number"><bean:message key="label.number"/></label>
                       <html:text name="CaseDetailsForm" styleId="number" property="number" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="floor">Pis</label>
+                      <label for="floor"><bean:message key="label.floor"/></label>
                       <html:text name="CaseDetailsForm" styleId="floor" property="floor" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="suite">Porta</label>
+                      <label for="suite"><bean:message key="label.suite"/></label>
                       <html:text name="CaseDetailsForm" styleId="suite" property="suite" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="postcode">Codi postal</label>
+                      <label for="postcode"><bean:message key="label.postcode"/></label>
                       <html:text name="CaseDetailsForm" styleId="postcode" property="postcode" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="city">Ciutat</label>
+                      <label for="city"><bean:message key="label.city"/></label>
                       <html:text name="CaseDetailsForm" styleId="city" property="city" disabled="true" />
                     </div>
                   </div>
                   <div class="fields-row">
                     <div class="smallfield">
-                      <label for="country">País</label>
+                      <label for="country"><bean:message key="label.country"/></label>
                       <html:text name="CaseDetailsForm" styleId="country" property="country" disabled="true" />
                     </div>
                     <div class="smallfield">
-                      <label for="phoneNumber">Telèfon</label>
+                      <label for="phoneNumber"><bean:message key="label.phoneNumber"/></label>
                       <html:text name="CaseDetailsForm" styleId="phoneNumber" property="phoneNumber" disabled="true" />
                     </div>
                   </div>
@@ -109,11 +109,11 @@
           <div class="botoneslaterales">
             <div class="botoneslateralescontainer">
               <div class="viewform"> 
-              	<a href="#" class="btn-primary btn editdataform">Editar</a>
+              	<a href="#" class="btn-primary btn editdataform"><bean:message key="label.edit"/></a>
               </div>
               <div class="editform">
-	            <a href="#confirmSaveModal" role="button" data-toggle="modal" class="btn-primary btn savedataform">Desar</a>
-	            <a href="#" class="btn-warning btn canceldataform">Cancel.</a>
+	            <a href="#confirmSaveModal" role="button" data-toggle="modal" class="btn-primary btn savedataform"><bean:message key="label.save"/></a>
+	            <a href="#" class="btn-warning btn canceldataform"><bean:message key="label.cancel.abrev"/></a>
               </div>
             </div>
           </div>
@@ -121,16 +121,16 @@
         </div>
 	    <div id="confirmSaveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
 	      <div class="modal-header">
-	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-	        <h3>El HIS no s'actualitzarà</h3>
+	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+	        <h3><bean:message key="alert.notUpdateHis.title"/></h3>
 	      </div>
 	      <div class="modal-body">
 	        <p>
-	          La modificació només es desarà al Open Health Practice. <br/>El HIS s'haurà d'actualitzar a part. Desitja continuar?
+	          <bean:message key="alert.notUpdateHis.body3"/><br/><bean:message key="alert.notUpdateHis.body2"/>
 	        </p>
 	      </div>
 	      <div class="modal-footer">
-	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-	        <button onclick="doSave()" class="btn btn-primary custom-btn btn-large">D'acord, continuar</button>
+	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large"><bean:message key="label.review"/></button>
+	        <button onclick="doSave()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.okcontinue"/></button>
 	      </div>
 	    </div>

@@ -41,14 +41,11 @@
 	    <put name="footer" value="/jsp/tiles/common/footer.jsp" />
 	    <put name="body" value="" /> 
     </definition>
-    <definition name="mainPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/tiles/general/main-body.jsp" />
-    </definition>
     <definition name="searchPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/tiles/general/search-body.jsp" />
+	    <put name="body" value="/jsp/tiles/case-search/search-body.jsp" />
     </definition>
     <definition name="newPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/tiles/general/new-body.jsp" />
+	    <put name="body" value="/jsp/tiles/case-search/new-body.jsp" />
     </definition>
     <definition name="casebase.definition" path="/jsp/tiles/layout/case-layout.jsp">
 	    <put name="html-header" value="/jsp/tiles/common/htmlheader.jsp" />
@@ -98,7 +95,7 @@
 	    <put name="body" value="/jsp/tiles/task/assigned-body.jsp" />
     </definition>
     <definition name="resultPg.page" extends="base.definition">
-	    <put name="body" value="/jsp/tiles/general/result-body.jsp" />
+	    <put name="body" value="/jsp/tiles/case-search/result-body.jsp" />
     </definition>
     
     

@@ -61,7 +61,7 @@
 	                      <li><html:link action="/formOpenAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Reobrir</html:link></li>
 		              </logic:equal>
 		              <logic:equal name="formItem" property="status" value="OPEN">
-	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Finalitzar</html:link></li>
+	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}"><bean:message key="label.finish"/></html:link></li>
 		              </logic:equal>
 	                  </ul>
 					</logic:equal>
@@ -84,7 +84,7 @@
 	                      <li><html:link action="/formOpenAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Reobrir</html:link></li>
 		              </logic:equal>
 		              <logic:equal name="formItem" property="status" value="OPEN">
-	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}">Finalitzar</html:link></li>
+	                      <li><html:link action="/formCloseAction?idCase=${CaseTaskDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.id}"><bean:message key="label.finish"/></html:link></li>
 		              </logic:equal>
 	                  </ul>
 					</logic:notEqual>
@@ -119,18 +119,18 @@
 	    </script>
 	    <div id="confirmFinishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
 	      <div class="modal-header">
-	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-	        <h3>Visita de seguiment?</h3>
+	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+	        <h3><bean:message key="alert.followUpVisit.title"/></h3>
 	      </div>
 	      <div class="modal-body">
 	        <p>
-	          Donat que és últim formulari pendent de finalitzar, es tancarà la tasca i es programarà la visita de seguiment. Desitja continuar?
+	          <bean:message key="alert.followUpVisit.body1"/>
 	        </p>
 	      </div>
 	      <div class="modal-footer">
-	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large">Finalitzar</button>
-	        <button onclick="doFinishAndNewTask()" class="btn btn-primary custom-btn btn-large">Finalitzar i visita de seguiment</button>
+	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large"><bean:message key="label.review"/></button>
+	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.finish"/></button>
+	        <button onclick="doFinishAndNewTask()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.finishAndFollowUp"/></button>
 	      </div>
 	    </div>
         </logic:present>

@@ -92,7 +92,7 @@
       <div class="container">
         <!-- Encabezado-->
         <div class="encabezado">
-          <h1>Usuaris <strong>— Pacients</strong></h1>
+          <h1><bean:message key="menu.users"/> <strong>— <bean:message key="label.patients"/></strong></h1>
         </div>
         <hr>
         <!-- Encabezado fin-->
@@ -102,7 +102,7 @@
       <div class="container">
         <div class="bloqueizq">
           <div class="recentbox">
-            <h4>Recent...</h4>
+            <h4><bean:message key="label.recent"/>...</h4>
           </div>
         </div>
         <div class="content">
@@ -113,9 +113,9 @@
 	          
 	            <div class="formrow header">
 		            <span>
-			            <a href="#" class="item1"><span>CIP</span></a>
-			            <a href="#" class="item2"><span>NIF</span></a>
-			            <a href="#" class="item3"><span>Nom complert</span></a>
+			            <a href="#" class="item1"><span><bean:message key="label.cip"/></span></a>
+			            <a href="#" class="item2"><span><bean:message key="label.nif"/></span></a>
+			            <a href="#" class="item3"><span><bean:message key="label.fullname"/></span></a>
 			            <a href="#" class="item4"><span></span></a>
 		            </span>
 	            </div>
@@ -147,7 +147,7 @@
 				<logic:empty name="patients">
 	              <div class="formrow">
 					
-		              No hi ha elements per mostrar.
+		              <bean:message key="label.noElements"/>
 
 	              </div>
 				</logic:empty>
@@ -161,12 +161,12 @@
             <html:hidden name="CaseResultForm" property="resultAction" styleId="resultAction" />
             <div class="pagination">
               <div class="navigation">
-	            <a href="#" onclick="doResultAction('first');return false;">Primer</a>
-	            <a href="#" onclick="doResultAction('prev');return false;" class="btn btn-large btn-info prev">Anterior</a>
-	            <a href="#" onclick="doResultAction('next');return false;" class="btn btn-large btn-info next">Següent</a>
-	            <a href="#" onclick="doResultAction('last');return false;">Últim</a>
+	            <a href="#" onclick="doResultAction('first');return false;"><bean:message key="pagination.first"/></a>
+	            <a href="#" onclick="doResultAction('prev');return false;" class="btn btn-large btn-info prev"><bean:message key="pagination.prev"/></a>
+	            <a href="#" onclick="doResultAction('next');return false;" class="btn btn-large btn-info next"><bean:message key="pagination.next"/></a>
+	            <a href="#" onclick="doResultAction('last');return false;"><bean:message key="pagination.last"/></a>
               </div>
-              <div class="status">Mostrant <span id="elemFirst">1</span> a <span id="elemLast">10</span> de <a href="#"><span id="elemTotal">10</span> entrades</a></div>
+              <div class="status"><bean:message key="pagination.showing"/> <span id="elemFirst">1</span> <bean:message key="pagination.to"/> <span id="elemLast">10</span> <bean:message key="pagination.of"/> <a href="#"><span id="elemTotal">10</span> <bean:message key="pagination.entries"/></a></div>
             </div>
             </html:form>
 	        <div id="example"></div>

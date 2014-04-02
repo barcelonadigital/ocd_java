@@ -27,10 +27,10 @@
         <!-- Encabezado-->
         <div class="encabezado bordebajo">
           <div class="h1actions">
-            <a href="#confirmNewModal" role="button" data-toggle="modal" class="btn btn-large btn-warning">Nou pacient</a>
+            <a href="#confirmNewModal" role="button" data-toggle="modal" class="btn btn-large btn-warning"><bean:message key="label.caseNew"/></a>
           </div>
           <header>
-            <h1>Usuaris <strong>— Pacients</strong></h1>
+            <h1><bean:message key="menu.users"/> <strong>— <bean:message key="label.patients"/></strong></h1>
           </header>
         </div>
         <!-- Encabezado fin-->
@@ -51,20 +51,20 @@
 		        </html:messages>
 		    </logic:messagesNotPresent>
             <logic:equal name="CaseNewForm" property="showLinkCreate" value="true">
-                <span style='color:red'>El pacient no existeix. Desitja donar-lo d'alta? 
-		        <html:link styleId="linkNew" href="#">Alta</html:link>
+                <span style='color:red'><bean:message key="errors.caseNotFoundAndCreate"/>
+		        <html:link styleId="linkNew" href="#"><bean:message key="label.discharge"/></html:link>
                 </span>
 			</logic:equal>
             <div id="search-patient">
                 <label for="searchStr">
-                Cerca per tots els camps
-				<a href="#info1" role="button" data-toggle="modal" class="info_popup">Info</a>               
+                <bean:message key="label.searchAllFields"/>
+				<a href="#info1" role="button" data-toggle="modal" class="info_popup"><bean:message key="label.info"/></a>               
                 </label>
                 <html:text styleId="searchStr" property="searchStr" />
                 
             </div>
             <div class="actions bottom">
-                <html:submit styleClass="btn custom-btn btn-large btn-info" value="Cercar" />
+                <html:submit styleClass="btn custom-btn btn-large btn-info" ><bean:message key="label.search"/></html:submit>
             </div>
             </html:form>
           </div>
@@ -75,27 +75,27 @@
     <!-- Lightboxes-->
     <div id="info1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal detail hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-        <h3>Seleccionar pacient</h3>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+        <h3><bean:message key="label.caseSearch"/></h3>
       </div>
       <div class="modal-body">
-        <h4>Sobre quins camps es realitza la cerca?</h4>
-        <p><strong>CIP i NHC</strong>, en cas de pacients que existeixin al <strong>HIS</strong>.</p>
-        <p><strong>CIP, NHC, NIF, NIE, passaport, nom, cognoms i telèfon</strong>, en cas de pacients que existeixin al <strong>Open Health Practice</strong>.</p>
+        <h4><bean:message key="alert.helpCaseSearch.title"/></h4>
+        <p><bean:message key="alert.helpCaseSearch.body1"/></p>
+        <p><bean:message key="alert.helpCaseSearch.body2"/></p>
       </div>
     </div>
     <div id="confirmNewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-        <h3>El HIS no s'actualitzarà</h3>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+        <h3><bean:message key="alert.notUpdateHis.title"/></h3>
       </div>
       <div class="modal-body">
         <p>
-          El pacient només es crearà al Open Health Practice. <br/>El HIS s'haurà d'actualitzar a part. Desitja continuar?
+          <bean:message key="alert.notUpdateHis.body1"/><br/><bean:message key="alert.notUpdateHis.body2"/>
         </p>
       </div>
       <div class="modal-footer">
-        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-        <button onclick="window.location='<html:rewrite action="/caseNewPg.do"/>'" class="btn btn-primary custom-btn btn-large">D'acord, continuar</button>
+        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large"><bean:message key="label.review"/></button>
+        <button onclick="window.location='<html:rewrite action="/caseNewPg.do"/>'" class="btn btn-primary custom-btn btn-large"><bean:message key="label.okcontinue"/></button>
       </div>
     </div>

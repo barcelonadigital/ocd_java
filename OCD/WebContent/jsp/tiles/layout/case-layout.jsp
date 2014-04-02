@@ -23,7 +23,7 @@
 <html class="no-js">
   <!-- <![endif]-->
   <head>
-    <title>OCD</title>
+    <title><bean:message key="application.title"/></title>
     <tiles:insert attribute="html-header"/>
     <script type="text/javascript">
 	    function bodyOnLoad(){

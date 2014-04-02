@@ -31,3 +31,15 @@
       s.parentNode.insertBefore(g,s)}(document,'script'));
       
     </script>
+    <script>
+        $.fn.datepicker.dates['linkcare'] = {
+    			days: ['<bean:message key="datepicker.sunday"/>', '<bean:message key="datepicker.monday"/>', '<bean:message key="datepicker.tuesday"/>', '<bean:message key="datepicker.wednesday"/>', '<bean:message key="datepicker.thursday"/>', '<bean:message key="datepicker.friday"/>', '<bean:message key="datepicker.saturday"/>', '<bean:message key="datepicker.sunday"/>'],
+    			daysShort: ['<bean:message key="datepicker.sunday.abrev3"/>', '<bean:message key="datepicker.monday.abrev3"/>', '<bean:message key="datepicker.tuesday.abrev3"/>', '<bean:message key="datepicker.wednesday.abrev3"/>', '<bean:message key="datepicker.thursday.abrev3"/>', '<bean:message key="datepicker.friday.abrev3"/>', '<bean:message key="datepicker.saturday.abrev3"/>', '<bean:message key="datepicker.sunday.abrev3"/>'],
+    			daysMin: ['<bean:message key="datepicker.sunday.abrev2"/>', '<bean:message key="datepicker.monday.abrev2"/>', '<bean:message key="datepicker.tuesday.abrev2"/>', '<bean:message key="datepicker.wednesday.abrev2"/>', '<bean:message key="datepicker.thursday.abrev2"/>', '<bean:message key="datepicker.friday.abrev2"/>', '<bean:message key="datepicker.saturday.abrev2"/>', '<bean:message key="datepicker.sunday.abrev2"/>'],
+    			months: ['<bean:message key="datepicker.january"/>','<bean:message key="datepicker.february"/>','<bean:message key="datepicker.march"/>','<bean:message key="datepicker.april"/>','<bean:message key="datepicker.may"/>','<bean:message key="datepicker.june"/>','<bean:message key="datepicker.july"/>','<bean:message key="datepicker.august"/>','<bean:message key="datepicker.september"/>','<bean:message key="datepicker.october"/>','<bean:message key="datepicker.november"/>','<bean:message key="datepicker.december"/>'],
+    			monthsShort: ['<bean:message key="datepicker.january.abrev3"/>','<bean:message key="datepicker.february.abrev3"/>','<bean:message key="datepicker.march.abrev3"/>','<bean:message key="datepicker.april.abrev3"/>','<bean:message key="datepicker.may.abrev3"/>','<bean:message key="datepicker.june.abrev3"/>','<bean:message key="datepicker.july.abrev3"/>','<bean:message key="datepicker.august.abrev3"/>','<bean:message key="datepicker.september.abrev3"/>','<bean:message key="datepicker.october.abrev3"/>','<bean:message key="datepicker.november.abrev3"/>','<bean:message key="datepicker.december.abrev3"/>'],
+    			today: '<bean:message key="datepicker.today"/>',
+    			clear: '<bean:message key="datepicker.clear"/>'
+		};
+
+    </script>

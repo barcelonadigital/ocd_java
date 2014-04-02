@@ -65,7 +65,7 @@
       <div class="container">
         <!-- Encabezado-->
         <div class="encabezado">
-          <h1>Tasques <strong>— Pendents</strong></h1>
+          <h1><bean:message key="menu.tasks"/> <strong>— <bean:message key="label.pendings"/></strong></h1>
         </div>
         <hr>
         <!-- Encabezado fin-->
@@ -75,7 +75,7 @@
       <div class="container">
         <div class="bloqueizq">
           <div class="recentbox">
-            <h4>Recent...</h4>
+            <h4><bean:message key="label.recent"/>...</h4>
           </div>
         </div>
         <div class="content">
@@ -86,9 +86,9 @@
 	          
 	            <div class="formrow header">
 		            <span>
-			            <a href="#" class="col1"><span>Data</span></a>
-			            <a href="#" class="col2"><span>Tasca</span></a>
-			            <a href="#" class="col3"><span>Pacient</span></a>
+			            <a href="#" class="col1"><span><bean:message key="label.date"/></span></a>
+			            <a href="#" class="col2"><span><bean:message key="label.task"/></span></a>
+			            <a href="#" class="col3"><span><bean:message key="label.patient"/></span></a>
 			            <a href="#" class="col4"><span></span></a>
 		            </span>
 	            </div>
@@ -118,7 +118,7 @@
 				<logic:empty name="tasks">
 	              <div class="formrow">
 					
-		              No hi ha elements per mostrar.
+		              <bean:message key="label.noElements"/>
 
 	              </div>
 				</logic:empty>
@@ -128,12 +128,12 @@
 	          
             <div class="pagination">
               <div class="navigation">
-	            <a href="#" onclick="$('#example').bootstrapPaginator('showFirst');">Primer</a>
-	            <a href="#" class="btn btn-large btn-info prev" onclick="$('#example').bootstrapPaginator('showPrevious');">Anterior</a>
-	            <a href="#" class="btn btn-large btn-info next" onclick="$('#example').bootstrapPaginator('showNext');">Següent</a>
-	            <a href="#" onclick="$('#example').bootstrapPaginator('showLast');">Últim</a>
+	            <a href="#" onclick="$('#example').bootstrapPaginator('showFirst');"><bean:message key="pagination.first"/></a>
+	            <a href="#" class="btn btn-large btn-info prev" onclick="$('#example').bootstrapPaginator('showPrevious');"><bean:message key="pagination.prev"/></a>
+	            <a href="#" class="btn btn-large btn-info next" onclick="$('#example').bootstrapPaginator('showNext');"><bean:message key="pagination.next"/></a>
+	            <a href="#" onclick="$('#example').bootstrapPaginator('showLast');"><bean:message key="pagination.last"/></a>
               </div>
-              <div class="status">Mostrant <span id="elemFirst">1</span> a <span id="elemLast">10</span> de <a href="#"><span id="elemTotal">10</span> entrades</a></div>
+              <div class="status"><bean:message key="pagination.showing"/> <span id="elemFirst">1</span> <bean:message key="pagination.to"/> <span id="elemLast">10</span> <bean:message key="pagination.of"/> <a href="#"><span id="elemTotal">10</span> <bean:message key="pagination.entries"/></a></div>
             </div>
 	        <div id="example"></div>
 	        </div>

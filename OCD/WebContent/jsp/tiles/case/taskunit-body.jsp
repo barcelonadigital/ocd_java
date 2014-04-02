@@ -20,8 +20,8 @@
           <div id="news-list">
               
 	        <bean:define id="taskItem" name="task" type="org.bdigital.ocd.model.form.TaskAf"/>
-            <div class="h2actions"><a href="#alertModal" role="button" data-toggle="modal" class="btn btn-warning btn-large custom-btn">Nova tasca</a></div>
-            <h2 class="asses">Tasques</h2>
+            <div class="h2actions"><a href="#alertModal" role="button" data-toggle="modal" class="btn btn-warning btn-large custom-btn"><bean:message key="label.taskNew"/></a></div>
+            <h2 class="asses"><bean:message key="label.tasks"/></h2>
 	        <h3><bean:write name="taskItem" property="description"/><span><bean:write name="taskItem" property="date"/> <strong></strong></span></h3>
 		        
 	          <div class="formlist">
@@ -33,7 +33,7 @@
 	              <div class="formrow">
 					<logic:equal name="formItem" property="itemType" value="DOCUMENTALTA">
 		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENTALTA&idTask=${taskItem.ref}" data-toggle="dropdown">
-		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col1"><span><strong><bean:message key="label.report"/></strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
 		              <span class="col4"><span>&nbsp;</span></span>
@@ -46,7 +46,7 @@
 					</logic:equal>
 					<logic:equal name="formItem" property="itemType" value="DOCUMENTVISIT">
 		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENTVISIT&idTask=${taskItem.ref}" data-toggle="dropdown">
-		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col1"><span><strong><bean:message key="label.report"/></strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
 		              <span class="col4"><span>&nbsp;</span></span>
@@ -59,7 +59,7 @@
 					</logic:equal>
 					<logic:equal name="formItem" property="itemType" value="DOCUMENTPRESC">
 		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENTPRESC&idTask=${taskItem.ref}" data-toggle="dropdown">
-		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col1"><span><strong><bean:message key="label.report"/></strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
 		              <span class="col4"><span>&nbsp;</span></span>
@@ -72,7 +72,7 @@
 					</logic:equal>
 					<logic:equal name="formItem" property="itemType" value="DOCUMENT">
 		              <a href="<html:rewrite action="/caseFormDocumentDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=DOCUMENT&idTask=${taskItem.ref}" data-toggle="dropdown">
-		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col1"><span><strong><bean:message key="label.report"/></strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
 		              <span class="col4"><span>&nbsp;</span></span>
@@ -85,7 +85,7 @@
 					</logic:equal>
 					<logic:equal name="formItem" property="itemType" value="CATSALUT">
 		              <a href="<html:rewrite action="/caseFormCatSalutAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
-		              <span class="col1"><span><strong>REPORT</strong></span></span>
+		              <span class="col1"><span><strong><bean:message key="label.report"/></strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
 		              <span class="col4"><span>&nbsp;</span></span>
@@ -105,7 +105,7 @@
 		              < html : link action="/caseFormBoxesDetailsAction?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
 		               -->
 		              <a href="<html:rewrite action="/caseFormBoxesDetailsAction.do"/>?idCase=${CaseTaskUnitDetailsForm.idCase}&idAdmission=${admissionBean.idAdmission}&idForm=${formItem.ref}&idTask=${taskItem.ref}" data-toggle="dropdown">
-		              <span class="col1"><span><strong>QÜESTIONARI</strong></span></span>
+		              <span class="col1"><span><strong><bean:message key="label.quiz"/></strong></span></span>
 		              <span class="col2"><span><%= formShortName/*.toUpperCase()*/ %></span></span>
 		              <span class="col3"><span>&nbsp;</span></span>
 		              <span class="col4"><span>&nbsp;</span></span>
@@ -147,18 +147,18 @@
 	    </script>
 	    <div id="confirmFinishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
 	      <div class="modal-header">
-	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-	        <h3>Visita de seguiment?</h3>
+	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+	        <h3><bean:message key="alert.followUpVisit.title"/></h3>
 	      </div>
 	      <div class="modal-body">
 	        <p>
-	          Donat que és últim formulari pendent de finalitzar, es tancarà la tasca i es programarà la visita de seguiment. Desitja continuar?
+	          <bean:message key="alert.followUpVisit.body1"/>
 	        </p>
 	      </div>
 	      <div class="modal-footer">
-	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large">Finalitzar</button>
-	        <button onclick="doFinishAndNewTask()" class="btn btn-primary custom-btn btn-large">Finalitzar i visita de seguiment</button>
+	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large"><bean:message key="label.review"/></button>
+	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.finish"/></button>
+	        <button onclick="doFinishAndNewTask()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.finishAndFollowUp"/></button>
 	      </div>
 	    </div>
         </logic:present>

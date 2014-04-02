@@ -462,7 +462,7 @@
        format: "dd/mm/yyyy",
        weekStart: 1
        ,
-       language: "ca"
+       language: "linkcare"
    });
  });
 

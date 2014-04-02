@@ -14,7 +14,7 @@
       <div class="container">
         <!-- Encabezado-->
         <div class="encabezado">
-          <h1>Usuaris <strong>— Pacients</strong></h1>
+          <h1><bean:message key="menu.users"/> <strong>— <bean:message key="label.patients"/></strong></h1>
         </div>
         <hr>
         <!-- Encabezado fin-->
@@ -24,7 +24,7 @@
       <div class="container">
         <div class="bloqueizq">
           <div class="recentbox">
-            <h4>Recent...</h4>
+            <h4><bean:message key="label.recent"/>...</h4>
           </div>
         </div>
         <div class="content">
@@ -44,24 +44,24 @@
 		        </html:messages>
 		    </logic:messagesNotPresent>
             <div class="dataform">
-              <h3>Dades personals</h3>
+              <h3><bean:message key="label.personalData"/></h3>
               <div class="fields-row">
                 <div class="smallfield">
                   <label for="cip"><bean:message key="label.cip"/></label>
                   <html:text styleId="cip" property="cip" />
                 </div>
                 <div class="smallfield">
-                  <label for="nif">NIF</label>
+                  <label for="nif"><bean:message key="label.nif"/></label>
                   <html:text styleId="nif" property="nif" />
                 </div>
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="nie">NIE</label>
+                  <label for="nie"><bean:message key="label.nie"/></label>
                   <html:text styleId="nie" property="nie" />
                 </div>
                 <div class="smallfield">
-                  <label for="pas">PAS</label>
+                  <label for="pas"><bean:message key="label.pas"/></label>
                   <html:text styleId="pas" property="pas" />
                 </div>
               </div>
@@ -71,17 +71,17 @@
                   <html:text styleId="givenName" property="givenName" />
                 </div>
                 <div class="smallfield">
-                  <label for="middleName">Segon Nom</label>
+                  <label for="middleName"><bean:message key="label.middleName"/></label>
                   <html:text styleId="middleName" property="middleName" />
                 </div>
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="familyName">Primer Cognom</label>
+                  <label for="familyName"><bean:message key="label.familyName"/></label>
                   <html:text styleId="familyName" property="familyName" />
                 </div>
                 <div class="smallfield">
-                  <label for="familyName2">Segon Cognom</label>
+                  <label for="familyName2"><bean:message key="label.familyName2"/></label>
                   <html:text styleId="familyName2" property="familyName2" />
                 </div>
               </div>
@@ -94,7 +94,7 @@
                   <label for="sex"><bean:message key="label.sex"/></label>
                   <div class="btn-group">
                     <html:hidden property="sex" styleId="sex" />
-                    <button data-toggle="dropdown" data-targetinput="sex" class="btn btn-large dropdown-toggle">Seleccioni una opció<span class="caret triangulo"></span></button>
+                    <button data-toggle="dropdown" data-targetinput="sex" class="btn btn-large dropdown-toggle"><bean:message key="label.defaultOption"/><span class="caret triangulo"></span></button>
                     <ul class="dropdown-menu">
                       <li><a data-value="<%=org.bdigital.ocd.utils.Constants.LINKCARE_CASEGENDER_FEMININE%>" href="#" ><bean:message key="label.sex.dona"/></a></li>
                       <li><a data-value="<%=org.bdigital.ocd.utils.Constants.LINKCARE_CASEGENDER_MASCULINE%>" href="#"><bean:message key="label.sex.home"/></a></li>
@@ -102,44 +102,44 @@
                   </div>
                 </div>
               </div>
-              <h3>Dades de contacte</h3>
+              <h3><bean:message key="label.contactData"/></h3>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="streetName">Carrer</label>
+                  <label for="streetName"><bean:message key="label.street"/></label>
                   <html:text styleId="streetName" property="streetName" />
                 </div>
                 <div class="smallfield">
-                  <label for="number">Número</label>
+                  <label for="number"><bean:message key="label.number"/></label>
                   <html:text styleId="number" property="number" />
                 </div>
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="floor">Pis</label>
+                  <label for="floor"><bean:message key="label.floor"/></label>
                   <html:text styleId="floor" property="floor" />
                 </div>
                 <div class="smallfield">
-                  <label for="suite">Porta</label>
+                  <label for="suite"><bean:message key="label.suite"/></label>
                   <html:text styleId="suite" property="suite" />
                 </div>
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="postcode">Codi postal</label>
+                  <label for="postcode"><bean:message key="label.postcode"/></label>
                   <html:text styleId="postcode" property="postcode" />
                 </div>
                 <div class="smallfield">
-                  <label for="city">Ciutat</label>
+                  <label for="city"><bean:message key="label.city"/></label>
                   <html:text styleId="city" property="city" />
                 </div>
               </div>
               <div class="fields-row">
                 <div class="smallfield">
-                  <label for="country">País</label>
+                  <label for="country"><bean:message key="label.country"/></label>
                   <html:text styleId="country" property="country" />
                 </div>
                 <div class="smallfield">
-                  <label for="phoneNumber">Telèfon</label>
+                  <label for="phoneNumber"><bean:message key="label.phoneNumber"/></label>
                   <html:text styleId="phoneNumber" property="phoneNumber" />
                 </div>
               </div>
@@ -148,8 +148,8 @@
           <div class="botoneslaterales">
             <div class="botoneslateralescontainer">
               <div>
-              <html:link href="#" styleClass="btn-primary btn savedataform" onclick="return doSubmit();">Desar</html:link>
-              <html:link action="/caseSearchPg.do" styleClass="btn-warning btn canceldataform">Cancel.</html:link>
+              <html:link href="#" styleClass="btn-primary btn savedataform" onclick="return doSubmit();"><bean:message key="label.save"/></html:link>
+              <html:link action="/caseSearchPg.do" styleClass="btn-warning btn canceldataform"><bean:message key="label.cancel.abrev"/></html:link>
               </div>
             </div>
           </div>
@@ -175,26 +175,26 @@
     <bean:define id="dataItem" name="caseItem" property="data" type="org.bdigital.ocd.model.form.DataAf"/>
     <div id="loadsessionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal loadsession hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-        <h3>Pacient ja existent</h3>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+        <h3><bean:message key="errors.caseNewExists"/></h3>
       </div>
       <div class="modal-body table">
         <table>
           <tr>
-            <th>Nom</th>
-            <th>Dades personals</th>
+            <th><bean:message key="label.name"/></th>
+            <th><bean:message key="label.personalData"/></th>
             <th></th>
           </tr>
           <tr>
             <td><bean:write name="dataItem" property="fullname"/></td>
             <td>
-              <span><strong>Edat:</strong> <bean:write name="dataItem" property="age"/></span><br/>
+              <span><strong><bean:message key="label.age"/>:</strong> <bean:write name="dataItem" property="age"/></span><br/>
               <span><strong><bean:message key="label.sex"/>:</strong> <bean:write name="dataItem" property="gender"/></span><br/>
-              <span><strong>CIP:</strong> <bean:write name="caseItem" property="cip"/></span><br/>
-              <span><strong>NIF:</strong> <bean:write name="caseItem" property="nif"/></span>
+              <span><strong><bean:write name="caseItem" property="cip"/>:</strong> <bean:write name="caseItem" property="cip"/></span><br/>
+              <span><strong><bean:write name="caseItem" property="nif"/>:</strong> <bean:write name="caseItem" property="nif"/></span>
             </td>
             <td>
-            <html:link action="/caseTaskDetailsAction?idCase=${caseItem.ref}&idAdmission=${admissionBean.idAdmission}" styleClass="btn btn-primary custom-btn">Accedir</html:link>
+            <html:link action="/caseTaskDetailsAction?idCase=${caseItem.ref}&idAdmission=${admissionBean.idAdmission}" styleClass="btn btn-primary custom-btn"><bean:message key="label.load"/></html:link>
             </td>
           </tr>
         </table>

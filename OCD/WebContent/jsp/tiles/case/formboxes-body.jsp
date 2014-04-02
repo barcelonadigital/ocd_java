@@ -277,10 +277,10 @@
     				//$(newDiv).appendTo(fila).slideDown('slow');
 		    	}else if(questionOjb.type!='STATIC_TEXT'){
 		    		//fila.innerHTML += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-		    		//fila.innerHTML += 'type not found '+questionOjb.type;
+		    		//fila.innerHTML += '<bean:message key="label.typeNotFound"/> '+questionOjb.type;
 		    		var newDiv = document.createElement("DIV");
 	    			newDiv.style.display = 'none';
-	    			newDiv.innerHTML = 'type not found '+questionOjb.type;
+	    			newDiv.innerHTML = '<bean:message key="label.typeNotFound"/> '+questionOjb.type;
 	    			$(newDiv).appendTo(fila).slideDown('slow');
 		    	}
 	    		document.getElementById("ajaxResponseId").value = req.responseText;
@@ -310,35 +310,37 @@
 		        if (typeof valueObj !== "undefined") {
 		        	valueObj.value = 'true';
 		        }
-		        checkConditions();
+		        checkConditions(true,idQuestion);
 		    }
 		    
-		    function checkConditions(){
+		    function checkConditions(isFieldModified,specificQuestion){
 		    	for(var i=0;i<arrayConditions.length;i++){
 		    		var condition = arrayConditions[i];
 		    		if(condition!==''){
 			    		var elems = condition.split(',');
 			    		var idQuestion = elems[0].substring(1);
-			    		var oper = elems[1];
-			    		var valueObj = getInputValue(idQuestion);
-			    		var option=getDropdownSelectedValue(idQuestion);
-			    		if(oper==='EQUAL'){
-				    		var valueThatEnables = elems[2];
-				    		if(valueObj === valueThatEnables || option === valueThatEnables){
-				    			setDisabledElement(arrayQuestions[i],false);
-				    		}else{
-				    			setDisabledElement(arrayQuestions[i],true);
-				    		}
-			    		}else if(oper==='RANGE'){
-				    		var valueThatEnables1 = +elems[2];
-				    		var valueThatEnables2 = +elems[3];
-				    		valueObj = +(valueObj.replace('.', '' ).replace(',', '.' ));
-				    		option = +option;
-				    		if((valueObj >= valueThatEnables1 && valueObj < valueThatEnables2) || 
-				    				(option >= valueThatEnables1 && option < valueThatEnables2)){
-				    			setDisabledElement(arrayQuestions[i],false);
-				    		}else{
-				    			setDisabledElement(arrayQuestions[i],true);
+			    		if(typeof specificQuestion === "undefined" || specificQuestion==idQuestion){
+				    		var oper = elems[1];
+				    		var valueObj = getInputValue(idQuestion);
+				    		var option=getDropdownSelectedValue(idQuestion);
+				    		if(oper==='EQUAL'){
+					    		var valueThatEnables = elems[2];
+					    		if(valueObj === valueThatEnables || option === valueThatEnables){
+					    			setDisabledElement(arrayQuestions[i],false,isFieldModified);
+					    		}else{
+					    			setDisabledElement(arrayQuestions[i],true,isFieldModified);
+					    		}
+				    		}else if(oper==='RANGE'){
+					    		var valueThatEnables1 = +elems[2];
+					    		var valueThatEnables2 = +elems[3];
+					    		valueObj = +(valueObj.replace('.', '' ).replace(',', '.' ));
+					    		option = +option;
+					    		if((valueObj >= valueThatEnables1 && valueObj < valueThatEnables2) || 
+					    				(option >= valueThatEnables1 && option < valueThatEnables2)){
+					    			setDisabledElement(arrayQuestions[i],false,isFieldModified);
+					    		}else{
+					    			setDisabledElement(arrayQuestions[i],true,isFieldModified);
+					    		}
 				    		}
 			    		}
 			    	}
@@ -346,7 +348,7 @@
 		    }
 		    
 
-		    function setDisabledElement(idQuestion,disabledValue)
+		    function setDisabledElement(idQuestion,disabledValue,propagationModification)
 		    {
 		       var inputType=document.getElementsByName("questionType("+idQuestion+")")[0].value;
 		       if (inputType === "VERTICAL_RADIO" || inputType === "HORIZONTAL_RADIO") {
@@ -363,12 +365,12 @@
 		       }
 	    	   var valueObj = document.getElementsByName("questionModified("+idQuestion+")")[0];
 		       if (typeof valueObj !== "undefined") {
-		           valueObj.value = 'true';
+		           valueObj.value = propagationModification;
 		       }
 		    }
 		    
 		    function bodyOnLoadAux(){
-		    	checkConditions();
+		    	checkConditions(false);
 		    }
 
 		    function doSave() {
@@ -400,13 +402,13 @@
                 <logic:notEmpty name="boxItem" property="groups">
                   <logic:iterate name="boxItem" property="groups" id="groupItem" indexId="idxGroup" type="org.bdigital.ocd.beans.GroupBean" >
                   <logic:equal name="groupItem" property="untitled" value="true">
-                  <div class="h2actions"><a href="#detailModal_${idxColumn}_${idxBox}_${idxGroup}" data-toggle="modal" class="pencil">Editar</a></div>
+                  <div class="h2actions"><a href="#detailModal_${idxColumn}_${idxBox}_${idxGroup}" data-toggle="modal" class="pencil"><bean:message key="label.edit"/></a></div>
                   </logic:equal>
                   <logic:notEqual name="groupItem" property="untitled" value="true">
                   <a href="#detailModal_${idxColumn}_${idxBox}_${idxGroup}" data-toggle="modal"><bean:write name="groupItem" property="title"/></a>
                   </logic:notEqual>
                   <logic:equal name="groupItem" property="hasErrors" value="true">
-                  <span class="help-inline">(Conté errors)</span>
+                  <span class="help-inline"><bean:message key="errors.containsErrors"/></span>
                   </logic:equal>
                   <p>
                   <% request.setAttribute("hiHaElements",""); %>
@@ -421,7 +423,7 @@
                   </logic:iterate>
                   </logic:iterate>
                   <logic:notEqual name="hiHaElements" value="true">
-                  No hi han dades per mostrar.
+                  <bean:message key="label.noData"/>
                   </logic:notEqual>
                   </p>
                   </logic:iterate>
@@ -462,13 +464,21 @@
 		    		  }
 				  }
 			  });
-			  checkConditions();
+			  checkConditions(false);
+			  for(var i=0;i<arrayQuestions.length;i++){
+				ajaxGetQuestion(arrayQuestions[i]);
+				var idQuestion = arrayQuestions[i];
+				var valueObj = document.getElementsByName("questionModified("+idQuestion+")")[0];
+				if (typeof valueObj !== "undefined") {
+		        	valueObj.value = 'false';
+		        }
+			  }
 		  });
       });
     </script>
     <div id="detailModal_${idxColumn}_${idxBox}_${idxGroup}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal detail hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
         <logic:equal name="groupItem" property="untitled" value="true">
         <h3><bean:write name="boxItem" property="title"/></h3>
         </logic:equal>
@@ -480,7 +490,7 @@
         <div class="tab-content">
           <div id="tab_${idxColumn}_${idxBox}_${idxGroup}_0" class="tab-pane dataform active">
             <logic:equal name="groupItem" property="hasErrors" value="true">
-            <div class="formerror">El formulari conté algun camp no vàlid que no s'ha pogut desar.</div>
+            <div class="formerror"><bean:message key="errors.formContainsInvalidAnswers"/></div>
             </logic:equal>
             <logic:iterate name="groupItem" property="rows" id="rowItem" indexId="indexRow" type="org.bdigital.ocd.beans.RowBean" >
             <% request.setAttribute("hiHaError","false"); %>
@@ -524,10 +534,11 @@
 		                    <bean:write name="CaseFormBoxesDetailsForm" property="questionTextValue(${questionItem.questionId})"/><span class="caret triangulo"></span>
 		                  </logic:notEmpty>
 		                  <logic:empty name="CaseFormBoxesDetailsForm" property="questionOption(${questionItem.questionId})">
-		                    Seleccioni una opció<span class="caret triangulo"></span>
+		                    <bean:message key="label.defaultOption"/><span class="caret triangulo"></span>
 		                  </logic:empty>
 		                </button>
 		                <ul class="dropdown-menu">
+	                              <li><a data-value="" href="#"><bean:message key="label.defaultOption"/></a></li>
 		 				  <logic:iterate name="questionItem" property="options" id="optionItem" type="org.bdigital.ocd.model.Option" >
 	 				        <% request.setAttribute("activeClass",""); %>
 	 				        <logic:equal name="questionItem" property="value" value="${optionItem.optionId}">
@@ -565,7 +576,7 @@
 					  <logic:notEqual name="questionItem" property="type" value="HORIZONTAL_RADIO">
 				      <logic:notEqual name="questionItem" property="type" value="STATIC_TEXT">
 					        <logic:notEqual name="questionItem" property="type" value="FORMULA">
-					            type not found: <bean:write name="questionItem" property="type"/>
+					            <bean:message key="label.typeNotFound"/>: <bean:write name="questionItem" property="type"/>
 					        </logic:notEqual>
 					    </logic:notEqual>
 					  </logic:notEqual>
@@ -685,18 +696,18 @@
         </div>
       </div>
       <div class="modal-footer outside">
-          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_0" data-toggle="tab">Introducció de dades</a>
+          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_0" data-toggle="tab"><bean:message key="label.enterData"/></a>
           <logic:equal name="groupItem" property="id" value="GASOMETRIA_ID">
-          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_1" data-toggle="tab">Ajuda</a>
+          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_1" data-toggle="tab"><bean:message key="label.help"/></a>
           </logic:equal>
           <logic:equal name="groupItem" property="id" value="PULSIOXIMETRIA_ID">
-          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_1" data-toggle="tab">Ajuda</a>
+          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_1" data-toggle="tab"><bean:message key="label.help"/></a>
           </logic:equal>
           <logic:equal name="groupItem" property="id" value="ESPIROMETRIA_ID">
-          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_1" data-toggle="tab">Ajuda</a>
+          <a href="#tab_${idxColumn}_${idxBox}_${idxGroup}_1" data-toggle="tab"><bean:message key="label.help"/></a>
           </logic:equal>
-          <button class="btn btn-primary save" onclick="return doSave();"><span></span>Desar</button>
-          <button type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-warning link">Cancel·lar</button>
+          <button class="btn btn-primary save" onclick="return doSave();"><span></span><bean:message key="label.save"/></button>
+          <button type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-warning link"><bean:message key="label.cancel"/></button>
       </div>
     </div>
     </logic:iterate></logic:notEmpty></logic:iterate></logic:iterate></logic:present>

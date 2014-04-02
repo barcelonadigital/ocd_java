@@ -251,10 +251,10 @@
     				//$(newDiv).appendTo(fila).slideDown('slow');
 		    	}else if(questionOjb.type!='STATIC_TEXT'){
 		    		//fila.innerHTML += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-		    		//fila.innerHTML += 'type not found '+questionOjb.type;
+		    		//fila.innerHTML += '<bean:message key="label.typeNotFound"/> '+questionOjb.type;
 		    		var newDiv = document.createElement("DIV");
 	    			newDiv.style.display = 'none';
-	    			newDiv.innerHTML = 'type not found '+questionOjb.type;
+	    			newDiv.innerHTML = '<bean:message key="label.typeNotFound"/> '+questionOjb.type;
 	    			$(newDiv).appendTo(fila).slideDown('slow');
 		    	}
 	    		document.getElementById("ajaxResponseId").value = req.responseText;

@@ -112,9 +112,6 @@ public class CaseNewAction extends BaseAction {
 //            	}
                 request.setAttribute("foundCaseBean", caseAf);
         	}
-//    		ActionMessages errors = new ActionMessages();
-//            errors.add("error",new ActionMessage("errors.caseNewExists",caseDesc));
-//            saveErrors(request, errors);
             request.setAttribute("errorCaseNew", "true");
             return mapping.findForward(FAILURE);
     	}else if ("NEW".equals(type.value)) {

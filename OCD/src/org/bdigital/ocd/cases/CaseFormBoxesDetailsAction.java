@@ -215,9 +215,9 @@ public class CaseFormBoxesDetailsAction extends CaseBaseAction {
                         		questionObj.getValue()!=null && !"".equals(questionObj.getValue())){
                         	for(int j=0;j<questionObj.getOptions().size();j++){
                 				Option optionObj = questionObj.getOptions().get(j);
-                				if(optionObj.getValue()!=null && 
+                				if(optionObj.getOptionId()!=null && 
                 						questionObj.getValue()!=null &&
-                						optionObj.getValue().equals(questionObj.getValue())){
+                						optionObj.getOptionId().equals(questionObj.getValue())){
                 					formBean.setQuestionTextValue(questionObj.getQuestionId(), optionObj.getDescription());
                 				}
                 			}
@@ -226,6 +226,7 @@ public class CaseFormBoxesDetailsAction extends CaseBaseAction {
                         }
                     }
                 	formBean.setQuestionOption(questionObj.getQuestionId(), questionObj.getValue());
+                	formBean.setQuestionModified(questionObj.getQuestionId(), "");
                 	//questionObj.setOptions(optionsMap.get(questionObj.getQuestionId()));
                 	questionsMap.put(questionObj.getQuestionId(), questionObj);
 //                	List<Option> options=new ArrayList<Option>();

@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.bdigital.ocd.base.BaseAction;
+import org.bdigital.ocd.utils.Constants;
 import org.bdigital.ocd.ws.LINKCAREException;
 
 /**
@@ -50,14 +51,16 @@ public class LoginAction extends BaseAction {
     	StringHolder role = new StringHolder("");
     	StringHolder center = new StringHolder("");
     	StringHolder name = new StringHolder("");
+    	String ip=java.net.InetAddress.getLocalHost().getHostAddress();
+    	String host=request.getServerName();
     	try{
-    		proxy.session_init(user, password, "127.0.0.1", 
-                    "test.linkcare.es", language, token, 
+    		proxy.session_init(user, password, ip, 
+    				host, language, token, 
                     "", role, center, name, 
                     errorMsg);
         }catch(LINKCAREException e){
         	
-            if ("ERROR:Invalid user/password".equals(e.getMessage())) {
+            if (Constants.LINKCARE_ERRORMSG_LOGININVALID.equals(e.getMessage())) {
             	
             	ActionMessages errors = new ActionMessages();
                 errors.add("error",

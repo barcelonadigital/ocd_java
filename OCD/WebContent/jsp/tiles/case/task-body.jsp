@@ -17,14 +17,14 @@
 	    });
 	    </script>
         <div class="content">
-          <div class="h2actions"><a href="#alertModal" role="button" data-toggle="modal" class="btn btn-warning btn-large custom-btn">Nova tasca</a></div>
-          <h2 class="asses">Tasques</h2>
+          <div class="h2actions"><a href="#alertModal" role="button" data-toggle="modal" class="btn btn-warning btn-large custom-btn"><bean:message key="label.taskNew"/></a></div>
+          <h2 class="asses"><bean:message key="label.tasks"/></h2>
           <br><br>
           <div id="news-list">
               
 	        <logic:present name="tasks">
 	        <logic:empty name="tasks">
-	        No hi ha elements per mostrar.
+	        <bean:message key="label.noElements"/>
 	        </logic:empty>
 	        <logic:notEmpty name="tasks">
 		    <logic:iterate name="tasks" id="taskItem" type="org.bdigital.ocd.model.form.TaskAf" >
@@ -63,18 +63,18 @@
 	    </script>
 	    <div id="confirmFinishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
 	      <div class="modal-header">
-	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-	        <h3>Visita de seguiment?</h3>
+	        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+	        <h3><bean:message key="alert.followUpVisit.title"/></h3>
 	      </div>
 	      <div class="modal-body">
 	        <p>
-	          Donat que és últim formulari pendent de finalitzar, es tancarà la tasca i es programarà la visita de seguiment. Desitja continuar?
+	          <bean:message key="alert.followUpVisit.body1"/>
 	        </p>
 	      </div>
 	      <div class="modal-footer">
-	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large">Finalitzar</button>
-	        <button onclick="doFinishAndNewTask()" class="btn btn-primary custom-btn btn-large">Finalitzar i visita de seguiment</button>
+	        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large"><bean:message key="label.review"/></button>
+	        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.finish"/></button>
+	        <button onclick="doFinishAndNewTask()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.finishAndFollowUp"/></button>
 	      </div>
 	    </div>
         </logic:present>

@@ -22,14 +22,14 @@
     <div class="cabeceraperfil">
       <div class="container">
         <div id="contentnophoto" class="content">
-          <small>Pacient</small>
+          <small><bean:message key="label.patient"/></small>
           <h2><bean:write name="caseBean" property="fullname" /></h2>
-          <span><strong>Edat:</strong> <bean:write name="caseBean" property="age" /></span>
-          <span><strong>Gènere:</strong> <bean:write name="caseBean" property="descSex" /></span>
-          <span><strong>CIP:</strong> <bean:write name="caseBean" property="cip" /></span>
+          <span><strong><bean:message key="label.age"/>:</strong> <bean:write name="caseBean" property="age" /></span>
+          <span><strong><bean:message key="label.sex"/>:</strong> <bean:write name="caseBean" property="descSex" /></span>
+          <span><strong><bean:message key="label.cip"/>:</strong> <bean:write name="caseBean" property="cip" /></span>
           <div class="actionsbottom">
             <div class="dropdown"><a data-toggle="dropdown" class="btn btn-blancogris btn-doslineas btn-large">
-                <strong>Programa</strong>
+                <strong><bean:message key="label.program"/></strong>
 				<logic:present name="admissionBean" property="descProtocolActual">
 				<bean:define id="protocolName" name="admissionBean" property="descProtocolActual" type="java.lang.String"/>
 				<% 
@@ -66,26 +66,26 @@
 				</logic:present>
             </div>
             <span class="info">
-	            <strong>Inici</strong>
+	            <strong><bean:message key="label.start"/></strong>
 	            <bean:write name="admissionBean" property="dataProtocolActual" />&nbsp;
             </span>
             <span class="info">
-	            <strong>Estat</strong>
+	            <strong><bean:message key="label.status"/></strong>
 	            <bean:write name="admissionBean" property="estatProtocolActual" />&nbsp;
             </span>
           </div>
-          <div class="actionstop"><html:link action="/caseSearchPg" styleClass="btn btn-large">Seleccionar un altre pacient</html:link></div>
+          <div class="actionstop"><html:link action="/caseSearchPg" styleClass="btn btn-large"><bean:message key="label.changePatient2"/></html:link></div>
           <div class="contactinfo">
             <div class="dropdown">
-              <a href="#" data-toggle="dropdown" class="btn-large dropdown-toggle">Dades de contacte<span class="caret"></span></a>
+              <a href="#" data-toggle="dropdown" class="btn-large dropdown-toggle"><bean:message key="label.contactData"/><span class="caret"></span></a>
               <div class="dropdown-menu">
               <ul>
                 <bean:define id="contactItem" name="caseBean" property="contact" type="org.bdigital.ocd.model.Contact"/>
 			    <logic:iterate name="contactItem" property="addresses" id="addressItem" indexId="addressIdx" type="org.bdigital.ocd.model.Address" >
-                      <li><b>Adreça ${addressIdx+1}:</b></li>
+                      <li><b><bean:message key="label.address"/> ${addressIdx+1}:</b></li>
                       <li><bean:write name="addressItem" property="street" />
                           <bean:write name="addressItem" property="number" />
-                          Pis <bean:write name="addressItem" property="floor" />
+                          <bean:message key="label.floor"/> <bean:write name="addressItem" property="floor" />
                           <bean:write name="addressItem" property="suite" /></li>
                       <li><bean:write name="addressItem" property="postcode" /> 
                           <bean:write name="addressItem" property="city" /></li>
@@ -93,12 +93,12 @@
 				</logic:iterate>
 				<logic:iterate name="contactItem" property="phones" id="phoneItem" indexId="phoneIdx" type="org.bdigital.ocd.model.Phone" >
                       <logic:notEmpty name="phoneItem" property="number"><logic:equal name="phoneItem" property="type" value="home">
-                      <li><b>Telèfon:</b></li>
+                      <li><b><bean:message key="label.phoneNumber"/>:</b></li>
                       <li><bean:write name="phoneItem" property="number" /><br></li>
                       </logic:equal></logic:notEmpty>
 				</logic:iterate>
 				<logic:empty name="contactItem" property="addresses">
-                      <li>No hi ha cap adreça</li>
+                      <li><bean:message key="label.noAddress"/></li>
 				</logic:empty>
               </ul></div>
             </div>  
@@ -114,47 +114,47 @@
     <!-- Lightbox-->
     <div id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal alert hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-        <h3>Avís</h3>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+        <h3><bean:message key="label.window.alert"/></h3>
       </div>
       <div class="modal-body">
-        <p>Si us plau, seleccioni la tasca que vol realitzar:</p>
+        <p><bean:message key="alert.taskNew.body1"/></p>
       </div>
       <div class="modal-footer">
         <div class="btn-block">
-                <button onclick="assignarProtocolParam('#TASK:N253')" class="btn btn-warning custom-btn btn-large">Prescripció d'OCD</button>
-                <button onclick="assignarProtocolParam('#TASK:N261')" class="btn btn-warning custom-btn btn-large">Visita de seguiment</button>
-                <button onclick="assignarProtocolParam('#XDISCHARGE')" class="btn btn-warning custom-btn btn-large">Alta del programa</button>
+                <button onclick="assignarProtocolParam('<%=org.bdigital.ocd.utils.Constants.LINKCARE_TASKCODE_PRESCRIPTION%>')" class="btn btn-warning custom-btn btn-large"><bean:message key="label.ocdPrescription"/></button>
+                <button onclick="assignarProtocolParam('<%=org.bdigital.ocd.utils.Constants.LINKCARE_TASKCODE_VISITFOLLOWUP%>')" class="btn btn-warning custom-btn btn-large"><bean:message key="label.followUpVisit"/></button>
+                <button onclick="assignarProtocolParam('<%=org.bdigital.ocd.utils.Constants.LINKCARE_TASKCODE_DISCHARGE%>')" class="btn btn-warning custom-btn btn-large"><bean:message key="label.dischargeProgram"/></button>
         </div>
       </div>
     </div>
     <div id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-        <h3>Assignar protocol?</h3>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+        <h3><bean:message key="alert.protocolNew.title"/></h3>
       </div>
       <div class="modal-body">
         <p>
-          Es finalitzarà el protocol actiu actualment. Desitja continuar?
+          <bean:message key="alert.protocolNew.body1"/>
         </p>
       </div>
       <div class="modal-footer">
-        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-        <button onclick="assignarProtocol()" class="btn btn-primary custom-btn btn-large">D'acord, assignar</button>
+        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large"><bean:message key="label.review"/></button>
+        <button onclick="assignarProtocol()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.okAssign"/></button>
       </div>
     </div>
     <div id="protocolsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal protocols hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-        <h3>Protocols assignats</h3>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+        <h3><bean:message key="label.assignedProtocols"/></h3>
       </div>
       <div class="modal-body table">
         <table>
           <tr>
-            <th>Protocol</th>
-            <th>Inici del protocol</th>
-            <th>Estat del protocol</th>
-            <th>Opcions</th>
+            <th><bean:message key="label.protocol"/></th>
+            <th><bean:message key="label.protocolStart"/></th>
+            <th><bean:message key="label.protocolStatus"/></th>
+            <th><bean:message key="label.options"/></th>
           </tr>
 	    <logic:present name="admissions">
 	    <logic:iterate name="admissions" id="admissionItem" type="org.bdigital.ocd.model.form.AdmissionAf" >
@@ -165,7 +165,7 @@
                 <td><bean:write name="protocolItem" property="name"/></td>
                 <td><bean:write name="dataItem" property="dateToDisplay"/></td>
                 <td><bean:write name="dataItem" property="status"/></td>
-                <td><html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}" styleClass="news-block-link">Accedir</html:link></td>
+                <td><html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionItem.ref}" styleClass="news-block-link"><bean:message key="label.load"/></html:link></td>
             </tr>
 		</logic:iterate>
 		</logic:present>

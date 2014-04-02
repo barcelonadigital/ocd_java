@@ -1425,15 +1425,6 @@
 			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 			today: "Today",
 			clear: "Clear"
-		},
-		ca: {
-			days: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte", "Diumenge"],
-			daysShort: ["Diu","Dil","Dim","Dim","Dij","Div","Dis", "Diu"],
-			daysMin: ["Dg","Dl","Dm","Dc","Dj","Dv","Ds", "Dg"],
-			months: ["Gener","Febrer","Mar\xe7","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Novembre","Decembre"],
-			monthsShort: ["Gen", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-			today: "Avui",
-			clear: "Esborra"
 		}
 	};
 

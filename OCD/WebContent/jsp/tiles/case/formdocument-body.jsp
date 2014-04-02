@@ -34,7 +34,7 @@
 			</logic:equal>
 			
             <div class="actions bottom">
-	            <html:link action="/caseTaskUnitDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}&idTask=${CaseFormDocumentDetailsForm.idTask}" styleClass="btn btn-warning link">Cancel.</html:link>
+	            <html:link action="/caseTaskUnitDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}&idTask=${CaseFormDocumentDetailsForm.idTask}" styleClass="btn btn-warning link"><bean:message key="label.cancel.abrev"/></html:link>
 	            <html:link action="/caseTaskUnitDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}&idTask=${CaseFormDocumentDetailsForm.idTask}" styleId="botoEnviar" styleClass="btn custom-btn btn-large btn-info">Enviar</html:link>
             </div>
         </div>

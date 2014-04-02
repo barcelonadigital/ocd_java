@@ -262,10 +262,10 @@
     				//$(newDiv).appendTo(fila).slideDown('slow');
 		    	}else if(questionOjb.type!='STATIC_TEXT'){
 		    		//fila.innerHTML += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-		    		//fila.innerHTML += 'type not found '+questionOjb.type;
+		    		//fila.innerHTML += '<bean:message key="label.typeNotFound"/> '+questionOjb.type;
 		    		var newDiv = document.createElement("DIV");
 	    			newDiv.style.display = 'none';
-	    			newDiv.innerHTML = 'type not found '+questionOjb.type;
+	    			newDiv.innerHTML = '<bean:message key="label.typeNotFound"/> '+questionOjb.type;
 	    			$(newDiv).appendTo(fila).slideDown('slow');
 		    	}
 	    		document.getElementById("ajaxResponseId").value = req.responseText;
@@ -505,7 +505,7 @@
 			 				  <logic:notEqual name="questionItem" property="type" value="HORIZONTAL_RADIO">
 			 			      <logic:notEqual name="questionItem" property="type" value="STATIC_TEXT">
 			 				        <logic:notEqual name="questionItem" property="type" value="FORMULA">
-			 				            type not found: <bean:write name="questionItem" property="type"/>
+			 				            <bean:message key="label.typeNotFound"/>: <bean:write name="questionItem" property="type"/>
 			 				        </logic:notEqual>
 			 				    </logic:notEqual>
 			 				  </logic:notEqual>
@@ -549,11 +549,11 @@
           <div class="botoneslaterales">
             <div class="botoneslateralescontainer">
               <div>
-	            <html:link href="#" styleClass="btn-primary btn savedataform" onclick="return doSave();">Desar</html:link>
+	            <html:link href="#" styleClass="btn-primary btn savedataform" onclick="return doSave();"><bean:message key="label.save"/></html:link>
 	            <!-- 
 	            <html:link href="#" styleClass="btn-primary btn acceptdataform" onclick="return doConfirm();">Finalitz.</html:link>
 	             -->
-                <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="btn-warning btn canceldataform">Cancel.</html:link>
+                <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="btn-warning btn canceldataform"><bean:message key="label.cancel.abrev"/></html:link>
               </div>
             </div>
           </div>
@@ -562,7 +562,7 @@
     <% if("true".equals(request.getAttribute("hiHaGasometria"))){ %>
     <div id="helpGasometriaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal loadsession hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
         <h3>Informació</h3>
       </div>
       <div class="modal-body">
@@ -615,7 +615,7 @@
     <% if("true".equals(request.getAttribute("hiHaPulsio"))){ %>
     <div id="helpPulsioModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal loadsession hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
         <h3>Informació</h3>
       </div>
       <div class="modal-body">
@@ -641,7 +641,7 @@
     <% if("true".equals(request.getAttribute("hiHaEspiro"))){ %>
     <div id="helpEspiroModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal loadsession hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
         <h3>Informació</h3>
       </div>
       <div class="modal-body">
@@ -660,16 +660,16 @@
     <% } %>
     <div id="confirmFinishModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal confirmation hide fade">
       <div class="modal-header">
-        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">close</button>
-        <h3>Finalitzar formulari?</h3>
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><bean:message key="label.window.close"/></button>
+        <h3><bean:message key="alert.finishForm.title"/></h3>
       </div>
       <div class="modal-body">
         <p>
-          Es finalitzarà el formulari i no es podrà tornar a modificar. Desitja continuar?
+          <bean:message key="alert.finishForm.body1"/>
         </p>
       </div>
       <div class="modal-footer">
-        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large">Revisar</button>
-        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large">D'acord, finalitzar</button>
+        <button data-dismiss="modal" aria-hidden="true" class="btn btn-success custom-btn btn-large"><bean:message key="label.review"/></button>
+        <button onclick="doFinish()" class="btn btn-primary custom-btn btn-large"><bean:message key="label.okFinish"/></button>
       </div>
     </div>

@@ -104,7 +104,7 @@
       </div>
             <!-- 
             <div class="actions bottom">
-                <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="btn btn-warning link">Cancel.</html:link>
+                <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleClass="btn btn-warning link"><bean:message key="label.cancel.abrev"/></html:link>
 	            <html:link action="/caseTaskDetailsAction?idCase=${caseBean.idCase}&idAdmission=${admissionBean.idAdmission}" styleId="botoCompletat" styleClass="btn custom-btn btn-large btn-info">Finalitzat</html:link>
             </div>
              -->

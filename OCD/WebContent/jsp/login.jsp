@@ -24,7 +24,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>OCD</title>
+    <title><bean:message key="application.title"/></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@
         </ul>
       </div>
        -->
-      <h1 class="logo-ocd">OCD</h1>
+      <h1 class="logo-ocd"><bean:message key="application.title"/></h1>
       <div class="caja">
         <html:form action="/loginAction">
         <div class="dataform">
@@ -68,8 +68,8 @@
             <html:password property="password" />
           </div>
           <div class="actions">
-            <html:submit styleId="buttonEnter" styleClass="btn btn-large btn-primary" value="Entrar" />
-            <buttom class="btn btn-large btn-primary cancel">Cancel·lar</buttom>
+            <html:submit styleId="buttonEnter" styleClass="btn btn-large btn-primary"><bean:message key="label.login" /></html:submit>
+            <html:button property="buttonCancel" styleClass="btn btn-large btn-primary cancel"><bean:message key="label.cancel" /></html:button>
           </div>
         </div>
         </html:form>
