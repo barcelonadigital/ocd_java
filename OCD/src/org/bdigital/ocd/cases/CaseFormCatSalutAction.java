@@ -248,7 +248,10 @@ public class CaseFormCatSalutAction extends CaseBaseAction {
     			}
     			formBean.setDescDiagnostic(descDiagnostic);
     			
-    			formBean.setDataSolicitud(UtilsString.dateToString(UtilsString.stringtoDate(getValueDescription(idForm1+"_5",questionsMap), Constants.FORMAT_DATE_WS), Constants.FORMAT_DATE_WEB));
+    			String dataSolicitud = getValueDescription(idForm1+"_5",questionsMap);
+    			if(dataSolicitud!=null && !"".equals(dataSolicitud)){
+    				formBean.setDataSolicitud(UtilsString.dateToString(UtilsString.stringtoDate(dataSolicitud, Constants.FORMAT_DATE_WS), Constants.FORMAT_DATE_WEB));
+    			}
     			formBean.setDuracio(getValueDescription(idForm4+"_39",questionsMap));
 
     			String descSolicitant       = getValueDescription(idForm6+"_44",questionsMap);

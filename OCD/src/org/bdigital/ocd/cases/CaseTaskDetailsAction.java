@@ -20,6 +20,7 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.model.Task;
 import org.bdigital.ocd.model.Tasks;
 import org.bdigital.ocd.model.form.TaskAf;
@@ -60,6 +61,7 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
     	List<TaskAf> tasks = new ArrayList<TaskAf>();
     	if(admissionId!=null){
     	//if(taskId!=null){
+    		MessageResources msgResource = getResources(request);
     		Date admissionDate = null;
         	Calendar admissionCal = new GregorianCalendar();
         	Calendar todayCal = new GregorianCalendar();
@@ -111,14 +113,14 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
 //                        		}
                         		if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){
                         			tAf.setDescription("Prescripció d'OCD");
-                        			tAf.setDescriptionLong("QÜESTIONARI VARIABLES. REPORT Enviament de document a la historia clínica. REPORT Sol·licitud d'OCD a CatSalut.");
+                        			tAf.setDescriptionLong(""+msgResource.getMessage("label.quiz")+" VARIABLES. "+msgResource.getMessage("label.report")+" "+msgResource.getMessage("label.documentSending")+". "+msgResource.getMessage("label.report")+" "+msgResource.getMessage("label.catSalutApplication")+".");
                         			tasks.add(tAf);
                         		}else if("CVSO".equals(taskObj.getDescription().toUpperCase())){
                         			tAf.setDescription("Visita de seguiment");
-                        			tAf.setDescriptionLong("QÜESTIONARI CVSO. REPORT Enviament de document a la historia clínica. REPORT Sol·licitud d'OCD a CatSalut.");
+                        			tAf.setDescriptionLong(""+msgResource.getMessage("label.quiz")+" CVSO. "+msgResource.getMessage("label.report")+" "+msgResource.getMessage("label.documentSending")+". "+msgResource.getMessage("label.report")+" "+msgResource.getMessage("label.catSalutApplication")+".");
                         			tasks.add(tAf);
                         		}else if("DISCHARGE".equals(taskObj.getType())){
-                        			tAf.setDescriptionLong("QÜESTIONARI REGISTRE D´ALTA DEL PROGRAMA. REPORT Enviament de document a la historia clínica. REPORT Sol·licitud d'OCD a CatSalut.");
+                        			tAf.setDescriptionLong(""+msgResource.getMessage("label.quiz")+" REGISTRE D´ALTA DEL PROGRAMA. "+msgResource.getMessage("label.report")+" "+msgResource.getMessage("label.documentSending")+". "+msgResource.getMessage("label.report")+" "+msgResource.getMessage("label.catSalutApplication")+".");
                         			tasks.add(tAf);
                         		}
                         		if(taskObj.getForms()!=null &&
@@ -157,11 +159,11 @@ public class CaseTaskDetailsAction extends CaseBaseAction {
                                 		if("253".equals(taskObj.getRefs()[0])){
                                 			FormAf fAf = new FormAf(new Form());
                                     		fAf.setItemType("DOCUMENT");
-                                    		fAf.setShortName("Enviament de document a la historia clínica");
+                                    		fAf.setShortName(msgResource.getMessage("label.documentSending"));
                                 			forms.add(fAf);
                                 			fAf = new FormAf(new Form());
                                 			fAf.setItemType("CATSALUT");
-                                    		fAf.setShortName("Sol·licitud d'OCD a CatSalut");
+                                    		fAf.setShortName(msgResource.getMessage("label.catSalutApplication"));
                                 			fAf.setRef(refFirstItem);
                                     		fAf.setStatus(statusFirstItem);
                                 			forms.add(fAf);

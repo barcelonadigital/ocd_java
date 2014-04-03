@@ -16,6 +16,7 @@ import javax.xml.rpc.holders.StringHolder;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.util.MessageResources;
 import org.bdigital.ocd.model.Form;
 import org.bdigital.ocd.model.Forms;
 import org.bdigital.ocd.model.Task;
@@ -54,6 +55,7 @@ public class CaseTaskUnitDetailsAction extends CaseBaseAction {
     	
     	if(taskId!=null){
     	//if(taskId!=null){
+    		MessageResources msgResource = getResources(request);
     		StringHolder errorMsg = new StringHolder("");
     		StringHolder result = new StringHolder("");
         	proxy.task_get(tokenLK, taskId, "ADMI", result, errorMsg);
@@ -105,33 +107,33 @@ public class CaseTaskUnitDetailsAction extends CaseBaseAction {
             		if("VARIABLES".equals(taskObj.getDescription().toUpperCase())){
             			FormAf fAf = new FormAf(new Form());
                 		fAf.setItemType("DOCUMENTPRESC");
-                		fAf.setShortName("Enviament de document a la historia clínica");
+                		fAf.setShortName(msgResource.getMessage("label.documentSending"));
             			forms.add(fAf);
             			fAf = new FormAf(new Form());
             			fAf.setItemType("CATSALUT");
-                		fAf.setShortName("Sol·licitud d'OCD a CatSalut");
+                		fAf.setShortName(msgResource.getMessage("label.catSalutApplication"));
             			fAf.setRef(refFirstItem);
                 		fAf.setStatus(statusFirstItem);
             			forms.add(fAf);
             		}else if("CVSO".equals(taskObj.getDescription().toUpperCase())){
             			FormAf fAf = new FormAf(new Form());
                 		fAf.setItemType("DOCUMENTVISIT");
-                		fAf.setShortName("Enviament de document a la historia clínica");
+                		fAf.setShortName(msgResource.getMessage("label.documentSending"));
             			forms.add(fAf);
             			fAf = new FormAf(new Form());
             			fAf.setItemType("CATSALUT");
-                		fAf.setShortName("Sol·licitud d'OCD a CatSalut");
+                		fAf.setShortName(msgResource.getMessage("label.catSalutApplication"));
             			fAf.setRef(refFirstItem);
                 		fAf.setStatus(statusFirstItem);
             			forms.add(fAf);
             		}else if("DISCHARGE".equals(taskObj.getType())){
             			FormAf fAf = new FormAf(new Form());
                 		fAf.setItemType("DOCUMENTALTA");
-                		fAf.setShortName("Enviament de document a la historia clínica");
+                		fAf.setShortName(msgResource.getMessage("label.documentSending"));
             			forms.add(fAf);
             			fAf = new FormAf(new Form());
             			fAf.setItemType("CATSALUT");
-                		fAf.setShortName("Sol·licitud d'OCD a CatSalut");
+                		fAf.setShortName(msgResource.getMessage("label.catSalutApplication"));
             			fAf.setRef(refFirstItem);
                 		fAf.setStatus(statusFirstItem);
             			forms.add(fAf);

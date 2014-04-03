@@ -9389,13 +9389,13 @@ a.info_popup {
     width: 1000px;
 }
 .h2actions a.pencil {
-    top: 8px;
+    top: 3px;
     position: absolute;
     display:block;
     width:37px;
     height:29px;
     float:right;
-    right: 15px;
+    right: 10px;
 }
 .modal.detail .modal-body .dataform label,
 .modal.info_popup .modal-body .dataform label {
