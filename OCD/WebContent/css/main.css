@@ -9381,7 +9381,7 @@ a.info_popup {
   width: 24px;
   height: 24px;
   background: url(../img/ico-info-popup.png) no-repeat center center;
-  margin: 0 12px;
+  margin: -10px 12px;
   overflow: hidden;
   text-indent: -9999px;
 }

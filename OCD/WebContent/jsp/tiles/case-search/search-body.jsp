@@ -39,7 +39,7 @@
         <div class="container">
           <div class="content">
             <h2 class="clinician"><bean:message key="label.caseSearch"/></h2>
-            
+            <a href="#info1" role="button" data-toggle="modal" class="info_popup"><bean:message key="label.info"/></a>            
             <html:form styleId="formSearch" action="/caseSearchAction">
             <html:hidden name="CaseNewForm" property="doNew" styleId="doNew"/>
 			<html:messages id="msg2" property="general">
@@ -56,10 +56,6 @@
                 </span>
 			</logic:equal>
             <div id="search-patient">
-                <label for="searchStr">
-                <bean:message key="label.searchAllFields"/>
-				<a href="#info1" role="button" data-toggle="modal" class="info_popup"><bean:message key="label.info"/></a>               
-                </label>
                 <html:text styleId="searchStr" property="searchStr" />
                 
             </div>

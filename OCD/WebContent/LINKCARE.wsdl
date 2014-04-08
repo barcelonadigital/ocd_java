@@ -3559,7 +3559,7 @@
 
     <wsdl:service name="LINKCARE">
         <wsdl:port binding="intf:LINKCARESoapBinding" name="LINKCARE">
-            <wsdlsoap:address location="http://localhost:8081/BDIGITAL-LCWS/ServerWSDL.php"/>
+            <wsdlsoap:address location="http://dev3.linkcare.es/ws/ServerWSDL.php"/>
         </wsdl:port>
     </wsdl:service>
 
