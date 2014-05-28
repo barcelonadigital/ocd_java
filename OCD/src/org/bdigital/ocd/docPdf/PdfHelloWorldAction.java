@@ -688,25 +688,17 @@ public class PdfHelloWorldAction extends Action {
 
             BufferedReader lectura = new BufferedReader(new InputStreamReader(System.in));
             String ruta = lectura.readLine();
-            switch(ruta){
-                
-                    case "1":
-                        resultat = 0;
-                        menu = true;
-                        System.out.println("Has escollit/escogido: Català/Castellano");
-                        break;
-                        
-                    case "2":
-                        resultat = 2;
-                        menu = true;
-                        System.out.println("You have chosen: English");
-                        break;
-                        
-                    default:
-                        System.out.println("OPCIO INCORRECTA !");
-                        break;
+            if("1".equals(ruta)){
+                resultat = 0;
+                menu = true;
+                System.out.println("Has escollit/escogido: Català/Castellano");
+            }else if("2".equals(ruta)){
+                resultat = 2;
+                menu = true;
+                System.out.println("You have chosen: English");
+            }else{
+                System.out.println("OPCIO INCORRECTA !");
             }
-            
         }
         return resultat;
     }

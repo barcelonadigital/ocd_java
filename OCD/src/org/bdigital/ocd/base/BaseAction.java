@@ -32,7 +32,7 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
     protected static final String SUCCESS = "success";
     protected final static String FAILURE = "failure";
     protected org.bdigital.ocd.ws.LINKCAREProxyWrapper proxy;
-    private boolean autologin = true;
+    private boolean autologin = false;
 
     /**
      * This is the action called from the Struts framework.
@@ -57,8 +57,8 @@ public abstract class BaseAction extends org.apache.struts.action.Action {
     	if(tokenLK == null && !(this instanceof LoginAction)){
     		if(autologin){
 	    		LoginForm formBean = new LoginForm();
-	            formBean.setUsername("ernest.pastor");
-	            formBean.setPassword("bdigital");
+	            formBean.setUsername("atencio.integrada");
+	            formBean.setPassword("xxxxxxxxxx");
 	            request.setAttribute("LoginForm", formBean);
 	            return mapping.findForward("loginAuto");
 	    	}else{
